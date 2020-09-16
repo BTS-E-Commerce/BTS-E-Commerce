@@ -81,7 +81,8 @@ async function buildTables() {
         inventory INTEGER NOT NULL DEFAULT 0,
         "basePrice" INTEGER NOT NULL,
         "currentPrice" INTEGER NOT NULL,
-        sale BOOLEAN DEFAULT false
+        sale BOOLEAN DEFAULT false,
+        date DATE DEFAULT now()
       );
     `);
     console.log("Sucessfully finished building products table!");
@@ -101,8 +102,8 @@ async function buildTables() {
     await client.query(`
       CREATE TABLE product_categories (
         id SERIAL PRIMARY KEY,
-        "productId" INTERGER REFERENCES product(id),
-        "categoryId" INTERGER REFERENCES categories(id),
+        "productId" INTEGER REFERENCES product(id),
+        "categoryId" INTEGER REFERENCES categories(id),
         UNIQUE ("productId", "categoriesId")
       );
     `);
@@ -113,7 +114,9 @@ async function buildTables() {
     await client.query(`
       CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
-        "userId" INTERGER REFERENCES users(id)
+        "userId" INTEGER REFERENCES users(id),
+        "orderPrice" INTEGER NOT NULL,
+        date DATE DEFAULT now(),
       );
     `);
     console.log("Sucessfully finished building orders table!");
@@ -123,11 +126,10 @@ async function buildTables() {
     await client.query(`
       CREATE TABLE order_products (
         id SERIAL PRIMARY KEY,
-        "orderId" INTERGER REFERENCES orders(id),
-        "productId" INTERGER REFERENCES products(id),
+        "orderId" INTEGER REFERENCES orders(id),
+        "productId" INTEGER REFERENCES products(id),
         quantity INTEGER NOT NULL,
         price INTEGER NOT NULL,
-        "orderPrice" INTEGER NOT NULL,
         UNIQUE ("orderId", "productId")
       );
     `);
@@ -138,15 +140,12 @@ async function buildTables() {
     await client.query(`
       CREATE TABLE reviews (
         id SERIAL PRIMARY KEY,
-      );
-    `);
-    console.log("Sucessfully finished building reviews table!");
-
-    //# Create reviews table.
-    console.log("Starting to create reviews tables...");
-    await client.query(`
-      CREATE TABLE reviews (
-        id SERIAL PRIMARY KEY,
+        "productId" INTEGER REFERENCES products(id),
+        "userId" INTEGER REFERENCES users(id),
+        content TEXT NOT NULL,
+        rating INTEGER NOT NULL,
+        date DATE DEFAULT now(),
+        UNIQUE ("productId", "userId")
       );
     `);
     console.log("Sucessfully finished building reviews table!");
