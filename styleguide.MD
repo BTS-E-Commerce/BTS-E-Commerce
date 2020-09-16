@@ -17,7 +17,7 @@
 
 2.  //--- Minor Topic ---
 
-3.  //*** Function Explination
+3.  //* Function Explination
 
 4.  //# In-Function Explination
 
@@ -27,7 +27,7 @@
 //~~~~~~~~~~~~~~~~~~~
 
 // -- Client --
-//*** Makes Client object avaliable from 'express' library.
+//* Makes Client object avaliable from 'express' library.
 const { Client } = require('express');
 
 //~~~~~~~~~~~~~~~~~~~
