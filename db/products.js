@@ -66,6 +66,21 @@ async function getProductByName({ name }) {
   }
 }
 
+//# Get Products By Sale
+
+async function getProductsBySale() {
+  try {
+    const { rows: products } = await client.query(`
+        SELECT products.*
+        FROM products
+        WHERE sale=true`);
+
+    return products;
+  } catch (error) {
+    throw error;
+  }
+}
+
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
@@ -74,4 +89,5 @@ module.exports = {
   getAllProducts,
   getProductById,
   getProductByName,
+  getProductsBySale,
 };
