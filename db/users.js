@@ -22,11 +22,33 @@ async function getAllUsers() {
     }
 }
 
+//# Get a specific user given an id.
 async function getUserById({ id }) {
     try {
+        const { rows: [user] } = await client.query(`
+            SELECT *
+            FROM users
+            WHERE id=$1;
+        `, [id]);
 
+        return user;
     } catch (error) {
+        throw error;
+    }
+}
 
+//# Get a specific user given a string username.
+async function getUserByUsername({ username }) {
+    try {
+        const { rows: [user] } = await client.query(`
+            SELECT *
+            FROM users
+            WHERE username=$1;
+        `, [username]);
+
+        return user;
+    } catch (error) {
+        throw error;
     }
 }
 
@@ -45,6 +67,13 @@ async function createUser({ username, password }) {
         throw error;
     }
 }
+
+//-- Update Functions --
+//# Updates a users informaiton.
+
+
+//-- Delete Functions --
+//# Delete a user.
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
