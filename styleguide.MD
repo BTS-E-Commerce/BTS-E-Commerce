@@ -1,10 +1,10 @@
 # STYLE GUIDE
 
 ## JS Norms:
-1. Always use semicolons after the end of a code block./Do not use a semicolon at the end of a code block.
-2. Decide upon naming conventions for primary functions (IE. Create, Update/Patch, Delete, Get, Post, etc.)
-3. Decide upon Code Organizaiton sections naming conventions.
-4. Decide upon using ' or " for strings.
+1. Always use semicolons after the end of a code block.
+2. Function naming conventions for primary functions: Initialize, Create, Update, Delete, Get, Post.
+3. ALways use single quotes ('') unless it isn't syntactically correct to do so.
+5. Always use tabs to indent lines.
 
 
 
@@ -14,12 +14,16 @@
 1.  //~~~~~~~~~~~~~~~~~~~
     //~~~ MAJOR TOPIC ~~~
     //~~~~~~~~~~~~~~~~~~~
+        Imports, Functions, Middleware, Global Variables, Exports
 
 2.  //--- Minor Topic ---
+        A subset of the major topic if grouping within it is relevant.
 
 3.  //* Function Explination
+        Every function should have an explination. This should state how this is used, not what it does. 
 
 4.  //# In-Function Explination
+        Anything that needs to be clarified within a function/code block.
 
 #### Code Organization Example:
 //~~~~~~~~~~~~~~~~~~~
