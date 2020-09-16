@@ -10,6 +10,8 @@ const { client } = require("./index.js");
 
 //-- Get Functions --
 //# Gets all categories from exotic-db
+const { client } = require("./index.js");
+
 async function getAllCategories() {
   try {
     const { rows: categories } = await client.query(`
