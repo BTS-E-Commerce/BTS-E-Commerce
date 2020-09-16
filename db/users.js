@@ -1,10 +1,7 @@
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
-const {
-    client
-    // other db methods 
-} = require('./index');
+const { client } = require('./client');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -37,7 +34,7 @@ async function getUserById({ id }) {
 //# Creates a new user. Used in the registering process.
 async function createUser({ username, password }) {
     try {
-        const { rows: [user] } = client.query(`
+        const { rows: [user] } = await client.query(`
             INSERT INTO users(username, password)
             VALUES ($1, $2)
             RETURNING *;
@@ -48,10 +45,6 @@ async function createUser({ username, password }) {
         throw error;
     }
 }
-
-console.log(createUser({ username: "brody", password: "password" }));
-
-console.log(getAllUsers());
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
