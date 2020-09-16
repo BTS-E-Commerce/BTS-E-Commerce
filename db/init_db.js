@@ -3,10 +3,9 @@
 //~~~~~~~~~~~~~~~~~~~
 
 // -- Client --
-const {
-  client
-  // other db methods 
-} = require('./index');
+const { client } = require('./client');
+const { getAllUsers, } = require('./index');
+const { createUser } = require('./users');
 
 //-- Database Imports --
 
@@ -18,6 +17,7 @@ const {
 //-- Main Function --
 initializeTables()
   .then(initializeData)
+  .then(testDatabase)
   .catch(console.error)
   .finally(() => client.end());
 
@@ -39,7 +39,7 @@ async function initializeTables() {
 //* Drops tables in order of dependencies. Must be used before building tables again.
 async function dropTables() {
   try {
-    console.log('Starting to drop tables...[]');
+    console.log('Starting to drop tables...');
 
     await client.query(`
       DROP TABLE IF EXISTS product_categories;
@@ -108,9 +108,9 @@ async function buildTables() {
     await client.query(`
       CREATE TABLE product_categories (
         id SERIAL PRIMARY KEY,
-        "productId" INTEGER REFERENCES product(id),
+        "productId" INTEGER REFERENCES products(id),
         "categoryId" INTEGER REFERENCES categories(id),
-        UNIQUE ("productId", "categoriesId")
+        UNIQUE ("productId", "categoryId")
       );
     `);
     console.log('Sucessfully finished building categories table!');
@@ -121,8 +121,7 @@ async function buildTables() {
       CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
         "userId" INTEGER REFERENCES users(id),
-        'orderPrice" INTEGER NOT NULL,
-        date DATE DEFAULT now(),
+        "orderPrice" INTEGER NOT NULL
       );
     `);
     console.log('Sucessfully finished building orders table!');
@@ -180,25 +179,72 @@ async function initializeData() {
 
 //* Initializes the starting/default users.
 async function initializeUsers() {
+  try {
+    const userOne = await createUser({ username: "brody", password: "password" });
+    console.log(userOne);
+  } catch (error) {
 
+  }
 }
 
 //* Initializes the starting/default products. This may pull from some sort of api??
 async function initializeProducts() {
+  try {
 
+  } catch (error) {
+
+  }
 }
 
 //* Initializes the starting/default categories.
 async function initializeCategories() {
+  try {
 
+  } catch (error) {
+
+  }
 }
 
 //* Initializes the starting/default orders.
 async function initializeOrders() {
+  try {
 
+  } catch (error) {
+
+  }
 }
 
 //* Initializes the starting/default reviews.
 async function initializeReviews() {
+  try {
 
+  } catch (error) {
+
+  }
+}
+
+// -- Database Function Testing --
+//# Tests all functions associated with the database.
+async function testDatabase() {
+  try {
+    console.log("Running tests of database functions...");
+
+    await testUserFunctions();
+
+    console.log("Successfully finished running tests of database functions!");
+  } catch (error) {
+    console.log("Error testing database functions.");
+    throw error;
+  }
+}
+
+//# Tests the functions associated with the users table.
+async function testUserFunctions() {
+  try {
+    console.log("Testing getAllUsers...")
+    const allUsers = await getAllUsers();
+    console.log("Successfully ran getAllUsers: \n", allUsers);
+  } catch (error) {
+    throw error;
+  }
 }

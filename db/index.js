@@ -4,23 +4,32 @@
 
 // -- Client --
 //*** Connect to DB
-const { Client } = require('pg');
+// const { Client } = require('pg');
 
 //*** Tentative name for database. We can change later if we want. Just have to create a new db then link it.
-const DB_NAME = 'exotic-db'
-const DB_URL = process.env.DATABASE_URL || `postgres://${DB_NAME}`;
-const client = new Client(DB_URL);
+// const DB_NAME = 'exotic-db'
+// const DB_URL = process.env.DATABASE_URL || `postgres://localhost:5432/${DB_NAME}`;
+// const client = new Client(DB_URL);
 
-//~~~~~~~~~~~~~~~~~~~
-//~~~~ FUNCTIONS ~~~~
-//~~~~~~~~~~~~~~~~~~~
 // database methods
-
+// const { } = require('./users');
+// const { } = require('./products');
+// const { } = require('./categories');
+// const { } = require('./product_categories');
+// const { } = require('./orders');
+// const { } = require('./order_products');
+// const { } = require('./reviews');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 module.exports = {
-  client,
-  // db methods
+  // client,
+  ...require('./users'),
+  ...require('./products'),
+  ...require('./categories'),
+  ...require('./product_categories'),
+  ...require('./orders'),
+  ...require('./order_products'),
+  ...require('./reviews')
 }
