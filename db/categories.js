@@ -8,16 +8,37 @@ const { client } = require("./index.js");
 //~~~~~~~~~~~~~~~~~~~
 
 //-- Get Functions --
-//# Gets all categories from exotic-db
-
+//# Gets all categories from exotic-db.
 async function getAllCategories() {
   try {
-    const { rows: categories } = await client.query(`
-        SELECT *
-        FROM categories
-        `);
+    const { rows: categories } = await client.query(
+      `
+      SELECT *
+      FROM categories
+      `
+    );
 
     return categories;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//# Gets all categories by id.
+async function getCategoryById(id) {
+  try {
+    const {
+      rows: [link],
+    } = await client.query(
+      `
+      SELECT *
+      FROM categories
+      WHERE id=$1
+    `,
+      [id]
+    );
+
+    return link;
   } catch (error) {
     throw error;
   }
@@ -68,5 +89,6 @@ async function createCategories(categoryList) {
 //~~~~~~~~~~~~~~~~~~~
 module.exports = {
   getAllCategories,
+  getCategoryById,
   createCategories,
 };
