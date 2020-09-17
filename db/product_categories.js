@@ -10,7 +10,7 @@ const { getProductById } = require('./products.js');
 
 //-- Create Functions --
 //#
-async function createProductCategory(productId, categoryId) {
+async function createProductCategory(productId, [categoryId]) {
   try {
     await client.query(
       `
