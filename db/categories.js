@@ -73,7 +73,6 @@ async function createCategories(categoryList) {
     SELECT * FROM categories
     WHERE name
     IN (${valuesStringSelect})
-    
     `,
       categoryList
     );
