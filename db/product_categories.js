@@ -9,8 +9,8 @@ const { getProductById } = require('./products.js');
 //~~~~~~~~~~~~~~~~~~~
 
 //-- Create Functions --
-//#
-async function createProductCategory(productId, [categoryId]) {
+//# Inserts the product id and an array of categories into product_categories
+async function createProductCategory(productId, [categories]) {
   try {
     await client.query(
       `
@@ -18,7 +18,7 @@ async function createProductCategory(productId, [categoryId]) {
     VALUES ($1, $2)
     ON CONFLICT ("productId", "categoryId") DO NOTHING;
     `,
-      [productId, categoryId]
+      [productId, categories]
     );
   } catch (error) {
     throw error;
