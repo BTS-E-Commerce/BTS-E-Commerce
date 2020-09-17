@@ -1,8 +1,8 @@
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
-const { client } = require("./index.js");
-const { getProductById } = require("./products.js");
+const { client } = require('./index.js');
+const { getProductById } = require('./products.js');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -28,13 +28,12 @@ async function createProductCategory(productId, categoryId) {
 //# addCategoriesToProducts
 async function addCategoriesToProducts(productId, categoryId) {
   try {
-    const createProdCatPromises = categoryId.map((category) =>
-      createProductCategory(productId, category.id)
+    const products = await Promise.all(
+      categoryArray.map((category) =>
+        createProductCategory(productId, category.id)
+      )
     );
 
-    await Promise.all(createProdCatPromises);
-
-    // need to return the getProductsByID from products.js
     return await getProductById(productId);
   } catch (error) {
     throw error;

@@ -1,7 +1,7 @@
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
-const { client } = require("./client");
+const { client } = require('./client');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -52,11 +52,11 @@ async function createCategories(categoryList) {
   }
   const valuesStringInsert = categoryList
     .map((_, index) => `$${index + 1}`)
-    .join("), (");
+    .join('), (');
 
   const valuesStringSelect = categoryList
     .map((_, index) => `$${index + 1}`)
-    .join(", ");
+    .join(', ');
 
   //# For some reason it does not like this line of code below
   //#  ON CONFLICT (name) DO NOTHING;
