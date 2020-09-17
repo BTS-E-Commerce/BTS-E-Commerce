@@ -4,7 +4,7 @@
 const {
   client,
   // other db methods
-} = require("./index");
+} = require("./client");
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -18,7 +18,7 @@ async function getAllProducts() {
   try {
     const { rows: products } = await client.query(`
         SELECT *
-        FROM users;
+        FROM products;
         `);
 
     return products;
@@ -81,6 +81,35 @@ async function getProductsBySale() {
   }
 }
 
+//# Create Product
+
+async function createProduct({
+  name,
+  description,
+  image,
+  inventory,
+  basePrice,
+  currentPrice,
+  sale,
+  date,
+}) {
+  try {
+    const { rows: product } = await client.query(
+      `
+  INSERT INTO products(name, description, image, inventory, "basePrice", "currentPrice", sale, date)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+  ON CONFLICT (name) DO NOTHING
+  RETURNING *;
+  `,
+      [name, description, image, inventory, basePrice, currentPrice, sale, date]
+    );
+
+    return product;
+  } catch (error) {
+    throw error;
+  }
+}
+
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
@@ -90,4 +119,5 @@ module.exports = {
   getProductById,
   getProductByName,
   getProductsBySale,
+  createProduct,
 };
