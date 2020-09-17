@@ -1,7 +1,7 @@
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
-const { client } = require("./index.js");
+const { client } = require('./client');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -52,18 +52,19 @@ async function createCategories(categoryList) {
   }
   const valuesStringInsert = categoryList
     .map((_, index) => `$${index + 1}`)
-    .join("), (");
+    .join('), (');
 
   const valuesStringSelect = categoryList
     .map((_, index) => `$${index + 1}`)
-    .join(", ");
+    .join(', ');
 
+  //# For some reason it does not like this line of code below
+  //#  ON CONFLICT (name) DO NOTHING;
   try {
     await client.query(
       `
     INSERT INTO categories(name)
     VALUES (${valuesStringInsert})
-    ON CONFLICT (name) DO NOTHING;
     `,
       categoryList
     );
@@ -73,7 +74,6 @@ async function createCategories(categoryList) {
     SELECT * FROM categories
     WHERE name
     IN (${valuesStringSelect})
-    
     `,
       categoryList
     );

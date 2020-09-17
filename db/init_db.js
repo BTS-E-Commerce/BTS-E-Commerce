@@ -14,6 +14,7 @@ const {
   getProductsBySale,
 } = require("./products");
 
+const { getAllCategories, createCategories } = require('./categories');
 //-- Database Imports --
 
 //~~~~~~~~~~~~~~~~~~~
@@ -194,6 +195,8 @@ async function initializeUsers() {
 //* Initializes the starting/default products. This may pull from some sort of api??
 async function initializeProducts() {
   try {
+
+  } catch (error) {}
     console.log("Creating initial products...");
     await createProduct({
       name: "Baked Mac N Cheese",
@@ -242,6 +245,16 @@ async function initializeProducts() {
 //* Initializes the starting/default categories.
 async function initializeCategories() {
   try {
+
+    const categories = await createCategories([
+      '#apples',
+      '#bananas',
+      '#blueberries',
+    ]);
+    console.log(categories);
+  } catch (error) {
+    console.log(error);
+  }
   } catch (error) {}
 }
 
@@ -261,14 +274,18 @@ async function initializeReviews() {
 //# Tests all functions associated with the database.
 async function testDatabase() {
   try {
-    console.log("Running tests of database functions...");
+    console.log('Running tests of database functions...');
 
     await testUserFunctions();
+
+    await testCategoryFunctions();
+
     await testProductFunctions();
 
-    console.log("Successfully finished running tests of database functions!");
+
+    console.log('Successfully finished running tests of database functions!');
   } catch (error) {
-    console.log("Error testing database functions.");
+    console.log('Error testing database functions.');
     throw error;
   }
 }
@@ -283,6 +300,14 @@ async function testUserFunctions() {
     throw error;
   }
 }
+
+//# Tests the functions associated with the categories table.
+async function testCategoryFunctions() {
+  try {
+    console.log('Testing getAllCategories...');
+    const allCategories = await getAllCategories();
+    console.log('Successfully ran getAllCategories: \n', allCategories);
+  } catch (error) {
 
 //# Tests the functions for the products table.
 async function testProductFunctions() {
