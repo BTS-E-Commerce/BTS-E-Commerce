@@ -32,7 +32,6 @@ async function getAllProducts() {
 //# Get Product By Id
 
 async function getProductById(id) {
-  console.log('starting get by id');
   try {
     const {
       rows: [product],
@@ -44,7 +43,6 @@ async function getProductById(id) {
         `,
       [id]
     );
-    console.log('product: ', product);
 
     const { rows: categories } = await client.query(
       `
@@ -55,8 +53,6 @@ async function getProductById(id) {
       `,
       [id]
     );
-
-    console.log('categories: ', categories);
 
     product.categories = categories;
 

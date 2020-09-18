@@ -8,7 +8,7 @@ const { client } = require('./client');
 //~~~~~~~~~~~~~~~~~~~
 
 //-- Get Functions --
-//# Gets all users in database. Useful for administrator functionality.
+//* Gets all users in database. Useful for administrator functionality.
 async function getAllUsers() {
     try {
         const { rows: users } = await client.query(`
@@ -22,7 +22,7 @@ async function getAllUsers() {
     }
 }
 
-//# Get a specific user given an id.
+//* Get a specific user given an id.
 async function getUserById({ id }) {
     try {
         const { rows: [user] } = await client.query(`
@@ -37,7 +37,7 @@ async function getUserById({ id }) {
     }
 }
 
-//# Get a specific user given a string username.
+//* Get a specific user given a string username.
 async function getUserByUsername({ username }) {
     try {
         const { rows: [user] } = await client.query(`
@@ -53,7 +53,7 @@ async function getUserByUsername({ username }) {
 }
 
 //-- Create Functions --
-//# Creates a new user. Used in the registering process.
+//* Creates a new user. Used in the registering process.
 async function createUser({ username, password }) {
     try {
         const { rows: [user] } = await client.query(`
@@ -69,11 +69,11 @@ async function createUser({ username, password }) {
 }
 
 //-- Update Functions --
-//# Updates a users informaiton.
+//* Updates a users informaiton.
 
 
 //-- Delete Functions --
-//# Delete a user.
+//* Delete a user.
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
