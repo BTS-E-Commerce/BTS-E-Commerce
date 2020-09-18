@@ -6,7 +6,7 @@ const {
   // other db methods
 } = require('./client');
 const { createCategories } = require('./categories');
-const { addCategoriesToProducts } = require('./product_categories');
+const { addCategoriesToProduct } = require('./product_categories');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -32,6 +32,7 @@ async function getAllProducts() {
 //# Get Product By Id
 
 async function getProductById(id) {
+  console.log('starting get by id');
   try {
     const {
       rows: [product],
@@ -43,6 +44,7 @@ async function getProductById(id) {
         `,
       [id]
     );
+    console.log('product: ', product);
 
     const { rows: categories } = await client.query(
       `
@@ -51,8 +53,10 @@ async function getProductById(id) {
       JOIN product_categories ON categories.id=product_categories."categoryId"
       WHERE product_categories."productId"=$1;
       `,
-      [productId]
+      [id]
     );
+
+    console.log('categories: ', categories);
 
     product.categories = categories;
 
@@ -121,12 +125,16 @@ async function createProduct({
       [name, description, image, inventory, basePrice, currentPrice, sale, date]
     );
 
+    //May nto need in future
     const categoryList = await createCategories(categories);
 
-    console.log('HERE: ', product.id, categoryList);
-    return await addCategoriesToProducts(product.id, categoryList);
+    if (categoryList) {
+      await addCategoriesToProduct(product.id, categoryList);
+    }
 
-    // return await getProductById(product.id);
+    const newProduct = await getProductById(product.id);
+
+    return newProduct;
   } catch (error) {
     throw error;
   }
