@@ -28,7 +28,7 @@ async function getAllCategories() {
 async function getCategoryById(id) {
   try {
     const {
-      rows: [link],
+      rows: [category],
     } = await client.query(
       `
       SELECT *
@@ -38,7 +38,27 @@ async function getCategoryById(id) {
       [id]
     );
 
-    return link;
+    return category;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//# Gets all categories by name.
+async function getCategoryByName(name) {
+  try {
+    const {
+      rows: [category],
+    } = await client.query(
+      `
+      SELECT *
+      FROM categories
+      WHERE name=$1
+      `,
+      [name]
+    );
+
+    return category;
   } catch (error) {
     throw error;
   }
@@ -84,13 +104,14 @@ async function createCategories(categoryList) {
   }
 }
 
+//# deletes a specfic category. Useful for admin to remove categories.
 async function deleteCategory(id) {
   try {
     await client.query(
       `
       DELETE
       FROM product_categories
-      WHERE id = $1;
+      WHERE "categoryId" = $1;
       `,
       [id]
     );
@@ -112,7 +133,11 @@ async function deleteCategory(id) {
   }
 }
 
+//# Updates the name column in categories table.
 async function updateCategory(id, fields = {}) {
+  //* need to make a check to see if the name already exists.
+  //* can get rid of the setString, the only key in categories is name
+
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(', ');
@@ -145,6 +170,7 @@ async function updateCategory(id, fields = {}) {
 module.exports = {
   getAllCategories,
   getCategoryById,
+  getCategoryByName,
   createCategories,
   deleteCategory,
   updateCategory,

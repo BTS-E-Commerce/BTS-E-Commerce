@@ -5,6 +5,7 @@ const {
   getAllCategories,
   createCategories,
   getCategoryById,
+  getCategoryByName,
   deleteCategory,
   updateCategory,
 } = require('./index');
@@ -46,12 +47,17 @@ async function testCategoryFunctions() {
     // const categoryById = await getCategoryById(allCategories[0].id);
     // console.log('Sucessfully tested getCategorybyId: ', categoryById);
 
-    //# Verified this works, commenting out keep categories for now.
+    //# Verified this works, commenting out for now.
+    // console.log('Testing getCategoryByName');
+    // const categoryByName = await getCategoryByName('baked');
+    // console.log('Sucessfully tested getCategorybyName: ', categoryByName);
+
+    //# Verified this works, commenting out for now.
     // console.log('Testing deleteCategory...');
     // await deleteCategory(8);
     // console.log('Remaining Routines: ', await getAllCategories());
 
-    //# Verified this works, commenting to de-clutter
+    //# Verified this works, commenting out to de-clutter
     // console.log('Testing updateCategory...');
     // const oldCategory = await getCategoryById(allCategories[0].id);
     // const newCategory = await updateCategory(allCategories[0].id, {
