@@ -19,5 +19,5 @@ module.exports = {
   // ...require('./init_orders'),
   // ...require('./init_products'),
   // ...require('./init_reviews'),
-  // ...require('./init_users')
-}
+  // ...require('./init_users'),
+};
