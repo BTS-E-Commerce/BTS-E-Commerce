@@ -34,7 +34,7 @@ async function getCategoryById(id) {
       SELECT *
       FROM categories
       WHERE id=$1
-    `,
+      `,
       [id]
     );
 
@@ -63,18 +63,18 @@ async function createCategories(categoryList) {
   try {
     await client.query(
       `
-    INSERT INTO categories(name)
-    VALUES (${valuesStringInsert})
-    `,
+      INSERT INTO categories(name)
+      VALUES (${valuesStringInsert})
+      `,
       categoryList
     );
 
     const { rows } = await client.query(
       `
-    SELECT * FROM categories
-    WHERE name
-    IN (${valuesStringSelect})
-    `,
+      SELECT * FROM categories
+      WHERE name
+      IN (${valuesStringSelect})
+      `,
       categoryList
     );
 

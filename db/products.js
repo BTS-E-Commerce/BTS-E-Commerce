@@ -4,7 +4,7 @@
 const {
   client,
   // other db methods
-} = require("./client");
+} = require('./client');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
