@@ -112,6 +112,33 @@ async function deleteCategory(id) {
   }
 }
 
+async function updateCategory(id, fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(', ');
+
+  if (setString.length === 0) {
+    return;
+  }
+
+  try {
+    const {
+      rows: [category],
+    } = await client.query(
+      `
+      UPDATE categories
+      SET ${setString}
+      WHERE id=${id}
+      RETURNING *;
+      `,
+      Object.values(fields)
+    );
+    return category;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
@@ -120,4 +147,5 @@ module.exports = {
   getCategoryById,
   createCategories,
   deleteCategory,
+  updateCategory,
 };

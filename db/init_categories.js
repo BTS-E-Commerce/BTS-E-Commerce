@@ -6,6 +6,7 @@ const {
   createCategories,
   getCategoryById,
   deleteCategory,
+  updateCategory,
 } = require('./index');
 
 // -- Client --
@@ -49,6 +50,15 @@ async function testCategoryFunctions() {
     // console.log('Testing deleteCategory...');
     // await deleteCategory(8);
     // console.log('Remaining Routines: ', await getAllCategories());
+
+    console.log('Testing updateCategory...');
+    const oldCategory = await getCategoryById(allCategories[0].id);
+    const newCategory = await updateCategory(allCategories[0].id, {
+      name: 'fried',
+    });
+    console.log('old: ', oldCategory);
+    console.log('new: ', newCategory);
+    console.log('Sucessfully ran updateCategory...');
   } catch (error) {
     console.log(error);
   }
