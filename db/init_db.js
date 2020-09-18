@@ -179,9 +179,9 @@ async function initializeData() {
   try {
     await initializeUsers();
 
-    await initializeProducts();
-
     await initializeCategories();
+
+    await initializeProducts();
 
     await initializeOrders();
 
