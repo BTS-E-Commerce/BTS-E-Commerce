@@ -84,6 +84,34 @@ async function createCategories(categoryList) {
   }
 }
 
+async function deleteCategory(id) {
+  try {
+    await client.query(
+      `
+      DELETE
+      FROM product_categories
+      WHERE id = $1;
+      `,
+      [id]
+    );
+
+    const {
+      rows: [category],
+    } = await client.query(
+      `
+      DELETE
+      FROM categories
+      WHERE id = $1;
+      `,
+      [id]
+    );
+
+    return category;
+  } catch (error) {
+    throw error;
+  }
+}
+
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
@@ -91,4 +119,5 @@ module.exports = {
   getAllCategories,
   getCategoryById,
   createCategories,
+  deleteCategory,
 };
