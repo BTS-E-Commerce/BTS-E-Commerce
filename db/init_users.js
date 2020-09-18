@@ -16,7 +16,21 @@ async function initializeUsers() {
             password: 'password',
         });
         console.log(userOne);
-    } catch (error) { }
+
+        const userTwo = await createUser({
+            username: 'sam',
+            password: 'password',
+        });
+        console.log(userTwo);
+
+        const userThree = await createUser({
+            username: 'tyler',
+            password: 'password',
+        });
+        console.log(userThree);
+    } catch (error) {
+        throw error;
+    }
 }
 
 async function testUserFunctions() {

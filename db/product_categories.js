@@ -2,7 +2,6 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 const { client } = require('./client');
-const { getProductById } = require('./index');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -33,8 +32,6 @@ async function addCategoriesToProduct(productId, categoryList) {
         createProductCategory(productId, category.id)
       )
     );
-
-    console.log('productId: ', productId);
   } catch (error) {
     throw error;
   }

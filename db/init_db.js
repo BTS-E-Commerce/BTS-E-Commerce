@@ -18,7 +18,7 @@ const { client } = require('./client');
 const { initializeUsers, testUserFunctions } = require('./init_users');
 const { initializeProducts, testProductFunctions } = require('./init_products');
 const { initializeCategories, testCategoryFunctions } = require('./init_categories');
-const { initializeOrders } = require('./init_orders');
+const { initializeOrders, testOrderFunctions } = require('./init_orders');
 const { initializeReviews } = require('./init_reviews');
 
 //-- Database Imports --
@@ -133,7 +133,9 @@ async function buildTables() {
       CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
         "userId" INTEGER REFERENCES users(id),
-        "orderPrice" INTEGER NOT NULL
+        "totalPrice" INTEGER NOT NULL DEFAULT 0,
+        date DATE DEFAULT now(),
+        isComplete BOOLEAN DEFAULT false
       );
     `);
     console.log('Sucessfully finished building orders table!');
@@ -203,6 +205,8 @@ async function testDatabase() {
     await testCategoryFunctions();
 
     await testProductFunctions();
+
+    await testOrderFunctions();
 
     console.log('Successfully finished running tests of database functions!');
   } catch (error) {
