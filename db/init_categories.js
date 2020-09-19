@@ -48,9 +48,11 @@ async function testCategoryFunctions() {
     // console.log('Sucessfully tested getCategorybyId: ', categoryById);
 
     //# Verified this works, commenting out for now.
-    // console.log('Testing getCategoryByName');
-    // const categoryByName = await getCategoryByName('baked');
-    // console.log('Sucessfully tested getCategorybyName: ', categoryByName);
+    console.log('Testing getCategoryByName');
+    const categoryByName = await getCategoryByName({
+      name: 'baked',
+    });
+    console.log('Sucessfully tested getCategorybyName: ', categoryByName);
 
     //# Verified this works, commenting out for now.
     // console.log('Testing deleteCategory...');
