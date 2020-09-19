@@ -19,6 +19,7 @@ async function createOrderProducts(orderId, productId, quantity, price) {
     }
 }
 
+//* Used for adding multiple products to an order.
 async function addProductToOrder(orderId, productList) {
     try {
         await Promise.all(productList.map(product =>
@@ -29,9 +30,49 @@ async function addProductToOrder(orderId, productList) {
     }
 }
 
+//* Used for deleting a single product from an order.
+async function deleteOrderProduct(orderId, productId) {
+    try {
+
+        const { rows: product } = await client.query(`
+            DELETE
+            FROM order_products
+            WHERE "orderId"=$1
+            AND "productId"=$2;
+        `, [orderId, productId]);
+
+        return product;
+    } catch (error) {
+        throw error;
+    }
+}
+
+//* Updates a single product from an order given the fields passed.
+async function updateOrderProduct({ orderId, productId, fields = {} }) {
+    try {
+        const setString = Object.keys(fields).map(
+            (key, index) => `"${key}"=$${index + 1}`
+        ).join(', ');
+
+        const { rows } = await client.query(`
+        UPDATE order_products
+        SET ${setString}
+        WHERE "orderId"=${orderId} 
+        AND "productId"=${productId}
+        RETURNING *;
+        `, Object.values(fields));
+
+        return rows;
+    } catch (error) {
+
+    }
+}
+
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 module.exports = {
-    addProductToOrder
+    addProductToOrder,
+    deleteOrderProduct,
+    updateOrderProduct
 };

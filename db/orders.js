@@ -4,7 +4,7 @@
 const { client } = require('./client');
 // const { addProductToOrder, getProductById } = require('./index');
 const { getProductById } = require('./products');
-const { addProductToOrder } = require('./order_products')
+const { addProductToOrder, deleteOrderProduct } = require('./order_products')
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -23,7 +23,7 @@ async function getAllOrders() {
 
         return orders;
     } catch (error) {
-
+        throw error;
     }
 }
 
@@ -79,11 +79,27 @@ async function getOrderById(orderId) {
         throw error;
     }
 }
-//*Gets all orders by username.
+//*Gets all orders by a user id.
+async function getAllOrdersByUserId({ id }) {
+    try {
+        const { rows: orderIds } = await client.query(`
+            SELECT id
+            FROM orders
+            WHERE "userId"=$1;
+        `, [id]);
 
-//*Gets all orders by product.
+        const orders = Promise.all(orderIds.map(
+            order => getOrderById(order.id)
+        ));
+
+        return orders;
+    } catch (error) {
+        throw error;
+    }
+}
 
 //* Creates a new order.
+//products looks like [{id: 1, quantity: 5}, {id: 5, quantity: 1}]
 async function createOrder({ userId }, products = []) {
     try {
         //Make any checks here
@@ -105,7 +121,6 @@ async function createOrder({ userId }, products = []) {
         //     })
         // );
 
-        //products looks like [{id: 1, quantity: 5}, {id: 5, quantity: 1}]
         //# Goes through the above passed product array and for each "product" in it grabs the data for it from the database
         //# and then proceeds to add the quantity from the product to the product database object. It is then pushed to a new arra.
         let orderProducts = [];
@@ -116,8 +131,6 @@ async function createOrder({ userId }, products = []) {
 
             orderProducts.push(productData);
         }
-
-        console.log('products on order: ', orderProducts);
 
         if (!orderProducts) {
             //error could not find product with that id
@@ -133,11 +146,102 @@ async function createOrder({ userId }, products = []) {
     }
 }
 
+//* Updates an order with new information.
+//You'll only ever want to update an order by adding or deleting products from it.
+//get all products by order function?
+async function updateOrder({ orderId }, products = []) {
+    try {
+        if (products.length === 0) {
+            return;
+        }
+
+        let order = await getOrderById(orderId);
+
+        if (!order) {
+            return;
+        }
+
+        //get all products by order. 
+        //This is a duplicate of most of the createOrder function. 
+        //Maybe this should be re-factored or split into seperate function?
+        let orderProducts = [];
+        for (const product of products) {
+            const productData = await getProductById(product.id)
+
+            productData.quantity = product.quantity;
+
+            orderProducts.push(productData);
+        }
+
+        if (!orderProducts) {
+            //error could not find product with that id
+        }
+
+        await addProductToOrder(order.id, orderProducts);
+
+        const newOrder = await getOrderById(order.id);
+
+        return newOrder;
+    } catch (error) {
+        throw error;
+    }
+}
+
+//* Updates an order with an added product.
+async function updateAddProductToOrder({ orderId, products = [] }) {
+    try {
+        await addProductToOrder(orderId, products);
+
+        const newOrder = await getOrderById(orderId);
+
+        return newOrder;
+    } catch (error) {
+        throw error;
+    }
+}
+
+//* Deletes a product from an order.
+async function deleteProductFromOrder({ orderId, productId }) {
+    try {
+        await deleteOrderProduct(orderId, productId);
+
+        const newOrder = await getOrderById(orderId);
+
+        return newOrder;
+    } catch (error) {
+        throw error;
+    }
+}
+
+//* Deletes an entire order.
+async function deleteOrder({ orderId }) {
+    try {
+        await client.query(`
+            DELETE
+            FROM order_products
+            WHERE "orderId"=$1;
+        `, [orderId]);
+
+        const { rows: order } = await client.query(`
+            DELETE
+            FROM orders
+            WHERE id=$1;
+        `, [orderId])
+
+        return order;
+    } catch (error) {
+        throw error;
+    }
+}
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 module.exports = {
     getAllOrders,
-    createOrder
+    getAllOrdersByUserId,
+    createOrder,
+    updateAddProductToOrder,
+    deleteProductFromOrder,
+    deleteOrder
 }
