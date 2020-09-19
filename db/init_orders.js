@@ -4,7 +4,7 @@
 
 // -- Client --
 const { client } = require('./client');
-const { getAllOrders, createOrder } = require('./index');
+const { getAllOrders, createOrder, getAllOrdersByUserId, updateAddProductToOrder, deleteProductFromOrder, deleteOrder, updateOrderProduct } = require('./index');
 // const { createOrder } = require('./orders');
 
 //~~~~~~~~~~~~~~~~~~~
@@ -13,8 +13,6 @@ const { getAllOrders, createOrder } = require('./index');
 //* Initializes the starting/default orders.
 async function initializeOrders() {
     try {
-        console.log('INITIALIZING ORDERS')
-
         const orderOne = await createOrder({ userId: 1 }, [{ id: 1, quantity: 2 }, { id: 3, quantity: 1 }]);
         console.log('Order: \n', orderOne)
 
@@ -33,6 +31,27 @@ async function testOrderFunctions() {
         console.log('Testing getAllOrders...');
         const allOrders = await getAllOrders();
         console.log('Successfully ran getAllOrders:', allOrders);
+
+        console.log('Testing getAllOrdersByUserId...');
+        const allOrdersByUserId = await getAllOrdersByUserId({ id: 1 });
+        console.log('Successfully ran getAllOrdersByUserId:', allOrdersByUserId);
+
+        console.log('Testing updateAddProductToOrder...');
+        const addedOrderProduct = await updateAddProductToOrder({ orderId: 1, products: [{ id: 2, quantity: 3, currentPrice: 5 }] });
+        console.log('Successfully ran updateAddProductToOrder:', addedOrderProduct);
+
+        console.log('Testing deleteProductFromOrder...');
+        const deletedOrderProduct = await deleteProductFromOrder({ orderId: 1, productId: 2 });
+        console.log('Successfully ran deleteProductFromOrder:', deletedOrderProduct);
+
+        console.log('Testing deleteOrder...');
+        await deleteOrder({ orderId: 1 });
+        const afterDeleteOrder = await getAllOrders();
+        console.log('Successfully ran deleteOrder:', afterDeleteOrder);
+
+        console.log('Testing updateOrderProduct...');
+        const updatedOrderProduct = await updateOrderProduct({ orderId: 2, productId: 1, fields: { quantity: 12, price: 100 } });
+        console.log('Successfully ran updateOrderProduct:', updatedOrderProduct);
 
     } catch (error) {
         throw error;
