@@ -4,9 +4,9 @@
 const {
   client,
   // other db methods
-} = require('./client');
-const { createCategories } = require('./categories');
-const { addCategoriesToProduct } = require('./product_categories');
+} = require("./client");
+const { createCategories } = require("./categories");
+const { addCategoriesToProduct } = require("./product_categories");
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -32,6 +32,7 @@ async function getAllProducts() {
 //# Get Product By Id
 
 async function getProductById(id) {
+  console.log("starting get by id");
   try {
     const {
       rows: [product],
@@ -43,6 +44,7 @@ async function getProductById(id) {
         `,
       [id]
     );
+    console.log("product: ", product);
 
     const { rows: categories } = await client.query(
       `
@@ -53,6 +55,8 @@ async function getProductById(id) {
       `,
       [id]
     );
+
+    console.log("categories: ", categories);
 
     product.categories = categories;
 
@@ -69,7 +73,7 @@ async function getProductByName({ name }) {
       `
         SELECT products.*
         FROM products
-        WHERE name=$1
+        WHERE name=$1;
         `,
       [name]
     );
@@ -87,7 +91,7 @@ async function getProductsBySale() {
     const { rows: products } = await client.query(`
         SELECT products.*
         FROM products
-        WHERE sale=true`);
+        WHERE sale=true;`);
 
     return products;
   } catch (error) {
@@ -136,6 +140,91 @@ async function createProduct({
   }
 }
 
+//# Update Product
+async function updateProduct(productId, fields = {}) {
+  const { categories } = fields;
+  delete fields.categories;
+
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
+
+  try {
+    if (setString.length > 0) {
+      await client.query(
+        `
+        UPDATE products
+        SET ${setString}
+        WHERE id=${productId}
+        RETURNING *;
+      `,
+        Object.values(fields)
+      );
+    }
+
+    if (categories === undefined) {
+      return await getProductById(productId);
+    }
+
+    const categoryList = await createCategories(categories);
+    const categoryListIdString = categoryList
+      .map((category) => `${category.id}`)
+      .join(", ");
+
+    await client.query(
+      `
+      DELETE FROM product_categories
+      WHERE "categoryId"
+      NOT IN (${categoryListIdString})
+      AND "productId"=$1;
+    `,
+      [productId]
+    );
+
+    // and create post_tags as necessary
+    await addCategoriesToProduct(productId, categoryList);
+
+    const finalProduct = await getProductById(productId);
+    return finalProduct;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// # Delete Product
+
+async function deleteProduct(id) {
+  try {
+    await client.query(
+      `
+    DELETE FROM order_products
+    WHERE "productId"=$1;
+    `,
+      [id]
+    );
+
+    await client.query(
+      `
+    DELETE FROM product_categories
+    WHERE "productId"=$1;
+    `,
+      [id]
+    );
+
+    await client.query(
+      `
+    DELETE FROM products
+    WHERE id=$1;
+    `,
+      [id]
+    );
+
+    return `Deleted Product: ${id}`;
+  } catch (error) {
+    throw error;
+  }
+}
+
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
@@ -146,4 +235,6 @@ module.exports = {
   getProductByName,
   getProductsBySale,
   createProduct,
+  updateProduct,
+  deleteProduct,
 };

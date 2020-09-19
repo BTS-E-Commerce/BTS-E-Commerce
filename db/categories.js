@@ -1,7 +1,7 @@
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
-const { client } = require('./client');
+const { client } = require("./client");
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -72,11 +72,11 @@ async function createCategories(categoryList) {
   }
   const valuesStringInsert = categoryList
     .map((_, index) => `$${index + 1}`)
-    .join('), (');
+    .join("), (");
 
   const valuesStringSelect = categoryList
     .map((_, index) => `$${index + 1}`)
-    .join(', ');
+    .join(", ");
 
   //# For some reason it does not like this line of code below
   //#  ON CONFLICT (name) DO NOTHING;
@@ -84,7 +84,7 @@ async function createCategories(categoryList) {
     await client.query(
       `
       INSERT INTO categories(name)
-      VALUES (${valuesStringInsert})
+      VALUES (${valuesStringInsert});
       `,
       categoryList
     );
@@ -93,7 +93,7 @@ async function createCategories(categoryList) {
       `
       SELECT * FROM categories
       WHERE name
-      IN (${valuesStringSelect})
+      IN (${valuesStringSelect});
       `,
       categoryList
     );
@@ -140,7 +140,7 @@ async function updateCategory(id, fields = {}) {
 
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
-    .join(', ');
+    .join(", ");
 
   if (setString.length === 0) {
     return;
