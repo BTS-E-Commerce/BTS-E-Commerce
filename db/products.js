@@ -4,9 +4,9 @@
 const {
   client,
   // other db methods
-} = require("./client");
-const { createCategories } = require("./categories");
-const { addCategoriesToProduct } = require("./product_categories");
+} = require('./client');
+const { createCategories } = require('./categories');
+const { addCategoriesToProduct } = require('./product_categories');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -32,7 +32,7 @@ async function getAllProducts() {
 //# Get Product By Id
 
 async function getProductById(id) {
-  console.log("starting get by id");
+  console.log('starting get by id');
   try {
     const {
       rows: [product],
@@ -44,7 +44,7 @@ async function getProductById(id) {
         `,
       [id]
     );
-    console.log("product: ", product);
+    console.log('product: ', product);
 
     const { rows: categories } = await client.query(
       `
@@ -56,7 +56,7 @@ async function getProductById(id) {
       [id]
     );
 
-    console.log("categories: ", categories);
+    console.log('categories: ', categories);
 
     product.categories = categories;
 
@@ -147,7 +147,7 @@ async function updateProduct(productId, fields = {}) {
 
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
-    .join(", ");
+    .join(', ');
 
   try {
     if (setString.length > 0) {
@@ -169,7 +169,7 @@ async function updateProduct(productId, fields = {}) {
     const categoryList = await createCategories(categories);
     const categoryListIdString = categoryList
       .map((category) => `${category.id}`)
-      .join(", ");
+      .join(', ');
 
     await client.query(
       `
