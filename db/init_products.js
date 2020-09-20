@@ -19,45 +19,63 @@ const { client } = require('./client');
 //* Initializes the starting/default products. This may pull from some sort of api??
 async function initializeProducts() {
   try {
-    await createProduct({
-      name: 'Baked Mac N Cheese',
-      description: 'Grammys special Thanksgiving Baked Mac N Cheese',
-      image:
-        'https://www.recipetineats.com/wp-content/uploads/2018/05/Baked-Mac-and-Cheese_2.jpg',
-      inventory: '10',
-      basePrice: '7',
-      currentPrice: '5',
-      sale: true,
-      date: '09/15/20',
-      categories: ['baked', 'oven'],
-    });
+    await createProduct(
+      {
+        name: 'Baked Mac N Cheese',
+        description: 'Grammys special Thanksgiving Baked Mac N Cheese',
+        image:
+          'https://www.recipetineats.com/wp-content/uploads/2018/05/Baked-Mac-and-Cheese_2.jpg',
+        inventory: '10',
+        basePrice: '7',
+        currentPrice: '5',
+        sale: true,
+        date: '09/15/20',
+      },
+      [
+        { id: 2, name: 'oven' },
+        { id: 1, name: 'baked' },
+        { id: 4, name: 'cheesy' },
+      ]
+    );
 
-    await createProduct({
-      name: 'Mac N Cheese Breadsticks',
-      description:
-        "It's not an official movie night at Grammys without the Mac Sticks!",
-      image:
-        'https://img.buzzfeed.com/video-api-prod/assets/5643fc670b714aefadf31991ed2f0f2f/BFV11184_MacnCheeseBreadsticks-Thumb1080SQ.jpg?resize=300:*&output-format=webp&output-quality=auto',
-      inventory: '20',
-      basePrice: '5',
-      currentPrice: '3',
-      sale: true,
-      date: '09/17/20',
-      categories: ['crunchy', 'cheesy', 'cheddar'],
-    });
+    await createProduct(
+      {
+        name: 'Mac N Cheese Breadsticks',
+        description:
+          "It's not an official movie night at Grammys without the Mac Sticks!",
+        image:
+          'https://img.buzzfeed.com/video-api-prod/assets/5643fc670b714aefadf31991ed2f0f2f/BFV11184_MacnCheeseBreadsticks-Thumb1080SQ.jpg?resize=300:*&output-format=webp&output-quality=auto',
+        inventory: '20',
+        basePrice: '5',
+        currentPrice: '3',
+        sale: true,
+        date: '09/17/20',
+      },
+      [
+        { id: 7, name: 'special' },
+        { id: 5, name: 'cheddar' },
+        { id: 2, name: 'oven' },
+      ]
+    );
 
-    await createProduct({
-      name: 'Vegan Mac N Cheese',
-      description: 'Grammys special Mac for Auntie Sarah',
-      image:
-        'https://img.buzzfeed.com/video-api-prod/assets/d9fd07cb667d47288c03a873c76a3445/FB_1.jpg?resize=300:*&output-format=webp&output-quality=auto',
-      inventory: '5',
-      basePrice: '10',
-      currentPrice: '10',
-      sale: false,
-      date: '09/10/2020',
-      categories: ['vegan', 'special', 'cheese'],
-    });
+    await createProduct(
+      {
+        name: 'Vegan Mac N Cheese',
+        description: 'Grammys special Mac for Auntie Sarah',
+        image:
+          'https://img.buzzfeed.com/video-api-prod/assets/d9fd07cb667d47288c03a873c76a3445/FB_1.jpg?resize=300:*&output-format=webp&output-quality=auto',
+        inventory: '5',
+        basePrice: '10',
+        currentPrice: '10',
+        sale: false,
+        date: '09/10/2020',
+      },
+      [
+        { id: 8, name: 'cheese' },
+        { id: 6, name: 'vegan' },
+        { id: 5, name: 'cheddar' },
+      ]
+    );
     console.log('Finished making products...');
   } catch (error) {
     console.log('Error creating initial products...');

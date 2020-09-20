@@ -19,16 +19,16 @@ const { client } = require('./client');
 //* Initializes the starting/default categories.
 async function initializeCategories() {
   try {
-    // const categories = await createCategories([
-    //   'baked',
-    //   'oven',
-    //   'crunchy',
-    //   'cheesy',
-    //   'cheddar',
-    //   'vegan',
-    //   'special',
-    //   'cheese',
-    // ]);
+    const categories = await createCategories([
+      'baked',
+      'oven',
+      'crunchy',
+      'cheesy',
+      'cheddar',
+      'vegan',
+      'special',
+      'cheese',
+    ]);
     // console.log(categories);
   } catch (error) {
     console.log(error);
