@@ -36,7 +36,6 @@ async function getAllProducts() {
 //# Get Product By Id
 
 async function getProductById(id) {
-  console.log('starting get by id');
   try {
     const {
       rows: [product],
@@ -90,7 +89,6 @@ async function getProductByName({ name }) {
 }
 
 //# Get Products By Sale
-
 async function getProductsBySale() {
   try {
     const { rows: productsList } = await client.query(`
@@ -109,7 +107,6 @@ async function getProductsBySale() {
 }
 
 //# Create Product
-
 async function createProduct(
   { name, description, image, inventory, basePrice, currentPrice, sale, date },
   categories
@@ -189,7 +186,6 @@ async function updateProduct(productId, fields = {}) {
 }
 
 // # Delete Product
-
 async function deleteProduct(id) {
   try {
     await client.query(

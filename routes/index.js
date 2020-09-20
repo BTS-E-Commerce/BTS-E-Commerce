@@ -1,3 +1,4 @@
+const client = require('../db')
 const apiRouter = require('express').Router();
 
 apiRouter.get("/", (req, res, next) => {
