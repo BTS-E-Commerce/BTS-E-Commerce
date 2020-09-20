@@ -11,6 +11,7 @@ const { client } = require('./client');
 //# Inserts the product id and an array of categories into product_categories
 async function createProductCategory(productId, categoryId) {
   try {
+    console.log('categoryId:', categoryId);
     await client.query(
       `
     INSERT INTO product_categories("productId", "categoryId")
@@ -19,6 +20,7 @@ async function createProductCategory(productId, categoryId) {
     `,
       [productId, categoryId]
     );
+    console.log('done');
   } catch (error) {
     throw error;
   }
@@ -27,6 +29,7 @@ async function createProductCategory(productId, categoryId) {
 //# addCategoriesToProducts
 async function addCategoriesToProduct(productId, categoryList) {
   try {
+    console.log('categoryList:', categoryList);
     await Promise.all(
       categoryList.map((category) =>
         createProductCategory(productId, category.id)

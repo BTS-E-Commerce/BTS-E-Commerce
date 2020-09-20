@@ -18,10 +18,14 @@ const { addCategoriesToProduct } = require('./product_categories');
 
 async function getAllProducts() {
   try {
-    const { rows: products } = await client.query(`
-        SELECT *
+    const { rows: productIds } = await client.query(`
+        SELECT id
         FROM products;
         `);
+
+    const products = await Promise.all(
+      productIds.map((product) => getProductById(product.id))
+    );
 
     return products;
   } catch {
@@ -44,7 +48,6 @@ async function getProductById(id) {
         `,
       [id]
     );
-    console.log('product: ', product);
 
     const { rows: categories } = await client.query(
       `
@@ -55,8 +58,6 @@ async function getProductById(id) {
       `,
       [id]
     );
-
-    console.log('categories: ', categories);
 
     product.categories = categories;
 
@@ -69,13 +70,17 @@ async function getProductById(id) {
 //# Get Product By Name
 async function getProductByName({ name }) {
   try {
-    const { rows: products } = await client.query(
+    const { rows: productsList } = await client.query(
       `
         SELECT products.*
         FROM products
         WHERE name=$1;
         `,
       [name]
+    );
+
+    const products = await Promise.all(
+      productsList.map((product) => getProductById(product.id))
     );
 
     return products;
@@ -88,10 +93,14 @@ async function getProductByName({ name }) {
 
 async function getProductsBySale() {
   try {
-    const { rows: products } = await client.query(`
+    const { rows: productsList } = await client.query(`
         SELECT products.*
         FROM products
         WHERE sale=true;`);
+
+    const products = await Promise.all(
+      productsList.map((product) => getProductById(product.id))
+    );
 
     return products;
   } catch (error) {
@@ -101,17 +110,10 @@ async function getProductsBySale() {
 
 //# Create Product
 
-async function createProduct({
-  name,
-  description,
-  image,
-  inventory,
-  basePrice,
-  currentPrice,
-  sale,
-  date,
-  categories = [],
-}) {
+async function createProduct(
+  { name, description, image, inventory, basePrice, currentPrice, sale, date },
+  categories
+) {
   try {
     const {
       rows: [product],
@@ -125,12 +127,7 @@ async function createProduct({
       [name, description, image, inventory, basePrice, currentPrice, sale, date]
     );
 
-    //May nto need in future
-    const categoryList = await createCategories(categories);
-
-    if (categoryList) {
-      await addCategoriesToProduct(product.id, categoryList);
-    }
+    await addCategoriesToProduct(product.id, categories);
 
     const newProduct = await getProductById(product.id);
 
