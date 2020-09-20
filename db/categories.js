@@ -14,7 +14,7 @@ async function getAllCategories() {
     const { rows: categories } = await client.query(
       `
       SELECT *
-      FROM categories
+      FROM categories;
       `
     );
 
@@ -33,7 +33,7 @@ async function getCategoryById(id) {
       `
       SELECT *
       FROM categories
-      WHERE id=$1
+      WHERE id=$1;
       `,
       [id]
     );
@@ -45,15 +45,13 @@ async function getCategoryById(id) {
 }
 
 //# Gets all categories by name.
-async function getCategoryByName(name) {
+async function getCategoryByName({ name }) {
   try {
-    const {
-      rows: [category],
-    } = await client.query(
+    const { rows: category } = await client.query(
       `
       SELECT *
       FROM categories
-      WHERE name=$1
+      WHERE name=$1;
       `,
       [name]
     );

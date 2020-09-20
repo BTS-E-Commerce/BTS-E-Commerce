@@ -206,6 +206,14 @@ async function deleteProduct(id) {
 
     await client.query(
       `
+    DELETE FROM reviews
+    WHERE "productId"=$1;
+    `,
+      [id]
+    );
+
+    await client.query(
+      `
     DELETE FROM products
     WHERE id=$1;
     `,

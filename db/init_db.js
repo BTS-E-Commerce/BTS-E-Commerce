@@ -17,9 +17,12 @@ const { client } = require('./client');
 
 const { initializeUsers, testUserFunctions } = require('./init_users');
 const { initializeProducts, testProductFunctions } = require('./init_products');
-const { initializeCategories, testCategoryFunctions } = require('./init_categories');
+const {
+  initializeCategories,
+  testCategoryFunctions,
+} = require('./init_categories');
 const { initializeOrders, testOrderFunctions } = require('./init_orders');
-const { initializeReviews } = require('./init_reviews');
+const { initializeReviews, testReviewFunctions } = require('./init_reviews');
 
 //-- Database Imports --
 
@@ -188,7 +191,6 @@ async function initializeData() {
     await initializeOrders();
 
     await initializeReviews();
-
   } catch (error) {
     throw error;
   }
@@ -207,6 +209,8 @@ async function testDatabase() {
     await testProductFunctions();
 
     await testOrderFunctions();
+
+    await testReviewFunctions();
 
     console.log('Successfully finished running tests of database functions!');
   } catch (error) {
