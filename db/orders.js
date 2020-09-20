@@ -110,19 +110,8 @@ async function createOrder({ userId }, products = []) {
             RETURNING *;
         `, [userId]);
 
-        //Why doesn't promise.all work here?
-        // const orderProducts = await Promise.all(products
-        //     .map(product => {
-        //         console.log('PRODUCT FROM FRONT END: ', product);
-        //         const productData = getProductById(product.id)
-        //         console.log('PRODUCT FROM DB: ', productData);
-        //         productData.quantity = product.quantity;
-        //         console.log('DONE ', productData);
-        //     })
-        // );
-
         //# Goes through the above passed product array and for each "product" in it grabs the data for it from the database
-        //# and then proceeds to add the quantity from the product to the product database object. It is then pushed to a new arra.
+        //# and then proceeds to add the quantity from the product to the product database object. It is then pushed to a new array.
         let orderProducts = [];
         for (const product of products) {
             const productData = await getProductById(product.id)
