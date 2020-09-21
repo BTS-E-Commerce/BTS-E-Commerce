@@ -105,7 +105,7 @@ async function getProductsBySale() {
 
 //# Create Product
 async function createProduct(
-  { name, description, image, inventory, basePrice, currentPrice, sale, date },
+  { name, description, image, inventory, basePrice, currentPrice, sale },
   categories
 ) {
   try {
@@ -113,12 +113,12 @@ async function createProduct(
       rows: [product],
     } = await client.query(
       `
-  INSERT INTO products(name, description, image, inventory, "basePrice", "currentPrice", sale, date)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+  INSERT INTO products(name, description, image, inventory, "basePrice", "currentPrice", sale)
+  VALUES ($1, $2, $3, $4, $5, $6, $7)
   ON CONFLICT (name) DO NOTHING
   RETURNING *;
   `,
-      [name, description, image, inventory, basePrice, currentPrice, sale, date]
+      [name, description, image, inventory, basePrice, currentPrice, sale]
     );
 
     await addCategoriesToProduct(product.id, categories);

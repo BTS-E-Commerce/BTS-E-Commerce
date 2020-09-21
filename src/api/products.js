@@ -21,6 +21,19 @@ export async function getAllProducts() {
     }
 }
 
+export async function createProduct(product, categories) {
+    try {
+        const { data } = await axios.post(`${BASE_URL}/products`, {
+            product,
+            categories
+        });
+        console.log(data);
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export async function deleteProduct(productId) {
     try {
         const { data } = await axios.delete(`${BASE_URL}/products/${productId}`);
