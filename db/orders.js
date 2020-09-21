@@ -4,7 +4,7 @@
 const { client } = require('./client');
 // const { addProductToOrder, getProductById } = require('./index');
 const { getProductById } = require('./products');
-const { addProductToOrder, deleteOrderProduct } = require('./order_products')
+const { addProductsToOrderProducts, deleteOrderProduct } = require('./order_products')
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
@@ -125,7 +125,7 @@ async function createOrder({ userId }, products = []) {
             //error could not find product with that id
         }
 
-        await addProductToOrder(order.id, orderProducts);
+        await addProductsToOrderProducts(order.id, orderProducts);
 
         const newOrder = await getOrderById(order.id);
 
@@ -166,7 +166,7 @@ async function updateOrder({ orderId }, products = []) {
             //error could not find product with that id
         }
 
-        await addProductToOrder(order.id, orderProducts);
+        await addProductsToOrderProducts(order.id, orderProducts);
 
         const newOrder = await getOrderById(order.id);
 
@@ -177,9 +177,9 @@ async function updateOrder({ orderId }, products = []) {
 }
 
 //* Updates an order with an added product.
-async function updateAddProductToOrder({ orderId, products = [] }) {
+async function addProductToOrder({ orderId, products = [] }) {
     try {
-        await addProductToOrder(orderId, products);
+        await addProductsToOrderProducts(orderId, products);
 
         const newOrder = await getOrderById(orderId);
 
@@ -230,7 +230,7 @@ module.exports = {
     getAllOrders,
     getAllOrdersByUserId,
     createOrder,
-    updateAddProductToOrder,
+    addProductToOrder,
     deleteProductFromOrder,
     deleteOrder
 }

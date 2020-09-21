@@ -20,7 +20,7 @@ async function createOrderProducts(orderId, productId, quantity, price) {
 }
 
 //* Used for adding multiple products to an order.
-async function addProductToOrder(orderId, productList) {
+async function addProductsToOrderProducts(orderId, productList) {
     try {
         await Promise.all(productList.map(product =>
             createOrderProducts(orderId, product.id, product.quantity, product.currentPrice))
@@ -72,7 +72,7 @@ async function updateOrderProduct({ orderId, productId, fields = {} }) {
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 module.exports = {
-    addProductToOrder,
+    addProductsToOrderProducts,
     deleteOrderProduct,
     updateOrderProduct
 };

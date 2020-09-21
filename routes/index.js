@@ -1,5 +1,15 @@
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ IMPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~
 const client = require('../db')
 const apiRouter = require('express').Router();
+
+const usersRouter = require('./users');
+const productsRouter = require('./products');
+
+//~~~~~~~~~~~~~~~~~~~
+//~~~ MIDDLEWARE ~~~~
+//~~~~~~~~~~~~~~~~~~~
 
 apiRouter.get("/", (req, res, next) => {
   res.send({
@@ -7,4 +17,10 @@ apiRouter.get("/", (req, res, next) => {
   });
 });
 
+apiRouter.use('/users', usersRouter);
+apiRouter.use('/products', productsRouter);
+
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ EXPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~
 module.exports = apiRouter;
