@@ -5,22 +5,9 @@
 // -- Client --
 const { client } = require('./client');
 
-//For some reason this doesn't work but I'm keeping itanywa to troubleshoot later
-// const { initializeUsers,
-//   testUserFunctions,
-//   initializeProducts,
-//   testProductFunctions,
-//   initializeCategories,
-//   testCategoryFunctions,
-//   initializeOrders,
-//   initializeReviews } = require('./index')
-
 const { initializeUsers, testUserFunctions } = require('./init_users');
 const { initializeProducts, testProductFunctions } = require('./init_products');
-const {
-  initializeCategories,
-  testCategoryFunctions,
-} = require('./init_categories');
+const { initializeCategories, testCategoryFunctions } = require('./init_categories');
 const { initializeOrders, testOrderFunctions } = require('./init_orders');
 const { initializeReviews, testReviewFunctions } = require('./init_reviews');
 

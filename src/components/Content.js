@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import ProductCard, { } from './ProductCard';
+import ProductCard from './ProductCard';
+import NewProductForm from './NewProductForm';
 
-import { getAllUsers, getAllProducts } from '../api/index';
+import { getAllProducts } from '../api/products';
+
 
 const Content = () => {
     const [products, setProducts] = useState([]);
@@ -15,14 +17,15 @@ const Content = () => {
             .catch(error => {
                 console.log(error);
             })
-    }, []);
-
-    console.log(products);
+        //Putting "products" into the change array below causes it to run forever every second. I don't know why.
+        //Nevermind, I figured it out. It was becuase I was running a console log on it right after, which counted as a "change".
+    }, [products]);
 
     return (
         <div>
+            <NewProductForm />
             {products.map(product => (
-                <ProductCard product={product} />
+                <ProductCard key={product.id} product={product} />
             ))}
         </div>
 

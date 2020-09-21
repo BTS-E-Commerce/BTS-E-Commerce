@@ -10,8 +10,6 @@ const {
   updateProduct,
   deleteProduct,
 } = require('./index');
-// -- Client --
-const { client } = require('./client');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~

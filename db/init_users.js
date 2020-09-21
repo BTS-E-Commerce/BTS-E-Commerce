@@ -2,8 +2,7 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 const { createUser, getAllUsers } = require('./index');
-// -- Client --
-const { client } = require('./client');
+
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~

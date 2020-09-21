@@ -2,8 +2,6 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 
-// -- Client --
-const { client } = require('./client');
 const { getAllOrders, createOrder, getAllOrdersByUserId, addProductToOrder, deleteProductFromOrder, deleteOrder, updateOrderProduct } = require('./index');
 // const { createOrder } = require('./orders');
 

@@ -1,10 +1,7 @@
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
-const {
-  client,
-  // other db methods
-} = require('./client');
+const { client } = require('./client');
 const { createCategories } = require('./categories');
 const { addCategoriesToProduct } = require('./product_categories');
 
