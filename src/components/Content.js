@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import NewProductForm from './NewProductForm';
 
-import { getAllProducts } from '../api/products';
+import { getAllProducts, deleteProduct } from '../api/products';
 
 
 const Content = () => {
@@ -17,15 +17,21 @@ const Content = () => {
             .catch(error => {
                 console.log(error);
             })
-        //Putting "products" into the change array below causes it to run forever every second. I don't know why.
-        //Nevermind, I figured it out. It was becuase I was running a console log on it right after, which counted as a "change".
     }, [products]);
+
+    const onProductDelete = (id) => () => {
+        deleteProduct(id);
+        setProducts(products.filter(product => id !== product.id));
+    }
+
+    // const onProductCreate = () => {
+    // }
 
     return (
         <div>
-            <NewProductForm />
+            <NewProductForm setProducts={setProducts} products={products} />
             {products.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard onDelete={onProductDelete(product.id)} key={product.id} product={product} />
             ))}
         </div>
 
