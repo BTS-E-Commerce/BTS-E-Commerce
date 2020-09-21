@@ -4,7 +4,7 @@
 
 // -- Client --
 const { client } = require('./client');
-const { getAllOrders, createOrder, getAllOrdersByUserId, updateAddProductToOrder, deleteProductFromOrder, deleteOrder, updateOrderProduct } = require('./index');
+const { getAllOrders, createOrder, getAllOrdersByUserId, addProductToOrder, deleteProductFromOrder, deleteOrder, updateOrderProduct } = require('./index');
 // const { createOrder } = require('./orders');
 
 //~~~~~~~~~~~~~~~~~~~
@@ -36,9 +36,9 @@ async function testOrderFunctions() {
         const allOrdersByUserId = await getAllOrdersByUserId({ id: 1 });
         console.log('Successfully ran getAllOrdersByUserId:', allOrdersByUserId);
 
-        console.log('Testing updateAddProductToOrder...');
-        const addedOrderProduct = await updateAddProductToOrder({ orderId: 1, products: [{ id: 2, quantity: 3, currentPrice: 5 }] });
-        console.log('Successfully ran updateAddProductToOrder:', addedOrderProduct);
+        console.log('Testing addProductToOrder...');
+        const addedOrderProduct = await addProductToOrder({ orderId: 1, products: [{ id: 2, quantity: 3, currentPrice: 5 }] });
+        console.log('Successfully ran addProductToOrder:', addedOrderProduct);
 
         console.log('Testing deleteProductFromOrder...');
         const deletedOrderProduct = await deleteProductFromOrder({ orderId: 1, productId: 2 });
