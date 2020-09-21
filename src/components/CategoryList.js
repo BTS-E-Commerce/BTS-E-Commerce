@@ -19,7 +19,7 @@ const CategoryList = () => {
       <h1>Categories</h1>
       <ul>
         {categories.map((category) => (
-          <span>
+          <span key={category.id}>
             <li>{category.id}</li>
             <li>{category.name}</li>
           </span>
