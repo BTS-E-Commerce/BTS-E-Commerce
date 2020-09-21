@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
 import NewProductForm from './NewProductForm';
 
+import CategoryList from './CategoryList';
 import { getAllProducts, deleteProduct } from '../api/products';
 
 
@@ -33,6 +34,7 @@ const Content = () => {
             {products.map(product => (
                 <ProductCard onDelete={onProductDelete(product.id)} key={product.id} product={product} />
             ))}
+            <CategoryList />
         </div>
 
     );
