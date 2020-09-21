@@ -21,7 +21,8 @@ productsRouter.get('/', async (req, res, next) => {
     }
 });
 
-productsRouter.get('/:productId', async (req, res, next) => {
+
+productsRouter.delete('/:productId', async (req, res, next) => {
     const { productId } = req.params;
     try {
         await client.deleteProduct(productId)

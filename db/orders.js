@@ -2,7 +2,6 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 const { client } = require('./client');
-// const { addProductToOrder, getProductById } = require('./index');
 const { getProductById } = require('./products');
 const { addProductsToOrderProducts, deleteOrderProduct } = require('./order_products')
 
@@ -67,12 +66,6 @@ async function getOrderById(orderId) {
         `, [orderId]);
 
         order.totalPrice = orderSum.totalPrice;
-        //TRAVIS' QUERY 
-        // SELECT SUM(order_products.price), order.id 
-        // FROM orders 
-        // JOIN order_products ON order.id = order_products."orderId"
-        // GROUP BY orders.id
-        // WHERE order."userId" = $1;
 
         return order;
     } catch (error) {
@@ -112,47 +105,6 @@ async function createOrder({ userId }, products = []) {
 
         //# Goes through the above passed product array and for each "product" in it grabs the data for it from the database
         //# and then proceeds to add the quantity from the product to the product database object. It is then pushed to a new array.
-        let orderProducts = [];
-        for (const product of products) {
-            const productData = await getProductById(product.id)
-
-            productData.quantity = product.quantity;
-
-            orderProducts.push(productData);
-        }
-
-        if (!orderProducts) {
-            //error could not find product with that id
-        }
-
-        await addProductsToOrderProducts(order.id, orderProducts);
-
-        const newOrder = await getOrderById(order.id);
-
-        return newOrder;
-    } catch (error) {
-        throw error;
-    }
-}
-
-//* Updates an order with new information.
-//You'll only ever want to update an order by adding or deleting products from it.
-//get all products by order function?
-async function updateOrder({ orderId }, products = []) {
-    try {
-        if (products.length === 0) {
-            return;
-        }
-
-        let order = await getOrderById(orderId);
-
-        if (!order) {
-            return;
-        }
-
-        //get all products by order. 
-        //This is a duplicate of most of the createOrder function. 
-        //Maybe this should be re-factored or split into seperate function?
         let orderProducts = [];
         for (const product of products) {
             const productData = await getProductById(product.id)

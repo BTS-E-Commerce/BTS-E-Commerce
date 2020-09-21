@@ -4,8 +4,6 @@
 
 const { getAllReviews, createReview } = require('./index');
 
-const { client } = require('./client');
-
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
 //~~~~~~~~~~~~~~~~~~~
