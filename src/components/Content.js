@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 import NewProductForm from './NewProductForm';
 
 import CategoryList from './CategoryList';
-import { getAllProducts, deleteProduct } from '../api/products';
+import { getAllProducts, deleteProduct, createProduct } from '../api/products';
 
 
 const Content = () => {
@@ -18,19 +18,21 @@ const Content = () => {
             .catch(error => {
                 console.log(error);
             })
-    }, [products]);
+    }, []);
 
-    const onProductDelete = (id) => () => {
-        deleteProduct(id);
+    const onProductDelete = (id) => async function () {
+        await deleteProduct(id);
         setProducts(products.filter(product => id !== product.id));
     }
 
-    // const onProductCreate = () => {
-    // }
+    const onProductCreate = async function (newProduct) {
+        const { product } = await createProduct(newProduct, [{ id: 1, name: 'baked' }]);
+        setProducts([...products, product]);
+    }
 
     return (
         <div>
-            <NewProductForm setProducts={setProducts} products={products} />
+            <NewProductForm createProduct={onProductCreate} />
             {products.map(product => (
                 <ProductCard onDelete={onProductDelete(product.id)} key={product.id} product={product} />
             ))}
