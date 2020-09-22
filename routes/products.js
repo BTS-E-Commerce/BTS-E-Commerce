@@ -23,7 +23,6 @@ productsRouter.get('/', async (req, res, next) => {
 });
 
 productsRouter.post('/', async (req, res, next) => {
-    console.log(req.body);
     const { name, description, imageUrl, inventory, price, sale } = req.body.product;
     const categories = req.body.categories;
 
@@ -33,7 +32,7 @@ productsRouter.post('/', async (req, res, next) => {
     //Check for failure to cretae.
     //Check for invalid user type (not admin).
 
-    // //build product object for database input
+    //build product object for database input
     let newProduct = {};
     newProduct.name = name;
     newProduct.description = description;
@@ -59,6 +58,11 @@ productsRouter.delete('/:productId', async (req, res, next) => {
     const { productId } = req.params;
     try {
         await client.deleteProduct(productId)
+        res.status(200);
+        res.send({
+            name: "Success",
+            message: "This was deleted."
+        })
     } catch (error) {
         throw error;
     }

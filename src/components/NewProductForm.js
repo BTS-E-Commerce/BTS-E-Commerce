@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 
-import { createProduct } from '../api/products'
-
-const NewProductForm = ({ categories, setProducts, products }) => {
+const NewProductForm = ({ createProduct }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [imageUrl, setImageUrl] = useState('');
@@ -14,9 +12,7 @@ const NewProductForm = ({ categories, setProducts, products }) => {
     async function handleSubmit(event) {
         event.preventDefault();
 
-        const newProduct = createProduct({ name, description, imageUrl, inventory, price, sale }, [{ id: 1, name: 'baked' }]);
-        products.push(newProduct);
-        setProducts(products);
+        createProduct({ name, description, imageUrl, inventory, price, sale })
     }
 
     const handleNameChange = event => {

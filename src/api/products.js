@@ -27,7 +27,6 @@ export async function createProduct(product, categories) {
             product,
             categories
         });
-        console.log(data);
         return data;
     } catch (error) {
         throw error;
