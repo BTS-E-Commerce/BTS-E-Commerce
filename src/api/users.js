@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 // export async function getSomething() {
 //   try {
 //     const { data } = await axios.get('/api');
@@ -13,10 +12,22 @@ import axios from 'axios';
 const BASE_URL = '/api';
 
 export async function getAllUsers() {
-    try {
-        const { data } = await axios.get(`${BASE_URL}/users`);
-        return data;
-    } catch (error) {
-        throw error;
-    }
+  try {
+    const { data } = await axios.get(`${BASE_URL}/users`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function createUser({ username, password }) {
+  try {
+    const { data } = await axios.post(`${BASE_URL}/users`, {
+      username,
+      password,
+    });
+    console.log(data);
+  } catch (error) {
+    throw error;
+  }
 }

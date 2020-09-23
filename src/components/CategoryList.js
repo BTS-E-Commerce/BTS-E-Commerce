@@ -18,12 +18,11 @@ const CategoryList = () => {
     <div>
       <h1>Categories</h1>
       <ul>
-        {categories.map((category) => (
-          <span key={category.id}>
-            <li>{category.id}</li>
-            <li>{category.name}</li>
-          </span>
-        ))}
+        <select>
+          {categories.map((category) => (
+            <option key={category.id}>{category.name}</option>
+          ))}
+        </select>
       </ul>
     </div>
   );
