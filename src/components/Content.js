@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import ProductCard from './ProductCard';
 import NewProductForm from './NewProductForm';
-import Register from './Register';
-import Login from './Login';
 import CategoryList from './CategoryList';
 import { getAllProducts, deleteProduct, createProduct } from '../api/products';
 
@@ -44,8 +42,6 @@ const Content = () => {
         />
       ))}
       <CategoryList />
-      <Register />
-      <Login />
     </div>
   );
 };
