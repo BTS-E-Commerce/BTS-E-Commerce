@@ -7,7 +7,10 @@ const { client } = require('./client');
 
 const { initializeUsers, testUserFunctions } = require('./init_users');
 const { initializeProducts, testProductFunctions } = require('./init_products');
-const { initializeCategories, testCategoryFunctions } = require('./init_categories');
+const {
+  initializeCategories,
+  testCategoryFunctions,
+} = require('./init_categories');
 const { initializeOrders, testOrderFunctions } = require('./init_orders');
 const { initializeReviews, testReviewFunctions } = require('./init_reviews');
 

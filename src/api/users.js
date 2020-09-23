@@ -22,7 +22,7 @@ export async function getAllUsers() {
 
 export async function createUser({ username, password }) {
   try {
-    const { data } = await axios.post(`${BASE_URL}/users`, {
+    const { data } = await axios.post(`${BASE_URL}/users/register`, {
       username,
       password,
     });
