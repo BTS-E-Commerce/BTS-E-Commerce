@@ -9,23 +9,20 @@ const { createUser, getAllUsers, getUserByUsername } = require('../index');
 //* Initializes the starting/default users.
 async function initializeUsers() {
   try {
-    const userOne = await createUser({
+    await createUser({
       username: 'brody',
       password: 'password',
     });
-    console.log(userOne);
 
-    const userTwo = await createUser({
+    await createUser({
       username: 'sam',
       password: 'password',
     });
-    console.log(userTwo);
 
-    const userThree = await createUser({
+    await createUser({
       username: 'tyler',
       password: 'password',
     });
-    console.log(userThree);
   } catch (error) {
     throw error;
   }

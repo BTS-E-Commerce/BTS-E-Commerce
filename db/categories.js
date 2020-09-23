@@ -158,7 +158,7 @@ async function updateCategory(id, fields = {}) {
     );
     return category;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
 
