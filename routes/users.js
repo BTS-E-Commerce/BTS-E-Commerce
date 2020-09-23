@@ -3,6 +3,14 @@
 //~~~~~~~~~~~~~~~~~~~
 const client = require('../db');
 const usersRouter = require('express').Router();
+const morgan = require('morgan');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { getUserByUsername } = require('../db');
+
+usersRouter.use(morgan('dev'));
+
+const SALT_COUNT = 10;
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~ MIDDLEWARE ~~~~
@@ -23,18 +31,37 @@ usersRouter.get('/', async (req, res, next) => {
 });
 
 // -- CREATE Routes --
-//* Create a User
-usersRouter.post('/', async (req, res, next) => {
-  const { username, password } = req.body;
-
+//* Creates a user from the register form.
+usersRouter.post('/register', async (req, res, next) => {
   try {
-    const user = await client.createUser(req.body);
-    res.status(201);
-    res.send({
-      user,
+    const { username, password } = req.body;
+
+    //# need to take a deeper look at this. Not working
+    // const userCheck = await getUserByUsername({ username });
+
+    // if (userCheck) {
+    //   next({
+    //     name: 'UserAlreadyExistsError',
+    //     message: 'Username already exists',
+    //   });
+    // }
+
+    let securePassword;
+
+    bcrypt.hash(password, SALT_COUNT, async (err, hashedPassword) => {
+      securePassword = hashedPassword;
+      console.log('securePassword HERE:', securePassword);
+      const newUser = await client.createUser({
+        username,
+        password: securePassword,
+      });
+      res.status(201);
+      res.send({
+        newUser,
+      });
     });
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 });
 
