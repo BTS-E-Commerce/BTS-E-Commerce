@@ -57,6 +57,14 @@ async function getProductById(id) {
 
     product.categories = categories;
 
+    const { rows: reviews } = await client.query(`
+      SELECT *
+      FROM reviews
+      WHERE "productId"=$1;
+    `, [id]);
+
+    product.reviews = reviews;
+
     return product;
   } catch (error) {
     throw error;

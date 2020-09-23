@@ -11,14 +11,13 @@ const { getAllOrders, createOrder, getAllOrdersByUserId, addProductToOrder, dele
 //* Initializes the starting/default orders.
 async function initializeOrders() {
     try {
-        const orderOne = await createOrder({ userId: 1 }, [{ id: 1, quantity: 2 }, { id: 3, quantity: 1 }]);
-        console.log('Order: \n', orderOne)
+        await createOrder({ userId: 1 }, [{ id: 1, quantity: 2 }, { id: 3, quantity: 1 }]);
 
-        const orderTwo = await createOrder({ userId: 2 }, [{ id: 1, quantity: 1 }, { id: 2, quantity: 3 }]);
-        console.log('INITIAL ORDER: \n', orderTwo)
+        await createOrder({ userId: 2 }, [{ id: 1, quantity: 1 }, { id: 2, quantity: 3 }]);
 
-        const orderThree = await createOrder({ userId: 3 }, [{ id: 2, quantity: 5 }, { id: 3, quantity: 2 }]);
-        console.log('INITIAL ORDER: \n', orderThree)
+        await createOrder({ userId: 3 }, [{ id: 2, quantity: 5 }, { id: 3, quantity: 2 }]);
+
+        await createOrder({ userId: 1 }, [{ id: 1, quantity: 3 }, { id: 3, quantity: 2 }]);
     } catch (error) {
         throw error;
     }

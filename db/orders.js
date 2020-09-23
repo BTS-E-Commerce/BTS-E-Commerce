@@ -163,10 +163,11 @@ async function deleteOrder({ orderId }) {
             WHERE "orderId"=$1;
         `, [orderId]);
 
-        const { rows: order } = await client.query(`
+        const { rows: [order] } = await client.query(`
             DELETE
             FROM orders
-            WHERE id=$1;
+            WHERE id=$1
+            RETURNING *;
         `, [orderId])
 
         return order;

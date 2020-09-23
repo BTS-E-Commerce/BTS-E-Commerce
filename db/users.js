@@ -3,6 +3,10 @@
 //~~~~~~~~~~~~~~~~~~~
 const { client } = require('./client');
 
+// const { getAllReviewsByUserId, getAllOrdersByUserId } = require('./index');
+const { getAllOrdersByUserId } = require('./orders');
+const { getAllReviewsByUserId } = require('./reviews');
+
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
 //~~~~~~~~~~~~~~~~~~~
@@ -11,10 +15,14 @@ const { client } = require('./client');
 //* Gets all users in database. Useful for administrator functionality.
 async function getAllUsers() {
   try {
-    const { rows: users } = await client.query(`
-            SELECT *
+    const { rows: userIds } = await client.query(`
+            SELECT id
             FROM users;
         `);
+
+    const users = Promise.all(userIds.map(
+      user => getUserById(user.id)
+    ));
 
     return users;
   } catch (error) {
@@ -23,18 +31,23 @@ async function getAllUsers() {
 }
 
 //* Get a specific user given an id.
-async function getUserById({ id }) {
+async function getUserById(id) {
   try {
     const {
       rows: [user],
-    } = await client.query(
-      `
-            SELECT *
+    } = await client.query(`
+            SELECT id
             FROM users
             WHERE id=$1;
-        `,
-      [id]
-    );
+    `, [id]);
+
+    //get orders for user
+    const orders = await getAllOrdersByUserId({ id })
+    user.orders = orders;
+
+    //get reviews for user
+    const reviews = await getAllReviewsByUserId({ id });
+    user.reviews = reviews;
 
     return user;
   } catch (error) {
@@ -45,14 +58,16 @@ async function getUserById({ id }) {
 //* Get a specific user given a string username.
 async function getUserByUsername({ username }) {
   try {
-    const { rows: user } = await client.query(
+    const { rows: [{ id }] } = await client.query(
       `
-            SELECT *
+            SELECT id
             FROM users
             WHERE username=$1;
         `,
       [username]
     );
+
+    const user = await getUserById(id);
 
     return user;
   } catch (error) {
