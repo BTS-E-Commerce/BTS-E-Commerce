@@ -4,11 +4,14 @@
 const client = require('../db');
 const usersRouter = require('express').Router();
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { getUserByUsername } = require('../db');
 
 usersRouter.use(morgan('dev'));
+usersRouter.use(bodyParser.json());
+const jwtKey = 'my_secret_key';
 
 const SALT_COUNT = 10;
 
@@ -55,9 +58,18 @@ usersRouter.post('/register', async (req, res, next) => {
         username,
         password: securePassword,
       });
+
+      const token = jwt.sign({ id: newUser.id, username }, jwtKey, {
+        expiresIn: '72h',
+      });
+
       res.status(201);
+      //# Will not send back newUser or token. Leaving it
+      //# to help with testing for now
       res.send({
         newUser,
+        token,
+        message: 'Thank you for signing up!',
       });
     });
   } catch (error) {
