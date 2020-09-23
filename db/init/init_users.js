@@ -1,7 +1,7 @@
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
-const { createUser, getAllUsers } = require('./index');
+const { createUser, getAllUsers } = require('../index');
 
 
 //~~~~~~~~~~~~~~~~~~~

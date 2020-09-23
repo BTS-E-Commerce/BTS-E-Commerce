@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import ProductCard from './ProductCard';
-import NewProductForm from './NewProductForm';
-import CategoryList from './CategoryList';
+import { ProductCard, NewProductForm, CategoryList } from './index';
 import { getAllProducts, deleteProduct, createProduct } from '../api/products';
 
 const Content = () => {
@@ -34,6 +32,7 @@ const Content = () => {
   return (
     <div>
       <NewProductForm createProduct={onProductCreate} />
+      <h1>Products</h1>
       {products.map((product) => (
         <ProductCard
           onDelete={onProductDelete(product.id)}
