@@ -9,7 +9,7 @@ const {
   getProductsBySale,
   updateProduct,
   deleteProduct,
-} = require('./index');
+} = require('../index');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~
