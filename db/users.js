@@ -45,9 +45,7 @@ async function getUserById({ id }) {
 //* Get a specific user given a string username.
 async function getUserByUsername({ username }) {
   try {
-    const {
-      rows: [user],
-    } = await client.query(
+    const { rows: user } = await client.query(
       `
             SELECT *
             FROM users

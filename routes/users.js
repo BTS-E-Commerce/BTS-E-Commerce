@@ -77,6 +77,23 @@ usersRouter.post('/register', async (req, res, next) => {
   }
 });
 
+//* Logs in a user from the login form using JWT and Bcrypt
+usersRouter.post('/login'),
+  async (req, res, next) => {
+    const { username, password } = req.body;
+    //# checks need to happen here
+
+    try {
+      const user = await getUserByUsername(username);
+      res.send({
+        message: 'succesful login',
+        user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
