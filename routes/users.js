@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 
 usersRouter.use(morgan('dev'));
 usersRouter.use(bodyParser.json());
+
 const jwtKey = 'my_secret_key';
 
 const SALT_COUNT = 10;

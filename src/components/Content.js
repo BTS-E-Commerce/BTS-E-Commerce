@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import ProductCard from './ProductCard';
-import NewProductForm from './NewProductForm';
-import CategoryList from './CategoryList';
-import { getAllProducts, deleteProduct, createProduct } from '../api/products';
+import { ProductCard, NewProductForm, CategoryList } from './index';
+import { getAllProducts, deleteProduct, createProduct } from '../api/index';
 
 const Content = () => {
   const [products, setProducts] = useState([]);

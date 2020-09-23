@@ -8,10 +8,10 @@ const {
   getCategoryByName,
   deleteCategory,
   updateCategory,
-} = require('./index');
+} = require('../index');
 
 // -- Client --
-const { client } = require('./client');
+const { client } = require('../client');
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~ FUNCTIONS ~~~~

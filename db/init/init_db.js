@@ -3,7 +3,7 @@
 //~~~~~~~~~~~~~~~~~~~
 
 // -- Client --
-const { client } = require('./client');
+const { client } = require('../client');
 
 const { initializeUsers, testUserFunctions } = require('./init_users');
 const { initializeProducts, testProductFunctions } = require('./init_products');

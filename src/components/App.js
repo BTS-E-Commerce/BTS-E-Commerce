@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Content from './Content.js';
-import Register from './Register';
-import Login from './Login';
+import { Content, Register, Login } from './index';
 
 const App = () => {
   return (

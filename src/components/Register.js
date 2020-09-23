@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createUser } from '../api/users';
+import { createUser } from '../api/index';
 
 const Register = () => {
   const [username, setUsername] = useState('');
