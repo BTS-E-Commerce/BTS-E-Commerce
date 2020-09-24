@@ -4,13 +4,19 @@ import { createUser } from '../api/index';
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
 
   async function handleSubmit(event) {
     event.preventDefault();
 
+    if (password !== confirm) {
+      alert('Passwords do not match!');
+    }
+
     createUser({ username, password });
     setUsername('');
     setPassword('');
+    setConfirm('');
   }
 
   const handleUsernameChange = (event) => {
@@ -19,6 +25,10 @@ const Register = () => {
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleConfirmChange = (event) => {
+    setConfirm(event.target.value);
   };
 
   return (
@@ -42,6 +52,16 @@ const Register = () => {
           value={password}
           onChange={handlePasswordChange}
           placeholder='password'
+        />
+      </div>
+      <div>
+        <label htmlFor='confirm'>Confirm Password:</label>
+        <input
+          type='text'
+          name='confirm'
+          value={confirm}
+          onChange={handleConfirmChange}
+          placeholder='confirm password'
         />
       </div>
       <button type='submit'>Register</button>
