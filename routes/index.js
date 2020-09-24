@@ -7,6 +7,7 @@ const apiRouter = require('express').Router();
 const usersRouter = require('./users');
 const productsRouter = require('./products');
 const categoriesRouter = require('./categories');
+const ordersRouter = require('./orders');
 //~~~~~~~~~~~~~~~~~~~
 //~~~ MIDDLEWARE ~~~~
 //~~~~~~~~~~~~~~~~~~~
@@ -20,6 +21,7 @@ apiRouter.get('/', (req, res, next) => {
 apiRouter.use('/users', usersRouter);
 apiRouter.use('/products', productsRouter);
 apiRouter.use('/categories', categoriesRouter);
+apiRouter.use('/orders', ordersRouter);
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~

@@ -2,7 +2,6 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 const client = require('../db');
-const categories = require('../db/categories');
 const categoriesRouter = require('express').Router();
 
 //~~~~~~~~~~~~~~~~~~~
