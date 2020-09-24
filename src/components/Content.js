@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 import { ProductCard, NewProductForm, CategoryList } from './index';
-import { getAllProducts, deleteProduct, createProduct } from '../api/index';
+import { deleteProduct, createProduct } from '../api/index';
 
-const Content = () => {
-  const [products, setProducts] = useState([]);
+const Content = ({ products, setProducts, addProductToOrder }) => {
+  // const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    getAllProducts()
-      .then((result) => {
-        setProducts(result.products);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getAllProducts()
+  //     .then((result) => {
+  //       setProducts(result.products);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   const onProductDelete = (id) =>
     async function () {
@@ -37,6 +37,7 @@ const Content = () => {
           onDelete={onProductDelete(product.id)}
           key={product.id}
           product={product}
+          onAddToOrder={addProductToOrder(product.id)}
         />
       ))}
       <CategoryList />

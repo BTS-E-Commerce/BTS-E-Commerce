@@ -128,7 +128,7 @@ async function buildTables() {
         "userId" INTEGER REFERENCES users(id),
         "totalPrice" INTEGER NOT NULL DEFAULT 0,
         date DATE DEFAULT now(),
-        isComplete BOOLEAN DEFAULT false
+        "isComplete" BOOLEAN DEFAULT false
       );
     `);
     console.log('Sucessfully finished building orders table!');
