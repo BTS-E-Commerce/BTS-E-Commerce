@@ -10,6 +10,10 @@ const { createUser, getAllUsers, getUserByUsername } = require('../index');
 async function initializeUsers() {
   try {
     await createUser({
+      username: 'guest',
+      password: 'password',
+    });
+    await createUser({
       username: 'brody',
       password: 'password',
     });

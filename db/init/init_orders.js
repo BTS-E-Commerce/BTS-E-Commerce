@@ -20,25 +20,33 @@ const {
 //* Initializes the starting/default orders.
 async function initializeOrders() {
   try {
-    await createOrder({ userId: 1 }, [
-      { id: 1, quantity: 2 },
-      { id: 3, quantity: 1 },
-    ]);
+    await createOrder({
+      userId: 2, products: [
+        { id: 1, quantity: 2 },
+        { id: 3, quantity: 1 },
+      ]
+    });
 
-    await createOrder({ userId: 2 }, [
-      { id: 1, quantity: 1 },
-      { id: 2, quantity: 3 },
-    ]);
+    await createOrder({
+      userId: 2, products: [
+        { id: 1, quantity: 2 },
+        { id: 2, quantity: 1 },
+      ]
+    });
 
-    await createOrder({ userId: 3 }, [
-      { id: 2, quantity: 5 },
-      { id: 3, quantity: 2 },
-    ]);
+    await createOrder({
+      userId: 3, products: [
+        { id: 1, quantity: 2 },
+        { id: 3, quantity: 1 },
+      ]
+    });
 
-    await createOrder({ userId: 1 }, [
-      { id: 1, quantity: 3 },
-      { id: 3, quantity: 2 },
-    ]);
+    await createOrder({
+      userId: 2, products: [
+        { id: 1, quantity: 2 },
+        { id: 2, quantity: 1 },
+      ]
+    });
   } catch (error) {
     throw error;
   }

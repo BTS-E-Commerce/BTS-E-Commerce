@@ -72,19 +72,20 @@ async function getOrderById(orderId) {
     order.user = user;
 
     //# Used for calculating the sum of all products in an order.
-    const {
-      rows: [orderSum],
-    } = await client.query(
-      `
-            SELECT SUM(price * quantity) AS "totalPrice"
-            FROM order_products
-            WHERE "orderId"=$1
-            GROUP BY "orderId";
-        `,
-      [orderId]
-    );
+    //Maybe not needed?
+    // const {
+    //   rows: [orderSum],
+    // } = await client.query(
+    //   `
+    //         SELECT SUM(price * quantity) AS "totalPrice"
+    //         FROM order_products
+    //         WHERE "orderId"=$1
+    //         GROUP BY "orderId";
+    //     `,
+    //   [orderId]
+    // );
 
-    order.totalPrice = orderSum.totalPrice;
+    // order.totalPrice = orderSum.totalPrice;
 
     return order;
   } catch (error) {
@@ -133,7 +134,7 @@ async function getOrderIdByUserIdAndIsComplete({ id }) {
 
 //* Creates a new order.
 //products looks like [{id: 1, quantity: 5}, {id: 5, quantity: 1}]
-async function createOrder({ userId }, products = []) {
+async function createOrder({ userId, products = [] }) {
   try {
     //Make any checks here
 
