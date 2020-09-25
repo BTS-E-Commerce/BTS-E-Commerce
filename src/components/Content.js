@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ProductCard, NewProductForm, CategoryList } from './index';
 import { deleteProduct, createProduct } from '../api/index';
 
-const Content = ({ products, setProducts, addProductToOrder }) => {
+const Content = ({ products, setProducts, addProductToCart }) => {
   // const [products, setProducts] = useState([]);
 
   // useEffect(() => {
@@ -37,7 +37,7 @@ const Content = ({ products, setProducts, addProductToOrder }) => {
           onDelete={onProductDelete(product.id)}
           key={product.id}
           product={product}
-          onAddToOrder={addProductToOrder(product.id)}
+          onAddToOrder={addProductToCart(product.id, product.currentPrice)}
         />
       ))}
       <CategoryList />
