@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Content, Register, Login } from './index';
+import { Content, Register, Login, UsersInfo } from './index';
 import { getAllProducts, getAllOrders, createOrder, addProductToOrder } from '../api/index';
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
   //Default state should be {id: 1, username: 'guest'}
-  const [currentUser, setCurrentUser] = useState({ id: 4, username: "tyler" });
+  const [currentUser, setCurrentUser] = useState({ id: 2, username: 'brody' });
   const [ongoingOrder, setOngoingOrder] = useState({});
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const App = () => {
         console.log("I'm a guest.")
         //Check local storage
         if (JSON.parse(localStorage.getItem('cart')) === null) {
-          console.log("There is nothing in local.")
+          console.log('There is nothing in local.')
         }
       }
 
@@ -89,9 +89,9 @@ const App = () => {
         setProducts={setProducts}
         addProductToCart={addProductToCart}
       />
-      {/* <Users products={products.id} /> */}
       <Register />
       <Login />
+      <UsersInfo orders={orders} currentUser={currentUser} setCurrentUser={setCurrentUser} />
     </div>
   );
 };
