@@ -20,6 +20,18 @@ export async function getAllUsers() {
   }
 }
 
+export async function loginUser({ username, password }) {
+  try {
+    const { data } = await axios.post(`${BASE_URL}/users/login`, {
+      username,
+      password,
+    });
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function createUser({ username, password }) {
   try {
     const { data } = await axios.post(`${BASE_URL}/users/register`, {

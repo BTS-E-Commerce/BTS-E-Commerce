@@ -3,15 +3,11 @@
 //~~~~~~~~~~~~~~~~~~~
 const client = require('../db');
 const usersRouter = require('express').Router();
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
-usersRouter.use(morgan('dev'));
-usersRouter.use(bodyParser.json());
-
-const jwtKey = 'my_secret_key';
+require('dotenv').config();
+const { JWT_SECRET } = process.env;
+const { getAllUsers, getUserByUsername } = require('../db/users');
 
 const SALT_COUNT = 10;
 
@@ -22,10 +18,9 @@ const SALT_COUNT = 10;
 //* Get All Users
 usersRouter.get('/', async (req, res, next) => {
   try {
-    const users = await client.getAllUsers();
+    const users = await getAllUsers();
 
-    res.status(201);
-    res.send({
+    res.status(201).send({
       users,
     });
   } catch (error) {
@@ -39,15 +34,14 @@ usersRouter.post('/register', async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    //# need to take a deeper look at this. Not working
-    // const userCheck = await client.getUserByUsername({ username });
+    const userCheck = await getUserByUsername({ username });
 
-    // if (userCheck) {
-    //   next({
-    //     name: 'UserAlreadyExistsError',
-    //     message: 'Username already exists',
-    //   });
-    // }
+    if (userCheck) {
+      res.status(402).send({
+        name: 'User Already Exists Error',
+        message: 'Username already exists',
+      });
+    }
 
     let securePassword;
 
@@ -59,40 +53,70 @@ usersRouter.post('/register', async (req, res, next) => {
         password: securePassword,
       });
 
-      const token = jwt.sign({ id: newUser.id, username }, jwtKey, {
-        expiresIn: '72h',
-      });
+      console.log(newUser);
 
-      res.status(201);
-      //# Will not send back newUser or token. Leaving it
-      //# to help with testing for now
-      res.send({
+      const token = jwt.sign(
+        { id: newUser.id, username },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: '2hr',
+        }
+      );
+
+      //# Will not send back newUser or token.
+      //# Leaving it to help with testing for now
+      res.status(201).send({
         newUser,
         token,
         message: 'Thank you for signing up!',
       });
     });
   } catch (error) {
-    console.log(error);
+    console.error(error.message);
   }
 });
 
 //* Logs in a user from the login form using JWT and Bcrypt
-// usersRouter.post('/login'),
-//   async (req, res, next) => {
-//     const { username } = req.body;
-//     //# checks need to happen here
-//     console.log(req.body);
-//     try {
-//       const user = await client.getUserByUsername(req.body.username);
-//       res.send({
-//         message: 'succesful login',
-//         user,
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+usersRouter.post('/login', async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await getUserByUsername({ username });
+
+    const hashedPassword = user.password;
+    // console.log('Login Username: ', username);
+    // console.log('Login Password: ', password);
+    // console.log('Login HashedPassword: ', hashedPassword);
+    if (!username || !password) {
+      next({
+        name: 'Missing Credentials Error',
+        message: 'Please provide a valid username and password',
+      });
+    }
+    bcrypt.compare(password, hashedPassword, function (err, passwordsMatch) {
+      if (passwordsMatch) {
+        const token = jwt.sign(
+          { id: user.id, username: username },
+          JWT_SECRET,
+          { expiresIn: '2hr' }
+        );
+
+        res.status(201).send({
+          message: 'succesful login',
+          user,
+          token,
+        });
+      } else {
+        res.status(401).send({
+          name: 'Incorrect Credentials Error',
+          message: 'Username or password is incorrect',
+        });
+      }
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+});
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~

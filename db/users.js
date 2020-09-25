@@ -20,9 +20,7 @@ async function getAllUsers() {
             FROM users;
         `);
 
-    const users = Promise.all(userIds.map(
-      user => getUserById(user.id)
-    ));
+    const users = Promise.all(userIds.map((user) => getUserById(user.id)));
 
     return users;
   } catch (error) {
@@ -35,14 +33,17 @@ async function getUserById(id) {
   try {
     const {
       rows: [user],
-    } = await client.query(`
+    } = await client.query(
+      `
             SELECT id
             FROM users
             WHERE id=$1;
-    `, [id]);
+    `,
+      [id]
+    );
 
     //get orders for user
-    const orders = await getAllOrdersByUserId({ id })
+    const orders = await getAllOrdersByUserId({ id });
     user.orders = orders;
 
     //get reviews for user
@@ -58,16 +59,18 @@ async function getUserById(id) {
 //* Get a specific user given a string username.
 async function getUserByUsername({ username }) {
   try {
-    const { rows: [{ id }] } = await client.query(
+    const {
+      rows: [user],
+    } = await client.query(
       `
-            SELECT id
+            SELECT *
             FROM users
             WHERE username=$1;
         `,
       [username]
     );
 
-    const user = await getUserById(id);
+    // const user = await getUserById(id);
 
     return user;
   } catch (error) {
