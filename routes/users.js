@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { JWT_SECRET } = process.env;
-const { getAllUsers, getUserByUsername } = require('../db/users');
 
 const SALT_COUNT = 10;
 
@@ -19,7 +18,7 @@ const SALT_COUNT = 10;
 //* Get All Users
 usersRouter.get('/', async (req, res, next) => {
   try {
-    const users = await getAllUsers();
+    const users = await client.getAllUsers();
 
     res.status(201).send({
       users,
@@ -35,7 +34,7 @@ usersRouter.post('/register', async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    const userCheck = await getUserByUsername({ username });
+    const userCheck = await client.getUserByUsername({ username });
     console.log(userCheck);
     if (userCheck) {
       res.status(402).send({
@@ -82,7 +81,7 @@ usersRouter.post('/login', async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    const user = await getUserByUsername({ username });
+    const user = await client.getUserByUsername({ username });
 
     const hashedPassword = user.password;
 
