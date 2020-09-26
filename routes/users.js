@@ -35,7 +35,7 @@ usersRouter.post('/register', async (req, res, next) => {
     const { username, password } = req.body;
 
     const userCheck = await client.getUserByUsername({ username });
-    console.log(userCheck);
+
     if (userCheck) {
       res.status(402).send({
         name: 'User Already Exists Error',
@@ -47,7 +47,7 @@ usersRouter.post('/register', async (req, res, next) => {
 
     bcrypt.hash(password, SALT_COUNT, async (err, hashedPassword) => {
       securePassword = hashedPassword;
-      console.log('securePassword HERE:', securePassword);
+
       const newUser = await client.createUser({
         username,
         password: securePassword,
@@ -92,7 +92,6 @@ usersRouter.post('/login', async (req, res, next) => {
       });
     }
     bcrypt.compare(password, hashedPassword, function (err, passwordsMatch) {
-      console.log(passwordsMatch);
       if (passwordsMatch) {
         const token = jwt.sign(
           { id: user.id, username: username },
