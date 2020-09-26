@@ -14,6 +14,7 @@ const SALT_COUNT = 10;
 //~~~~~~~~~~~~~~~~~~~
 //~~~ MIDDLEWARE ~~~~
 //~~~~~~~~~~~~~~~~~~~
+
 // -- GET Routes --
 //* Get All Users
 usersRouter.get('/', async (req, res, next) => {
@@ -35,7 +36,7 @@ usersRouter.post('/register', async (req, res, next) => {
     const { username, password } = req.body;
 
     const userCheck = await getUserByUsername({ username });
-
+    console.log(userCheck);
     if (userCheck) {
       res.status(402).send({
         name: 'User Already Exists Error',
@@ -84,9 +85,7 @@ usersRouter.post('/login', async (req, res, next) => {
     const user = await getUserByUsername({ username });
 
     const hashedPassword = user.password;
-    // console.log('Login Username: ', username);
-    // console.log('Login Password: ', password);
-    // console.log('Login HashedPassword: ', hashedPassword);
+
     if (!username || !password) {
       next({
         name: 'Missing Credentials Error',
@@ -94,6 +93,7 @@ usersRouter.post('/login', async (req, res, next) => {
       });
     }
     bcrypt.compare(password, hashedPassword, function (err, passwordsMatch) {
+      console.log(passwordsMatch);
       if (passwordsMatch) {
         const token = jwt.sign(
           { id: user.id, username: username },

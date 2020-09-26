@@ -35,7 +35,7 @@ async function getUserById(id) {
       rows: [user],
     } = await client.query(
       `
-            SELECT id
+            SELECT *
             FROM users
             WHERE id=$1;
     `,
@@ -63,16 +63,20 @@ async function getUserByUsername({ username }) {
       rows: [user],
     } = await client.query(
       `
-            SELECT *
+            SELECT id
             FROM users
             WHERE username=$1;
         `,
       [username]
     );
 
-    // const user = await getUserById(id);
+    if (!user) {
+      return;
+    }
 
-    return user;
+    const userObj = await getUserById(user.id);
+
+    return userObj;
   } catch (error) {
     throw error;
   }
@@ -93,7 +97,9 @@ async function createUser({ username, password }) {
       [username, password]
     );
 
-    return user;
+    const userObj = await getUserById(user.id);
+
+    return userObj;
   } catch (error) {
     throw error;
   }
@@ -112,4 +118,5 @@ module.exports = {
   getAllUsers,
   createUser,
   getUserByUsername,
+  getUserById,
 };
