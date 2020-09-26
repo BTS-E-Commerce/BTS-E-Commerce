@@ -133,8 +133,8 @@ async function getOrderIdByUserIdAndIsComplete({ id }) {
 }
 
 //* Creates a new order.
-//products looks like [{id: 1, quantity: 5}, {id: 5, quantity: 1}]
-async function createOrder({ userId, products = [] }) {
+//products looks like [{id: 1, isComplete: false, quantity: 5}, {id: 5, quantity: 1}]
+async function createOrder({ userId, isComplete = false, products = [] }) {
   try {
     //Make any checks here
 
@@ -142,11 +142,11 @@ async function createOrder({ userId, products = [] }) {
       rows: [order],
     } = await client.query(
       `
-            INSERT INTO orders("userId")
-            VALUES($1)
+            INSERT INTO orders("userId", "isComplete")
+            VALUES($1, $2)
             RETURNING *;
         `,
-      [userId]
+      [userId, isComplete]
     );
 
     //# Goes through the above passed product array and for each "product" in it grabs the data for it from the database
@@ -169,6 +169,32 @@ async function createOrder({ userId, products = [] }) {
     const newOrder = await getOrderById(order.id);
 
     return newOrder;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//* Updates an order's information. Mostly used for updating isComplete status and total price.
+//Maybe merge this with add/delete product to order functionality??
+async function updateOrder(orderId, fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(', ');
+
+  if (setString.length === 0) {
+    return;
+  }
+  try {
+    const order = await client.query(`
+    UPDATE orders
+    SET ${setString}
+    WHERE id=${orderId}
+    RETURNING *;
+  `, Object.values(fields));
+
+    const updatedOrder = getOrderById(orderId);
+
+    return updatedOrder;
   } catch (error) {
     throw error;
   }
@@ -238,6 +264,7 @@ module.exports = {
   getAllOrdersByUserId,
   getOrderIdByUserIdAndIsComplete,
   createOrder,
+  updateOrder,
   addProductToOrder,
   deleteProductFromOrder,
   deleteOrder,

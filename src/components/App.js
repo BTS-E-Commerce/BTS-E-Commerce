@@ -63,12 +63,14 @@ const App = () => {
       //Maybe add to quantity?
       console.log("THIS IS THE CURRENT ORDER BEFORE ADDING PRODUCT:", ongoingOrder);
       // console.log(Object.keys(ongoingOrder).length === 0);
-      // console.log(JSON.parse(localStorage.getItem('cart')) == null);
+      console.log(JSON.parse(localStorage.getItem('cart')) == null);
       if (JSON.parse(localStorage.getItem('cart')) == null) {
         console.log("There is no current order.")
-        const newOrder = await createOrder(currentUser.id, id)
-        console.log("CREATED NEW ONGOING ORDER:", newOrder);
-        localStorage.setItem('cart', JSON.stringify(newOrder));
+        const order = await createOrder(currentUser.id, id)
+        setOrders([...orders, order])
+        console.log("CREATED NEW ONGOING ORDER:", order);
+        localStorage.setItem('cart', JSON.stringify(order));
+        setOngoingOrder(order);
       } else {
         console.log("TRYING TO UPDATE AN EXSISTING ORDER");
         // if (currentUser.username !== 'guest') {
@@ -76,6 +78,7 @@ const App = () => {
         // }
         const order = await addProductToOrder(ongoingOrder.id, id, price);
         localStorage.setItem('cart', JSON.stringify(order))
+        setOngoingOrder(order);
       }
     };
 
@@ -89,7 +92,7 @@ const App = () => {
       />
       <Register />
       <Login />
-      <UsersInfo ongoingOrder={ongoingOrder} orders={orders} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <UsersInfo ongoingOrder={ongoingOrder} setOngoingOrder={setOngoingOrder} orders={orders} setOrders={setOrders} currentUser={currentUser} setCurrentUser={setCurrentUser} />
     </div>
   );
 };

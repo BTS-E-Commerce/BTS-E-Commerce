@@ -28,7 +28,7 @@ ordersRouter.post('/', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-})
+});
 
 ordersRouter.post('/:orderId', async (req, res, next) => {
   const { orderId, products, currentPrice } = req.body;
@@ -42,7 +42,40 @@ ordersRouter.post('/:orderId', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+});
+
+ordersRouter.patch('/:orderId', async (req, res, next) => {
+  const { orderId } = req.params;
+  const { fields } = req.body;
+
+  //Check for order exsistence
+  //check for fields
+  try {
+    const order = await client.updateOrder(orderId, fields);
+
+    res.send({
+      order
+    })
+  } catch (error) {
+
+  }
 })
+
+ordersRouter.delete('/:orderId', async (req, res, next) => {
+  const { orderId } = req.params;
+  const { fields } = req.body;
+  console.log(req.body);
+  try {
+    const order = await client.deleteOrder(orderId, {});
+
+    console.log("RETURNING DELETED ORDER INFO", order);
+    res.send({
+      order
+    })
+  } catch (error) {
+    next(error);
+  }
+});
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~

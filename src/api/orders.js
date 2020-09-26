@@ -35,9 +35,22 @@ export async function createOrder(userId, productId) {
   }
 }
 
+export async function updateOrder(orderId, fields) {
+  try {
+    console.log(orderId, fields);
+
+    const { data: { order } } = await axios.patch(`${BASE_URL}/orders/${orderId}`, {
+      fields
+    });
+
+    return order;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function addProductToOrder(orderId, productId, currentPrice) {
   try {
-    console.log(orderId);
     const { data: { order } } = await axios.post(`${BASE_URL}/orders/${orderId}`, {
       orderId,
       products: [
@@ -45,6 +58,17 @@ export async function addProductToOrder(orderId, productId, currentPrice) {
       ]
     });
     return order;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deleteOrder(orderId) {
+  try {
+    console.log("API REQUEST", orderId);
+    const { data } = await axios.delete(`${BASE_URL}/orders/${orderId}`);
+
+    return data;
   } catch (error) {
     throw error;
   }
