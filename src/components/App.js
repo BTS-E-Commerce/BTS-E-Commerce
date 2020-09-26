@@ -8,7 +8,8 @@ const App = () => {
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
   //Default state should be {id: 1, username: 'guest'}
-  const [currentUser, setCurrentUser] = useState({ id: 2, username: 'brody' });
+  //Test User state should be { id: 2, username: 'brody' }
+  const [currentUser, setCurrentUser] = useState({ id: 1, username: 'guest' });
   const [ongoingOrder, setOngoingOrder] = useState({});
 
   useEffect(() => {
@@ -32,32 +33,49 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    let currentOrder = {};
-    orders.map(order => {
-      if (order.user.id == currentUser.id) {
-        if (order.isComplete === false) {
-          currentOrder = order;
-          console.log("WE FOUND THE ORDEr:", order);
-          localStorage.setItem('cart', JSON.stringify(currentOrder));
-        }
+    if (currentUser.username === 'guest') {
+      console.log('I am a guest.')
+      const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+      console.log(localStorageCart);
+      if (localStorageCart != null) {
+        console.log("Set oongoing order to local storgae")
+        setOngoingOrder(localStorageCart);
       }
-    });
-    setOngoingOrder(currentOrder);
-  }, [orders]);
+    } else {
+      console.log('I am ' + currentUser.username);
+      let currentOrder = {};
+      orders.map(order => {
+        if (order.user.id == currentUser.id) {
+          if (order.isComplete === false) {
+            currentOrder = order;
+            console.log("WE FOUND THE ORDEr:", order);
+            localStorage.setItem('cart', JSON.stringify(currentOrder));
+          }
+        }
+      });
+      setOngoingOrder(currentOrder);
+    }
+  }, [orders, currentUser]);
 
   const addProductToCart = (id, price) =>
     async function () {
+      //MAybe check to see if product is alreayd in order...
+      //Maybe add to quantity?
       console.log("THIS IS THE CURRENT ORDER BEFORE ADDING PRODUCT:", ongoingOrder);
-      console.log(Object.keys(ongoingOrder).length);
-      if (Object.keys(ongoingOrder).length === 0) {
+      // console.log(Object.keys(ongoingOrder).length === 0);
+      // console.log(JSON.parse(localStorage.getItem('cart')) == null);
+      if (JSON.parse(localStorage.getItem('cart')) == null) {
         console.log("There is no current order.")
         const newOrder = await createOrder(currentUser.id, id)
         console.log("CREATED NEW ONGOING ORDER:", newOrder);
         localStorage.setItem('cart', JSON.stringify(newOrder));
       } else {
         console.log("TRYING TO UPDATE AN EXSISTING ORDER");
-        const updatedOrder = await addProductToOrder(ongoingOrder.id, id, price);
-        console.log("UPDATED ONGOING ORDER:", updatedOrder);
+        // if (currentUser.username !== 'guest') {
+        //   await addProductToOrder(ongoingOrder.id, id, price);
+        // }
+        const order = await addProductToOrder(ongoingOrder.id, id, price);
+        localStorage.setItem('cart', JSON.stringify(order))
       }
     };
 
@@ -71,7 +89,7 @@ const App = () => {
       />
       <Register />
       <Login />
-      <UsersInfo orders={orders} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      <UsersInfo ongoingOrder={ongoingOrder} orders={orders} currentUser={currentUser} setCurrentUser={setCurrentUser} />
     </div>
   );
 };
