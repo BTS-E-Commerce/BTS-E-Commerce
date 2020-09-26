@@ -20,9 +20,7 @@ async function getAllUsers() {
             FROM users;
         `);
 
-    const users = Promise.all(userIds.map(
-      user => getUserById(user.id)
-    ));
+    const users = Promise.all(userIds.map((user) => getUserById(user.id)));
 
     return users;
   } catch (error) {
@@ -35,14 +33,17 @@ async function getUserById(id) {
   try {
     const {
       rows: [user],
-    } = await client.query(`
-            SELECT id
+    } = await client.query(
+      `
+            SELECT *
             FROM users
             WHERE id=$1;
-    `, [id]);
+    `,
+      [id]
+    );
 
     //get orders for user
-    const orders = await getAllOrdersByUserId({ id })
+    const orders = await getAllOrdersByUserId({ id });
     user.orders = orders;
 
     //get reviews for user
@@ -58,7 +59,9 @@ async function getUserById(id) {
 //* Get a specific user given a string username.
 async function getUserByUsername({ username }) {
   try {
-    const { rows: [{ id }] } = await client.query(
+    const {
+      rows: [user],
+    } = await client.query(
       `
             SELECT id
             FROM users
@@ -67,9 +70,13 @@ async function getUserByUsername({ username }) {
       [username]
     );
 
-    const user = await getUserById(id);
+    if (!user) {
+      return;
+    }
 
-    return user;
+    const userObj = await getUserById(user.id);
+
+    return userObj;
   } catch (error) {
     throw error;
   }
@@ -90,7 +97,9 @@ async function createUser({ username, password }) {
       [username, password]
     );
 
-    return user;
+    const userObj = await getUserById(user.id);
+
+    return userObj;
   } catch (error) {
     throw error;
   }
@@ -109,4 +118,5 @@ module.exports = {
   getAllUsers,
   createUser,
   getUserByUsername,
+  getUserById,
 };
