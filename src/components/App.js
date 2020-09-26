@@ -31,42 +31,22 @@ const App = () => {
       });
   }, []);
 
-  // console.log('orders', orders);
-  // console.log('ongoingOrder', ongoingOrder);
-
-
-  //Gets the current order given a current user id and checks if it is complete
-  const checkForUsersOngoingOrder = (userId, orders) => {
+  useEffect(() => {
     let currentOrder = {};
     orders.map(order => {
-      if (order.user.id == userId) {
+      if (order.user.id == currentUser.id) {
         if (order.isComplete === false) {
           currentOrder = order;
-          console.log(order);
+          console.log("WE FOUND THE ORDEr:", order);
           localStorage.setItem('cart', JSON.stringify(currentOrder));
         }
       }
     });
-    console.log("DID WE FIND ORDEr?", currentOrder);
     setOngoingOrder(currentOrder);
-    console.log("UPDATED ORDER: ", ongoingOrder);
-  }
+  }, [orders]);
 
   const addProductToCart = (id, price) =>
     async function () {
-      //check for guest
-      if (currentUser.username === 'guest') {
-        console.log("I'm a guest.")
-        //Check local storage
-        if (JSON.parse(localStorage.getItem('cart')) === null) {
-          console.log('There is nothing in local.')
-        }
-      }
-
-      console.log('product', id, price);
-      checkForUsersOngoingOrder(currentUser.id, orders);
-
-      //Check to see if the ongoingOrder has changed.
       console.log("THIS IS THE CURRENT ORDER BEFORE ADDING PRODUCT:", ongoingOrder);
       console.log(Object.keys(ongoingOrder).length);
       if (Object.keys(ongoingOrder).length === 0) {
