@@ -103,6 +103,14 @@ const App = () => {
           <Route path='/account'>
             <h2>Welcome, {currentUser.username}</h2>
             {/* USER ORDER HISTORY, REVIEWS, ETC */}
+            <UsersInfo
+              ongoingOrder={ongoingOrder}
+              setOngoingOrder={setOngoingOrder}
+              orders={orders}
+              setOrders={setOrders}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
           </Route>
           <Route path='/register'>
             <Register />
@@ -116,14 +124,6 @@ const App = () => {
             products={products}
             setProducts={setProducts}
             addProductToCart={addProductToCart}
-          />
-          <UsersInfo
-            ongoingOrder={ongoingOrder}
-            setOngoingOrder={setOngoingOrder}
-            orders={orders}
-            setOrders={setOrders}
-            currentUser={currentUser}
-            setCurrentUser={setCurrentUser}
           />
         </Switch>
       </div>
