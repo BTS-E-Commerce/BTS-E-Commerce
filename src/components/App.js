@@ -98,7 +98,7 @@ const App = () => {
   return (
     <Router>
       <div className='App'>
-        <Header />
+        <Header currentUser={currentUser} />
         <Switch>
           <Route path='/account'>
             <h2>Welcome, {currentUser.username}</h2>
