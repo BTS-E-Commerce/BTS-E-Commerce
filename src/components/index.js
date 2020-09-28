@@ -11,3 +11,4 @@ export { default as Orders } from './Orders';
 export { default as OrderCard } from './OrderCard';
 export { default as OrderCardProducts } from './OrderCardProducts';
 export { default as CartCard } from './CartCard';
+export { default as CartCardProducts } from './CartCardProducts';

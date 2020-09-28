@@ -8,6 +8,7 @@ const {
   getAllOrdersByUserId,
   getOrderIdByUserIdAndIsComplete,
   addProductToOrder,
+  updateOrder,
   deleteProductFromOrder,
   deleteOrder,
   updateOrderProduct,
@@ -43,7 +44,7 @@ async function initializeOrders() {
     });
 
     await createOrder({
-      userId: 2, products: [
+      userId: 2, isComplete: true, products: [
         { id: 1, quantity: 2 },
         { id: 2, quantity: 1 },
       ]
@@ -66,6 +67,10 @@ async function testOrderFunctions() {
     console.log('Testing getOrderIdByUserIdAndIsComplete');
     const userOrder = await getOrderIdByUserIdAndIsComplete({ id: 2 });
     console.log('Successfully ran getOrderIdByUserIdAndIsComplete', userOrder);
+
+    console.log('Testing updateOrder...');
+    const updatedOrder = await updateOrder(1, { isComplete: true, totalPrice: 500 });
+    console.log('Successfully ran updateOrder:', updatedOrder);
 
     console.log('Testing addProductToOrder...');
     const addedOrderProduct = await addProductToOrder({
