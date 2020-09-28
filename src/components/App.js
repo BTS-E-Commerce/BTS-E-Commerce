@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react';
-
-import { Content, Register, Login, UsersInfo } from './index';
-import { getAllProducts, getAllOrders, createOrder, addProductToOrder } from '../api/index';
+import { Content, UsersInfo, Header, Register, Login } from './index';
+import {
+  getAllProducts,
+  getAllOrders,
+  createOrder,
+  addProductToOrder,
+} from '../api/index';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -34,21 +44,21 @@ const App = () => {
 
   useEffect(() => {
     if (currentUser.username === 'guest') {
-      console.log('I am a guest.')
-      const localStorageCart = JSON.parse(localStorage.getItem('cart'))
+      console.log('I am a guest.');
+      const localStorageCart = JSON.parse(localStorage.getItem('cart'));
       console.log(localStorageCart);
       if (localStorageCart != null) {
-        console.log("Set oongoing order to local storgae")
+        console.log('Set oongoing order to local storgae');
         setOngoingOrder(localStorageCart);
       }
     } else {
       console.log('I am ' + currentUser.username);
       let currentOrder = {};
-      orders.map(order => {
+      orders.map((order) => {
         if (order.user.id == currentUser.id) {
           if (order.isComplete === false) {
             currentOrder = order;
-            console.log("WE FOUND THE ORDEr:", order);
+            console.log('WE FOUND THE ORDEr:', order);
             localStorage.setItem('cart', JSON.stringify(currentOrder));
           }
         }
@@ -61,39 +71,63 @@ const App = () => {
     async function () {
       //MAybe check to see if product is alreayd in order...
       //Maybe add to quantity?
-      console.log("THIS IS THE CURRENT ORDER BEFORE ADDING PRODUCT:", ongoingOrder);
+      console.log(
+        'THIS IS THE CURRENT ORDER BEFORE ADDING PRODUCT:',
+        ongoingOrder
+      );
       // console.log(Object.keys(ongoingOrder).length === 0);
       console.log(JSON.parse(localStorage.getItem('cart')) == null);
       if (JSON.parse(localStorage.getItem('cart')) == null) {
-        console.log("There is no current order.")
-        const order = await createOrder(currentUser.id, id)
-        setOrders([...orders, order])
-        console.log("CREATED NEW ONGOING ORDER:", order);
+        console.log('There is no current order.');
+        const order = await createOrder(currentUser.id, id);
+        setOrders([...orders, order]);
+        console.log('CREATED NEW ONGOING ORDER:', order);
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       } else {
-        console.log("TRYING TO UPDATE AN EXSISTING ORDER");
+        console.log('TRYING TO UPDATE AN EXSISTING ORDER');
         // if (currentUser.username !== 'guest') {
         //   await addProductToOrder(ongoingOrder.id, id, price);
         // }
         const order = await addProductToOrder(ongoingOrder.id, id, price);
-        localStorage.setItem('cart', JSON.stringify(order))
+        localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       }
     };
 
   return (
-    <div className='App'>
-      <h1>Hello, World!</h1>
-      <Content
-        products={products}
-        setProducts={setProducts}
-        addProductToCart={addProductToCart}
-      />
-      <Register />
-      <Login />
-      <UsersInfo ongoingOrder={ongoingOrder} setOngoingOrder={setOngoingOrder} orders={orders} setOrders={setOrders} currentUser={currentUser} setCurrentUser={setCurrentUser} />
-    </div>
+    <Router>
+      <div className='App'>
+        <Header />
+        <Switch>
+          <Route path='/account'>
+            <h2>Welcome, {currentUser.username}</h2>
+            {/* USER ORDER HISTORY, REVIEWS, ETC */}
+          </Route>
+          <Route path='/register'>
+            <Register />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <Route path='/cart'>{/* RENDER CART HERE */}</Route>
+
+          <Content
+            products={products}
+            setProducts={setProducts}
+            addProductToCart={addProductToCart}
+          />
+          <UsersInfo
+            ongoingOrder={ongoingOrder}
+            setOngoingOrder={setOngoingOrder}
+            orders={orders}
+            setOrders={setOrders}
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
