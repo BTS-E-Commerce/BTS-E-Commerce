@@ -31,7 +31,7 @@ const Login = () => {
           name='username'
           value={username}
           onChange={handleUsernameChange}
-          placeholder='username'
+          placeholder=' username'
         />
       </div>
       <div>
@@ -41,7 +41,7 @@ const Login = () => {
           name='password'
           value={password}
           onChange={handlePasswordChange}
-          placeholder='password'
+          placeholder=' password'
         />
       </div>
       <button type='submit'>Login</button>
