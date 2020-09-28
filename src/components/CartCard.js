@@ -1,10 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { CartCardProducts } from './index'
+import { CartCardProducts } from './index';
 
-import { updateOrder, deleteOrder } from '../api/index'
+import { updateOrder, deleteOrder } from '../api/index';
+
+import { FindTotalPrice } from '../utils/FindTotalPrice';
 
 const CartCard = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }) => {
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    useEffect(() => {
+        if (Object.keys(ongoingOrder).length !== 0) {
+            setTotalPrice(FindTotalPrice(ongoingOrder.products));
+        }
+
+    }, [usersOrders]);
 
     console.log("USERS ORDERS:", usersOrders);
 
@@ -30,18 +40,21 @@ const CartCard = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }
         localStorage.clear();
         console.log("Here is your completed order:", completedOrder);
     }
+
+    //Implement removing product from cart after addition.
+    //change/update inventory on product id in products when deleting product from the cart and ongoing order.
     return (
         <div>
             <h1>CartCard</h1>
-            {Object.keys(ongoingOrder).length !== 0 ? ongoingOrder.products.map((product) => (
-                <>
-                    <CartCardProducts product={product} />
-                    <p>total price here</p>
-                    <button onClick={onCheckout}>CHECKOUT</button>
-                    <button onClick={onDeleteOrder}>DELETE ORDER</button>
-                </>
-            )) : "There is nothing here."}
-
+            {Object.keys(ongoingOrder).length !== 0
+                ? ongoingOrder.products.map((product) => (
+                    <>
+                        <CartCardProducts product={product} />
+                        <button onClick={onCheckout}>CHECKOUT</button>
+                        <button onClick={onDeleteOrder}>DELETE ORDER</button>
+                    </>
+                )) : "There is nothing here."}
+            <p>Total Price: ${totalPrice / 100}</p>
         </div>
 
     )
