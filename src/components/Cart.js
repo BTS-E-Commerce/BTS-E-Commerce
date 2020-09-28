@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CartCard } from './index'
+import { CartCard } from './index';
 
 const Cart = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }) => {
     return (

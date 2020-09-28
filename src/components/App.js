@@ -17,8 +17,6 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
-  //Default state should be {id: 1, username: 'guest'}
-  //Test User state should be { id: 2, username: 'brody' }
   const [currentUser, setCurrentUser] = useState({ id: 1, username: 'guest' });
   const [ongoingOrder, setOngoingOrder] = useState({});
 
@@ -44,21 +42,16 @@ const App = () => {
 
   useEffect(() => {
     if (currentUser.username === 'guest') {
-      console.log('I am a guest.');
       const localStorageCart = JSON.parse(localStorage.getItem('cart'));
-      console.log(localStorageCart);
       if (localStorageCart != null) {
-        console.log('Set oongoing order to local storgae');
         setOngoingOrder(localStorageCart);
       }
     } else {
-      console.log('I am ' + currentUser.username);
       let currentOrder = {};
       orders.map((order) => {
         if (order.user.id == currentUser.id) {
           if (order.isComplete === false) {
             currentOrder = order;
-            console.log('WE FOUND THE ORDEr:', order);
             localStorage.setItem('cart', JSON.stringify(currentOrder));
           }
         }
@@ -69,26 +62,13 @@ const App = () => {
 
   const addProductToCart = (id, price) =>
     async function () {
-      //MAybe check to see if product is alreayd in order...
-      //Maybe add to quantity?
-      console.log(
-        'THIS IS THE CURRENT ORDER BEFORE ADDING PRODUCT:',
-        ongoingOrder
-      );
-      // console.log(Object.keys(ongoingOrder).length === 0);
-      console.log(JSON.parse(localStorage.getItem('cart')) == null);
+      //update/change inventory on product
       if (JSON.parse(localStorage.getItem('cart')) == null) {
-        console.log('There is no current order.');
         const order = await createOrder(currentUser.id, id);
         setOrders([...orders, order]);
-        console.log('CREATED NEW ONGOING ORDER:', order);
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       } else {
-        console.log('TRYING TO UPDATE AN EXSISTING ORDER');
-        // if (currentUser.username !== 'guest') {
-        //   await addProductToOrder(ongoingOrder.id, id, price);
-        // }
         const order = await addProductToOrder(ongoingOrder.id, id, price);
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
