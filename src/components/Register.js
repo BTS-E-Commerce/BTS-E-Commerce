@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createUser } from '../api/index';
+import { NavLink } from 'react-router-dom';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -41,7 +42,7 @@ const Register = () => {
           name='username'
           value={username}
           onChange={handleUsernameChange}
-          placeholder='username'
+          placeholder=' username'
         />
       </div>
       <div>
@@ -51,7 +52,7 @@ const Register = () => {
           name='password'
           value={password}
           onChange={handlePasswordChange}
-          placeholder='password'
+          placeholder=' password'
         />
       </div>
       <div>
@@ -61,7 +62,7 @@ const Register = () => {
           name='confirm'
           value={confirm}
           onChange={handleConfirmChange}
-          placeholder='confirm password'
+          placeholder=' confirm password'
         />
       </div>
       <button type='submit'>Register</button>

@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 
-import { Content, Register, Login, UsersInfo } from './index';
-import { getAllProducts, getAllOrders, createOrder, addProductToOrder } from '../api/index';
+import { Content, Header, Register, Login, UsersInfo } from './index';
+import {
+  getAllProducts,
+  getAllOrders,
+  createOrder,
+  addProductToOrder,
+} from '../api/index';
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -33,11 +44,11 @@ const App = () => {
 
   useEffect(() => {
     let currentOrder = {};
-    orders.map(order => {
+    orders.map((order) => {
       if (order.user.id == currentUser.id) {
         if (order.isComplete === false) {
           currentOrder = order;
-          console.log("WE FOUND THE ORDEr:", order);
+          console.log('WE FOUND THE ORDEr:', order);
           localStorage.setItem('cart', JSON.stringify(currentOrder));
         }
       }
@@ -47,32 +58,56 @@ const App = () => {
 
   const addProductToCart = (id, price) =>
     async function () {
-      console.log("THIS IS THE CURRENT ORDER BEFORE ADDING PRODUCT:", ongoingOrder);
+      console.log(
+        'THIS IS THE CURRENT ORDER BEFORE ADDING PRODUCT:',
+        ongoingOrder
+      );
       console.log(Object.keys(ongoingOrder).length);
       if (Object.keys(ongoingOrder).length === 0) {
-        console.log("There is no current order.")
-        const newOrder = await createOrder(currentUser.id, id)
-        console.log("CREATED NEW ONGOING ORDER:", newOrder);
+        console.log('There is no current order.');
+        const newOrder = await createOrder(currentUser.id, id);
+        console.log('CREATED NEW ONGOING ORDER:', newOrder);
         localStorage.setItem('cart', JSON.stringify(newOrder));
       } else {
-        console.log("TRYING TO UPDATE AN EXSISTING ORDER");
-        const updatedOrder = await addProductToOrder(ongoingOrder.id, id, price);
-        console.log("UPDATED ONGOING ORDER:", updatedOrder);
+        console.log('TRYING TO UPDATE AN EXSISTING ORDER');
+        const updatedOrder = await addProductToOrder(
+          ongoingOrder.id,
+          id,
+          price
+        );
+        console.log('UPDATED ONGOING ORDER:', updatedOrder);
       }
     };
 
   return (
-    <div className='App'>
-      <h1>Hello, World!</h1>
-      <Content
-        products={products}
-        setProducts={setProducts}
-        addProductToCart={addProductToCart}
-      />
-      <Register />
-      <Login />
-      <UsersInfo orders={orders} currentUser={currentUser} setCurrentUser={setCurrentUser} />
-    </div>
+    <Router>
+      <div className='App'>
+        <Header />
+        <Switch>
+          <Route path='/register'>
+            <Register />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+          <Route path='/account'>
+            <h2>Welcome, {currentUser.username}</h2>
+            <UsersInfo
+              orders={orders}
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+            />
+          </Route>
+          <Route exact path='/'>
+            <Content
+              products={products}
+              setProducts={setProducts}
+              addProductToCart={addProductToCart}
+            />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
