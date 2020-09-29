@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 
 import { OrderCardProducts } from './index'
 
+import { FindTotalPrice } from '../utils/FindTotalPrice'
 const OrderCard = ({ order, number }) => {
-    //Total price is not updating correctly. It is not adding the digits togther. It puts them side by side.
-    let totalPrice = 0;
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    useEffect(() => {
+        setTotalPrice(FindTotalPrice(order.products));
+    }, [order]);
+
     return (
         <div>
             <h2>OrderCard</h2>
@@ -20,9 +25,7 @@ const OrderCard = ({ order, number }) => {
                 />
             )
             )}
-            <h3>Total Price: {order.products.map((product) => {
-                return totalPrice = totalPrice + product.currentPrice * product.quantity
-            })}
+            <h3>Total Price: ${totalPrice / 100}
             </h3>
         </div>
 
