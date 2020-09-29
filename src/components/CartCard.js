@@ -10,11 +10,11 @@ const CartCard = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
+        setTotalPrice(0);
         if (Object.keys(ongoingOrder).length !== 0) {
             setTotalPrice(FindTotalPrice(ongoingOrder.products));
         }
-
-    }, [usersOrders]);
+    }, [ongoingOrder]);
 
     console.log("USERS ORDERS:", usersOrders);
 
@@ -29,7 +29,6 @@ const CartCard = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }
         } else {
             console.log("Cannot delete order.")
         }
-
     }
 
     async function onCheckout() {
