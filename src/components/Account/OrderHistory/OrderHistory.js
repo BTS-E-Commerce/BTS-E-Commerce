@@ -2,7 +2,7 @@ import React from 'react';
 
 import { OrderCard } from './index'
 
-const Orders = ({ usersOrders }) => {
+const OrderHistory = ({ usersOrders }) => {
     let number = 0;
     return (
         <div>
@@ -19,4 +19,4 @@ const Orders = ({ usersOrders }) => {
     )
 }
 
-export default Orders;
+export default OrderHistory;

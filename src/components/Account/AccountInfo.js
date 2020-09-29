@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { Cart, Orders } from './index'
+import { OrderHistory } from './OrderHistory/index'
 
-const UsersInfo = ({ orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser }) => {
+const AccountInfo = ({ orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser }) => {
     const [usersOrders, setUsersOrders] = useState([])
 
 
@@ -15,8 +15,6 @@ const UsersInfo = ({ orders, setOrders, ongoingOrder, setOngoingOrder, currentUs
         // getUsersOrders()
         setUsersOrders(getUsersOrderHistory())
     }, [orders, currentUser]);
-
-    console.log(orders);
 
     const getUsersOrderHistory = () => {
         return orders.filter(order => (order.user.id === currentUser.id && order.isComplete === true))
@@ -50,17 +48,16 @@ const UsersInfo = ({ orders, setOrders, ongoingOrder, setOngoingOrder, currentUs
 
     return (
         <div>
-            <h1>UsersInfo</h1>
+            <h1>AccountInfo</h1>
             <h2>Current user is: {currentUser.username}</h2>
             <button onClick={testChangeUserToGuest}>Change user to guest</button>
             <button onClick={testChangeUserToBrody}>Change user to brody</button>
             <button onClick={testChangeUserToSam}>Change user to sam</button>
             <button onClick={testChangeUserToTyler}>Change user to tyler</button>
-            <Cart usersOrders={usersOrders} setUsersOrders={setUsersOrders} ongoingOrder={ongoingOrder} setOngoingOrder={setOngoingOrder} />
-            <Orders usersOrders={usersOrders} />
+            <OrderHistory usersOrders={usersOrders} />
         </div>
 
     )
 }
 
-export default UsersInfo;
+export default AccountInfo;

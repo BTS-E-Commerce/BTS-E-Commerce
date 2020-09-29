@@ -1,5 +1,8 @@
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ IMPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~
 import React, { useState, useEffect } from 'react';
-import { Content, UsersInfo, Header, Register, Login } from './index';
+import { Content, Header } from './index';
 import {
   getAllProducts,
   getAllOrders,
@@ -12,13 +15,33 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
+import { Account } from './Account/index';
+import { Register, Login } from './Authenitcation/index';
+import { Cart } from './Cart/index';
 
 const App = () => {
+  //~~~~~~~~~~~~~~~~~~~
+  //~~~~~~ STATE ~~~~~~
+  //~~~~~~~~~~~~~~~~~~~
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({ id: 1, username: 'guest' });
   const [ongoingOrder, setOngoingOrder] = useState({});
+  const [usersOrders, setUsersOrders] = useState([])
+
+  //~~~~~~~~~~~~~~~~~~~
+  //~~~~~ EFFECTS ~~~~~
+  //~~~~~~~~~~~~~~~~~~~
+  useEffect(() => {
+    // getUsersOrders()
+    setUsersOrders(getUsersOrderHistory())
+  }, []);
+
+  useEffect(() => {
+    // getUsersOrders()
+    setUsersOrders(getUsersOrderHistory())
+  }, [orders, currentUser]);
 
   useEffect(() => {
     getAllProducts()
@@ -60,6 +83,14 @@ const App = () => {
     }
   }, [orders, currentUser]);
 
+  //~~~~~~~~~~~~~~~~~~~
+  //~~~~ FUNCTIONS ~~~~
+  //~~~~~~~~~~~~~~~~~~~
+
+  const getUsersOrderHistory = () => {
+    return orders.filter(order => (order.user.id === currentUser.id && order.isComplete === true))
+  }
+
   const addProductToCart = (id, price) =>
     async function () {
       //update/change inventory on product
@@ -75,6 +106,9 @@ const App = () => {
       }
     };
 
+  //~~~~~~~~~~~~~~~~~~~
+  //~~~~~~ JSX ~~~~~~~~
+  //~~~~~~~~~~~~~~~~~~~
   return (
     <Router>
       <div className='App'>
@@ -83,7 +117,7 @@ const App = () => {
           <Route path='/account'>
             <h2>Welcome, {currentUser.username}</h2>
             {/* USER ORDER HISTORY, REVIEWS, ETC */}
-            <UsersInfo
+            <Account
               ongoingOrder={ongoingOrder}
               setOngoingOrder={setOngoingOrder}
               orders={orders}
@@ -98,7 +132,9 @@ const App = () => {
           <Route path='/login'>
             <Login />
           </Route>
-          <Route path='/cart'>{/* RENDER CART HERE */}</Route>
+          <Route path='/cart'>
+            <Cart usersOrders={usersOrders} setUsersOrders={setUsersOrders} ongoingOrder={ongoingOrder} setOngoingOrder={setOngoingOrder} />
+          </Route>
 
           <Content
             products={products}
@@ -111,4 +147,7 @@ const App = () => {
   );
 };
 
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ EXPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~
 export default App;
