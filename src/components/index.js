@@ -13,3 +13,4 @@ export { default as OrderCardProducts } from './OrderCardProducts';
 export { default as CartCard } from './CartCard';
 export { default as CartCardProducts } from './CartCardProducts';
 export { default as Header } from './Header';
+export { default as Searchbar } from './Searchbar';
