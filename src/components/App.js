@@ -8,6 +8,7 @@ import {
   getAllOrders,
   createOrder,
   addProductToOrder,
+  updateProduct
 } from '../api/index';
 import {
   BrowserRouter as Router,
@@ -91,20 +92,29 @@ const App = () => {
     return orders.filter(order => (order.user.id === currentUser.id && order.isComplete === true))
   }
 
-  const addProductToCart = (id, price) =>
+  const addProductToCart = (id, price, inventory) =>
     async function () {
-      //update/change inventory on product
-      if (JSON.parse(localStorage.getItem('cart')) == null) {
+      if (Object.keys(JSON.parse(localStorage.getItem('cart'))).length == 0) {
         const order = await createOrder(currentUser.id, id);
         setOrders([...orders, order]);
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       } else {
+        //Check if alreayd in order.
         const order = await addProductToOrder(ongoingOrder.id, id, price);
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       }
+      await updateProductInventory(id, 1, inventory);
     };
+
+  const updateProductInventory = async function (id, quantity, inventory) {
+    console.log(inventory);
+    console.log(quantity);
+    inventory -= quantity;
+    console.log(inventory);
+    await updateProduct(id, { inventory })
+  }
 
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ JSX ~~~~~~~~
