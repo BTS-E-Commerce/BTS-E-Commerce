@@ -74,6 +74,45 @@ async function initializeProducts() {
         { id: 5, name: 'cheddar' },
       ]
     );
+
+    await createProduct(
+      {
+        name: 'Breakfast Mac And Cheese',
+        description:
+          'Extra cheesy mac and cheese, with bacon bits thrown in and soft baked eggs on top for good measure',
+        image:
+          'https://img.huffingtonpost.com/asset/5a83285321000039006011a2.png?ops=scalefit_960_noupscale&format=webp',
+        inventory: '20',
+        basePrice: '15',
+        currentPrice: '15',
+        sale: false,
+        date: '09/27/2020',
+      },
+      [
+        { id: 8, name: 'cheese' },
+        { id: 6, name: 'crunchy' },
+        { id: 5, name: 'special' },
+      ]
+    );
+
+    await createProduct(
+      {
+        name: 'Lobster Mac N Cheese',
+        description: 'The Sea in the Cheese!',
+        image:
+          'https://img.huffingtonpost.com/asset/55a7fc101200002b00135271.jpeg?ops=scalefit_960_noupscale&format=webp',
+        inventory: '3',
+        basePrice: '25',
+        currentPrice: '15',
+        sale: true,
+        date: '09/30/2020',
+      },
+      [
+        { id: 8, name: 'cheese' },
+        { id: 6, name: 'oven' },
+        { id: 5, name: 'special' },
+      ]
+    );
     console.log('Finished making products...');
   } catch (error) {
     console.log('Error creating initial products...');
