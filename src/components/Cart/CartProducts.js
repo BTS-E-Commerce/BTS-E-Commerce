@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CartCardProducts = ({ product }) => {
+const CartProducts = ({ product }) => {
     //implement quantity going up.
     //change ongoing order product quantity by id
 
@@ -25,4 +25,4 @@ const CartCardProducts = ({ product }) => {
     )
 }
 
-export default CartCardProducts;
+export default CartProducts;

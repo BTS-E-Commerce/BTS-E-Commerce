@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import { loginUser } from '../api/users';
+import { createUser } from '../../api/index';
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    loginUser({ username, password });
+    if (password !== confirm) {
+      alert('Passwords do not match!');
+    }
+
+    createUser({ username, password });
     setUsername('');
     setPassword('');
+    setConfirm('');
   }
 
   const handleUsernameChange = (event) => {
@@ -21,9 +27,13 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
+  const handleConfirmChange = (event) => {
+    setConfirm(event.target.value);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Login Here:</h1>
+      <h1>Register Here:</h1>
       <div>
         <label htmlFor='username'>Username:</label>
         <input
@@ -44,9 +54,19 @@ const Login = () => {
           placeholder=' password'
         />
       </div>
-      <button type='submit'>Login</button>
+      <div>
+        <label htmlFor='confirm'>Confirm Password:</label>
+        <input
+          type='text'
+          name='confirm'
+          value={confirm}
+          onChange={handleConfirmChange}
+          placeholder=' confirm password'
+        />
+      </div>
+      <button type='submit'>Register</button>
     </form>
   );
 };
 
-export default Login;
+export default Register;

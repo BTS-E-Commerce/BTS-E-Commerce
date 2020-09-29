@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import { OrderCardProducts } from './index'
 
-import { FindTotalPrice } from '../utils/FindTotalPrice'
+import { FindTotalPrice } from '../../../utils/FindTotalPrice'
 const OrderCard = ({ order, number }) => {
     const [totalPrice, setTotalPrice] = useState(0);
 

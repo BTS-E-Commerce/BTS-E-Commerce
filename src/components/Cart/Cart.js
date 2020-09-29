@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import { CartCardProducts } from './index';
+import { CartProducts } from './index';
 
-import { updateOrder, deleteOrder } from '../api/index';
+import { updateOrder, deleteOrder } from '../../api/index';
 
-import { FindTotalPrice } from '../utils/FindTotalPrice';
+import { FindTotalPrice } from '../../utils/FindTotalPrice';
 
-const CartCard = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }) => {
+const Cart = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }) => {
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
@@ -44,11 +44,11 @@ const CartCard = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }
     //change/update inventory on product id in products when deleting product from the cart and ongoing order.
     return (
         <div>
-            <h1>CartCard</h1>
+            <h1>Cart</h1>
             {Object.keys(ongoingOrder).length !== 0
                 ? ongoingOrder.products.map((product) => (
                     <>
-                        <CartCardProducts product={product} />
+                        <CartProducts product={product} />
                         <button onClick={onCheckout}>CHECKOUT</button>
                         <button onClick={onDeleteOrder}>DELETE ORDER</button>
                     </>
@@ -59,4 +59,4 @@ const CartCard = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }
     )
 }
 
-export default CartCard;
+export default Cart;

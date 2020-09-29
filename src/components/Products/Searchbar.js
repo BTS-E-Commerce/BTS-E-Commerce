@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CategoryList } from './index';
+import { CategoryList } from '../Account/Admin/index';
 
 const Searchbar = ({ products, setProducts }) => {
   const [name, setName] = useState('');

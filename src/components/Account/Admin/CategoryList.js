@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { getAllCategories } from '../api/index';
+import { getAllCategories } from '../../../api/index';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-
-import { ProductCard, NewProductForm, CategoryList, Searchbar } from './index';
+import React from 'react';
+import { ProductCard, NewProductForm, Searchbar } from './Products/index';
+import { CategoryList } from './Account/Admin/index'
 import { deleteProduct, createProduct } from '../api/index';
 
 const Content = ({ products, setProducts, addProductToCart }) => {
