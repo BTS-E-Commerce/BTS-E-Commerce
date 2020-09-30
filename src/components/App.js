@@ -8,7 +8,7 @@ import {
   getAllOrders,
   createOrder,
   addProductToOrder,
-  updateProduct
+  updateProduct,
 } from '../api/index';
 import {
   BrowserRouter as Router,
@@ -73,8 +73,13 @@ const App = () => {
   useEffect(() => {
     if (currentUser.username === 'guest') {
       const localStorageCart = JSON.parse(localStorage.getItem('cart'));
-      if (localStorageCart != null && Object.keys(localStorageCart).length != 0) {
-        localStorageCart.products = localStorageCart.products.sort(compareProductIds);
+      if (
+        localStorageCart != null &&
+        Object.keys(localStorageCart).length != 0
+      ) {
+        localStorageCart.products = localStorageCart.products.sort(
+          compareProductIds
+        );
         setOngoingOrder(localStorageCart);
       }
     } else {
@@ -83,7 +88,9 @@ const App = () => {
         if (order.user.id == currentUser.id) {
           if (order.isComplete === false) {
             currentOrder = order;
-            currentOrder.products = currentOrder.products.sort(compareProductIds);
+            currentOrder.products = currentOrder.products.sort(
+              compareProductIds
+            );
             localStorage.setItem('cart', JSON.stringify(currentOrder));
           }
         }
@@ -97,13 +104,6 @@ const App = () => {
   //~~~~ FUNCTIONS ~~~~
   //~~~~~~~~~~~~~~~~~~~
 
-
-  const getUsersOrderHistory = () => {
-    return orders.filter(
-      (order) => order.user.id === currentUser.id && order.isComplete === true
-    );
-  };
-
   const compareProductIds = (productA, productB) => {
     const idA = productA.id;
     const idB = productB.id;
@@ -116,8 +116,7 @@ const App = () => {
       comparison = -1;
     }
     return comparison;
-  }
-
+  };
 
   const getUsersOrderHistory = () => {
     return orders.filter(
@@ -128,10 +127,15 @@ const App = () => {
   const addProductToCart = (id, price, inventory, quantity = 1) =>
     async function () {
       if (inventory < quantity) {
-        alert("This product is out of order! Contact support for further action.");
+        alert(
+          'This product is out of order! Contact support for further action.'
+        );
         return;
       }
-      if (JSON.parse(localStorage.getItem('cart')) == null || Object.keys(JSON.parse(localStorage.getItem('cart'))).length == 0) {
+      if (
+        JSON.parse(localStorage.getItem('cart')) == null ||
+        Object.keys(JSON.parse(localStorage.getItem('cart'))).length == 0
+      ) {
         const order = await createOrder(currentUser.id, id);
         setOrders([...orders, order]);
         localStorage.setItem('cart', JSON.stringify(order));
@@ -155,8 +159,8 @@ const App = () => {
     console.log(quantity);
     inventory -= quantity;
     console.log(inventory);
-    await updateProduct(id, { inventory })
-  }
+    await updateProduct(id, { inventory });
+  };
 
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ JSX ~~~~~~~~

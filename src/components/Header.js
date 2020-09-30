@@ -2,8 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { getAllUsers } from '../api/users';
 
-
-import './App.css';
+// import './App.css';
 
 const Header = ({ currentUser, setCurrentUser }) => {
   const logOutUser = (event) => {
