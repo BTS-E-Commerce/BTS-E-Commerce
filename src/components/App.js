@@ -29,7 +29,7 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({ id: 1, username: 'guest' });
   const [ongoingOrder, setOngoingOrder] = useState({});
-  const [usersOrders, setUsersOrders] = useState([])
+  const [usersOrders, setUsersOrders] = useState([]);
 
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~ EFFECTS ~~~~~
@@ -42,12 +42,12 @@ const App = () => {
 
   useEffect(() => {
     // getUsersOrders()
-    setUsersOrders(getUsersOrderHistory())
+    setUsersOrders(getUsersOrderHistory());
   }, []);
 
   useEffect(() => {
     // getUsersOrders()
-    setUsersOrders(getUsersOrderHistory())
+    setUsersOrders(getUsersOrderHistory());
   }, [orders, currentUser]);
 
   useEffect(() => {
@@ -112,8 +112,10 @@ const App = () => {
   }
 
   const getUsersOrderHistory = () => {
-    return orders.filter(order => (order.user.id === currentUser.id && order.isComplete === true))
-  }
+    return orders.filter(
+      (order) => order.user.id === currentUser.id && order.isComplete === true
+    );
+  };
 
   const addProductToCart = (id, price, inventory, quantity = 1) =>
     async function () {
@@ -154,11 +156,10 @@ const App = () => {
   return (
     <Router>
       <div className='App'>
-        <Header currentUser={currentUser} />
+        <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
         <Switch>
           <Route path='/account'>
-            <h2>Welcome, {currentUser.username}</h2>
-            {/* USER ORDER HISTORY, REVIEWS, ETC */}
+            <h2>Welcome to your account, {currentUser.username}</h2>
             <Account
               usersOrders={usersOrders}
               setUsersOrders={setUsersOrders}
@@ -171,10 +172,13 @@ const App = () => {
             />
           </Route>
           <Route path='/register'>
-            <Register />
+            <Register
+              setCurrentUser={setCurrentUser}
+              currentUser={currentUser}
+            />
           </Route>
           <Route path='/login'>
-            <Login />
+            <Login setCurrentUser={setCurrentUser} currentUser={currentUser} />
           </Route>
           <Route path='/cart'>
             <Cart
@@ -186,6 +190,7 @@ const App = () => {
               setOngoingOrder={setOngoingOrder}
               compareProductIds={compareProductIds}
               updateProductInventory={updateProductInventory}
+
             />
           </Route>
 
