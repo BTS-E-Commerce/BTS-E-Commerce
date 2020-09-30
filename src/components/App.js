@@ -34,6 +34,12 @@ const App = () => {
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~ EFFECTS ~~~~~
   //~~~~~~~~~~~~~~~~~~~
+
+  useEffect(() => {
+    //check if logged in token exsists
+    //If yes, change current user to token one
+  }, []);
+
   useEffect(() => {
     // getUsersOrders()
     setUsersOrders(getUsersOrderHistory())
@@ -77,11 +83,12 @@ const App = () => {
         if (order.user.id == currentUser.id) {
           if (order.isComplete === false) {
             currentOrder = order;
+            currentOrder.products = currentOrder.products.sort(compareProductIds);
             localStorage.setItem('cart', JSON.stringify(currentOrder));
           }
         }
       });
-      currentOrder = currentOrder.products.sort(compareProductIds);
+
       setOngoingOrder(currentOrder);
     }
   }, [orders, currentUser]);
@@ -123,8 +130,9 @@ const App = () => {
         //Dont need to do becuase should alreayd be in local sotagre.
         //Check if alreayd in order.
         const order = await addProductToOrder(ongoingOrder.id, id, price);
-        //sort old order
+
         order.products = order.products.sort(compareProductIds);
+
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       }
@@ -177,6 +185,7 @@ const App = () => {
               ongoingOrder={ongoingOrder}
               setOngoingOrder={setOngoingOrder}
               compareProductIds={compareProductIds}
+              updateProductInventory={updateProductInventory}
             />
           </Route>
 

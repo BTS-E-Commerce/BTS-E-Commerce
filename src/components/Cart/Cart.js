@@ -6,8 +6,9 @@ import { updateOrder, deleteOrder } from '../../api/index';
 
 import { FindTotalPrice } from '../../utils/FindTotalPrice';
 
-const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder, compareProductIds }) => {
+const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder, compareProductIds, updateProductInventory }) => {
     const [totalPrice, setTotalPrice] = useState(0);
+    //For some reason when refreshing on cart as guest or user, cart is not saved to localstorage and not rememebred.
 
     useEffect(() => {
         setTotalPrice(0);
@@ -26,7 +27,11 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
     }, [totalPrice]);
 
     async function onDeleteOrder() {
-        console.log(ongoingOrder.id);
+        //change quantites from cart products to their respective products
+        //for every product inongoingorder,
+        //read product id, quantity, and inventory 
+        //Add quantity to inventory
+        //update inventory
         const deletedOrder = await deleteOrder(ongoingOrder.id);
         if (deletedOrder) {
             setOngoingOrder({});
@@ -63,6 +68,7 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
                             ongoingOrder={ongoingOrder}
                             setOngoingOrder={setOngoingOrder}
                             compareProductIds={compareProductIds}
+                            updateProductInventory={updateProductInventory}
                         />
                         <button onClick={onCheckout}>CHECKOUT</button>
                         <button onClick={onDeleteOrder}>DELETE ORDER</button>

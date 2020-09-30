@@ -78,10 +78,9 @@ ordersRouter.patch('/:orderId/:productId', async (req, res, next) => {
 
 ordersRouter.delete('/:orderId', async (req, res, next) => {
   const { orderId } = req.params;
-  const { fields } = req.body;
-  console.log(req.body);
+  console.log(req.params);
   try {
-    const order = await client.deleteOrder(orderId, {});
+    const order = await client.deleteOrder({ orderId });
 
     console.log("RETURNING DELETED ORDER INFO", order);
     res.send({
