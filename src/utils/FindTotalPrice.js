@@ -1,3 +1,3 @@
 export function FindTotalPrice(products) {
-    return products.reduce((previous, current) => previous + current.currentPrice, 0);
+    return products.reduce((previous, current) => previous + (current.currentPrice * current.quantity), 0);
 }

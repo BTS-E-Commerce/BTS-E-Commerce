@@ -53,6 +53,19 @@ productsRouter.post('/', async (req, res, next) => {
     }
 });
 
+productsRouter.patch('/:productId', async (req, res, next) => {
+    const { productId } = req.params;
+    const { fields } = req.body;
+    try {
+        const updatedProduct = await client.updateProduct(productId, fields);
+        res.send({
+            updatedProduct
+        })
+    } catch (error) {
+
+    }
+})
+
 
 productsRouter.delete('/:productId', async (req, res, next) => {
     const { productId } = req.params;

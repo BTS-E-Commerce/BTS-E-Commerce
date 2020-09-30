@@ -6,20 +6,32 @@ import { updateOrder, deleteOrder } from '../../api/index';
 
 import { FindTotalPrice } from '../../utils/FindTotalPrice';
 
-const Cart = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }) => {
+const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder, compareProductIds, updateProductInventory }) => {
     const [totalPrice, setTotalPrice] = useState(0);
+    //For some reason when refreshing on cart as guest or user, cart is not saved to localstorage and not rememebred.
 
     useEffect(() => {
         setTotalPrice(0);
         if (Object.keys(ongoingOrder).length !== 0) {
             setTotalPrice(FindTotalPrice(ongoingOrder.products));
         }
+
+        localStorage.setItem('cart', JSON.stringify(ongoingOrder));
     }, [ongoingOrder]);
 
-    console.log("USERS ORDERS:", usersOrders);
+    useEffect(() => {
+        async function updateTotalPrice() {
+            await updateOrder(ongoingOrder.id, { totalPrice })
+        }
+        updateTotalPrice();
+    }, [totalPrice]);
 
     async function onDeleteOrder() {
-        console.log(ongoingOrder.id);
+        //change quantites from cart products to their respective products
+        //for every product inongoingorder,
+        //read product id, quantity, and inventory 
+        //Add quantity to inventory
+        //update inventory
         const deletedOrder = await deleteOrder(ongoingOrder.id);
         if (deletedOrder) {
             setOngoingOrder({});
@@ -48,12 +60,21 @@ const Cart = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }) =>
             {Object.keys(ongoingOrder).length !== 0
                 ? ongoingOrder.products.map((product) => (
                     <>
-                        <CartProducts product={product} />
+                        <CartProducts
+                            key={product.id}
+                            products={products}
+                            setProducts={setProducts}
+                            product={product}
+                            ongoingOrder={ongoingOrder}
+                            setOngoingOrder={setOngoingOrder}
+                            compareProductIds={compareProductIds}
+                            updateProductInventory={updateProductInventory}
+                        />
                         <button onClick={onCheckout}>CHECKOUT</button>
                         <button onClick={onDeleteOrder}>DELETE ORDER</button>
                     </>
                 )) : "There is nothing here."}
-            <p>Total Price: ${totalPrice / 100}</p>
+            <p>Total Price: ${(totalPrice / 100).toFixed(2)}</p>
         </div>
 
     )

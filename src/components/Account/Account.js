@@ -2,10 +2,11 @@ import React from 'react';
 
 import { AccountInfo } from './index'
 
-const Account = ({ orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser }) => {
+const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser }) => {
 
     return (
         <AccountInfo
+            usersOrders={usersOrders}
             ongoingOrder={ongoingOrder}
             setOngoingOrder={setOngoingOrder}
             orders={orders}

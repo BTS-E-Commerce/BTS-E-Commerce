@@ -8,6 +8,7 @@ import {
   getAllOrders,
   createOrder,
   addProductToOrder,
+  updateProduct
 } from '../api/index';
 import {
   BrowserRouter as Router,
@@ -33,6 +34,12 @@ const App = () => {
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~ EFFECTS ~~~~~
   //~~~~~~~~~~~~~~~~~~~
+
+  useEffect(() => {
+    //check if logged in token exsists
+    //If yes, change current user to token one
+  }, []);
+
   useEffect(() => {
     // getUsersOrders()
     setUsersOrders(getUsersOrderHistory());
@@ -66,7 +73,8 @@ const App = () => {
   useEffect(() => {
     if (currentUser.username === 'guest') {
       const localStorageCart = JSON.parse(localStorage.getItem('cart'));
-      if (localStorageCart != null) {
+      if (localStorageCart != null && Object.keys(localStorageCart).length != 0) {
+        localStorageCart.products = localStorageCart.products.sort(compareProductIds);
         setOngoingOrder(localStorageCart);
       }
     } else {
@@ -75,10 +83,12 @@ const App = () => {
         if (order.user.id == currentUser.id) {
           if (order.isComplete === false) {
             currentOrder = order;
+            currentOrder.products = currentOrder.products.sort(compareProductIds);
             localStorage.setItem('cart', JSON.stringify(currentOrder));
           }
         }
       });
+
       setOngoingOrder(currentOrder);
     }
   }, [orders, currentUser]);
@@ -87,26 +97,66 @@ const App = () => {
   //~~~~ FUNCTIONS ~~~~
   //~~~~~~~~~~~~~~~~~~~
 
+
   const getUsersOrderHistory = () => {
     return orders.filter(
       (order) => order.user.id === currentUser.id && order.isComplete === true
     );
   };
 
-  const addProductToCart = (id, price) =>
+  const compareProductIds = (productA, productB) => {
+    const idA = productA.id;
+    const idB = productB.id;
+
+    let comparison = 0;
+
+    if (idA > idB) {
+      comparison = 1;
+    } else if (idA < idB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+
+
+  const getUsersOrderHistory = () => {
+    return orders.filter(
+      (order) => order.user.id === currentUser.id && order.isComplete === true
+    );
+  };
+
+  const addProductToCart = (id, price, inventory, quantity = 1) =>
     async function () {
-      //update/change inventory on product
-      if (JSON.parse(localStorage.getItem('cart')) == null) {
+      if (inventory < quantity) {
+        alert("This product is out of order! Contact support for further action.");
+        return;
+      }
+      if (JSON.parse(localStorage.getItem('cart')) == null || Object.keys(JSON.parse(localStorage.getItem('cart'))).length == 0) {
         const order = await createOrder(currentUser.id, id);
         setOrders([...orders, order]);
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       } else {
+        //Dont need to do becuase should alreayd be in local sotagre.
+        //Check if alreayd in order.
         const order = await addProductToOrder(ongoingOrder.id, id, price);
+
+        order.products = order.products.sort(compareProductIds);
+
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       }
+      await updateProductInventory(id, quantity, inventory);
     };
+
+  const updateProductInventory = async function (id, quantity, inventory) {
+    //Check if inventory is less than quantity;
+    console.log(inventory);
+    console.log(quantity);
+    inventory -= quantity;
+    console.log(inventory);
+    await updateProduct(id, { inventory })
+  }
 
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ JSX ~~~~~~~~
@@ -114,12 +164,13 @@ const App = () => {
   return (
     <Router>
       <div className='App'>
-        <Header currentUser={currentUser} />
+        <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
         <Switch>
           <Route path='/account'>
-            <h2>Welcome, {currentUser.username}</h2>
-            {/* USER ORDER HISTORY, REVIEWS, ETC */}
+            <h2>Welcome to your account, {currentUser.username}</h2>
             <Account
+              usersOrders={usersOrders}
+              setUsersOrders={setUsersOrders}
               ongoingOrder={ongoingOrder}
               setOngoingOrder={setOngoingOrder}
               orders={orders}
@@ -129,17 +180,24 @@ const App = () => {
             />
           </Route>
           <Route path='/register'>
-            <Register />
+            <Register
+              setCurrentUser={setCurrentUser}
+              currentUser={currentUser}
+            />
           </Route>
           <Route path='/login'>
-            <Login />
+            <Login setCurrentUser={setCurrentUser} currentUser={currentUser} />
           </Route>
           <Route path='/cart'>
             <Cart
+              products={products}
+              setProducts={setProducts}
               usersOrders={usersOrders}
               setUsersOrders={setUsersOrders}
               ongoingOrder={ongoingOrder}
               setOngoingOrder={setOngoingOrder}
+              compareProductIds={compareProductIds}
+              updateProductInventory={updateProductInventory}
             />
           </Route>
 

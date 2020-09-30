@@ -47,7 +47,6 @@ ordersRouter.post('/:orderId', async (req, res, next) => {
 ordersRouter.patch('/:orderId', async (req, res, next) => {
   const { orderId } = req.params;
   const { fields } = req.body;
-
   //Check for order exsistence
   //check for fields
   try {
@@ -61,12 +60,27 @@ ordersRouter.patch('/:orderId', async (req, res, next) => {
   }
 })
 
+ordersRouter.patch('/:orderId/:productId', async (req, res, next) => {
+  const { orderId, productId } = req.params;
+  const { fields } = req.body;
+
+  //Check for order exsistence
+  //check for fields
+  try {
+    const updatedOrderProduct = await client.updateOrderProduct({ orderId, productId, fields });
+    res.send({
+      updatedOrderProduct
+    })
+  } catch (error) {
+
+  }
+})
+
 ordersRouter.delete('/:orderId', async (req, res, next) => {
   const { orderId } = req.params;
-  const { fields } = req.body;
-  console.log(req.body);
+  console.log(req.params);
   try {
-    const order = await client.deleteOrder(orderId, {});
+    const order = await client.deleteOrder({ orderId });
 
     console.log("RETURNING DELETED ORDER INFO", order);
     res.send({

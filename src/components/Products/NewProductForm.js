@@ -11,7 +11,6 @@ const NewProductForm = ({ createProduct }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
     createProduct({ name, description, imageUrl, inventory, price, sale });
   }
 

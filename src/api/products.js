@@ -33,6 +33,18 @@ export async function createProduct(product, categories) {
     }
 }
 
+export async function updateProduct(productId, fields) {
+    try {
+        const { data } = await axios.patch(`${BASE_URL}/products/${productId}`, {
+            fields
+        });
+        console.log(data);
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export async function deleteProduct(productId) {
     try {
         const { data } = await axios.delete(`${BASE_URL}/products/${productId}`);
