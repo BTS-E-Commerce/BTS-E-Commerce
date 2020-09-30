@@ -23,6 +23,9 @@ const Content = ({ products, setProducts, addProductToCart }) => {
     };
 
   const onProductCreate = async function (newProduct) {
+    let { price } = newProduct;
+    newProduct.price = price * 100
+
     const { product } = await createProduct(newProduct, [
       { id: 1, name: 'baked' },
     ]);

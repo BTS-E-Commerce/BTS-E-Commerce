@@ -6,7 +6,7 @@ import { updateOrder, deleteOrder } from '../../api/index';
 
 import { FindTotalPrice } from '../../utils/FindTotalPrice';
 
-const Cart = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }) => {
+const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder, compareProductIds }) => {
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
@@ -57,9 +57,12 @@ const Cart = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }) =>
                     <>
                         <CartProducts
                             key={product.id}
+                            products={products}
+                            setProducts={setProducts}
                             product={product}
                             ongoingOrder={ongoingOrder}
                             setOngoingOrder={setOngoingOrder}
+                            compareProductIds={compareProductIds}
                         />
                         <button onClick={onCheckout}>CHECKOUT</button>
                         <button onClick={onDeleteOrder}>DELETE ORDER</button>
