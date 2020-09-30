@@ -1,7 +1,11 @@
 import React from 'react';
 import { ProductCard, NewProductForm, Searchbar } from './Products/index';
-import { CategoryList } from './Account/Admin/index'
-import { deleteProduct, createProduct, } from '../api/index';
+
+import { CategoryList } from './Account/Admin/index';
+import { deleteProduct, createProduct } from '../api/index';
+
+
+import './App.css';
 
 const Content = ({ products, setProducts, addProductToCart }) => {
   // const [products, setProducts] = useState([]);
@@ -33,7 +37,7 @@ const Content = ({ products, setProducts, addProductToCart }) => {
   };
 
   return (
-    <div>
+    <div id='content'>
       <NewProductForm createProduct={onProductCreate} />
       <Searchbar products={products} setProducts={setProducts} />
       {products.map((product) => (

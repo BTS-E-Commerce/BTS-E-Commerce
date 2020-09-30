@@ -1,6 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+
+import './App.css';
+
 const Header = ({ currentUser, setCurrentUser }) => {
   const logOutUser = (event) => {
     event.preventDefault();
@@ -10,7 +13,7 @@ const Header = ({ currentUser, setCurrentUser }) => {
   };
 
   return (
-    <div>
+    <div id='Header'>
       {currentUser.username === 'guest' ? (
         <>
           <h1>GRANDMA'S MAC</h1>

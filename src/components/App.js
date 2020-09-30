@@ -97,6 +97,13 @@ const App = () => {
   //~~~~ FUNCTIONS ~~~~
   //~~~~~~~~~~~~~~~~~~~
 
+
+  const getUsersOrderHistory = () => {
+    return orders.filter(
+      (order) => order.user.id === currentUser.id && order.isComplete === true
+    );
+  };
+
   const compareProductIds = (productA, productB) => {
     const idA = productA.id;
     const idB = productB.id;
@@ -110,6 +117,7 @@ const App = () => {
     }
     return comparison;
   }
+
 
   const getUsersOrderHistory = () => {
     return orders.filter(
@@ -190,7 +198,6 @@ const App = () => {
               setOngoingOrder={setOngoingOrder}
               compareProductIds={compareProductIds}
               updateProductInventory={updateProductInventory}
-
             />
           </Route>
 

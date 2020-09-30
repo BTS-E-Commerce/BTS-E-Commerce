@@ -1,67 +1,57 @@
+import { async } from 'q';
 import React, { useState } from 'react';
-import { CategoryList } from '../Account/Admin/index';
+import { getAllProducts } from '../../api/products';
 
 const Searchbar = ({ products, setProducts }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [searchValue, setValue] = useState('');
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+  const handleSearchChange = (event) => {
+    setValue(event.target.value);
   };
 
   const handleSearch = async (event) => {
     event.preventDefault();
-
-    products.filter((product) => filterProducts(product));
-  };
-
-  const filterProducts = (product) => {
-    if (product.name == name) {
-      setProducts(product);
-    } else if (product.description == description) {
-      setProducts(product);
-    } else {
-      return (
-        <div class='alert'>
-          <span
-            class='closebtn'
-            onclick="this.parentElement.style.display='none';"
-          >
-            &times;
-          </span>
-          <p>
-            <strong>Sad Mac's!</strong> Looks like Grandma hasn't tried that
-            recipe yet, try back later!
-          </p>
-        </div>
-      );
+    try {
+      const originalProducts = await getAllProducts();
+      console.log('originalProducts', originalProducts.products);
+      setProducts(originalProducts.products);
+    } catch (error) {
+      throw error;
+    }
+    console.log(products);
+    const searchedProducts = products.filter((product) =>
+      searchProducts(product)
+    );
+    if (searchedProducts) {
+      setProducts(searchedProducts);
     }
   };
+
+  const searchProducts = (product) => {
+    const { name, description, categories } = product;
+    let searchSuccess = name.includes(searchValue);
+    if (searchSuccess) {
+      return true;
+    }
+    if (description) {
+      searchSuccess = description.includes(searchValue);
+      if (searchSuccess) {
+        return true;
+      }
+    }
+  };
+
   return (
     <div id='searchBarContainer'>
-      <fieldset class='searchByName'>
+      <fieldset className='searchByValue'>
         <input
-          name='name'
+          name='searchValue'
           type='text'
-          placeholder='Search By Name'
-          value={name}
-          onChange={handleNameChange}
+          placeholder='Search Our Inventory...'
+          value={searchValue}
+          onChange={handleSearchChange}
         />
       </fieldset>
-      <fieldset class='searchByDescription'>
-        <input
-          name='name'
-          type='text'
-          placeholder='Search By Description'
-          value={description}
-          onChange={handleDescriptionChange}
-        />
-      </fieldset>
-      <CategoryList />
       <button onClick={handleSearch}>Search</button>
     </div>
   );
