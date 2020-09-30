@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { CategoryList } from '../Account/Admin/index';
 
 const Searchbar = ({ products, setProducts }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  const [searchName, setName] = useState('');
+  const [searchDescription, setDescription] = useState('');
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -16,52 +15,78 @@ const Searchbar = ({ products, setProducts }) => {
   const handleSearch = async (event) => {
     event.preventDefault();
 
-    products.filter((product) => filterProducts(product));
+    const searchedProducts = products.map((product) => filterProducts(product));
+
+    if (searchedProducts) {
+      setProducts(searchedProducts);
+    }
   };
 
   const filterProducts = (product) => {
-    if (product.name == name) {
-      setProducts(product);
-    } else if (product.description == description) {
-      setProducts(product);
-    } else {
-      return (
-        <div class='alert'>
-          <span
-            class='closebtn'
-            onclick="this.parentElement.style.display='none';"
-          >
-            &times;
-          </span>
-          <p>
-            <strong>Sad Mac's!</strong> Looks like Grandma hasn't tried that
-            recipe yet, try back later!
-          </p>
-        </div>
+    const { name, description } = product;
+    let subString = '';
+    let stringPos = 0;
+    if (searchName) {
+      console.log('searchName', searchName, 'productString', name);
+      for (let i = 0; i < name.length; i++) {
+        if (name[i] === searchName[stringPos]) {
+          subString += name[i];
+          console.log('updatedSubString', subString, 'name[i]', name[i]);
+          stringPos++;
+          if (subString.length == searchName.length) return true;
+        } else {
+          subString = '';
+          stringPos = 0;
+        }
+      }
+      return false;
+    } else if (searchDescription) {
+      console.log(
+        'searchDescription',
+        searchDescription,
+        'productString',
+        description
       );
+      for (let i = 0; i < description.length; i++) {
+        if (description[i] === searchDescription[stringPos]) {
+          subString += description[i];
+          console.log(
+            'updatedSubString',
+            subString,
+            'description[i]',
+            description[i]
+          );
+          stringPos++;
+          if (subString.length == searchDescription.length) return true;
+        } else {
+          subString = '';
+          stringPos = 0;
+        }
+      }
+      return false;
     }
   };
+
   return (
     <div id='searchBarContainer'>
-      <fieldset class='searchByName'>
+      <fieldset className='searchByName'>
         <input
-          name='name'
+          name='searchName'
           type='text'
           placeholder='Search By Name'
-          value={name}
+          value={searchName}
           onChange={handleNameChange}
         />
       </fieldset>
-      <fieldset class='searchByDescription'>
+      <fieldset className='searchByDescription'>
         <input
-          name='name'
+          name='searchDescription'
           type='text'
           placeholder='Search By Description'
-          value={description}
+          value={searchDescription}
           onChange={handleDescriptionChange}
         />
       </fieldset>
-      <CategoryList />
       <button onClick={handleSearch}>Search</button>
     </div>
   );
