@@ -15,7 +15,8 @@ const Login = ({ currentUser, setCurrentUser }) => {
     const user = await loginUser({ username, password });
 
     localStorage.clear();
-    setCurrentUser({ id: user.id, username: user.username });
+    setCurrentUser({ id: user.user.id, username: user.user.username });
+    localStorage.setItem('token', user.token);
 
     setUsername('');
     setPassword('');

@@ -3,7 +3,7 @@
 //~~~~~~~~~~~~~~~~~~~
 const client = require('../db');
 const apiRouter = require('express').Router();
-
+const { getUserById } = require('../db');
 const usersRouter = require('./users');
 const productsRouter = require('./products');
 const categoriesRouter = require('./categories');
@@ -28,7 +28,8 @@ apiRouter.use(async (req, res, next) => {
       const { id } = jwt.verify(token, JWT_SECRET);
 
       if (id) {
-        req.user = client.getUserById(id);
+        req.user = await getUserById(id);
+
         next();
       }
     } catch ({ name, message }) {
