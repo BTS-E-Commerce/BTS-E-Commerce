@@ -3,6 +3,7 @@
 //~~~~~~~~~~~~~~~~~~~
 const client = require('../db');
 const usersRouter = require('express').Router();
+const { requireUser, requireAdmin } = require('./utils');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -16,7 +17,7 @@ const SALT_COUNT = 10;
 
 // -- GET Routes --
 //* Get All Users
-usersRouter.get('/', async (req, res, next) => {
+usersRouter.get('/', requireUser, async (req, res, next) => {
   try {
     const users = await client.getAllUsers();
 
@@ -61,8 +62,6 @@ usersRouter.post('/register', async (req, res, next) => {
         }
       );
 
-      //# Will not send back newUser or token.
-      //# Leaving it to help with testing for now
       res.status(201).send({
         newUser,
         token,

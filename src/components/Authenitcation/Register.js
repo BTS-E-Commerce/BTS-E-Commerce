@@ -14,10 +14,14 @@ const Register = ({ currentUser, setCurrentUser }) => {
     }
 
     const user = await createUser({ username, password });
-    console.log(user.id, user.username);
+    console.log(user);
+    console.log(user.newUser.id, user.newUser.username);
+    console.log(user.token);
 
     localStorage.clear();
-    setCurrentUser({ id: user.id, username: user.username });
+    setCurrentUser({ id: user.newUser.id, username: user.newUser.username });
+
+    localStorage.setItem('token', user.token);
 
     setUsername('');
     setPassword('');

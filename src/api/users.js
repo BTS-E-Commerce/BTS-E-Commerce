@@ -1,14 +1,5 @@
 import axios from 'axios';
 
-// export async function getSomething() {
-//   try {
-//     const { data } = await axios.get('/api');
-//     return data;
-//   } catch (error) {
-//     throw error;
-//   }
-// }
-
 const BASE_URL = '/api';
 
 export async function getAllUsers() {
@@ -22,14 +13,12 @@ export async function getAllUsers() {
 
 export async function loginUser({ username, password }) {
   try {
-    const {
-      data: { user },
-    } = await axios.post(`${BASE_URL}/users/login`, {
+    const { data } = await axios.post(`${BASE_URL}/users/login`, {
       username,
       password,
     });
 
-    return user;
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -37,14 +26,12 @@ export async function loginUser({ username, password }) {
 
 export async function createUser({ username, password }) {
   try {
-    const {
-      data: { newUser },
-    } = await axios.post(`${BASE_URL}/users/register`, {
+    const { data } = await axios.post(`${BASE_URL}/users/register`, {
       username,
       password,
     });
 
-    return newUser;
+    return data;
   } catch (error) {
     throw error;
   }

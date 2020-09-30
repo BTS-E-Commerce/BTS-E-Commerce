@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { getAllUsers } from '../api/users';
 
 
 import './App.css';
@@ -7,10 +8,17 @@ import './App.css';
 const Header = ({ currentUser, setCurrentUser }) => {
   const logOutUser = (event) => {
     event.preventDefault();
-    console.log('this worked');
-    localStorage.clear();
+    localStorage.removeItem('token');
     setCurrentUser({ id: 1, username: 'guest' });
   };
+
+  async function testStuff(event) {
+    event.preventDefault();
+    console.log('click is working on test button');
+
+    const logAllUsers = await getAllUsers();
+    console.log(logAllUsers);
+  }
 
   return (
     <div id='Header'>
@@ -32,6 +40,7 @@ const Header = ({ currentUser, setCurrentUser }) => {
           <NavLink to='/account'>ACCOUNT</NavLink>
           <NavLink to='/cart'>MY CART </NavLink>
           <button onClick={logOutUser}>Log Out</button>
+          <button onClick={testStuff}>TEST JWT</button>
         </>
       )}
     </div>
