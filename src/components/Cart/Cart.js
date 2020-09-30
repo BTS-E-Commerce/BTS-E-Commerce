@@ -14,9 +14,16 @@ const Cart = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }) =>
         if (Object.keys(ongoingOrder).length !== 0) {
             setTotalPrice(FindTotalPrice(ongoingOrder.products));
         }
+
+        localStorage.setItem('cart', JSON.stringify(ongoingOrder));
     }, [ongoingOrder]);
 
-    console.log("USERS ORDERS:", usersOrders);
+    useEffect(() => {
+        async function updateTotalPrice() {
+            await updateOrder(ongoingOrder.id, { totalPrice })
+        }
+        updateTotalPrice();
+    }, [totalPrice]);
 
     async function onDeleteOrder() {
         console.log(ongoingOrder.id);
@@ -48,12 +55,17 @@ const Cart = ({ usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder }) =>
             {Object.keys(ongoingOrder).length !== 0
                 ? ongoingOrder.products.map((product) => (
                     <>
-                        <CartProducts product={product} />
+                        <CartProducts
+                            key={product.id}
+                            product={product}
+                            ongoingOrder={ongoingOrder}
+                            setOngoingOrder={setOngoingOrder}
+                        />
                         <button onClick={onCheckout}>CHECKOUT</button>
                         <button onClick={onDeleteOrder}>DELETE ORDER</button>
                     </>
                 )) : "There is nothing here."}
-            <p>Total Price: ${totalPrice / 100}</p>
+            <p>Total Price: ${(totalPrice / 100).toFixed(2)}</p>
         </div>
 
     )

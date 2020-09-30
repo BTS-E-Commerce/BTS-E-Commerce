@@ -47,7 +47,6 @@ ordersRouter.post('/:orderId', async (req, res, next) => {
 ordersRouter.patch('/:orderId', async (req, res, next) => {
   const { orderId } = req.params;
   const { fields } = req.body;
-
   //Check for order exsistence
   //check for fields
   try {
@@ -55,6 +54,22 @@ ordersRouter.patch('/:orderId', async (req, res, next) => {
 
     res.send({
       order
+    })
+  } catch (error) {
+
+  }
+})
+
+ordersRouter.patch('/:orderId/:productId', async (req, res, next) => {
+  const { orderId, productId } = req.params;
+  const { fields } = req.body;
+
+  //Check for order exsistence
+  //check for fields
+  try {
+    const updatedOrderProduct = await client.updateOrderProduct({ orderId, productId, fields });
+    res.send({
+      updatedOrderProduct
     })
   } catch (error) {
 
