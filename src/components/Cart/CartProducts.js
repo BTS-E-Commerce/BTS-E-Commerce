@@ -1,20 +1,28 @@
 import React from 'react';
+
 import { updateOrderProduct, updateProduct } from '../../api/index';
 
-const CartProducts = ({ products, setProducts, product, ongoingOrder, setOngoingOrder, compareProductIds }) => {
+const CartProducts = ({ products, setProducts, product, ongoingOrder, setOngoingOrder, compareProductIds, updateProductInventory }) => {
     const handleOnQuantityChange = async function (event) {
         const [updatedProduct] = ongoingOrder.products.filter((orderProduct) => product.id === orderProduct.id);
-        updatedProduct.quantity = event.target.value;
+        console.log(updatedProduct);
+        updatedProduct.quantity = parseInt(event.target.value);
         const updatedOrderProducts = ongoingOrder.products.filter((orderProduct) => product.id !== orderProduct.id);
         updatedOrderProducts.push(updatedProduct);
         updatedOrderProducts.sort(compareProductIds);
         //inventory
 
-        const inventoryProduct = products.filter((originalProduct) => product.id === originalProduct.id);
+        const [inventoryProduct] = products.filter((originalProduct) => product.id === originalProduct.id);
         console.log(inventoryProduct);
-        //Checkm if inventory is too low
-        //await updateProduct(product.id, { inventory: })
+        console.log(updatedProduct);
+        if (inventoryProduct.inventory < updatedProduct.quantity) {
+            console.log("NOT ENOUGH!")
+            alert("At this quantity, this product is out of order.")
+            product.quantity -= 1;
+            return;
+        }
         await updateOrderProduct(ongoingOrder.id, product.id, { quantity: updatedProduct.quantity })
+        await updateProductInventory(product.id, updatedProduct.quantity, inventoryProduct.inventory);
         setOngoingOrder({ ...ongoingOrder, products: updatedOrderProducts });
     }
 
