@@ -28,19 +28,19 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({ id: 1, username: 'guest' });
   const [ongoingOrder, setOngoingOrder] = useState({});
-  const [usersOrders, setUsersOrders] = useState([])
+  const [usersOrders, setUsersOrders] = useState([]);
 
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~ EFFECTS ~~~~~
   //~~~~~~~~~~~~~~~~~~~
   useEffect(() => {
     // getUsersOrders()
-    setUsersOrders(getUsersOrderHistory())
+    setUsersOrders(getUsersOrderHistory());
   }, []);
 
   useEffect(() => {
     // getUsersOrders()
-    setUsersOrders(getUsersOrderHistory())
+    setUsersOrders(getUsersOrderHistory());
   }, [orders, currentUser]);
 
   useEffect(() => {
@@ -88,8 +88,10 @@ const App = () => {
   //~~~~~~~~~~~~~~~~~~~
 
   const getUsersOrderHistory = () => {
-    return orders.filter(order => (order.user.id === currentUser.id && order.isComplete === true))
-  }
+    return orders.filter(
+      (order) => order.user.id === currentUser.id && order.isComplete === true
+    );
+  };
 
   const addProductToCart = (id, price) =>
     async function () {
@@ -133,7 +135,12 @@ const App = () => {
             <Login />
           </Route>
           <Route path='/cart'>
-            <Cart usersOrders={usersOrders} setUsersOrders={setUsersOrders} ongoingOrder={ongoingOrder} setOngoingOrder={setOngoingOrder} />
+            <Cart
+              usersOrders={usersOrders}
+              setUsersOrders={setUsersOrders}
+              ongoingOrder={ongoingOrder}
+              setOngoingOrder={setOngoingOrder}
+            />
           </Route>
 
           <Content
