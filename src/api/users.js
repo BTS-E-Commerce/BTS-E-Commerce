@@ -22,11 +22,14 @@ export async function getAllUsers() {
 
 export async function loginUser({ username, password }) {
   try {
-    const { data } = await axios.post(`${BASE_URL}/users/login`, {
+    const {
+      data: { user },
+    } = await axios.post(`${BASE_URL}/users/login`, {
       username,
       password,
     });
-    console.log(data);
+
+    return user;
   } catch (error) {
     console.log(error);
   }
@@ -34,11 +37,14 @@ export async function loginUser({ username, password }) {
 
 export async function createUser({ username, password }) {
   try {
-    const { data } = await axios.post(`${BASE_URL}/users/register`, {
+    const {
+      data: { newUser },
+    } = await axios.post(`${BASE_URL}/users/register`, {
       username,
       password,
     });
-    console.log(data);
+
+    return newUser;
   } catch (error) {
     throw error;
   }

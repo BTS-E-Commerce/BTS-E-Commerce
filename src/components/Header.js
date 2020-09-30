@@ -1,28 +1,34 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Header = ({ currentUser }) => {
-  // Log out button needs to clear the current User and clear all local storage
+const Header = ({ currentUser, setCurrentUser }) => {
+  const logOutUser = (event) => {
+    event.preventDefault();
+    console.log('this worked');
+    localStorage.clear();
+    setCurrentUser({ id: 1, username: 'guest' });
+  };
 
   return (
     <div>
       {currentUser.username === 'guest' ? (
         <>
           <h1>GRANDMA'S MAC</h1>
+          <h2>Current User: {currentUser.username}</h2>
           <NavLink to='/'>HOME</NavLink>
           <NavLink to='/account'>ACCOUNT</NavLink>
           <NavLink to='/register'>REGISTER</NavLink>
           <NavLink to='/login'>LOGIN </NavLink>
           <NavLink to='/cart'>MY CART </NavLink>
-          <button>Log Out</button>
         </>
       ) : (
         <>
           <h1>GRANDMA'S MAC</h1>
+          <h2>Current User: {currentUser.username}</h2>
           <NavLink to='/'>HOME</NavLink>
           <NavLink to='/account'>ACCOUNT</NavLink>
           <NavLink to='/cart'>MY CART </NavLink>
-          <button>Log Out</button>
+          <button onClick={logOutUser}>Log Out</button>
         </>
       )}
     </div>
