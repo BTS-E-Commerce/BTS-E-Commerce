@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { loginUser } from '../../api/users';
 
-const Login = () => {
+const Login = ({ currentUser, setCurrentUser }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    loginUser({ username, password });
+    if (!username || !password) {
+      alert('Please enter a valid username or password');
+    }
+
+    const user = await loginUser({ username, password });
+
+    localStorage.clear();
+    setCurrentUser({ id: user.id, username: user.username });
+
     setUsername('');
     setPassword('');
   }

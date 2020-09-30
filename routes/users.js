@@ -53,8 +53,6 @@ usersRouter.post('/register', async (req, res, next) => {
         password: securePassword,
       });
 
-      console.log(newUser);
-
       const token = jwt.sign(
         { id: newUser.id, username },
         process.env.JWT_SECRET,
@@ -100,9 +98,9 @@ usersRouter.post('/login', async (req, res, next) => {
         );
 
         res.status(201).send({
-          message: 'succesful login',
           user,
           token,
+          message: 'succesful login',
         });
       } else {
         res.status(401).send({

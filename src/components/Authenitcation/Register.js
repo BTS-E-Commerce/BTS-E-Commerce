@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createUser } from '../../api/index';
 
-const Register = () => {
+const Register = ({ currentUser, setCurrentUser }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -13,7 +13,12 @@ const Register = () => {
       alert('Passwords do not match!');
     }
 
-    createUser({ username, password });
+    const user = await createUser({ username, password });
+    console.log(user.id, user.username);
+
+    localStorage.clear();
+    setCurrentUser({ id: user.id, username: user.username });
+
     setUsername('');
     setPassword('');
     setConfirm('');
