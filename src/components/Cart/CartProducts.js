@@ -1,12 +1,19 @@
 import React from 'react';
-import { updateOrderProduct } from '../../api/index';
+import { updateOrderProduct, updateProduct } from '../../api/index';
 
-const CartProducts = ({ product, ongoingOrder, setOngoingOrder }) => {
+const CartProducts = ({ products, setProducts, product, ongoingOrder, setOngoingOrder, compareProductIds }) => {
     const handleOnQuantityChange = async function (event) {
         const [updatedProduct] = ongoingOrder.products.filter((orderProduct) => product.id === orderProduct.id);
         updatedProduct.quantity = event.target.value;
         const updatedOrderProducts = ongoingOrder.products.filter((orderProduct) => product.id !== orderProduct.id);
         updatedOrderProducts.push(updatedProduct);
+        updatedOrderProducts.sort(compareProductIds);
+        //inventory
+
+        const inventoryProduct = products.filter((originalProduct) => product.id === originalProduct.id);
+        console.log(inventoryProduct);
+        //Checkm if inventory is too low
+        //await updateProduct(product.id, { inventory: })
         await updateOrderProduct(ongoingOrder.id, product.id, { quantity: updatedProduct.quantity })
         setOngoingOrder({ ...ongoingOrder, products: updatedOrderProducts });
     }

@@ -6,6 +6,9 @@ const ProductCard = ({ product, onDelete, onAddToOrder }) => {
   return (
     <div key={product.id}>
       <img src={product.image} alt='A pic of macaroni.' />
+      {product.inventory <= 0
+        ? <h1>OUT OF ORDER</h1>
+        : ''}
       <h1>{product.name}</h1>
       <p>DATE CREATED: {moment(product.date).format('dddd, MMMM Do YYYY')}</p>
       <p>DESCRIPTION: {product.description}</p>

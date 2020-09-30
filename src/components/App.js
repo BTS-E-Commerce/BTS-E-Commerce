@@ -67,7 +67,8 @@ const App = () => {
   useEffect(() => {
     if (currentUser.username === 'guest') {
       const localStorageCart = JSON.parse(localStorage.getItem('cart'));
-      if (localStorageCart != null) {
+      if (localStorageCart != null && Object.keys(localStorageCart).length != 0) {
+        localStorageCart.products = localStorageCart.products.sort(compareProductIds);
         setOngoingOrder(localStorageCart);
       }
     } else {
@@ -80,6 +81,7 @@ const App = () => {
           }
         }
       });
+      currentOrder = currentOrder.products.sort(compareProductIds);
       setOngoingOrder(currentOrder);
     }
   }, [orders, currentUser]);
@@ -88,29 +90,51 @@ const App = () => {
   //~~~~ FUNCTIONS ~~~~
   //~~~~~~~~~~~~~~~~~~~
 
+  const compareProductIds = (productA, productB) => {
+    const idA = productA.id;
+    const idB = productB.id;
+
+    let comparison = 0;
+
+    if (idA > idB) {
+      comparison = 1;
+    } else if (idA < idB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+
   const getUsersOrderHistory = () => {
     return orders.filter(
       (order) => order.user.id === currentUser.id && order.isComplete === true
     );
   };
 
-  const addProductToCart = (id, price, inventory) =>
+  const addProductToCart = (id, price, inventory, quantity = 1) =>
     async function () {
-      if (Object.keys(JSON.parse(localStorage.getItem('cart'))).length == 0) {
+      if (inventory < quantity) {
+        alert("This product is out of order! Contact support for further action.");
+        return;
+      }
+      if (JSON.parse(localStorage.getItem('cart')) == null || Object.keys(JSON.parse(localStorage.getItem('cart'))).length == 0) {
         const order = await createOrder(currentUser.id, id);
         setOrders([...orders, order]);
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       } else {
+        //Dont need to do becuase should alreayd be in local sotagre.
         //Check if alreayd in order.
         const order = await addProductToOrder(ongoingOrder.id, id, price);
+        //sort old order
+        order.products = order.products.sort(compareProductIds);
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       }
-      await updateProductInventory(id, 1, inventory);
+      await updateProductInventory(id, quantity, inventory);
     };
 
   const updateProductInventory = async function (id, quantity, inventory) {
+    //Check if inventory is less than quantity;
     console.log(inventory);
     console.log(quantity);
     inventory -= quantity;
@@ -129,6 +153,8 @@ const App = () => {
           <Route path='/account'>
             <h2>Welcome to your account, {currentUser.username}</h2>
             <Account
+              usersOrders={usersOrders}
+              setUsersOrders={setUsersOrders}
               ongoingOrder={ongoingOrder}
               setOngoingOrder={setOngoingOrder}
               orders={orders}
@@ -148,10 +174,16 @@ const App = () => {
           </Route>
           <Route path='/cart'>
             <Cart
+              products={products}
+              setProducts={setProducts}
+
               usersOrders={usersOrders}
               setUsersOrders={setUsersOrders}
               ongoingOrder={ongoingOrder}
               setOngoingOrder={setOngoingOrder}
+
+              compareProductIds={compareProductIds}
+
             />
           </Route>
 
