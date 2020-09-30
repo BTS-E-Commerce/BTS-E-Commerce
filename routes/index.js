@@ -37,7 +37,7 @@ apiRouter.use(async (req, res, next) => {
     }
   } else {
     next({
-      name: 'AuthorizationHeaderError',
+      name: 'Authorization Header Error',
       message: `Authorization token must start with ${prefix}`,
     });
   }

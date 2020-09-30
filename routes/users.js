@@ -17,10 +17,10 @@ const SALT_COUNT = 10;
 
 // -- GET Routes --
 //* Get All Users
-usersRouter.get('/', requireAdmin, async (req, res, next) => {
+usersRouter.get('/', requireUser, async (req, res, next) => {
   try {
     const users = await client.getAllUsers();
-    console.log(req.user);
+
     res.status(201).send({
       users,
     });
