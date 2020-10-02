@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { updateProduct } from '../../api/index'
 
-const EditProductFrom = ({ product, products, categories, createProduct }) => {
+const EditProductFrom = ({ product, products, setProducts, categories, createProduct }) => {
     const [name, setName] = useState(product === undefined ? '' : (product.name));
     const [description, setDescription] = useState(product === undefined ? '' : (product.description));
     const [imageUrl, setImageUrl] = useState(product === undefined ? '' : (product.image));
@@ -14,9 +14,13 @@ const EditProductFrom = ({ product, products, categories, createProduct }) => {
     async function handleSubmit(event) {
         event.preventDefault();
         console.log("I PRESS SUBMIT");
-        const updatedProduct = await updateProduct(product.id, { name, description, imageUrl, inventory, price, sale, categories: [category] });
+        const { updatedProduct } = await updateProduct(product.id, { name, description, imageUrl, inventory, price, sale, categories: [category] });
         console.log(updatedProduct);
         //use product id from clicked product to remove original product from products and replace with updated product.
+        const removeIndex = products.findIndex(removeProduct => removeProduct.id === product.id)
+        products.splice(removeIndex, 1, updatedProduct);
+        console.log(products);
+        setProducts([...products]);
     }
 
     //Grab all of these values from the product object when clicked.

@@ -43,6 +43,7 @@ const Content = ({ products, setProducts, addProductToCart, categories }) => {
         <ProductCard
           categories={categories}
           products={products}
+          setProducts={setProducts}
           onDelete={onProductDelete(product.id)}
           key={product.id}
           product={product}
