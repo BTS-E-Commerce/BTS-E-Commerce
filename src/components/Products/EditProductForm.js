@@ -13,13 +13,11 @@ const EditProductFrom = ({ product, products, setProducts, categories, createPro
 
     async function handleSubmit(event) {
         event.preventDefault();
-        console.log("I PRESS SUBMIT");
+
         const { updatedProduct } = await updateProduct(product.id, { name, description, imageUrl, inventory, price, sale, categories: [category] });
-        console.log(updatedProduct);
-        //use product id from clicked product to remove original product from products and replace with updated product.
         const removeIndex = products.findIndex(removeProduct => removeProduct.id === product.id)
         products.splice(removeIndex, 1, updatedProduct);
-        console.log(products);
+
         setProducts([...products]);
     }
 

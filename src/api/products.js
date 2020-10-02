@@ -21,12 +21,13 @@ export async function getAllProducts() {
     }
 }
 
-export async function createProduct(product, categories) {
+export async function createProduct({ product, categories }) {
     try {
         const { data } = await axios.post(`${BASE_URL}/products`, {
             product,
             categories
         });
+
         return data;
     } catch (error) {
         throw error;

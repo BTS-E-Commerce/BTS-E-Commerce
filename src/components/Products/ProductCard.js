@@ -13,6 +13,7 @@ const ProductCard = ({ categories, products, setProducts, product, onDelete, onA
       <h1>{product.name}</h1>
       <p>DATE CREATED: {moment(product.date).format('dddd, MMMM Do YYYY')}</p>
       <p>DESCRIPTION: {product.description}</p>
+      <p>CATEGORY: {product.categories[0].name}</p>
       <h3>PRICE: ${product.currentPrice / 100}</h3>
       <button onClick={onAddToOrder}>Add To Cart</button>
       <button onClick={onDelete}>DELETE</button>

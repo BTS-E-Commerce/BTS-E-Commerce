@@ -26,18 +26,17 @@ const Content = ({ products, setProducts, addProductToCart, categories }) => {
     };
 
   const onProductCreate = async function (newProduct) {
-    let { price } = newProduct;
-    newProduct.price = price * 100;
+    console.log(newProduct);
+    let { price } = newProduct.product;
+    newProduct.product.price = price * 100;
 
-    const { product } = await createProduct(newProduct, [
-      { id: 1, name: 'baked' },
-    ]);
+    const { product } = await createProduct(newProduct);
     setProducts([...products, product]);
   };
 
   return (
     <div id='content'>
-      <NewProductForm products={products} categories={categories} createProduct={onProductCreate} />
+      <NewProductForm products={products} setProducts={setProducts} categories={categories} createProduct={onProductCreate} />
       <Searchbar products={products} setProducts={setProducts} />
       {products.map((product) => (
         <ProductCard
