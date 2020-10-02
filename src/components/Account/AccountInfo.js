@@ -12,19 +12,9 @@ const AccountInfo = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingO
         setCurrentUser({ id: 1, username: 'guest', admin: false })
     }
 
-    const testChangeUserToBrody = () => {
+    const testChangeUserToAdmin = () => {
         localStorage.clear();
-        setCurrentUser({ id: 4, username: 'brody', admin: true })
-    }
-
-    const testChangeUserToSam = () => {
-        localStorage.clear();
-        setCurrentUser({ id: 5, username: 'sam', admin: true })
-    }
-
-    const testChangeUserToTyler = () => {
-        localStorage.clear();
-        setCurrentUser({ id: 6, username: 'tyler', admin: true })
+        setCurrentUser({ id: 2, username: 'admin', admin: true })
     }
 
     return (
@@ -32,9 +22,7 @@ const AccountInfo = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingO
             <h1>AccountInfo</h1>
             <h2>Current user is: {currentUser.username}</h2>
             <button onClick={testChangeUserToGuest}>Change user to guest</button>
-            <button onClick={testChangeUserToBrody}>Change user to brody</button>
-            <button onClick={testChangeUserToSam}>Change user to sam</button>
-            <button onClick={testChangeUserToTyler}>Change user to tyler</button>
+            <button onClick={testChangeUserToAdmin}>Change user to admin</button>
             {currentUser.admin === false
                 ? ''
                 : <p>You are an admin.</p>
@@ -44,9 +32,14 @@ const AccountInfo = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingO
                 : <Admin
                     categories={categories}
                     setCategories={setCategories}
+                    setCurrentUser={setCurrentUser}
+                    setOngoingOrder={setOngoingOrder}
                 />
             }
-            <OrderHistory usersOrders={usersOrders} />
+            {currentUser.username !== 'guest'
+                ? <OrderHistory usersOrders={usersOrders} />
+                : 'Register or Sign in to see your order history.'}
+
         </div>
 
     )

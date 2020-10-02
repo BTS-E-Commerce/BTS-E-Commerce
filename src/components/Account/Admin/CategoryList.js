@@ -21,7 +21,7 @@ const CategoryList = ({ categories, setCategories }) => {
       <button>Add New Category</button>
       <ul>
         {categories.map((category) => (
-          <li>
+          <li key={category.id}>
             {(category.name[0]).toUpperCase()}
             {(category.name).slice(1)}
             <button>Edit Category</button>

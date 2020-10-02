@@ -3,7 +3,10 @@
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState, useEffect } from 'react';
 
-const UsersList = () => {
+import { getAllUsers } from '../../../api/index'
+import { UserCard } from './index';
+
+const UsersList = ({ setCurrentUser, setOngoingOrder }) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -12,18 +15,45 @@ const UsersList = () => {
     //~~~~~ EFFECTS ~~~~~
     //~~~~~~~~~~~~~~~~~~~
     useEffect(() => {
-
+        getAllUsers()
+            .then((response) => {
+                setUsers(response.users);
+                console.log(users);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }, []);
 
     //~~~~~~~~~~~~~~~~~~~
     //~~~~ FUNCTIONS ~~~~
     //~~~~~~~~~~~~~~~~~~~
+    const onChangeUser = (user) => () => {
+        localStorage.setItem('cart', null);
+        setOngoingOrder({})
+        setCurrentUser(user)
+    }
+
+    const onDeleteUser = (id) => () => {
+
+    }
 
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
     return (
-        <h2>Users List</h2>
+        <div>
+            <h2>Users List</h2>
+            {users.map((user) => (
+                <UserCard
+                    key={user.id}
+                    user={user}
+                    users={users}
+                    setUsers={setUsers}
+                    changeUser={onChangeUser(user)} />
+            ))}
+        </div>
+
     )
 }
 //~~~~~~~~~~~~~~~~~~~

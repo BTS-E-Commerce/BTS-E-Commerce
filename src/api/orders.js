@@ -23,7 +23,6 @@ export async function getAllOrders() {
 
 export async function createOrder(userId, productId) {
   try {
-    console.log(userId);
     const { data: { order } } = await axios.post(`${BASE_URL}/orders/`, {
       userId,
       products: [

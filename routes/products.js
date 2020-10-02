@@ -57,11 +57,18 @@ productsRouter.patch('/:productId', async (req, res, next) => {
     const { productId } = req.params;
     const { fields } = req.body;
 
-    fields.currentPrice = fields.price;
-    fields.image = fields.imageUrl;
+
+    if (fields.price) {
+        fields.currentPrice = fields.price;
+    }
+
+    if (fields.price) {
+        fields.image = fields.imageUrl;
+    }
 
     delete fields.price;
     delete fields.imageUrl;
+
 
     try {
         const updatedProduct = await client.updateProduct(productId, fields);
