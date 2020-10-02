@@ -98,19 +98,23 @@ const EditProductFrom = ({ product, products, setProducts, categories, createPro
                     value={sale}
                     onChange={handleSaleChange}
                 />
-                <label htmlFor='categories'>Choose a Category:</label>
-                <select className='edit-categories' name='categories' value={category === undefined ? '' : category.name} onChange={handleCategoryChange}>
-                    {categories.map(category => (
-                        <option
-                            key={category.id}
-                            data-id={category.id}
-                            value={category.name} >
-                            {(category.name[0]).toUpperCase()}
-                            {(category.name).slice(1)}
-                        </option>
-                    ))}
+                {categories === undefined ? '' :
+                    <div className='categoriesContainerForm'>
+                        <label htmlFor='categories'>Choose a Category:</label>
+                        <select className='edit-categories' name='categories' value={category === undefined ? '' : category.name} onChange={handleCategoryChange}>
+                            {categories.map(category => (
+                                <option
+                                    key={category.id}
+                                    data-id={category.id}
+                                    value={category.name} >
+                                    {(category.name[0]).toUpperCase()}
+                                    {(category.name).slice(1)}
+                                </option>
+                            ))}
 
-                </select>
+                        </select>
+                    </div>
+                }
                 <input type='submit' value='Submit'></input>
             </form>
         </div>
