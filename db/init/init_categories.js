@@ -20,6 +20,7 @@ const { client } = require('../client');
 async function initializeCategories() {
   try {
     const categories = await createCategories([
+      'none',
       'baked',
       'oven',
       'crunchy',
@@ -60,14 +61,15 @@ async function testCategoryFunctions() {
     console.log('Remaining Routines: ', await getAllCategories());
 
     //# Verified this works, commenting out to de-clutter
-    console.log('Testing updateCategory...');
-    const oldCategory = await getCategoryById(allCategories[0].id);
-    const newCategory = await updateCategory(allCategories[0].id, {
-      name: 'fried',
-    });
-    console.log('old: ', oldCategory);
-    console.log('new: ', newCategory);
-    console.log('Sucessfully ran updateCategory...');
+    //Commented out because need none to stay active.
+    // console.log('Testing updateCategory...');
+    // const oldCategory = await getCategoryById(allCategories[0].id);
+    // const newCategory = await updateCategory(allCategories[0].id, {
+    //   name: 'fried',
+    // });
+    // console.log('old: ', oldCategory);
+    // console.log('new: ', newCategory);
+    // console.log('Sucessfully ran updateCategory...');
   } catch (error) {
     console.log(error);
   }

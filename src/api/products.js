@@ -35,6 +35,7 @@ export async function createProduct(product, categories) {
 
 export async function updateProduct(productId, fields) {
     try {
+
         const { data } = await axios.patch(`${BASE_URL}/products/${productId}`, {
             fields
         });

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const NewProductForm = ({ createProduct }) => {
+const NewProductForm = ({ products, categories, createProduct }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
