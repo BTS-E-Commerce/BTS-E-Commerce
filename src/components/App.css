@@ -1,0 +1,30 @@
+div#root {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url('https://previews.123rf.com/images/sudowoodo/sudowoodo1805/sudowoodo180500035/102441690-italian-pasta-seamless-pattern-on-white-background-cute-hand-drawn-macaroni-doodles-vector-illustrat.jpg');
+  background-size: 20em;
+}
+
+.App {
+  background-color: white;
+  border: 7px double #a77327;
+  width: 1450px;
+  height: 937px;
+  box-shadow: 0px 0px 14px #9e6805;
+}
+
+div#content {
+  display: flex;
+  width: 1437px;
+  height: 760px;
+  overflow-y: hidden;
+}

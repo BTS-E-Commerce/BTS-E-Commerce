@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Just+Another+Hand&family=Lobster+Two:ital@1&display=swap');
+
+div#newProductForm {
+  display: flex;
+  flex-direction: column;
+  height: 760px;
+  width: 300px;
+  border-right: 7px double #a77327;
+  box-shadow: 2px 0px 10px #9e68059e;
+}
+
+#newProductForm h1 {
+  font-family: 'Lobster Two', cursive;
+  color: #6c4403;
+  text-shadow: 1px 1px 1px #ff7600;
+  text-align: center;
+  border-bottom: 7px double #a77327;
+  padding: 10px;
+}
+
+form {
+  height: 693px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.newProductForm label {
+  font-family: 'Lobster Two', cursive;
+  font-weight: bolder;
+  font-size: 20px;
+  color: #c77e00;
+  text-shadow: 0px 0px 0px #6c4403;
+  letter-spacing: 1px;
+}
+
+#salesForm {
+  height: 13px;
+}
+
+.newProductForm input {
+  border: 2px solid #a0520f;
+  height: 30px;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 24px;
+  box-shadow: 0px 0px 7px #a77327;
+  font-family: 'Just Another Hand', cursive;
+  cursor: text;
+}
+
+textarea.descriptionForm {
+  border: 2px solid #a0520f;
+  height: 55px;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 24px;
+  box-shadow: 0px 0px 7px #a77327;
+  font-family: 'Just Another Hand', cursive;
+  min-height: 55px;
+  max-height: 260px;
+  max-width: 250px;
+  min-width: 250px;
+  cursor: text;
+}
+
+input,
+textarea,
+button {
+  outline: none;
+}

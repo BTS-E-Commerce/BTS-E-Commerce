@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import './NewProductForm.css';
+
 const NewProductForm = ({ createProduct }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -36,63 +38,67 @@ const NewProductForm = ({ createProduct }) => {
 
   //Categories should come from DB, not be hard coded in like this example.
   return (
-    <div>
-      <h1>Create New Product Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='name'>Name:</label>
+    <div id='newProductForm'>
+      <h1>Create New Product</h1>
+      <form className='newProductForm' onSubmit={handleSubmit}>
+        <label htmlFor='nameForm'>Name:</label>
         <input
-          id='name'
+          className='nameForm'
           type='text'
           name='name'
           value={name}
           onChange={handleNameChange}
         />
-        <label htmlFor='description'>Description:</label>
-        <input
-          id='description'
+        <label htmlFor='descriptionForm'>Description:</label>
+        <textarea
+          className='descriptionForm'
           type='text'
           name='description'
           value={description}
           onChange={handleDescriptionChange}
-        />
-        <label htmlFor='image-url'>Image URL:</label>
+        ></textarea>
+        <label htmlFor='image-urlForm'>Image URL:</label>
         <input
-          id='image-url'
+          className='image-urlForm'
           type='text'
           name='image-url'
           value={imageUrl}
           onChange={handleImageUrlChange}
         />
-        <label htmlFor='inventory'>Inventory:</label>
+        <label htmlFor='inventoryForm'>Inventory:</label>
         <input
-          id='inventory'
+          className='inventoryForm'
           type='number'
           name='inventory'
           value={inventory}
           onChange={handleInventoryChange}
         />
-        <label htmlFor='price'>Price:</label>
+        <label htmlFor='priceForm'>Price:</label>
         <input
-          id='price'
+          className='priceForm'
           type='number'
           name='price'
           value={price}
           onChange={handlePriceChange}
         />
-        <label>On Sale:</label>
-        <input
-          id='sale'
-          type='checkbox'
-          name='Sale'
-          value={sale}
-          onChange={handleSaleChange}
-        />
-        <label htmlFor='categories'>Choose a Category:</label>
-        <select id='categories' name='categories'>
-          <option value='oven'>Oven</option>
-          <option value='baked'>Baked</option>
-          <option value='oven'>Cheesy</option>
-        </select>
+        <div className='salesContainer'>
+          <label htmlFor='salesForm'>On Sale:</label>
+          <input
+            className='salesForm'
+            type='checkbox'
+            name='Sale'
+            value={sale}
+            onChange={handleSaleChange}
+          />
+        </div>
+        <div className='categoriesContainer'>
+          <label htmlFor='categoriesForm'>Choose a Category:</label>
+          <select className='categoriesForm' name='categories'>
+            <option value='oven'>Oven</option>
+            <option value='baked'>Baked</option>
+            <option value='oven'>Cheesy</option>
+          </select>
+        </div>
         <input type='submit' value='Submit'></input>
       </form>
     </div>
