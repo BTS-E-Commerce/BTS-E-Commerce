@@ -4,7 +4,7 @@ import { ProductCard, NewProductForm, Searchbar } from './Products/index';
 import { CategoryList } from './Account/Admin/index';
 import { deleteProduct, createProduct } from '../api/index';
 
-// import './App.css';
+import './App.css';
 
 const Content = ({ products, setProducts, addProductToCart, categories }) => {
   // const [products, setProducts] = useState([]);
@@ -36,9 +36,32 @@ const Content = ({ products, setProducts, addProductToCart, categories }) => {
 
   return (
     <div id='content'>
-      <NewProductForm products={products} setProducts={setProducts} categories={categories} createProduct={onProductCreate} />
-      <Searchbar products={products} setProducts={setProducts} />
-      {products.map((product) => (
+
+      <div id='newProductForm'>
+        <NewProductForm createProduct={onProductCreate} />
+      </div>
+      <div className='feature'>
+        <Searchbar products={products} setProducts={setProducts} />
+        {products.map((product) => (
+          <ProductCard
+            onDelete={onProductDelete(product.id)}
+            key={product.id}
+            product={product}
+            onAddToOrder={addProductToCart(
+              product.id,
+              product.currentPrice,
+              product.inventory
+            )}
+          />
+        ))}
+      </div>
+=======
+      <div id='newProductForm'>
+        <NewProductForm products={products} setProducts={setProducts} categories={categories} createProduct={onProductCreate} />
+      </div>
+      <div className='feature'>
+        <Searchbar products={products} setProducts={setProducts} />
+{products.map((product) => (
         <ProductCard
           categories={categories}
           products={products}
@@ -53,7 +76,7 @@ const Content = ({ products, setProducts, addProductToCart, categories }) => {
           )}
         />
       ))}
-      <CategoryList />
+      </div>
     </div>
   );
 };

@@ -21,6 +21,8 @@ import { Account } from './Account/index';
 import { Register, Login } from './Authenitcation/index';
 import { Cart } from './Cart/index';
 
+import './App.css';
+
 const App = () => {
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ STATE ~~~~~~
