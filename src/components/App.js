@@ -198,6 +198,8 @@ const App = () => {
           <Route path='/account'>
             <h2>Welcome to your account, {currentUser.username}</h2>
             <Account
+              categories={categories}
+              setCategories={setCategories}
               usersOrders={usersOrders}
               setUsersOrders={setUsersOrders}
               ongoingOrder={ongoingOrder}

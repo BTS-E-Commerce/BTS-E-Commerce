@@ -44,11 +44,17 @@ async function getUserById(id) {
 
     //get orders for user
     const orders = await getAllOrdersByUserId({ id });
-    user.orders = orders;
+    if (orders.length != 0) {
+      user.orders = orders;
+    }
+
+
 
     //get reviews for user
     const reviews = await getAllReviewsByUserId({ id });
-    user.reviews = reviews;
+    if (reviews.length != 0) {
+      user.reviews = reviews;
+    }
 
     return user;
   } catch (error) {
@@ -84,17 +90,17 @@ async function getUserByUsername({ username }) {
 
 //-- Create Functions --
 //* Creates a new user. Used in the registering process.
-async function createUser({ username, password }) {
+async function createUser({ username, password, admin = false }) {
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-            INSERT INTO users(username, password)
-            VALUES ($1, $2)
+            INSERT INTO users(username, password, admin)
+            VALUES ($1, $2, $3)
             RETURNING *;
         `,
-      [username, password]
+      [username, password, admin]
     );
 
     const userObj = await getUserById(user.id);
@@ -107,10 +113,83 @@ async function createUser({ username, password }) {
 
 //-- Update Functions --
 //* Updates a users informaiton.
+async function updateUser(userId, fields = {}) {
+  console.log(fields);
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(', ');
 
+  if (setString.length === 0) {
+    return;
+  }
+  try {
+    await client.query(`
+    UPDATE users
+    SET ${setString}
+    WHERE id=${userId}
+    RETURNING *;
+  `, Object.values(fields));
+
+    const updatedUser = getUserById(userId);
+
+    return updatedUser;
+  } catch (error) {
+    throw error;
+  }
+}
 //-- Delete Functions --
 //* Delete a user.
+async function deleteUser(userId) {
+  try {
+    const {
+      rows: orders,
+    } = await client.query(
+      `
+            DELETE
+            FROM orders
+            WHERE "userId"=$1
+            RETURNING *;
+        `,
+      [userId]
+    );
 
+    const {
+      rows: reviews,
+    } = await client.query(
+      `
+            DELETE
+            FROM reviews
+            WHERE "userId"=$1
+            RETURNING *;
+        `,
+      [userId]
+    );
+
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+            DELETE
+            FROM users
+            WHERE id=$1
+            RETURNING *;
+        `,
+      [userId]
+    );
+
+    if (orders.length != 0) {
+      user.orders = orders;
+    }
+    if (reviews.length != 0) {
+      user.reviews = reviews;
+    }
+
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
@@ -119,4 +198,6 @@ module.exports = {
   createUser,
   getUserByUsername,
   getUserById,
+  updateUser,
+  deleteUser
 };
