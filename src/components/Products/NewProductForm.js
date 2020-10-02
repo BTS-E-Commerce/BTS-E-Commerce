@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './NewProductForm.css';
+import './Products.css';
 
 const NewProductForm = ({ products, setProducts, categories, createProduct }) => {
   const [name, setName] = useState('');
@@ -11,6 +11,8 @@ const NewProductForm = ({ products, setProducts, categories, createProduct }) =>
   const [sale, setSale] = useState(false);
   const [category, setCategory] = useState({ id: 1, name: 'none' });
   // const [categories, setCategories] = useState([]);
+
+  console.log(categories);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -98,21 +100,23 @@ const NewProductForm = ({ products, setProducts, categories, createProduct }) =>
             onChange={handleSaleChange}
           />
         </div>
-        <div className='categoriesContainer'>
-          <label htmlFor='categoriesForm'>Choose a Category:</label>
-          <select className='categoriesForm' name='categories' value={category === undefined ? '' : category.name} onChange={handleCategoryChange}>
-          {categories.map(category => (
-            <option
-              key={category.id}
-              data-id={category.id}
-              value={category.name} >
-              {(category.name[0]).toUpperCase()}
-              {(category.name).slice(1)}
-            </option>
-          ))}
+        {categories === undefined ? '' :
+          <div className='categoriesContainer'>
+            <label htmlFor='categoriesForm'>Choose a Category:</label>
+            <select className='categoriesForm' name='categories' value={category === undefined ? '' : category.name} onChange={handleCategoryChange}>
+              {categories.map(category => (
+                <option
+                  key={category.id}
+                  data-id={category.id}
+                  value={category.name} >
+                  {(category.name[0]).toUpperCase()}
+                  {(category.name).slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+        }
 
-        </select>
-        </div>
 
         <input type='submit' value='Submit'></input>
       </form>

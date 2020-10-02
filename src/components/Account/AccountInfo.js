@@ -7,22 +7,22 @@ const AccountInfo = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingO
     const testChangeUserToGuest = () => {
         localStorage.clear();
         setOngoingOrder({})
-        setCurrentUser({ id: 1, username: 'guest' })
+        setCurrentUser({ id: 1, username: 'guest', admin: false })
     }
 
     const testChangeUserToBrody = () => {
         localStorage.clear();
-        setCurrentUser({ id: 2, username: 'brody' })
+        setCurrentUser({ id: 2, username: 'brody', admin: true })
     }
 
     const testChangeUserToSam = () => {
         localStorage.clear();
-        setCurrentUser({ id: 3, username: 'sam' })
+        setCurrentUser({ id: 3, username: 'sam', admin: true })
     }
 
     const testChangeUserToTyler = () => {
         localStorage.clear();
-        setCurrentUser({ id: 4, username: 'tyler' })
+        setCurrentUser({ id: 4, username: 'tyler', admin: true })
     }
 
     return (

@@ -1,12 +1,13 @@
 import React from 'react';
-import { ProductCard, NewProductForm, Searchbar } from './Products/index';
+import { ProductCard, NewProductForm, Searchbar } from './index';
 
-import { CategoryList } from './Account/Admin/index';
-import { deleteProduct, createProduct } from '../api/index';
+import { CategoryList } from '../Account/Admin/index';
+import { deleteProduct, createProduct } from '../../api/index';
 
-import './App.css';
+import '../App.css';
+import './Products.css';
 
-const Content = ({ products, setProducts, addProductToCart, categories }) => {
+const Content = ({ products, setProducts, addProductToCart, categories, currentUser }) => {
   // const [products, setProducts] = useState([]);
 
   // useEffect(() => {
@@ -36,14 +37,20 @@ const Content = ({ products, setProducts, addProductToCart, categories }) => {
 
   return (
     <div id='content'>
+      {currentUser.admin === false
+        ? ''
+        : <div id='newProductForm'>
+          <NewProductForm products={products} setProducts={setProducts} categories={categories} createProduct={onProductCreate} />
+        </div>
+      }
 
-      <div id='newProductForm'>
-        <NewProductForm createProduct={onProductCreate} />
-      </div>
       <div className='feature'>
         <Searchbar products={products} setProducts={setProducts} />
         {products.map((product) => (
           <ProductCard
+            categories={categories}
+            products={products}
+            setProducts={setProducts}
             onDelete={onProductDelete(product.id)}
             key={product.id}
             product={product}
@@ -52,30 +59,9 @@ const Content = ({ products, setProducts, addProductToCart, categories }) => {
               product.currentPrice,
               product.inventory
             )}
+            currentUser={currentUser}
           />
         ))}
-      </div>
-=======
-      <div id='newProductForm'>
-        <NewProductForm products={products} setProducts={setProducts} categories={categories} createProduct={onProductCreate} />
-      </div>
-      <div className='feature'>
-        <Searchbar products={products} setProducts={setProducts} />
-{products.map((product) => (
-        <ProductCard
-          categories={categories}
-          products={products}
-          setProducts={setProducts}
-          onDelete={onProductDelete(product.id)}
-          key={product.id}
-          product={product}
-          onAddToOrder={addProductToCart(
-            product.id,
-            product.currentPrice,
-            product.inventory
-          )}
-        />
-      ))}
       </div>
     </div>
   );

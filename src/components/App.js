@@ -2,7 +2,7 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState, useEffect } from 'react';
-import { Content, Header } from './index';
+import { Header } from './index';
 import {
   getAllCategories,
   getAllProducts,
@@ -17,9 +17,11 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
+import { Content } from './Products/index';
 import { Account } from './Account/index';
 import { Register, Login } from './Authenitcation/index';
 import { Cart } from './Cart/index';
+
 
 import './App.css';
 
@@ -31,7 +33,7 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState({ id: 1, username: 'guest' });
+  const [currentUser, setCurrentUser] = useState({ id: 1, username: 'guest', admin: false });
   const [ongoingOrder, setOngoingOrder] = useState({});
   const [usersOrders, setUsersOrders] = useState([]);
 
@@ -50,6 +52,7 @@ const App = () => {
     getAllCategories()
       .then((response) => {
         setCategories(response.categories);
+        console.log(categories);
       })
       .catch((error) => {
         console.log(error);
@@ -159,6 +162,8 @@ const App = () => {
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       } else {
+        //Check if product alreayd exists in cart.
+        //If yes, dont add and send user message.
         const order = await addProductToOrder(ongoingOrder.id, id, price);
 
         //Compare function isn't nessecary here since comparing integer ids.
@@ -229,6 +234,7 @@ const App = () => {
             setProducts={setProducts}
             addProductToCart={addProductToCart}
             categories={categories}
+            currentUser={currentUser}
           />
         </Switch>
       </div>

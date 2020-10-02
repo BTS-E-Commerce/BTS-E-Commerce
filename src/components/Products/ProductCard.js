@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import { EditProductForm } from './index'
 
-const ProductCard = ({ categories, products, setProducts, product, onDelete, onAddToOrder }) => {
+const ProductCard = ({ categories, products, setProducts, product, onDelete, onAddToOrder, currentUser }) => {
   return (
     <div key={product.id}>
       <img src={product.image} alt='A pic of macaroni.' />
@@ -16,8 +16,20 @@ const ProductCard = ({ categories, products, setProducts, product, onDelete, onA
       <p>CATEGORY: {product.categories[0].name}</p>
       <h3>PRICE: ${product.currentPrice / 100}</h3>
       <button onClick={onAddToOrder}>Add To Cart</button>
-      <button onClick={onDelete}>DELETE</button>
-      <EditProductForm product={product} products={products} setProducts={setProducts} categories={categories} />
+      {currentUser.admin === false
+        ? ''
+        : <button onClick={onDelete}>DELETE</button>
+      }
+
+      {currentUser.admin === false ? '' :
+        <EditProductForm
+          product={product}
+          products={products}
+          setProducts={setProducts}
+          categories={categories}
+        />
+      }
+
     </div>
   );
 };
