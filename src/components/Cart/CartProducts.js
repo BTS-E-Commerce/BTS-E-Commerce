@@ -5,7 +5,7 @@ import React from 'react';
 
 import { updateOrderProduct, updateProduct } from '../../api/index';
 
-const CartProducts = ({ products, setProducts, product, ongoingOrder, setOngoingOrder, compareProductIds, updateProductInventory }) => {
+const CartProducts = ({ products, setProducts, product, ongoingOrder, setOngoingOrder, compareProductIds, onDeleteProductFromCart }) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~ FUNCTIONS ~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -44,7 +44,7 @@ const CartProducts = ({ products, setProducts, product, ongoingOrder, setOngoing
                 value={product.quantity}
                 onChange={handleOnQuantityChange}
             />
-            <button>DELETE PRODUCT</button>
+            <button onClick={onDeleteProductFromCart}>DELETE PRODUCT</button>
         </div>
 
     )
