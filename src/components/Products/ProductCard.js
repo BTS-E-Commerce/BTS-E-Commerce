@@ -1,8 +1,9 @@
 import React from 'react';
 import moment from 'moment';
 
-const ProductCard = ({ product, onDelete, onAddToOrder }) => {
-  //Use moment.js library for easy date convert.
+import { EditProductForm } from './index'
+
+const ProductCard = ({ categories, products, setProducts, product, onDelete, onAddToOrder }) => {
   return (
     <div key={product.id}>
       <img src={product.image} alt='A pic of macaroni.' />
@@ -15,6 +16,7 @@ const ProductCard = ({ product, onDelete, onAddToOrder }) => {
       <h3>PRICE: ${product.currentPrice / 100}</h3>
       <button onClick={onAddToOrder}>Add To Cart</button>
       <button onClick={onDelete}>DELETE</button>
+      <EditProductForm product={product} products={products} setProducts={setProducts} categories={categories} />
     </div>
   );
 };

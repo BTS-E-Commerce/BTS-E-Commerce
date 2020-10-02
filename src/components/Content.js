@@ -6,7 +6,7 @@ import { deleteProduct, createProduct } from '../api/index';
 
 // import './App.css';
 
-const Content = ({ products, setProducts, addProductToCart }) => {
+const Content = ({ products, setProducts, addProductToCart, categories }) => {
   // const [products, setProducts] = useState([]);
 
   // useEffect(() => {
@@ -37,10 +37,13 @@ const Content = ({ products, setProducts, addProductToCart }) => {
 
   return (
     <div id='content'>
-      <NewProductForm createProduct={onProductCreate} />
+      <NewProductForm products={products} categories={categories} createProduct={onProductCreate} />
       <Searchbar products={products} setProducts={setProducts} />
       {products.map((product) => (
         <ProductCard
+          categories={categories}
+          products={products}
+          setProducts={setProducts}
           onDelete={onProductDelete(product.id)}
           key={product.id}
           product={product}
