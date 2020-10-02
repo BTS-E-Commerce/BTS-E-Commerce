@@ -6,7 +6,7 @@ div#newProductForm {
   height: 760px;
   width: 300px;
   border-right: 7px double #a77327;
-  box-shadow: 2px 0px 10px #9e68059e;
+  box-shadow: 0px 0px 6px #9e68059e;
 }
 
 #newProductForm h1 {
@@ -70,4 +70,8 @@ input,
 textarea,
 button {
   outline: none;
+}
+
+#salesForm {
+  height: 13px;
 }

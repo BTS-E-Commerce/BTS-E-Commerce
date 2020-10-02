@@ -84,7 +84,7 @@ const NewProductForm = ({ createProduct }) => {
         <div className='salesContainer'>
           <label htmlFor='salesForm'>On Sale:</label>
           <input
-            className='salesForm'
+            id='salesForm'
             type='checkbox'
             name='Sale'
             value={sale}
