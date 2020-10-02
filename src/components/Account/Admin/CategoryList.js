@@ -1,31 +1,41 @@
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ IMPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~
 import React, { useEffect, useState } from 'react';
 
-import { getAllCategories } from '../../../api/index';
+const CategoryList = ({ categories, setCategories }) => {
+  //~~~~~~~~~~~~~~~~~~~
+  //~~~~~ EFFECTS ~~~~~
+  //~~~~~~~~~~~~~~~~~~~
 
-const CategoryList = () => {
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    getAllCategories()
-      .then((response) => {
-        setCategories(response.categories);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  //~~~~~~~~~~~~~~~~~~~
+  //~~~~ FUNCTIONS ~~~~
+  //~~~~~~~~~~~~~~~~~~~
 
+  //~~~~~~~~~~~~~~~~~~~
+  //~~~~~~ JSX ~~~~~~~~
+  //~~~~~~~~~~~~~~~~~~~
   return (
     <div>
       <h1>Categories</h1>
+      <button>Add New Category</button>
       <ul>
-        <select>
-          {categories.map((category) => (
-            <option key={category.id}>{category.name}</option>
-          ))}
-        </select>
+        {categories.map((category) => (
+          <li>
+            {(category.name[0]).toUpperCase()}
+            {(category.name).slice(1)}
+            <button>Edit Category</button>
+            <button>Delete Category</button>
+          </li>
+        ))}
       </ul>
     </div>
   );
 };
 
 export default CategoryList;
+
+
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ EXPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~

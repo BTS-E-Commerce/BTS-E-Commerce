@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import { OrderHistory } from './OrderHistory/index'
 
-const AccountInfo = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser }) => {
+import { Admin } from './Admin/index'
+
+const AccountInfo = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser, categories, setCategories }) => {
 
     const testChangeUserToGuest = () => {
         localStorage.clear();
@@ -12,17 +14,17 @@ const AccountInfo = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingO
 
     const testChangeUserToBrody = () => {
         localStorage.clear();
-        setCurrentUser({ id: 2, username: 'brody', admin: true })
+        setCurrentUser({ id: 4, username: 'brody', admin: true })
     }
 
     const testChangeUserToSam = () => {
         localStorage.clear();
-        setCurrentUser({ id: 3, username: 'sam', admin: true })
+        setCurrentUser({ id: 5, username: 'sam', admin: true })
     }
 
     const testChangeUserToTyler = () => {
         localStorage.clear();
-        setCurrentUser({ id: 4, username: 'tyler', admin: true })
+        setCurrentUser({ id: 6, username: 'tyler', admin: true })
     }
 
     return (
@@ -33,6 +35,17 @@ const AccountInfo = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingO
             <button onClick={testChangeUserToBrody}>Change user to brody</button>
             <button onClick={testChangeUserToSam}>Change user to sam</button>
             <button onClick={testChangeUserToTyler}>Change user to tyler</button>
+            {currentUser.admin === false
+                ? ''
+                : <p>You are an admin.</p>
+            }
+            {currentUser.admin === false
+                ? ''
+                : <Admin
+                    categories={categories}
+                    setCategories={setCategories}
+                />
+            }
             <OrderHistory usersOrders={usersOrders} />
         </div>
 
