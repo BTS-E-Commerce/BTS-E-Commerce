@@ -31,8 +31,6 @@ async function initializeProducts() {
       },
       [
         { id: 2, name: 'oven' },
-        { id: 1, name: 'baked' },
-        { id: 4, name: 'cheesy' },
       ]
     );
 
@@ -51,8 +49,6 @@ async function initializeProducts() {
       },
       [
         { id: 7, name: 'special' },
-        { id: 5, name: 'cheddar' },
-        { id: 2, name: 'oven' },
       ]
     );
 
@@ -69,9 +65,7 @@ async function initializeProducts() {
         date: '09/10/2020',
       },
       [
-        { id: 8, name: 'cheese' },
-        { id: 6, name: 'vegan' },
-        { id: 5, name: 'cheddar' },
+        { id: 7, name: 'special' },
       ]
     );
 
@@ -89,9 +83,7 @@ async function initializeProducts() {
         date: '09/27/2020',
       },
       [
-        { id: 8, name: 'cheese' },
         { id: 6, name: 'crunchy' },
-        { id: 5, name: 'special' },
       ]
     );
 
@@ -108,9 +100,7 @@ async function initializeProducts() {
         date: '09/30/2020',
       },
       [
-        { id: 8, name: 'cheese' },
-        { id: 6, name: 'oven' },
-        { id: 5, name: 'special' },
+        { id: 7, name: 'special' },
       ]
     );
     console.log('Finished making products...');
@@ -143,20 +133,20 @@ async function testProductFunctions() {
     const productsBySale = await getProductsBySale();
     console.log('Successfully tested getProductsBySale:', productsBySale);
 
-    console.log('Testing updateProduct using product:', products[2].id);
-    const updatedProduct = await updateProduct(products[2].id, {
-      name: 'Mac Bites',
-      description: "Grammy's deep-fried Mac N Cheese balls",
-      image:
-        'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.myrecipes.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2F1463689679%2Ffried-mac-and-cheese-bites-420x420.jpg%3Fitok%3DMY0nk5At',
-      inventory: '15',
-      basePrice: '10',
-      currentPrice: '5',
-      sale: true,
-      date: '09/18/2020',
-      categories: ['bites', 'cheddar ', 'fried'],
-    });
-    console.log('Successfully tested updateProduct:', updatedProduct);
+    // console.log('Testing updateProduct using product:', products[2].id);
+    // const updatedProduct = await updateProduct(products[2].id, {
+    //   name: 'Mac Bites',
+    //   description: "Grammy's deep-fried Mac N Cheese balls",
+    //   image:
+    //     'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fcdn-image.myrecipes.com%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2F1463689679%2Ffried-mac-and-cheese-bites-420x420.jpg%3Fitok%3DMY0nk5At',
+    //   inventory: '15',
+    //   basePrice: '10',
+    //   currentPrice: '5',
+    //   sale: true,
+    //   date: '09/18/2020',
+    //   categories: ['bites'],
+    // });
+    // console.log('Successfully tested updateProduct:', updatedProduct);
 
     console.log('Testing deleteProduct using product:', products[0].name);
     const deletedProduct = await deleteProduct(products[0].id);

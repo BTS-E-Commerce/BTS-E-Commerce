@@ -150,7 +150,7 @@ async function updateProduct(productId, fields = {}) {
 
   try {
     if (setString.length > 0) {
-      await client.query(
+      const test = await client.query(
         `
         UPDATE products
         SET ${setString}
@@ -161,12 +161,12 @@ async function updateProduct(productId, fields = {}) {
       );
     }
 
+
     if (categories === undefined) {
       return await getProductById(productId);
     }
 
-    const categoryList = await createCategories(categories);
-    const categoryListIdString = categoryList
+    const categoryListIdString = categories
       .map((category) => `${category.id}`)
       .join(', ');
 
@@ -181,7 +181,7 @@ async function updateProduct(productId, fields = {}) {
     );
 
     // and create post_tags as necessary
-    await addCategoriesToProduct(productId, categoryList);
+    await addCategoriesToProduct(productId, categories);
 
     const finalProduct = await getProductById(productId);
     return finalProduct;

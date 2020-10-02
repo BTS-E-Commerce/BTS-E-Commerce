@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { Content, Header } from './index';
 import {
+  getAllCategories,
   getAllProducts,
   getAllOrders,
   createOrder,
@@ -26,6 +27,7 @@ const App = () => {
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ STATE ~~~~~~
   //~~~~~~~~~~~~~~~~~~~
+  const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
@@ -37,20 +39,22 @@ const App = () => {
   //~~~~~ EFFECTS ~~~~~
   //~~~~~~~~~~~~~~~~~~~
 
+
+
   useEffect(() => {
     //check if logged in token exsists
     //If yes, change current user to token one
   }, []);
 
   useEffect(() => {
-    // getUsersOrders()
-    setUsersOrders(getUsersOrderHistory());
+    getAllCategories()
+      .then((response) => {
+        setCategories(response.categories);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
-
-  useEffect(() => {
-    // getUsersOrders()
-    setUsersOrders(getUsersOrderHistory());
-  }, [orders, currentUser]);
 
   useEffect(() => {
     getAllProducts()
@@ -102,10 +106,22 @@ const App = () => {
     }
   }, [orders, currentUser]);
 
+  useEffect(() => {
+    // getUsersOrders()
+    setUsersOrders(getUsersOrderHistory());
+  }, []);
+
+  useEffect(() => {
+    // getUsersOrders()
+    setUsersOrders(getUsersOrderHistory());
+  }, [orders, currentUser]);
+
   //~~~~~~~~~~~~~~~~~~~
   //~~~~ FUNCTIONS ~~~~
   //~~~~~~~~~~~~~~~~~~~
 
+  //Compare function isn't nessecary here since comparing integer ids.
+  //If using alphabetical sort then don't need anon function either.
   const compareProductIds = (productA, productB) => {
     const idA = productA.id;
     const idB = productB.id;
@@ -143,18 +159,20 @@ const App = () => {
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       } else {
-        //Dont need to do becuase should alreayd be in local sotagre.
-        //Check if alreayd in order.
         const order = await addProductToOrder(ongoingOrder.id, id, price);
 
-        order.products = order.products.sort(compareProductIds);
+        //Compare function isn't nessecary here since comparing integer ids.
+        //If using alphabetical sort then don't need anon function either.
+        // order.products = order.products.sort(compareProductIds);
+        order.products = order.products.sort((productA, productB) => productA.id < productB.id);
 
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       }
-      await updateProductInventory(id, quantity, inventory);
+      // await updateProductInventory(id, quantity, inventory);
     };
 
+  //I think I don;t need anymore.
   const updateProductInventory = async function (id, quantity, inventory) {
     //Check if inventory is less than quantity;
     console.log(inventory);
@@ -203,7 +221,6 @@ const App = () => {
               ongoingOrder={ongoingOrder}
               setOngoingOrder={setOngoingOrder}
               compareProductIds={compareProductIds}
-              updateProductInventory={updateProductInventory}
             />
           </Route>
 
@@ -211,6 +228,7 @@ const App = () => {
             products={products}
             setProducts={setProducts}
             addProductToCart={addProductToCart}
+            categories={categories}
           />
         </Switch>
       </div>

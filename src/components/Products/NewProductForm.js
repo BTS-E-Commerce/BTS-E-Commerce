@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 
 import './NewProductForm.css';
 
-const NewProductForm = ({ createProduct }) => {
+const NewProductForm = ({ products, setProducts, categories, createProduct }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [inventory, setInventory] = useState(0);
   const [price, setPrice] = useState(0);
   const [sale, setSale] = useState(false);
+  const [category, setCategory] = useState({ id: 1, name: 'none' });
   // const [categories, setCategories] = useState([]);
 
   async function handleSubmit(event) {
     event.preventDefault();
-    createProduct({ name, description, imageUrl, inventory, price, sale });
+
+    createProduct({ product: { name, description, imageUrl, inventory, price, sale }, categories: [category] });
   }
 
   const handleNameChange = (event) => {
@@ -34,6 +36,10 @@ const NewProductForm = ({ createProduct }) => {
   };
   const handleSaleChange = (event) => {
     setSale(event.target.value);
+  };
+  const handleCategoryChange = (event) => {
+    const [chosenCategory] = categories.filter((productCategory) => productCategory.name == event.target.value);
+    setCategory(chosenCategory);
   };
 
   //Categories should come from DB, not be hard coded in like this example.
@@ -81,6 +87,7 @@ const NewProductForm = ({ createProduct }) => {
           value={price}
           onChange={handlePriceChange}
         />
+
         <div className='salesContainer'>
           <label htmlFor='salesForm'>On Sale:</label>
           <input
@@ -93,12 +100,20 @@ const NewProductForm = ({ createProduct }) => {
         </div>
         <div className='categoriesContainer'>
           <label htmlFor='categoriesForm'>Choose a Category:</label>
-          <select className='categoriesForm' name='categories'>
-            <option value='oven'>Oven</option>
-            <option value='baked'>Baked</option>
-            <option value='oven'>Cheesy</option>
-          </select>
+          <select className='categoriesForm' name='categories' value={category === undefined ? '' : category.name} onChange={handleCategoryChange}>
+          {categories.map(category => (
+            <option
+              key={category.id}
+              data-id={category.id}
+              value={category.name} >
+              {(category.name[0]).toUpperCase()}
+              {(category.name).slice(1)}
+            </option>
+          ))}
+
+        </select>
         </div>
+
         <input type='submit' value='Submit'></input>
       </form>
     </div>

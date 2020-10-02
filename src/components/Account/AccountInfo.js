@@ -3,27 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { OrderHistory } from './OrderHistory/index'
 
 const AccountInfo = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser }) => {
-    // const [usersOrders, setUsersOrders] = useState([])
-
-
-    // useEffect(() => {
-    //     // getUsersOrders()
-    //     setUsersOrders(getUsersOrderHistory())
-    // }, []);
-
-    // useEffect(() => {
-    //     // getUsersOrders()
-    //     setUsersOrders(getUsersOrderHistory())
-    // }, [orders, currentUser]);
-
-    // const getUsersOrderHistory = () => {
-    //     return orders.filter(order => (order.user.id === currentUser.id && order.isComplete === true))
-    // }
-
-    //This gets all users orders regardless if they are complete or not (includes cart order)
-    // const getUsersOrders = () => {
-    //     return orders.filter(order => order.user.id === currentUser.id)
-    // }
 
     const testChangeUserToGuest = () => {
         localStorage.clear();
