@@ -1,15 +1,23 @@
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ IMPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~
 import React, { useState, useEffect } from 'react';
 
 import { CartProducts } from './index';
 
-import { updateOrder, deleteOrder } from '../../api/index';
+import { updateOrder, deleteOrder, updateProduct } from '../../api/index';
 
 import { FindTotalPrice } from '../../utils/FindTotalPrice';
 
-const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder, compareProductIds, updateProductInventory }) => {
+const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder, compareProductIds }) => {
+    //~~~~~~~~~~~~~~~~~~~
+    //~~~~~~ STATE ~~~~~~
+    //~~~~~~~~~~~~~~~~~~~
     const [totalPrice, setTotalPrice] = useState(0);
-    //For some reason when refreshing on cart as guest or user, cart is not saved to localstorage and not rememebred.
 
+    //~~~~~~~~~~~~~~~~~~~
+    //~~~~~ EFFECTS ~~~~~
+    //~~~~~~~~~~~~~~~~~~~
     useEffect(() => {
         setTotalPrice(0);
         if (Object.keys(ongoingOrder).length !== 0) {
@@ -26,26 +34,38 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
         updateTotalPrice();
     }, [totalPrice]);
 
+    //~~~~~~~~~~~~~~~~~~~
+    //~~~~ FUNCTIONS ~~~~
+    //~~~~~~~~~~~~~~~~~~~
     async function onDeleteOrder() {
-        //change quantites from cart products to their respective products
-        //for every product inongoingorder,
-        //read product id, quantity, and inventory 
-        //Add quantity to inventory
-        //update inventory
         const deletedOrder = await deleteOrder(ongoingOrder.id);
         if (deletedOrder) {
             setOngoingOrder({});
-            localStorage.clear();
+            //Need to change to localstorage.remove when user token shit is added.
+            localStorage.setItem('cart', null);
             console.log("THIS IS WHAT WAS DELETED", deletedOrder);
             console.log("THIS IS ONGOING AFTER DELETED", ongoingOrder);
         } else {
-            console.log("Cannot delete order.")
+            console.log('Cannot delete order.')
         }
     }
 
     async function onCheckout() {
         alert('THANKS FOR CHECKING OUT!');
-        const completedOrder = await updateOrder(ongoingOrder.id, { isComplete: true });
+        ongoingOrder.products.forEach(product => {
+            const [{ inventory }] = products.filter((storeProduct) => product.id === storeProduct.id);
+            product.inventory = inventory;
+            if (inventory < product.quantity) {
+                alert("Sorry. This mac is out of order! Please contact support for further information.")
+                return;
+            }
+        });
+        const completedOrder = await updateOrder(ongoingOrder.id, { isComplete: true, totalPrice });
+        for (const product of ongoingOrder.products) {
+            product.inventory -= product.quantity;
+            console.log(product.inventory);
+            await updateProduct(product.id, { inventory: product.inventory });
+        }
         setOngoingOrder({});
         setUsersOrders([...usersOrders, completedOrder]);
         localStorage.clear();
@@ -53,7 +73,14 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
     }
 
     //Implement removing product from cart after addition.
+    const onDeleteProductFromCart = (id) => () => {
+
+    }
     //change/update inventory on product id in products when deleting product from the cart and ongoing order.
+
+    //~~~~~~~~~~~~~~~~~~~
+    //~~~~~~ JSX ~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~
     return (
         <div>
             <h1>Cart</h1>
@@ -68,7 +95,6 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
                             ongoingOrder={ongoingOrder}
                             setOngoingOrder={setOngoingOrder}
                             compareProductIds={compareProductIds}
-                            updateProductInventory={updateProductInventory}
                         />
                         <button onClick={onCheckout}>CHECKOUT</button>
                         <button onClick={onDeleteOrder}>DELETE ORDER</button>
@@ -80,4 +106,7 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
     )
 }
 
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ EXPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~
 export default Cart;

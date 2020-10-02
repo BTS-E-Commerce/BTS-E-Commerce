@@ -104,6 +104,8 @@ const App = () => {
   //~~~~ FUNCTIONS ~~~~
   //~~~~~~~~~~~~~~~~~~~
 
+  //Compare function isn't nessecary here since comparing integer ids.
+  //If using alphabetical sort then don't need anon function either.
   const compareProductIds = (productA, productB) => {
     const idA = productA.id;
     const idB = productB.id;
@@ -141,18 +143,20 @@ const App = () => {
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       } else {
-        //Dont need to do becuase should alreayd be in local sotagre.
-        //Check if alreayd in order.
         const order = await addProductToOrder(ongoingOrder.id, id, price);
 
-        order.products = order.products.sort(compareProductIds);
+        //Compare function isn't nessecary here since comparing integer ids.
+        //If using alphabetical sort then don't need anon function either.
+        // order.products = order.products.sort(compareProductIds);
+        order.products = order.products.sort((productA, productB) => productA.id < productB.id);
 
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
       }
-      await updateProductInventory(id, quantity, inventory);
+      // await updateProductInventory(id, quantity, inventory);
     };
 
+  //I think I don;t need anymore.
   const updateProductInventory = async function (id, quantity, inventory) {
     //Check if inventory is less than quantity;
     console.log(inventory);
@@ -201,7 +205,6 @@ const App = () => {
               ongoingOrder={ongoingOrder}
               setOngoingOrder={setOngoingOrder}
               compareProductIds={compareProductIds}
-              updateProductInventory={updateProductInventory}
             />
           </Route>
 
