@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { getAllUsers } from '../api/users';
 
+import logo from './images/GrandmasMac.png'
+
 import './Header.css';
 
 const Header = ({ currentUser, setCurrentUser }) => {
@@ -25,7 +27,7 @@ const Header = ({ currentUser, setCurrentUser }) => {
         <>
           <NavLink className='homeNav' to='/'>
             <img
-              src="../../public/images/Grandma'sMac (2).png"
+              src={logo}
               alt="Grandma's Mac Logo"
             />
           </NavLink>
