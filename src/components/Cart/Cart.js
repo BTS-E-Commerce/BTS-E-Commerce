@@ -69,14 +69,11 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
         setOngoingOrder({});
         setUsersOrders([...usersOrders, completedOrder]);
         console.log('Here is your completed order:', completedOrder);
-        console.log(ongoingOrder);
     }
 
     //Implement removing product from cart after addition.
     const onDeleteProductFromCart = (id) => () => {
-        console.log(ongoingOrder);
         const newOngoingOrderProducts = ongoingOrder.products.filter((product) => id !== product.id);
-        console.log(newOngoingOrderProducts);
         localStorage.setItem('cart', JSON.stringify(newOngoingOrderProducts));
         setOngoingOrder({ ...ongoingOrder, products: newOngoingOrderProducts });
     }
@@ -100,38 +97,16 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
                                 compareProductIds={compareProductIds}
                                 onDeleteProductFromCart={onDeleteProductFromCart(product.id)}
                             />
-                            <button onClick={onCheckout}>CHECKOUT</button>
+
                             <button onClick={onDeleteOrder}>DELETE ORDER</button>
                         </>
                     ))
                     : "There is nothing here."
                 : "There is nothing here."}
-            <p>Total Price: ${(totalPrice / 100).toFixed(2)}</p>
-        </div>
-    )
-    return (
-        <div>
-            <h1>Cart</h1>
-            {(ongoingOrder.products).length !== 0
-                ? ongoingOrder.products.map((product) => (
-                    <>
-                        <CartProducts
-                            key={product.id}
-                            products={products}
-                            setProducts={setProducts}
-                            product={product}
-                            ongoingOrder={ongoingOrder}
-                            setOngoingOrder={setOngoingOrder}
-                            compareProductIds={compareProductIds}
-                            onDeleteProductFromCart={onDeleteProductFromCart(product.id)}
-                        />
-                        <button onClick={onCheckout}>CHECKOUT</button>
-                        <button onClick={onDeleteOrder}>DELETE ORDER</button>
-                    </>
-                )) : "There is nothing here."}
-            <p>Total Price: ${(totalPrice / 100).toFixed(2)}</p>
-        </div>
-
+            {(ongoingOrder.hasOwnProperty('products'))
+                ? (ongoingOrder.products).length !== 0 ? <button onClick={onCheckout}>CHECKOUT</button> : '' : ''}
+            < p > Total Price: ${(totalPrice / 100).toFixed(2)}</p>
+        </div >
     )
 }
 
