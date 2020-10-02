@@ -52,7 +52,6 @@ const App = () => {
     getAllCategories()
       .then((response) => {
         setCategories(response.categories);
-        console.log(categories);
       })
       .catch((error) => {
         console.log(error);
@@ -83,8 +82,8 @@ const App = () => {
     if (currentUser.username === 'guest') {
       const localStorageCart = JSON.parse(localStorage.getItem('cart'));
       if (
-        localStorageCart != null &&
-        Object.keys(localStorageCart).length != 0
+        localStorageCart !== null &&
+        Object.keys(localStorageCart).length !== 0
       ) {
         localStorageCart.products = localStorageCart.products.sort(
           compareProductIds
@@ -94,7 +93,7 @@ const App = () => {
     } else {
       let currentOrder = {};
       orders.map((order) => {
-        if (order.user.id == currentUser.id) {
+        if (order.user.id === currentUser.id) {
           if (order.isComplete === false) {
             currentOrder = order;
             currentOrder.products = currentOrder.products.sort(
@@ -154,7 +153,7 @@ const App = () => {
         return;
       }
       if (
-        JSON.parse(localStorage.getItem('cart')) == null ||
+        JSON.parse(localStorage.getItem('cart')) === null ||
         Object.keys(JSON.parse(localStorage.getItem('cart'))).length == 0
       ) {
         const order = await createOrder(currentUser.id, id);

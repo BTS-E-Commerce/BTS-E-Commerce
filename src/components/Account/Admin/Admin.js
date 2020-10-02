@@ -5,7 +5,7 @@ import React from 'react';
 
 import { UsersList, CategoryList } from './index'
 
-const Admin = ({ categories, setCategories }) => {
+const Admin = ({ categories, setCategories, setCurrentUser, setOngoingOrder }) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -24,7 +24,10 @@ const Admin = ({ categories, setCategories }) => {
     return (
         <div>
             <h1>Admin Actions</h1>
-            <UsersList />
+            <UsersList
+                setCurrentUser={setCurrentUser}
+                setOngoingOrder={setOngoingOrder}
+            />
             <CategoryList
                 categories={categories}
                 setCategories={setCategories}

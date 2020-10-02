@@ -63,13 +63,13 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
         const completedOrder = await updateOrder(ongoingOrder.id, { isComplete: true, totalPrice });
         for (const product of ongoingOrder.products) {
             product.inventory -= product.quantity;
-            console.log(product.inventory);
             await updateProduct(product.id, { inventory: product.inventory });
         }
+        localStorage.removeItem('cart');
         setOngoingOrder({});
         setUsersOrders([...usersOrders, completedOrder]);
-        localStorage.setItem('cart', null);
         console.log('Here is your completed order:', completedOrder);
+        console.log(ongoingOrder);
     }
 
     //Implement removing product from cart after addition.
