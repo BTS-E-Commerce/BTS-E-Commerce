@@ -2,7 +2,20 @@ import React, { useState } from 'react';
 
 import './Products.css';
 
-const NewProductForm = ({ products, setProducts, categories, createProduct }) => {
+//~~~~~~~~~~~~~~~~~~~
+//~~~~ PRODUCT FEATURE ~~~~
+//~~~~~~~~~~~~~~~~~~~
+
+//~~~~~~~~~~~~~~~~~~~
+//~~~~ NEW PRODUCT FORM ~~~~
+//~~~~~~~~~~~~~~~~~~~
+
+const NewProductForm = ({
+  products,
+  setProducts,
+  categories,
+  createProduct,
+}) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
@@ -15,7 +28,10 @@ const NewProductForm = ({ products, setProducts, categories, createProduct }) =>
   async function handleSubmit(event) {
     event.preventDefault();
 
-    createProduct({ product: { name, description, imageUrl, inventory, price, sale }, categories: [category] });
+    createProduct({
+      product: { name, description, imageUrl, inventory, price, sale },
+      categories: [category],
+    });
   }
 
   const handleNameChange = (event) => {
@@ -38,7 +54,9 @@ const NewProductForm = ({ products, setProducts, categories, createProduct }) =>
     setSale(event.target.value);
   };
   const handleCategoryChange = (event) => {
-    const [chosenCategory] = categories.filter((productCategory) => productCategory.name == event.target.value);
+    const [chosenCategory] = categories.filter(
+      (productCategory) => productCategory.name == event.target.value
+    );
     setCategory(chosenCategory);
   };
 
@@ -71,24 +89,15 @@ const NewProductForm = ({ products, setProducts, categories, createProduct }) =>
           value={imageUrl}
           onChange={handleImageUrlChange}
         />
-        <label htmlFor='inventoryForm'>Inventory:</label>
-        <input
-          className='inventoryForm'
-          type='number'
-          name='inventory'
-          value={inventory}
-          onChange={handleInventoryChange}
-        />
-        <label htmlFor='priceForm'>Price:</label>
-        <input
-          className='priceForm'
-          type='number'
-          name='price'
-          value={price}
-          onChange={handlePriceChange}
-        />
-
-        <div className='salesContainer'>
+        <div className='priceContainer'>
+          <label htmlFor='priceForm'>Price:</label>
+          <input
+            className='priceForm'
+            type='number'
+            name='price'
+            value={price}
+            onChange={handlePriceChange}
+          />
           <label htmlFor='salesForm'>On Sale:</label>
           <input
             id='salesForm'
@@ -98,25 +107,37 @@ const NewProductForm = ({ products, setProducts, categories, createProduct }) =>
             onChange={handleSaleChange}
           />
         </div>
-        {categories === undefined ? '' :
-          <div className='categoriesContainer'>
-            <label htmlFor='categoriesForm'>Choose a Category:</label>
-            <select className='categoriesForm' name='categories' value={category === undefined ? '' : category.name} onChange={handleCategoryChange}>
-              {categories.map(category => (
-                <option
-                  key={category.id}
-                  data-id={category.id}
-                  value={category.name} >
-                  {(category.name[0]).toUpperCase()}
-                  {(category.name).slice(1)}
-                </option>
-              ))}
-            </select>
-          </div>
-        }
-
-
-        <input type='submit' value='Submit'></input>
+        <div className='inventoryContainer'>
+          <label htmlFor='inventoryForm'>Inventory:</label>
+          <input
+            className='inventoryForm'
+            type='number'
+            name='inventory'
+            value={inventory}
+            onChange={handleInventoryChange}
+          />
+        </div>
+        <div className='categoriesContainer'>
+          <label htmlFor='categoriesForm'>Choose a Category:</label>
+          <select
+            className='categoriesForm'
+            name='categories'
+            value={category === undefined ? '' : category.name}
+            onChange={handleCategoryChange}
+          >
+            {categories.map((category) => (
+              <option
+                key={category.id}
+                data-id={category.id}
+                value={category.name}
+              >
+                {category.name[0].toUpperCase()}
+                {category.name.slice(1)}
+              </option>
+            ))}
+          </select>
+        </div>
+        <input id='newProductSubmit' type='submit' value='Submit'></input>
       </form>
     </div>
   );
