@@ -75,7 +75,7 @@ const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
                 MY CART
               </NavLink>
               <button onClick={logOutUser}>Log Out</button>
-              <button onClick={testStuff}>TEST JWT</button>
+              {/* <button onClick={testStuff}>TEST JWT</button> */}
             </div>
           </div>
         </>
