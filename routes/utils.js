@@ -1,6 +1,6 @@
 function requireUser(req, res, next) {
   if (!req.user) {
-    res.send({
+    res.status(403).send({
       name: 'Missing User Error',
       message: 'You must be logged in to perform this action',
     });
@@ -10,10 +10,10 @@ function requireUser(req, res, next) {
 }
 
 function requireAdmin(req, res, next) {
-  const adminCheck = req.user.admin;
+  const adminCheck = req.user && req.user.admin;
 
   if (!adminCheck) {
-    res.send({
+    res.status(403).send({
       name: 'Not Admin Error',
       message: 'You must be logged in as an admin to perform this action',
     });

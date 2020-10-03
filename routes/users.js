@@ -17,20 +17,8 @@ const SALT_COUNT = 10;
 
 // -- GET Routes --
 //* Get All Users
-//Commentes out for testing.
-// usersRouter.get('/', requireUser, async (req, res, next) => {
-//   try {
-//     const users = await client.getAllUsers();
 
-//     res.status(201).send({
-//       users,
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-usersRouter.get('/', async (req, res, next) => {
+usersRouter.get('/', requireUser, async (req, res, next) => {
   try {
     const users = await client.getAllUsers();
 
@@ -75,8 +63,14 @@ usersRouter.post('/register', async (req, res, next) => {
         }
       );
 
+      // delete newUser.password;
+
       res.status(201).send({
-        newUser,
+        newUser: {
+          username: newUser.username,
+          id: newUser.id,
+          admin: newUser.admin,
+        },
         token,
         message: 'Thank you for signing up!',
       });
@@ -109,8 +103,10 @@ usersRouter.post('/login', async (req, res, next) => {
           { expiresIn: '2hr' }
         );
 
+        // delete user.password;
+
         res.status(201).send({
-          user,
+          user: { username: user.username, id: user.id, admin: user.admin },
           token,
           message: 'succesful login',
         });
