@@ -20,7 +20,11 @@ const Login = ({ currentUser, setCurrentUser }) => {
     console.log(user);
 
     localStorage.clear();
-    setCurrentUser({ id: user.user.id, username: user.user.username });
+    setCurrentUser({
+      id: user.user.id,
+      username: user.user.username,
+      admin: user.user.admin,
+    });
 
     localStorage.setItem('id', user.user.id);
     localStorage.setItem('username', user.user.username);
