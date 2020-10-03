@@ -203,7 +203,11 @@ const App = () => {
   return (
     <Router>
       <div className='App'>
-        <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <Header
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          setOngoingOrder={setOngoingOrder}
+        />
         <Switch>
           <Route exact path='/account'>
             <h2>Welcome to your account, {currentUser.username}</h2>
