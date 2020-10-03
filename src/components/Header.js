@@ -6,11 +6,12 @@ import logo from './images/GrandmasMac.png';
 
 import './Header.css';
 
-const Header = ({ currentUser, setCurrentUser }) => {
+const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
   const logOutUser = (event) => {
     event.preventDefault();
     localStorage.clear();
     setCurrentUser({ id: 1, username: 'guest', admin: false });
+    setOngoingOrder({});
   };
 
   async function testStuff(event) {
