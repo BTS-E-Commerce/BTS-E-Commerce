@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createUser } from '../../api/index';
+import { Redirect } from 'react-router-dom';
 import './Auth.css';
 
 const Register = ({ currentUser, setCurrentUser }) => {
@@ -33,9 +34,6 @@ const Register = ({ currentUser, setCurrentUser }) => {
     setUsername('');
     setPassword('');
     setConfirm('');
-
-    // has to be a better way to redirect
-    // window.location.href = '/home';
   }
 
   const handleUsernameChange = (event) => {
@@ -52,48 +50,56 @@ const Register = ({ currentUser, setCurrentUser }) => {
 
   return (
     <div id='register'>
-      <form onSubmit={handleSubmit} className='auth-form'>
-        <h1 className='auth-header'>Welcome</h1>
-        <div className='auth-box'>
-          <label htmlFor='username' className='auth-label'>
-            Username:
-          </label>
-          <input
-            className='auth-input'
-            type='text'
-            name='username'
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div className='auth-box'>
-          <label htmlFor='password' className='auth-label'>
-            Password:
-          </label>
-          <input
-            className='auth-input'
-            type='text'
-            name='password'
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <div className='auth-box'>
-          <label htmlFor='confirm' className='auth-label'>
-            Confirm Password:
-          </label>
-          <input
-            className='auth-input'
-            type='text'
-            name='confirm'
-            value={confirm}
-            onChange={handleConfirmChange}
-          />
-        </div>
-        <button className='auth-button' type='submit'>
-          Register
-        </button>
-      </form>
+      {currentUser.id === 1 ? (
+        <>
+          <form onSubmit={handleSubmit} className='auth-form'>
+            <h1 className='auth-header'>Welcome</h1>
+            <div className='auth-box'>
+              <label htmlFor='username' className='auth-label'>
+                Username:
+              </label>
+              <input
+                className='auth-input'
+                type='text'
+                name='username'
+                value={username}
+                onChange={handleUsernameChange}
+              />
+            </div>
+            <div className='auth-box'>
+              <label htmlFor='password' className='auth-label'>
+                Password:
+              </label>
+              <input
+                className='auth-input'
+                type='password'
+                name='password'
+                value={password}
+                onChange={handlePasswordChange}
+              />
+            </div>
+            <div className='auth-box'>
+              <label htmlFor='confirm' className='auth-label'>
+                Confirm Password:
+              </label>
+              <input
+                className='auth-input'
+                type='password'
+                name='confirm'
+                value={confirm}
+                onChange={handleConfirmChange}
+              />
+            </div>
+            <button className='auth-button' type='submit'>
+              Register
+            </button>
+          </form>
+        </>
+      ) : (
+        <>
+          <Redirect to='/home' />
+        </>
+      )}
     </div>
   );
 };

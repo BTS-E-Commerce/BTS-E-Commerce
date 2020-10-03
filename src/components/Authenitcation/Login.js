@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { loginUser } from '../../api/users';
+import { Redirect } from 'react-router-dom';
 import './Auth.css';
 
 const Login = ({ currentUser, setCurrentUser }) => {
@@ -42,36 +43,44 @@ const Login = ({ currentUser, setCurrentUser }) => {
 
   return (
     <div id='login'>
-      <form onSubmit={handleSubmit} className='auth-form'>
-        <h1 className='auth-header'>Welcome</h1>
-        <div className='auth-box'>
-          <label htmlFor='username' className='auth-label'>
-            Username:
-          </label>
-          <input
-            className='auth-input'
-            type='text'
-            name='username'
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div className='auth-box'>
-          <label htmlFor='password' className='auth-label'>
-            Password:
-          </label>
-          <input
-            className='auth-input'
-            type='text'
-            name='password'
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button className='auth-button' type='submit'>
-          Login
-        </button>
-      </form>
+      {currentUser.id === 1 ? (
+        <>
+          <form onSubmit={handleSubmit} className='auth-form'>
+            <h1 className='auth-header'>Welcome</h1>
+            <div className='auth-box'>
+              <label htmlFor='username' className='auth-label'>
+                Username:
+              </label>
+              <input
+                className='auth-input'
+                type='text'
+                name='username'
+                value={username}
+                onChange={handleUsernameChange}
+              />
+            </div>
+            <div className='auth-box'>
+              <label htmlFor='password' className='auth-label'>
+                Password:
+              </label>
+              <input
+                className='auth-input'
+                type='password'
+                name='password'
+                value={password}
+                onChange={handlePasswordChange}
+              />
+            </div>
+            <button className='auth-button' type='submit'>
+              Login
+            </button>
+          </form>
+        </>
+      ) : (
+        <>
+          <Redirect to='/home' />
+        </>
+      )}
     </div>
   );
 };
