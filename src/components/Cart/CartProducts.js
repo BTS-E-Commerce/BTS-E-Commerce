@@ -46,7 +46,6 @@ const CartProducts = ({ products, setProducts, product, ongoingOrder, setOngoing
             />
             <button onClick={onDeleteProductFromCart}>DELETE PRODUCT</button>
         </div>
-
     )
 }
 
