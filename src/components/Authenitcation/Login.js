@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { loginUser } from '../../api/users';
 import './Auth.css';
 
+let globalToken;
+
 const Login = ({ currentUser, setCurrentUser }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

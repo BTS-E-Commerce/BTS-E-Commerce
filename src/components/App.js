@@ -100,6 +100,7 @@ const App = () => {
       }
     } else {
       let currentOrder = {};
+      console.log('this is running hahah');
       orders.map((order) => {
         if (order.user.id === currentUser.id) {
           if (order.isComplete === false) {
