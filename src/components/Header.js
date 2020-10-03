@@ -7,7 +7,8 @@ import { getAllUsers } from '../api/users';
 const Header = ({ currentUser, setCurrentUser }) => {
   const logOutUser = (event) => {
     event.preventDefault();
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
+    localStorage.clear();
     setCurrentUser({ id: 1, username: 'guest' });
   };
 

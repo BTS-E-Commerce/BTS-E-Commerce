@@ -10,12 +10,17 @@ const Login = ({ currentUser, setCurrentUser }) => {
 
     if (!username || !password) {
       alert('Please enter a valid username or password');
+      return;
     }
 
     const user = await loginUser({ username, password });
+    console.log(user);
 
     localStorage.clear();
     setCurrentUser({ id: user.user.id, username: user.user.username });
+
+    localStorage.setItem('id', user.user.id);
+    localStorage.setItem('username', user.user.username);
     localStorage.setItem('token', user.token);
 
     setUsername('');

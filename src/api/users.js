@@ -2,9 +2,18 @@ import axios from 'axios';
 
 const BASE_URL = '/api';
 
+// create a utils function for this config?
+
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
+};
+
 export async function getAllUsers() {
   try {
-    const { data } = await axios.get(`${BASE_URL}/users`);
+    const { data } = await axios.get(`${BASE_URL}/users`, config);
     return data;
   } catch (error) {
     throw error;

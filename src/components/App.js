@@ -27,7 +27,7 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState({ id: 1, username: 'guest' });
+  const [currentUser, setCurrentUser] = useState({});
   const [ongoingOrder, setOngoingOrder] = useState({});
   const [usersOrders, setUsersOrders] = useState([]);
 
@@ -35,9 +35,20 @@ const App = () => {
   //~~~~~ EFFECTS ~~~~~
   //~~~~~~~~~~~~~~~~~~~
 
+  function getUser() {
+    // check to make sure the user stored in local storage
+    // actually exists in the database
+    // call inside of the login useEffect
+  }
+
   useEffect(() => {
-    //check if logged in token exsists
-    //If yes, change current user to token one
+    const userId = localStorage.getItem('id');
+    const userUsername = localStorage.getItem('username');
+    if (!userId || !userUsername) {
+      setCurrentUser({ id: 1, username: 'guest' });
+    } else {
+      setCurrentUser({ id: userId, username: userUsername });
+    }
   }, []);
 
   useEffect(() => {

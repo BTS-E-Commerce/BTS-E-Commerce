@@ -62,8 +62,14 @@ usersRouter.post('/register', async (req, res, next) => {
         }
       );
 
+      // delete newUser.password;
+
       res.status(201).send({
-        newUser,
+        newUser: {
+          username: newUser.username,
+          id: newUser.id,
+          admin: newUser.admin,
+        },
         token,
         message: 'Thank you for signing up!',
       });
@@ -96,8 +102,10 @@ usersRouter.post('/login', async (req, res, next) => {
           { expiresIn: '2hr' }
         );
 
+        // delete user.password;
+
         res.status(201).send({
-          user,
+          user: { username: user.username, id: user.id, admin: user.admin },
           token,
           message: 'succesful login',
         });
