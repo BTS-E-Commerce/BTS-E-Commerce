@@ -16,6 +16,7 @@ import {
   Route,
   Switch,
   Redirect,
+  useHistory,
 } from 'react-router-dom';
 import { Content } from './Products/index';
 import { Account } from './Account/index';
@@ -103,7 +104,7 @@ const App = () => {
         localStorageCart !== null &&
         Object.keys(localStorageCart).length !== 0
       ) {
-        const localOrder = JSON.parse(localStorage.getItem('cart'))
+        const localOrder = JSON.parse(localStorage.getItem('cart'));
         setOngoingOrder(localOrder);
         return;
       }
@@ -178,9 +179,13 @@ const App = () => {
       } else {
         //Check if product alreayd exists in cart.
         //If yes, dont add and send user message.
-        const existingProduct = ongoingOrder.products.filter((product) => product.id === id);
+        const existingProduct = ongoingOrder.products.filter(
+          (product) => product.id === id
+        );
         if (existingProduct.length !== 0) {
-          alert("This product is already in your cart. You can change the quantity there.")
+          alert(
+            'This product is already in your cart. You can change the quantity there.'
+          );
           return;
         }
 
