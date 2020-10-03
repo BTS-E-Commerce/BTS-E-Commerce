@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { loginUser } from '../../api/users';
+import './Auth.css';
+
+let globalToken;
 
 const Login = ({ currentUser, setCurrentUser }) => {
   const [username, setUsername] = useState('');
@@ -10,12 +13,17 @@ const Login = ({ currentUser, setCurrentUser }) => {
 
     if (!username || !password) {
       alert('Please enter a valid username or password');
+      return;
     }
 
     const user = await loginUser({ username, password });
+    console.log(user);
 
     localStorage.clear();
     setCurrentUser({ id: user.user.id, username: user.user.username });
+
+    localStorage.setItem('id', user.user.id);
+    localStorage.setItem('username', user.user.username);
     localStorage.setItem('token', user.token);
 
     setUsername('');
@@ -31,30 +39,38 @@ const Login = ({ currentUser, setCurrentUser }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Login Here:</h1>
-      <div>
-        <label htmlFor='username'>Username:</label>
-        <input
-          type='text'
-          name='username'
-          value={username}
-          onChange={handleUsernameChange}
-          placeholder=' username'
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password:</label>
-        <input
-          type='text'
-          name='password'
-          value={password}
-          onChange={handlePasswordChange}
-          placeholder=' password'
-        />
-      </div>
-      <button type='submit'>Login</button>
-    </form>
+    <div id='login'>
+      <form onSubmit={handleSubmit} className='auth-form'>
+        <h1 className='auth-header'>Welcome</h1>
+        <div className='auth-box'>
+          <label htmlFor='username' className='auth-label'>
+            Username:
+          </label>
+          <input
+            className='auth-input'
+            type='text'
+            name='username'
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
+        <div className='auth-box'>
+          <label htmlFor='password' className='auth-label'>
+            Password:
+          </label>
+          <input
+            className='auth-input'
+            type='text'
+            name='password'
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <button className='auth-button' type='submit'>
+          Login
+        </button>
+      </form>
+    </div>
   );
 };
 

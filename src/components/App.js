@@ -22,7 +22,6 @@ import { Account } from './Account/index';
 import { Register, Login } from './Authenitcation/index';
 import { Cart } from './Cart/index';
 
-
 import './App.css';
 
 const App = () => {
@@ -32,8 +31,7 @@ const App = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState({ id: 1, username: 'guest', admin: false });
+  const [currentUser, setCurrentUser] = useState({});
   const [ongoingOrder, setOngoingOrder] = useState({});
   const [usersOrders, setUsersOrders] = useState([]);
 
@@ -41,11 +39,21 @@ const App = () => {
   //~~~~~ EFFECTS ~~~~~
   //~~~~~~~~~~~~~~~~~~~
 
-
+  function getUser() {
+    // Tyler todo:
+    // write a function to check if the user stored in local
+    // storage actually exists in the database
+    // call inside of the login useEffect below
+  }
 
   useEffect(() => {
-    //check if logged in token exsists
-    //If yes, change current user to token one
+    const userId = localStorage.getItem('id');
+    const userUsername = localStorage.getItem('username');
+    if (!userId || !userUsername) {
+      setCurrentUser({ id: 1, username: 'guest', admin: false });
+    } else {
+      setCurrentUser({ id: userId, username: userUsername });
+    }
   }, []);
 
   useEffect(() => {
@@ -92,6 +100,7 @@ const App = () => {
       }
     } else {
       let currentOrder = {};
+      console.log('this is running hahah');
       orders.map((order) => {
         if (order.user.id === currentUser.id) {
           if (order.isComplete === false) {
@@ -168,7 +177,9 @@ const App = () => {
         //Compare function isn't nessecary here since comparing integer ids.
         //If using alphabetical sort then don't need anon function either.
         // order.products = order.products.sort(compareProductIds);
-        order.products = order.products.sort((productA, productB) => productA.id < productB.id);
+        order.products = order.products.sort(
+          (productA, productB) => productA.id < productB.id
+        );
 
         localStorage.setItem('cart', JSON.stringify(order));
         setOngoingOrder(order);
@@ -194,7 +205,7 @@ const App = () => {
       <div className='App'>
         <Header currentUser={currentUser} setCurrentUser={setCurrentUser} />
         <Switch>
-          <Route path='/account'>
+          <Route exact path='/account'>
             <h2>Welcome to your account, {currentUser.username}</h2>
             <Account
               categories={categories}
@@ -209,16 +220,16 @@ const App = () => {
               setCurrentUser={setCurrentUser}
             />
           </Route>
-          <Route path='/register'>
+          <Route exact path='/register'>
             <Register
               setCurrentUser={setCurrentUser}
               currentUser={currentUser}
             />
           </Route>
-          <Route path='/login'>
+          <Route exact path='/login'>
             <Login setCurrentUser={setCurrentUser} currentUser={currentUser} />
           </Route>
-          <Route path='/cart'>
+          <Route exact path='/cart'>
             <Cart
               products={products}
               setProducts={setProducts}
@@ -229,7 +240,9 @@ const App = () => {
               compareProductIds={compareProductIds}
             />
           </Route>
-
+          <Route path='/home'>
+            <Redirect to='/' />
+          </Route>
           <Content
             products={products}
             setProducts={setProducts}

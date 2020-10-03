@@ -1,0 +1,64 @@
+#register {
+  display: flex;
+  justify-content: center;
+}
+
+#login {
+  display: flex;
+  justify-content: center;
+}
+
+.auth-form {
+  font-family: Arial, Arial, Helvetica, sans-serif;
+  margin: 4rem;
+  background-color: rgb(231, 234, 237);
+  border-radius: 2%;
+  width: 640px;
+  height: 450px;
+}
+
+.auth-header {
+  font-size: 36px;
+  color: rgb(166, 115, 47);
+  text-align: center;
+  margin: 30px 15px 15px 15px;
+}
+
+.auth-box {
+  font-family: sans-serif;
+  margin: 5px;
+  color: grey;
+  border-bottom: 1px solid grey;
+}
+
+.auth-input {
+  font-size: 22px;
+  text-align: left;
+  padding: 10px;
+  background-color: rgb(231, 234, 237);
+  width: 370px;
+}
+
+.auth-input:hover {
+  cursor: pointer;
+}
+
+.auth-label {
+  font-size: 24px;
+}
+
+.auth-button {
+  margin-top: 65px;
+  height: 48px;
+  font-size: 26px;
+
+  color: aliceblue;
+  background: #4c64ff;
+}
+
+.auth-button:hover {
+  font-size: 36px;
+  cursor: pointer;
+  color: #4c64ff;
+  background: rgb(231, 234, 237);
+}
