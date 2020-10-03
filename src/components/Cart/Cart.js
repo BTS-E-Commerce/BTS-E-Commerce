@@ -22,9 +22,8 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
         setTotalPrice(0);
         if (Object.keys(ongoingOrder).length !== 0) {
             setTotalPrice(FindTotalPrice(ongoingOrder.products));
+            localStorage.setItem('cart', JSON.stringify(ongoingOrder));
         }
-
-        localStorage.setItem('cart', JSON.stringify(ongoingOrder));
     }, [ongoingOrder]);
 
     useEffect(() => {
@@ -42,7 +41,7 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
         if (deletedOrder) {
             setOngoingOrder({});
             //Need to change to localstorage.remove when user token shit is added.
-            localStorage.setItem('cart', null);
+            localStorage.removeItem('cart');
             console.log("THIS IS WHAT WAS DELETED", deletedOrder);
             console.log("THIS IS ONGOING AFTER DELETED", ongoingOrder);
         } else {

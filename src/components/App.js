@@ -87,8 +87,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    const localStorageCart = JSON.parse(localStorage.getItem('cart'));
     if (currentUser.username === 'guest') {
-      const localStorageCart = JSON.parse(localStorage.getItem('cart'));
       if (
         localStorageCart !== null &&
         Object.keys(localStorageCart).length !== 0
@@ -99,8 +99,15 @@ const App = () => {
         setOngoingOrder(localStorageCart);
       }
     } else {
+      if (
+        localStorageCart !== null &&
+        Object.keys(localStorageCart).length !== 0
+      ) {
+        const localOrder = JSON.parse(localStorage.getItem('cart'))
+        setOngoingOrder(localOrder);
+        return;
+      }
       let currentOrder = {};
-      console.log('this is running hahah');
       orders.map((order) => {
         if (order.user.id === currentUser.id) {
           if (order.isComplete === false) {
@@ -112,7 +119,6 @@ const App = () => {
           }
         }
       });
-
       setOngoingOrder(currentOrder);
     }
   }, [orders, currentUser]);
@@ -172,6 +178,12 @@ const App = () => {
       } else {
         //Check if product alreayd exists in cart.
         //If yes, dont add and send user message.
+        const existingProduct = ongoingOrder.products.filter((product) => product.id === id);
+        if (existingProduct.length !== 0) {
+          alert("This product is already in your cart. You can change the quantity there.")
+          return;
+        }
+
         const order = await addProductToOrder(ongoingOrder.id, id, price);
 
         //Compare function isn't nessecary here since comparing integer ids.
