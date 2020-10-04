@@ -38,6 +38,11 @@ const UsersList = ({ setCurrentUser, setOngoingOrder }) => {
 
     }
 
+    const onMakeAdmin = (id) => () => {
+        await updateUser(id);
+
+    }
+
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~

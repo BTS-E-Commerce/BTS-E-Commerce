@@ -2,7 +2,7 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 const { client } = require('./client');
-const { createCategories } = require('./categories');
+const { createCategories, getCategoryByName } = require('./categories');
 const { addCategoriesToProduct } = require('./product_categories');
 
 //~~~~~~~~~~~~~~~~~~~
@@ -54,8 +54,14 @@ async function getProductById(id) {
       `,
       [id]
     );
+    if (categories.length > 0) {
+      product.categories = categories;
+    } else {
+      const noneCategory = getCategoryByName({ name: 'none' });
 
-    product.categories = categories;
+      product.categories = noneCategory;
+    }
+
 
     const { rows: reviews } = await client.query(
       `

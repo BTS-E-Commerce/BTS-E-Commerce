@@ -45,3 +45,15 @@ export async function createUser({ username, password }) {
     throw error;
   }
 }
+
+export async function updateUser(userId, fields) {
+  try {
+    const { data } = await axios.patch(`${BASE_URL}/users/${userId}`, {
+      fields
+    });
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}

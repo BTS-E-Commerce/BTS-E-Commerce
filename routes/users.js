@@ -122,6 +122,11 @@ usersRouter.post('/login', async (req, res, next) => {
   }
 });
 
+usersRouter.patch('/:userId', async (req, res, next) => {
+  const { userId } = req.params;
+  const { fields } = req.body;
+})
+
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
