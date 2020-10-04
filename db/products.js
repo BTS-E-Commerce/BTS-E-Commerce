@@ -57,11 +57,14 @@ async function getProductById(id) {
 
     product.categories = categories;
 
-    const { rows: reviews } = await client.query(`
+    const { rows: reviews } = await client.query(
+      `
       SELECT *
       FROM reviews
       WHERE "productId"=$1;
-    `, [id]);
+    `,
+      [id]
+    );
 
     product.reviews = reviews;
 
@@ -160,7 +163,6 @@ async function updateProduct(productId, fields = {}) {
         Object.values(fields)
       );
     }
-
 
     if (categories === undefined) {
       return await getProductById(productId);

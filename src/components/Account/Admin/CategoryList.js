@@ -3,6 +3,7 @@
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState } from 'react';
 import { createCategory, deleteCategory } from '../../../api';
+import { CategoryCard } from './index';
 
 const CategoryList = ({ categories, setCategories }) => {
   //~~~~~~~~~~~~~~~~~~~
@@ -31,19 +32,12 @@ const CategoryList = ({ categories, setCategories }) => {
     setNewCategory(event.target.value);
   };
 
-  async function onCategoryDeleteEvent(event) {
-    event.preventDefault();
-    console.log('delete category clicked');
-    const categoryId = event.target.value;
-    await deleteCategory(categoryId);
-    console.log('before: ', categories);
-    console.log('categoryId: ', categoryId);
-    setCategories(
-      categories.filter((category) => categoryId != console.log(category.id))
-    );
+  const onDelete = (id) =>
+    async function () {
+      await deleteCategory(id);
 
-    console.log('after: ', categories);
-  }
+      setCategories(categories.filter((category) => id !== category.id));
+    };
 
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ JSX ~~~~~~~~
@@ -64,14 +58,11 @@ const CategoryList = ({ categories, setCategories }) => {
 
       <ul>
         {categories.map((category) => (
-          <li key={category.id}>
-            {category.name[0].toUpperCase()}
-            {category.name.slice(1)}
-            {/* <button>Edit Category</button> */}
-            <button value={category.id} onClick={onCategoryDeleteEvent}>
-              Delete Category
-            </button>
-          </li>
+          <CategoryCard
+            key={category.id}
+            category={category}
+            onDelete={onDelete(category.id)}
+          />
         ))}
       </ul>
     </div>

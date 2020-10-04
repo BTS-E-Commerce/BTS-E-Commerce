@@ -4,6 +4,7 @@
 import React from 'react';
 
 import { UsersList, CategoryList } from './index';
+import { deleteCategory } from '../../../api';
 
 const Admin = ({
   categories,
@@ -29,10 +30,10 @@ const Admin = ({
   return (
     <div>
       <h1>Admin Actions</h1>
-      {/* <UsersList
-                setCurrentUser={setCurrentUser}
-                setOngoingOrder={setOngoingOrder}
-            /> */}
+      <UsersList
+        setCurrentUser={setCurrentUser}
+        setOngoingOrder={setOngoingOrder}
+      />
       <CategoryList categories={categories} setCategories={setCategories} />
     </div>
   );
