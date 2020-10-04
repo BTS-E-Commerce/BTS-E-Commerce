@@ -129,8 +129,9 @@ async function updateUser(userId, fields = {}) {
     RETURNING *;
   `, Object.values(fields));
 
-    const updatedUser = getUserById(userId);
+    const updatedUser = await getUserById(userId);
 
+    console.log(updatedUser);
     return updatedUser;
   } catch (error) {
     throw error;

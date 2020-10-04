@@ -1,29 +1,38 @@
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ IMPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~
 import React, { useEffect, useState } from 'react';
 
 import { OrderHistory } from './OrderHistory/index'
 
-import { Admin } from './Admin/index'
+import { Admin, EditUserForm } from './Admin/index'
 
 import { updateUser } from '../../api/index'
 
 const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser, categories, setCategories }) => {
+    //~~~~~~~~~~~~~~~~~~~
+    //~~~~~~ STATE ~~~~~~
+    //~~~~~~~~~~~~~~~~~~~
 
-    const testChangeUserToGuest = () => {
-        localStorage.clear();
-        setOngoingOrder({})
-        setCurrentUser({ id: 1, username: 'guest', admin: false })
-    }
+    //~~~~~~~~~~~~~~~~~~~
+    //~~~~~ EFFECTS ~~~~~
+    //~~~~~~~~~~~~~~~~~~~
 
+    //~~~~~~~~~~~~~~~~~~~
+    //~~~~ FUNCTIONS ~~~~
+    //~~~~~~~~~~~~~~~~~~~
     const onMakeAdmin = async function () {
         const { updatedUser } = await updateUser(currentUser.id, { admin: true });
         setCurrentUser(updatedUser);
     }
 
+    //~~~~~~~~~~~~~~~~~~~
+    //~~~~~~ JSX ~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~
     return (
         <div>
             <h1>AccountInfo</h1>
             <h2>Current user is: {currentUser.username}</h2>
-            <button onClick={testChangeUserToGuest}>Change user to guest</button>
             <button onClick={onMakeAdmin}>Make {currentUser.username} an Admin</button>
             {currentUser.admin === false
                 ? ''
@@ -40,7 +49,10 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
                 />
             }
             {currentUser.username !== 'guest'
-                ? <OrderHistory usersOrders={usersOrders} />
+                ? <div className='account-information'>
+                    <OrderHistory usersOrders={usersOrders} />
+                    <EditUserForm setCurrentUser={setCurrentUser} currentUser={currentUser} />
+                </div>
                 : 'Register or Sign in to see your order history.'}
 
         </div>
@@ -48,4 +60,7 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
     )
 }
 
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ EXPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~
 export default Account;

@@ -1,34 +1,64 @@
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { } from '../../../api/index';
+import { updateUser } from '../../../api/index';
 
-const EditUserForm = ({ user, users, setUsers }) => {
+const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser }) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
     const [username, setUsername] = useState(user === undefined ? '' : (user.username));
-    const [password, setPassword] = useState(user === undefined ? '' : (user.password));
+    const [password, setPassword] = useState('');
     const [admin, setAdmin] = useState(user === undefined ? '' : (user.admin));
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~ EFFECTS ~~~~~
     //~~~~~~~~~~~~~~~~~~~
-
+    useEffect(() => {
+        if (currentUser.admin === false) {
+            setAdmin(false);
+        }
+    }, []);
     //~~~~~~~~~~~~~~~~~~~
     //~~~~ FUNCTIONS ~~~~
     //~~~~~~~~~~~~~~~~~~~
-
+    console.log(currentUser);
     async function handleSubmit(event) {
         event.preventDefault();
 
         console.log(username, password, admin);
-        // const { updatedProduct } = await updateProduct(product.id, { name, description, imageUrl, inventory, price, sale, categories: [category] });
-        // const removeIndex = products.findIndex(removeProduct => removeProduct.id === product.id)
-        // products.splice(removeIndex, 1, updatedProduct);
+        try {
 
-        // setProducts([...products]);
+            if (currentUser.admin == true) {
+                const { updatedUser } = await updateUser(user.id, { username, password, admin })
+                const removeIndex = users.findIndex(removeUser => removeUser.id === user.id);
+                window.location.reload();
+            } else if (currentUser.admin == true && currentUser.id == user.id) {
+                const { updatedUser } = await updateUser(user.id, { username, password, admin })
+                const removeIndex = users.findIndex(removeUser => removeUser.id === user.id);
+                localStorage.setItem('username', updatedUser.username);
+                console.log(updatedUser);
+                setCurrentUser(updatedUser);
+                window.location.reload();
+            }
+            else {
+                const { updatedUser } = await updateUser(currentUser.id, { username, password, admin })
+                //Need to setCurrentUser here if changing your own userinfo.
+                //OR we need to make them login with new, updated info.
+                console.log(updatedUser);
+                setCurrentUser(updatedUser);
+            }
+            //For some reason this splice is not working on users. I have tried copying the array and prefomring it on the copy but that also does not work.
+            //To get around this I just force a refresh.
+            // users.slice(removeIndex, 1, updatedUser);
+            // setUsers([...users]);
+
+            //This is here as a failsafe.
+
+        } catch (error) {
+            throw error;
+        }
     }
 
     const handleUsernameChange = (event) => {
@@ -38,6 +68,7 @@ const EditUserForm = ({ user, users, setUsers }) => {
         setPassword(event.target.value);
     }
     const handleAdminChange = (event) => {
+        //This does not change from the default value when the radio buttons are clicked.
         setAdmin(event.target.value);
     }
     //~~~~~~~~~~~~~~~~~~~
@@ -55,7 +86,7 @@ const EditUserForm = ({ user, users, setUsers }) => {
                     value={username}
                     onChange={handleUsernameChange}
                 />
-                <label htmlFor='edit-password'>Password:</label>
+                <label htmlFor='edit-password'>New Password:</label>
                 <input
                     className='edit-password'
                     type='text'

@@ -27,6 +27,8 @@ const Login = ({ currentUser, setCurrentUser }) => {
     console.log(user);
 
     localStorage.clear();
+    //When logging in after changing username and password user comes back as undefined.
+    //I suspect a bcrypt problem.
     setCurrentUser({
       id: user.user.id,
       username: user.user.username,
@@ -94,10 +96,10 @@ const Login = ({ currentUser, setCurrentUser }) => {
           </form>
         </>
       ) : (
-        <>
-          <Redirect to='/home' />
-        </>
-      )}
+          <>
+            <Redirect to='/home' />
+          </>
+        )}
     </div>
   );
 };

@@ -7,6 +7,9 @@ import { getAllUsers, deleteUser } from '../../../api/index'
 import { UserCard } from './index';
 
 const UsersList = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
+    //The users password shows up as the bcrypt version. This password should show up as the one they eneterd.
+    //IE. It curently shows as $2b$10$xwWen9zSoDUhbPB/xK/R7uKgU358qoLK4ghiPz0icspzcXxEp6KEm when editing.
+    //It should be password, then re-bcrypt it.
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -62,6 +65,7 @@ const UsersList = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
                     user={user}
                     users={users}
                     setUsers={setUsers}
+                    currentUser={currentUser}
                     changeUser={onChangeUser(user)}
                     onDeleteUser={onDeleteUser(user.id)} />
             ))}

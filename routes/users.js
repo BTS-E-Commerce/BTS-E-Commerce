@@ -123,9 +123,16 @@ usersRouter.post('/login', async (req, res, next) => {
 });
 
 usersRouter.patch('/:userId', async (req, res, next) => {
+
   const { userId } = req.params;
   const { fields } = req.body;
+
   try {
+    const originalUser = await client.getUserById(userId)
+    if (fields.password != undefined && originalUser.password !== fields.password) {
+      //When updating and if there is a password update we need to run bcrypt again on it.
+      console.log("New password change.")
+    }
     const updatedUser = await client.updateUser(userId, fields);
     res.status(201).send({
       updatedUser,
