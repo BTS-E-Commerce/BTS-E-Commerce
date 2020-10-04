@@ -136,6 +136,19 @@ usersRouter.patch('/:userId', async (req, res, next) => {
   }
 })
 
+usersRouter.delete('/:userId', async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    const deletedUser = await client.deleteUser(userId);
+    res.status(201).send({
+      deletedUser,
+      message: 'Successfully deleted user!',
+    });
+  } catch (error) {
+    throw error;
+  }
+})
+
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~

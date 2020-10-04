@@ -57,3 +57,14 @@ export async function updateUser(userId, fields) {
     throw error;
   }
 }
+
+export async function deleteUser(userId) {
+  try {
+    const { data } = await axios.delete(`${BASE_URL}/users/${userId}`);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+

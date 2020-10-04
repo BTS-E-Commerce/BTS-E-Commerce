@@ -3,10 +3,10 @@
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState, useEffect } from 'react';
 
-import { getAllUsers } from '../../../api/index'
+import { getAllUsers, deleteUser } from '../../../api/index'
 import { UserCard } from './index';
 
-const UsersList = ({ setCurrentUser, setOngoingOrder }) => {
+const UsersList = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -34,9 +34,21 @@ const UsersList = ({ setCurrentUser, setOngoingOrder }) => {
         setCurrentUser(user)
     }
 
-    const onDeleteUser = (id) => () => {
+    const onDeleteUser = (id) =>
+        async function () {
+            try {
+                await deleteUser(id);
+                if (currentUser.id == id) {
+                    localStorage.clear();
+                    setCurrentUser({ id: 1, username: 'guest', admin: false });
+                    setOngoingOrder({});
+                }
+                setUsers(users.filter((user) => user.id !== id));
+            } catch (error) {
+                throw error;
+            }
 
-    }
+        }
 
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
@@ -50,7 +62,8 @@ const UsersList = ({ setCurrentUser, setOngoingOrder }) => {
                     user={user}
                     users={users}
                     setUsers={setUsers}
-                    changeUser={onChangeUser(user)} />
+                    changeUser={onChangeUser(user)}
+                    onDeleteUser={onDeleteUser(user.id)} />
             ))}
         </div>
 

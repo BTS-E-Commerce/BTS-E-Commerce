@@ -34,6 +34,7 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
                 : <Admin
                     categories={categories}
                     setCategories={setCategories}
+                    currentUser={currentUser}
                     setCurrentUser={setCurrentUser}
                     setOngoingOrder={setOngoingOrder}
                 />
