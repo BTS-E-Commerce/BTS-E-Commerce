@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Just+Another+Hand&family=Lobster+Two:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Lobster+Two:ital@1&family=Niconne&display=swap');
 
 div#Header {
   display: flex;
@@ -16,6 +16,7 @@ div#Header {
 .navContainer {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   width: 1437px;
   height: 40px;
@@ -23,16 +24,21 @@ div#Header {
   border-bottom: 7px double #a77327;
 }
 
-.navContainer h2 {
-  width: 185px;
-  height: 20px;
+.leftOfNavbar {
+  width: 300px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 90px;
+}
+
+.leftOfNavbar h2 {
+  height: 26px;
   text-align: center;
   font-size: 18px;
   letter-spacing: 2px;
   font-family: 'Lobster Two', cursive;
-  margin-bottom: 6px;
-  margin-left: 50px;
-  margin-right: 50px;
   color: #a0520f;
 }
 
@@ -44,20 +50,22 @@ h2 a {
   cursor: pointer;
 }
 
+h2 a:active {
+  margin: 6px 0px 2px 0px;
+}
+
 h2 a:hover {
-  color: black;
-  text-shadow: -2px 0px 2px orange;
+  color: #674403;
+  text-shadow: -2px 0px 2px #f3b542;
 }
 
 .navBar {
   height: 20px;
-  width: 700px;
-  margin-left: 85px;
-  margin-right: 23em;
+  width: 600px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .navBar a {
@@ -70,7 +78,41 @@ h2 a:hover {
   letter-spacing: 5px;
 }
 
+.navBar a:active {
+  margin: 6px 0px 2px 0px;
+}
+
 .navBar a:hover {
-  color: black;
-  text-shadow: -2px 0px 2px orange;
+  color: #674403;
+  text-shadow: -2px 0px 2px #f3b542;
+}
+
+.rightOfNavbar {
+  width: 300px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  margin-left: 90px;
+}
+
+.rightOfNavbar button {
+  color: wheat;
+  background-color: #8b5907;
+  width: 100px;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  align-self: center;
+  height: 24px;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 18px;
+  line-height: 1px;
+  letter-spacing: 1px;
+  font-family: 'Niconne', cursive;
+}
+
+.rightOfNavbar button:active {
+  margin: 3px 0px 2px 0px;
 }

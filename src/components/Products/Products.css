@@ -3,7 +3,7 @@
   overflow-y: auto;
 }
 /*NEW PRODUCT FORM STUFF */
-@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Just+Another+Hand&family=Lobster+Two:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Lobster+Two:ital@1&family=Niconne&display=swap');
 
 div#newProductForm {
   display: flex;
@@ -151,8 +151,9 @@ input.inventoryForm {
   box-shadow: 0px 0px 7px #3b2506;
   cursor: pointer;
   align-self: center;
+  font-family: 'Niconne', cursive;
 }
 
 #newProductSubmit:active {
-  margin: 6px 10px 2px 10px;
+  margin: 8px 10px 2px 10px;
 }

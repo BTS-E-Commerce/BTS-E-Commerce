@@ -30,12 +30,9 @@ const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
             <img src={logo} alt="Grandma's Mac Logo" />
           </NavLink>
           <div className='navContainer'>
-            <h2>
-              Current User:
-              <NavLink className='accountNav' to='/account'>
-                {currentUser.username}
-              </NavLink>
-            </h2>
+            <div className='leftOfNavbar'>
+              <h2> Welcome! </h2>
+            </div>
             <div className='navBar'>
               <NavLink className='homeNav' to='/home'>
                 HOME
@@ -53,6 +50,7 @@ const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
                 MY CART{' '}
               </NavLink>
             </div>
+            <div className='rightOfNavbar'></div>
           </div>
         </>
       ) : (
@@ -61,9 +59,14 @@ const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
             <img src={logo} alt="Grandma's Mac Logo" />
           </NavLink>
           <div className='navContainer'>
-            <NavLink className='accountNav' to='/account'>
-              <h2>{currentUser.username}</h2>
-            </NavLink>
+            <div className='leftOfNavbar'>
+              <h2>
+                Current User:
+                <NavLink className='accountNav' to='/account'>
+                  {currentUser.username}
+                </NavLink>
+              </h2>
+            </div>
             <div className='navBar'>
               <NavLink className='homeNav' to='/'>
                 HOME
@@ -74,6 +77,8 @@ const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
               <NavLink className='cartNav' to='/cart'>
                 MY CART
               </NavLink>
+            </div>
+            <div className='rightOfNavbar'>
               <button onClick={logOutUser}>Log Out</button>
               {/* <button onClick={testStuff}>TEST JWT</button> */}
             </div>
