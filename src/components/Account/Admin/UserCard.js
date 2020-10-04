@@ -23,9 +23,6 @@ const UserCard = ({ user, changeUser, users, setUsers }) => {
         setEditFormStatus(!editFormStatus);
     }
 
-    const makeAdmin = (id) => {
-        await updateUser()
-    }
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~

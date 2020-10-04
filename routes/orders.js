@@ -56,7 +56,7 @@ ordersRouter.patch('/:orderId', async (req, res, next) => {
       order
     })
   } catch (error) {
-
+    next(error);
   }
 })
 
@@ -72,19 +72,31 @@ ordersRouter.patch('/:orderId/:productId', async (req, res, next) => {
       updatedOrderProduct
     })
   } catch (error) {
-
+    next(error);
   }
 })
 
 ordersRouter.delete('/:orderId', async (req, res, next) => {
   const { orderId } = req.params;
-  console.log(req.params);
   try {
     const order = await client.deleteOrder({ orderId });
-
-    console.log("RETURNING DELETED ORDER INFO", order);
     res.send({
       order
+    })
+  } catch (error) {
+    next(error);
+  }
+});
+
+ordersRouter.delete('/:orderId/:productId', async (req, res, next) => {
+  const { orderId, productId } = req.params;
+  console.log(req.params);
+  try {
+    const deletedOrderProduct = await client.deleteOrderProduct(orderId, productId);
+
+    console.log("RETURNING DELETED ORDER INFO", deletedOrderProduct);
+    res.send({
+      deletedOrderProduct
     })
   } catch (error) {
     next(error);

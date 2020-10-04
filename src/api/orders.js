@@ -81,3 +81,13 @@ export async function deleteOrder(orderId) {
     throw error;
   }
 }
+
+export async function deleteProductFromOrder(orderId, productId) {
+  try {
+    const { data } = await axios.delete(`${BASE_URL}/orders/${orderId}/${productId}`);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}

@@ -9,7 +9,6 @@ import {
   getAllOrders,
   createOrder,
   addProductToOrder,
-  updateProduct,
 } from '../api/index';
 import {
   BrowserRouter as Router,
@@ -172,10 +171,14 @@ const App = () => {
         JSON.parse(localStorage.getItem('cart')) === null ||
         Object.keys(JSON.parse(localStorage.getItem('cart'))).length == 0
       ) {
-        const order = await createOrder(currentUser.id, id);
-        setOrders([...orders, order]);
-        localStorage.setItem('cart', JSON.stringify(order));
-        setOngoingOrder(order);
+        try {
+          const order = await createOrder(currentUser.id, id);
+          setOrders([...orders, order]);
+          localStorage.setItem('cart', JSON.stringify(order));
+          setOngoingOrder(order);
+        } catch (error) {
+          throw error;
+        }
       } else {
         //Check if product alreayd exists in cart.
         //If yes, dont add and send user message.
@@ -188,32 +191,23 @@ const App = () => {
           );
           return;
         }
+        try {
+          const order = await addProductToOrder(ongoingOrder.id, id, price);
 
-        const order = await addProductToOrder(ongoingOrder.id, id, price);
+          //Compare function isn't nessecary here since comparing integer ids.
+          //If using alphabetical sort then don't need anon function either.
+          // order.products = order.products.sort(compareProductIds);
+          order.products = order.products.sort(
+            (productA, productB) => productA.id < productB.id
+          );
 
-        //Compare function isn't nessecary here since comparing integer ids.
-        //If using alphabetical sort then don't need anon function either.
-        // order.products = order.products.sort(compareProductIds);
-        order.products = order.products.sort(
-          (productA, productB) => productA.id < productB.id
-        );
-
-        localStorage.setItem('cart', JSON.stringify(order));
-        setOngoingOrder(order);
+          localStorage.setItem('cart', JSON.stringify(order));
+          setOngoingOrder(order);
+        } catch (error) {
+          throw error;
+        }
       }
-      // await updateProductInventory(id, quantity, inventory);
     };
-
-  //I think I don;t need anymore.
-  const updateProductInventory = async function (id, quantity, inventory) {
-    //Check if inventory is less than quantity;
-    console.log(inventory);
-    console.log(quantity);
-    inventory -= quantity;
-    console.log(inventory);
-    await updateProduct(id, { inventory });
-  };
-
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ JSX ~~~~~~~~
   //~~~~~~~~~~~~~~~~~~~

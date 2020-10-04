@@ -1,21 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { AccountInfo } from './index'
+import { OrderHistory } from './OrderHistory/index'
+
+import { Admin } from './Admin/index'
+
+import { updateUser } from '../../api/index'
 
 const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser, categories, setCategories }) => {
-    //Does this module only exist to render Accoutn info? If so, Account info should turn into our Account componenet.
+
+    const testChangeUserToGuest = () => {
+        localStorage.clear();
+        setOngoingOrder({})
+        setCurrentUser({ id: 1, username: 'guest', admin: false })
+    }
+
+    const onMakeAdmin = async function () {
+        const { updatedUser } = await updateUser(currentUser.id, { admin: true });
+        setCurrentUser(updatedUser);
+    }
 
     return (
-        <AccountInfo
-            categories={categories}
-            setCategories={setCategories}
-            usersOrders={usersOrders}
-            ongoingOrder={ongoingOrder}
-            setOngoingOrder={setOngoingOrder}
-            orders={orders}
-            setOrders={setOrders}
-            currentUser={currentUser}
-            setCurrentUser={setCurrentUser} />
+        <div>
+            <h1>AccountInfo</h1>
+            <h2>Current user is: {currentUser.username}</h2>
+            <button onClick={testChangeUserToGuest}>Change user to guest</button>
+            <button onClick={onMakeAdmin}>Make {currentUser.username} an Admin</button>
+            {currentUser.admin === false
+                ? ''
+                : <p>You are an admin.</p>
+            }
+            {currentUser.admin === false
+                ? ''
+                : <Admin
+                    categories={categories}
+                    setCategories={setCategories}
+                    setCurrentUser={setCurrentUser}
+                    setOngoingOrder={setOngoingOrder}
+                />
+            }
+            {currentUser.username !== 'guest'
+                ? <OrderHistory usersOrders={usersOrders} />
+                : 'Register or Sign in to see your order history.'}
+
+        </div>
+
     )
 }
 

@@ -125,6 +125,15 @@ usersRouter.post('/login', async (req, res, next) => {
 usersRouter.patch('/:userId', async (req, res, next) => {
   const { userId } = req.params;
   const { fields } = req.body;
+  try {
+    const updatedUser = await client.updateUser(userId, fields);
+    res.status(201).send({
+      updatedUser,
+      message: 'Successfully updated user!',
+    });
+  } catch (error) {
+    throw error;
+  }
 })
 
 //~~~~~~~~~~~~~~~~~~~

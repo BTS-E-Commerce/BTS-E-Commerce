@@ -57,8 +57,7 @@ async function getProductById(id) {
     if (categories.length > 0) {
       product.categories = categories;
     } else {
-      const noneCategory = getCategoryByName({ name: 'none' });
-
+      const noneCategory = await getCategoryByName({ name: 'none' });
       product.categories = noneCategory;
     }
 

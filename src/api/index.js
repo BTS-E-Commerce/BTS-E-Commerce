@@ -16,4 +16,5 @@ export {
   updateOrder,
   updateOrderProduct,
   deleteOrder,
+  deleteProductFromOrder
 } from './orders';
