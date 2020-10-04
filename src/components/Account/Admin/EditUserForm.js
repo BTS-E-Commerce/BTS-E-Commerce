@@ -30,11 +30,11 @@ const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser }) =>
         console.log(username, password, admin);
         try {
 
-            if (currentUser.admin == true) {
+            if (currentUser.admin === true) {
                 const { updatedUser } = await updateUser(user.id, { username, password, admin })
                 const removeIndex = users.findIndex(removeUser => removeUser.id === user.id);
                 window.location.reload();
-            } else if (currentUser.admin == true && currentUser.id == user.id) {
+            } else if (currentUser.admin === true && currentUser.id === user.id) {
                 const { updatedUser } = await updateUser(user.id, { username, password, admin })
                 const removeIndex = users.findIndex(removeUser => removeUser.id === user.id);
                 localStorage.setItem('username', updatedUser.username);

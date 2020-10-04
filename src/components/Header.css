@@ -42,6 +42,56 @@ div#Header {
   color: #a0520f;
 }
 
+#homeNav{
+  display: flex;
+}
+  
+#homeNav img{
+  height: 25px;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+#accountNav{
+  display: flex;
+}
+  
+#accountNav img{
+  height: 25px;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+#loginNav{
+  display: flex;
+}
+  
+#loginNav img{
+  height: 25px;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+#registerNav{
+  display: flex;
+}
+  
+#registerNav img{
+  height: 25px;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+#cartNav{
+display: flex;
+}
+
+#cartNav img{
+  height: 25px;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
 h2 a {
   text-decoration: none;
   padding-left: 10px;
@@ -59,6 +109,7 @@ h2 a:hover {
   text-shadow: -2px 0px 2px #f3b542;
 }
 
+/* If you remove the width here it will auto adjust to center. */
 .navBar {
   height: 20px;
   width: 600px;
