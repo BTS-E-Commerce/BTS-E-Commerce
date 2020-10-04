@@ -3,7 +3,9 @@
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState } from 'react';
 
-import { EditUserForm } from './index'
+import { EditUserForm } from './index';
+
+import { updateUser } from '../../../api/index.js';
 
 const UserCard = ({ user, changeUser, users, setUsers }) => {
     //~~~~~~~~~~~~~~~~~~~
@@ -20,6 +22,10 @@ const UserCard = ({ user, changeUser, users, setUsers }) => {
     const showEditFrom = () => {
         setEditFormStatus(!editFormStatus);
     }
+
+    const makeAdmin = (id) => {
+        await updateUser()
+    }
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -30,6 +36,7 @@ const UserCard = ({ user, changeUser, users, setUsers }) => {
             <p>User Id: {user.id}</p>
             <p>Password: {user.password}</p>
             <p>Admin: {user.admin === false ? "User is NOT an admin." : "User is an admin."}</p>
+            <button onClick={changeUser}>Make {user.username} an Admin</button>
             <button onClick={changeUser}>Log in as {user.username}</button>
             <button onClick={showEditFrom}>
                 {editFormStatus === false
