@@ -5,9 +5,7 @@ import React, { useState } from 'react';
 
 import { EditUserForm } from './index';
 
-import { updateUser } from '../../../api/index.js';
-
-const UserCard = ({ user, changeUser, users, setUsers, onDeleteUser }) => {
+const UserCard = ({ user, changeUser, users, setUsers, currentUser, onDeleteUser }) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -43,7 +41,7 @@ const UserCard = ({ user, changeUser, users, setUsers, onDeleteUser }) => {
             </button>
             {editFormStatus === false
                 ? ''
-                : <EditUserForm user={user} users={users} setUsers={setUsers} />
+                : <EditUserForm currentUser={currentUser} user={user} users={users} setUsers={setUsers} />
             }
             <button onClick={onDeleteUser}>Delete {user.username}</button>
         </div>
