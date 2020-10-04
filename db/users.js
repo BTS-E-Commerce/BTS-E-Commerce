@@ -114,7 +114,6 @@ async function createUser({ username, password, admin = false }) {
 //-- Update Functions --
 //* Updates a users informaiton.
 async function updateUser(userId, fields = {}) {
-  console.log(fields);
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
     .join(', ');

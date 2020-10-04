@@ -2,7 +2,7 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState } from 'react';
-import { createCategory, deleteCategory } from '../../../api';
+import { createCategory, deleteCategory, getAllProducts } from '../../../api';
 import { CategoryCard } from './index';
 
 const CategoryList = ({ categories, setCategories }) => {
@@ -35,8 +35,10 @@ const CategoryList = ({ categories, setCategories }) => {
   const onDelete = (id) =>
     async function () {
       await deleteCategory(id);
-
       setCategories(categories.filter((category) => id !== category.id));
+      window.location.reload();
+      // await getAllProducts();
+      // const newProducts = products.filter((product) => )
     };
 
   //~~~~~~~~~~~~~~~~~~~
