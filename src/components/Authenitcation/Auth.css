@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Lobster+Two:ital@1&family=Niconne&display=swap');
+
 #register {
   display: flex;
   justify-content: center;
@@ -8,19 +10,23 @@
   justify-content: center;
 }
 
+#login .auth-form {
+  height: 350px;
+}
+
 .auth-form {
   font-family: 'Lobster Two', cursive;
   margin: 4rem;
-
   border: 2px solid #a0520f;
   border-radius: 2%;
   width: 640px;
-  height: 450px;
+  height: 430px;
 }
 
 .auth-header {
   font-size: 36px;
   color: #6c4403;
+  text-shadow: 1px 1px 1px #ff7600;
   text-align: center;
   margin: 30px 15px 15px 15px;
 }
@@ -32,34 +38,47 @@
   border-bottom: 3px solid #a0520f;
 }
 
+label.auth-label {
+  font-family: 'Lobster Two', cursive;
+  font-weight: bolder;
+  font-size: 24px;
+  color: #c77e00;
+  text-shadow: 0px 0px 0px #6c4403;
+  letter-spacing: 1px;
+}
+
 .auth-input {
-  font-size: 22px;
   text-align: left;
   padding: 10px;
   background-color: rgb(255, 255, 255);
   width: 370px;
-}
-
-.auth-input:hover {
-  cursor: pointer;
-}
-
-.auth-label {
-  font-size: 24px;
+  font-family: 'Just Another Hand', cursive;
+  font-size: 25px;
+  color: #6c4403;
+  text-shadow: 0px 0px 0px #6c4403;
+  letter-spacing: 1px;
+  cursor: text;
 }
 
 .auth-button {
-  margin-top: 65px;
-  height: 48px;
-  font-size: 26px;
-
   color: wheat;
   background-color: #8b5907;
+  width: 500px;
   border: 2px solid #814109;
   box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  align-self: center;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  line-height: 1px;
+  letter-spacing: 1px;
+  font-family: 'Niconne', cursive;
+  margin-top: 50px;
+  height: 40px;
+  font-size: 26px;
 }
 
-.auth-button:hover {
-  font-size: 36px;
-  cursor: pointer;
+.auth-button:active {
+  margin: 55px 0px 2px 0px;
 }
