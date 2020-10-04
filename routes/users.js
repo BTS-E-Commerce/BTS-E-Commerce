@@ -123,29 +123,57 @@ usersRouter.post('/login', async (req, res, next) => {
 });
 
 usersRouter.patch('/:userId', async (req, res, next) => {
-
   const { userId } = req.params;
-  const { fields } = req.body;
+  const { adminUserId, currentPassword, fields } = req.body;
+  let updatedUser = {};
 
-  if (fields.admin == undefined) {
+  if (fields.password === undefined || fields.password === '') {
+    delete fields.password;
+  }
 
+  if (fields.username === undefined || fields.username === '') {
+    delete fields.username;
   }
 
   try {
-    const originalUser = await client.getUserById(userId)
-    if (fields.password != undefined && originalUser.password !== fields.password) {
-      //When updating and if there is a password update we need to run bcrypt again on it.
-      console.log("New password change.")
+    let user;
+    if (adminUserId != null) {
+      user = await client.getUserById(adminUserId);
+    } else {
+      user = await client.getUserById(userId);
     }
-    const updatedUser = await client.updateUser(userId, fields);
-    res.status(201).send({
-      updatedUser,
-      message: 'Successfully updated user!',
+
+    const originalHashedPassword = user.password;
+
+    bcrypt.compare(currentPassword, originalHashedPassword, async function (err, passwordsMatch) {
+      if (passwordsMatch) {
+        if (fields.password !== undefined) {
+          let securePassword;
+
+          bcrypt.hash(fields.password, SALT_COUNT, async (err, hashedPassword) => {
+            securePassword = hashedPassword;
+            fields.password = securePassword;
+
+            updatedUser = await client.updateUser(userId, fields);
+          });
+        } else {
+          updatedUser = await client.updateUser(userId, fields);
+        }
+        res.status(201).send({
+          updatedUser,
+          message: 'Successfully updated user!',
+        });
+      } else {
+        res.status(401).send({
+          name: 'Incorrect Credentials Error',
+          message: 'Current password is incorrect.',
+        });
+      }
     });
   } catch (error) {
     throw error;
   }
-})
+});
 
 usersRouter.delete('/:userId', async (req, res, next) => {
   const { userId } = req.params;

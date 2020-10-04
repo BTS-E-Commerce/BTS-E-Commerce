@@ -21,10 +21,6 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
     //~~~~~~~~~~~~~~~~~~~
     //~~~~ FUNCTIONS ~~~~
     //~~~~~~~~~~~~~~~~~~~
-    const onMakeAdmin = async function () {
-        const { updatedUser } = await updateUser(currentUser.id, { admin: true });
-        setCurrentUser(updatedUser);
-    }
 
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
@@ -33,7 +29,6 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
         <div>
             <h1>AccountInfo</h1>
             <h2>Current user is: {currentUser.username}</h2>
-            <button onClick={onMakeAdmin}>Make {currentUser.username} an Admin</button>
             {currentUser.admin === false
                 ? ''
                 : <p>You are an admin.</p>
@@ -51,7 +46,10 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
             {currentUser.username !== 'guest'
                 ? <div className='account-information'>
                     <OrderHistory usersOrders={usersOrders} />
-                    <EditUserForm setCurrentUser={setCurrentUser} currentUser={currentUser} />
+                    {currentUser.admin === false
+                        ? <EditUserForm setOngoingOrder={setOngoingOrder} setCurrentUser={setCurrentUser} currentUser={currentUser} />
+                        : ''}
+
                 </div>
                 : 'Register or Sign in to see your order history.'}
 

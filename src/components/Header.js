@@ -75,14 +75,14 @@ const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
                 </h2>
               </div>
               <div className='navBar'>
-                <NavLink className='homeNav' to='/'>
-                  HOME
+                <NavLink id='homeNav' to='/'>
+                  <img src={homeImg} alt='A home with a heart around macaroni in it.' />HOME
               </NavLink>
-                <NavLink className='accountNav' to='/account'>
-                  ACCOUNT
+                <NavLink id='accountNav' to='/account'>
+                  <img src={accountImg} alt="A grandma's head with macaroni for eyes." />ACCOUNT
               </NavLink>
                 <NavLink id='cartNav' to='/cart'>
-                  MY CART
+                  <img src={cartImg} alt='A pot of macaroni.' />MY CART
               </NavLink>
               </div>
               <div className='rightOfNavbar'>
