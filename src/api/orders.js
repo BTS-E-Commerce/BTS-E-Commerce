@@ -82,9 +82,9 @@ export async function deleteOrder(orderId) {
   }
 }
 
-export async function deleteProductFromOrder(orderId) {
+export async function deleteProductFromOrder(orderId, productId) {
   try {
-    const { data } = await axios.delete(`${BASE_URL}/orders/${orderId}`);
+    const { data } = await axios.delete(`${BASE_URL}/orders/${orderId}/${productId}`);
 
     return data;
   } catch (error) {

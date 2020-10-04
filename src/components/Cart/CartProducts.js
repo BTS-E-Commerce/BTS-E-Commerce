@@ -22,8 +22,11 @@ const CartProducts = ({ products, setProducts, product, ongoingOrder, setOngoing
             product.quantity -= 1;
             return;
         }
-        await updateOrderProduct(ongoingOrder.id, product.id, { quantity: updatedProduct.quantity });
-        // await updateProductInventory(product.id, updatedProduct.quantity, inventoryProduct.inventory);
+        try {
+            await updateOrderProduct(ongoingOrder.id, product.id, { quantity: updatedProduct.quantity });
+        } catch (error) {
+            throw error;
+        }
         setOngoingOrder({ ...ongoingOrder, products: updatedOrderProducts });
     }
 

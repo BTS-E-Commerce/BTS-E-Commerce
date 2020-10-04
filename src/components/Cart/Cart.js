@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 import { CartProducts } from './index';
 
-import { updateOrder, deleteOrder, updateProduct } from '../../api/index';
+import { updateOrder, deleteOrder, deleteProductFromOrder, updateProduct } from '../../api/index';
 
 import { FindTotalPrice } from '../../utils/FindTotalPrice';
 
@@ -28,7 +28,12 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
 
     useEffect(() => {
         async function updateTotalPrice() {
-            await updateOrder(ongoingOrder.id, { totalPrice })
+            try {
+                await updateOrder(ongoingOrder.id, { totalPrice })
+            } catch (error) {
+                throw error;
+            }
+
         }
         updateTotalPrice();
     }, [totalPrice]);
@@ -59,23 +64,33 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
                 return;
             }
         });
-        const completedOrder = await updateOrder(ongoingOrder.id, { isComplete: true, totalPrice });
-        for (const product of ongoingOrder.products) {
-            product.inventory -= product.quantity;
-            await updateProduct(product.id, { inventory: product.inventory });
+        try {
+            const completedOrder = await updateOrder(ongoingOrder.id, { isComplete: true, totalPrice });
+            for (const product of ongoingOrder.products) {
+                product.inventory -= product.quantity;
+                await updateProduct(product.id, { inventory: product.inventory });
+            }
+            localStorage.removeItem('cart');
+            setOngoingOrder({});
+            setUsersOrders([...usersOrders, completedOrder]);
+            console.log('Here is your completed order:', completedOrder);
+        } catch (error) {
+            throw error;
         }
-        localStorage.removeItem('cart');
-        setOngoingOrder({});
-        setUsersOrders([...usersOrders, completedOrder]);
-        console.log('Here is your completed order:', completedOrder);
     }
 
     //Implement removing product from cart after addition.
-    const onDeleteProductFromCart = (id) => () => {
-        const newOngoingOrderProducts = ongoingOrder.products.filter((product) => id !== product.id);
-        localStorage.setItem('cart', JSON.stringify(newOngoingOrderProducts));
-        setOngoingOrder({ ...ongoingOrder, products: newOngoingOrderProducts });
-    }
+    const onDeleteProductFromCart = (id) =>
+        async function () {
+            try {
+                await deleteProductFromOrder(ongoingOrder.id, id);
+            } catch (error) {
+                throw error;
+            }
+            const newOngoingOrderProducts = ongoingOrder.products.filter((product) => id !== product.id);
+            localStorage.setItem('cart', JSON.stringify(newOngoingOrderProducts));
+            setOngoingOrder({ ...ongoingOrder, products: newOngoingOrderProducts });
+        };
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
