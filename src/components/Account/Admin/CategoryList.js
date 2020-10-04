@@ -1,16 +1,43 @@
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { createCategory, deleteCategory } from '../../../api';
+import { CategoryCard } from './index';
 
 const CategoryList = ({ categories, setCategories }) => {
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~ EFFECTS ~~~~~
   //~~~~~~~~~~~~~~~~~~~
+  const [newCategory, setNewCategory] = useState();
 
   //~~~~~~~~~~~~~~~~~~~
   //~~~~ FUNCTIONS ~~~~
   //~~~~~~~~~~~~~~~~~~~
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (!newCategory || newCategory === undefined) {
+      alert('please enter a valid category');
+      return;
+    }
+
+    const category = await createCategory(newCategory);
+
+    setCategories([...categories, category]);
+    setNewCategory('');
+  }
+
+  const handleNewCategory = (event) => {
+    console.log(event.target.value);
+    setNewCategory(event.target.value);
+  };
+
+  const onDelete = (id) =>
+    async function () {
+      await deleteCategory(id);
+
+      setCategories(categories.filter((category) => id !== category.id));
+    };
 
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ JSX ~~~~~~~~
@@ -18,24 +45,32 @@ const CategoryList = ({ categories, setCategories }) => {
   return (
     <div>
       <h1>Categories</h1>
-      <button>Add New Category</button>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor='add-category'>New Category:</label>
+        <input
+          type='text'
+          name='add-category'
+          value={newCategory}
+          onChange={handleNewCategory}
+        />
+        <button>Add New Category</button>
+      </form>
+
       <ul>
         {categories.map((category) => (
-          <li key={category.id}>
-            {(category.name[0]).toUpperCase()}
-            {(category.name).slice(1)}
-            <button>Edit Category</button>
-            <button>Delete Category</button>
-          </li>
+          <CategoryCard
+            key={category.id}
+            category={category}
+            onDelete={onDelete(category.id)}
+          />
         ))}
       </ul>
     </div>
   );
 };
 
-export default CategoryList;
-
-
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
+
+export default CategoryList;
