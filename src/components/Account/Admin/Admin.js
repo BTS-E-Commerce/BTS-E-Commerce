@@ -9,6 +9,7 @@ import { deleteCategory } from '../../../api';
 const Admin = ({
   categories,
   setCategories,
+  currentUser,
   setCurrentUser,
   setOngoingOrder,
 }) => {
@@ -31,6 +32,7 @@ const Admin = ({
     <div>
       <h1>Admin Actions</h1>
       <UsersList
+        currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         setOngoingOrder={setOngoingOrder}
       />

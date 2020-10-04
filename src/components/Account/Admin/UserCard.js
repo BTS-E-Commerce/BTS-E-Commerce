@@ -7,7 +7,7 @@ import { EditUserForm } from './index';
 
 import { updateUser } from '../../../api/index.js';
 
-const UserCard = ({ user, changeUser, users, setUsers }) => {
+const UserCard = ({ user, changeUser, users, setUsers, onDeleteUser }) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -45,7 +45,7 @@ const UserCard = ({ user, changeUser, users, setUsers }) => {
                 ? ''
                 : <EditUserForm user={user} users={users} setUsers={setUsers} />
             }
-
+            <button onClick={onDeleteUser}>Delete {user.username}</button>
         </div>
 
     )
