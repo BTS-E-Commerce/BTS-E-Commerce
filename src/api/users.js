@@ -48,7 +48,6 @@ export async function createUser({ username, password }) {
 
 export async function updateUser(userId, fields) {
   try {
-    //When updating and if there is a password we need to run bcrypt again on it.
     const { data } = await axios.patch(`${BASE_URL}/users/${userId}`, {
       fields
     });
