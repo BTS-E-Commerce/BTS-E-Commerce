@@ -3,15 +3,21 @@
 //~~~~~~~~~~~~~~~~~~~
 import React, { useEffect, useState } from 'react';
 
+import { Redirect, Route, useHistory } from 'react-router-dom'
+
 import { updateUser } from '../../../api/index';
 
-const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser }) => {
+const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser, setOngoingOrder }) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
-    const [username, setUsername] = useState(user === undefined ? '' : (user.username));
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [currentPassword, setCurrentPassword] = useState('');
     const [admin, setAdmin] = useState(user === undefined ? '' : (user.admin));
+    //For some reason setCurrentUser is listed as not a fucntion.
+
+    let history = useHistory();
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~ EFFECTS ~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -23,39 +29,50 @@ const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser }) =>
     //~~~~~~~~~~~~~~~~~~~
     //~~~~ FUNCTIONS ~~~~
     //~~~~~~~~~~~~~~~~~~~
-    console.log(currentUser);
+    //* For testing purposes. Makes the current user an admin.
+    const onMakeAdmin = async function () {
+        const { updatedUser } = await updateUser({ userId: currentUser.id, adminUserId: currentUser.id, currentPassword: currentPassword, fields: { admin: true } });
+        setCurrentUser(updatedUser);
+    }
+
     async function handleSubmit(event) {
         event.preventDefault();
 
         console.log(username, password, admin);
+        if (currentPassword === '') {
+            alert('You need to verify your current password to update your info.');
+            return;
+        }
         try {
+            if (currentUser.admin === true && currentUser.id === user.id) {
+                const { updatedUser } = await updateUser({ userId: user.id, adminUserId: currentUser.id, currentPassword: currentPassword, fields: { username, password, admin } })
+                console.log("THIS IS MY OWN USER INfo.")
 
-            if (currentUser.admin === true) {
-                const { updatedUser } = await updateUser(user.id, { username, password, admin })
+                localStorage.clear();
+                setCurrentUser({ id: 1, username: 'guest', admin: false });
+                setOngoingOrder({});
+
+                history.push('/login');
+            } else if (currentUser.admin === true) {
+                const { updatedUser } = await updateUser({ userId: user.id, adminUserId: currentUser.id, currentPassword: currentPassword, fields: { username, password, admin } })
                 const removeIndex = users.findIndex(removeUser => removeUser.id === user.id);
-                window.location.reload();
-            } else if (currentUser.admin === true && currentUser.id === user.id) {
-                const { updatedUser } = await updateUser(user.id, { username, password, admin })
-                const removeIndex = users.findIndex(removeUser => removeUser.id === user.id);
-                localStorage.setItem('username', updatedUser.username);
-                console.log(updatedUser);
-                setCurrentUser(updatedUser);
+                //For some reason this splice is not working on users. I have tried copying the array and prefomring it on the copy but that also does not work.
+                //To get around this I just force a refresh.
+                // users.slice(removeIndex, 1, updatedUser);
+                // setUsers([...users]);
+
+                //This is here as a failsafe.
                 window.location.reload();
             }
             else {
-                const { updatedUser } = await updateUser(currentUser.id, { username, password, admin })
-                //Need to setCurrentUser here if changing your own userinfo.
-                //OR we need to make them login with new, updated info.
-                console.log(updatedUser);
-                setCurrentUser(updatedUser);
+                const { updatedUser } = await updateUser({ userId: currentUser.id, currentPassword: currentPassword, fields: { username, password, admin } })
+
+                localStorage.clear();
+                setCurrentUser({ id: 1, username: 'guest', admin: false });
+                setOngoingOrder({});
+
+                history.push('/login');
             }
-            //For some reason this splice is not working on users. I have tried copying the array and prefomring it on the copy but that also does not work.
-            //To get around this I just force a refresh.
-            // users.slice(removeIndex, 1, updatedUser);
-            // setUsers([...users]);
-
-            //This is here as a failsafe.
-
         } catch (error) {
             throw error;
         }
@@ -66,6 +83,10 @@ const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser }) =>
     }
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
+    }
+
+    const handleCurrentPasswordChange = (event) => {
+        setCurrentPassword(event.target.value);
     }
     const handleAdminChange = (event) => {
         //This does not change from the default value when the radio buttons are clicked.
@@ -78,7 +99,15 @@ const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser }) =>
         <div>
             <h3>Edit User Form</h3>
             <form onSubmit={handleSubmit}>
-                <label htmlFor='edit-username'>Username:</label>
+                <label htmlFor='edit-current-password'>Current Password:</label>
+                <input
+                    className='edit-current-password'
+                    type='text'
+                    name='current-password'
+                    value={currentPassword}
+                    onChange={handleCurrentPasswordChange}
+                />
+                <label htmlFor='edit-username'>New Username:</label>
                 <input
                     className='edit-username'
                     type='text'
@@ -94,13 +123,17 @@ const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser }) =>
                     value={password}
                     onChange={handlePasswordChange}
                 />
-                <p>Give Admin Status?</p>
-                <label htmlFor='edit-admin-true'>True</label>
-                <input type="radio" className='edit-admin-true' name="edit-admin" value="true" onChange={handleAdminChange} />
-                <label htmlFor='edit-admin-false'>False</label>
-                <input type="radio" className='edit-admin-false' name="edit-admin" value="false" onChange={handleAdminChange} checked />
+
+                {currentUser.admin === true ? <>
+                    <p>Give Admin Status?</p>
+                    <label htmlFor='edit-admin-true'>True</label>
+                    <input type="radio" className='edit-admin-true' name="edit-admin" value="true" onChange={handleAdminChange} />
+                    <label htmlFor='edit-admin-false'>False</label>
+                    <input type="radio" className='edit-admin-false' name="edit-admin" value="false" onChange={handleAdminChange} checked />
+                </> : ''}
                 <input type='submit' value='Submit'></input>
             </form>
+            <button onClick={onMakeAdmin}>Make {currentUser.username} an Admin</button>
         </div >
     )
 }
