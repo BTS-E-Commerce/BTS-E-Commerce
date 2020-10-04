@@ -169,7 +169,7 @@ const App = () => {
       }
       if (
         JSON.parse(localStorage.getItem('cart')) === null ||
-        Object.keys(JSON.parse(localStorage.getItem('cart'))).length == 0
+        Object.keys(JSON.parse(localStorage.getItem('cart'))).length === 0
       ) {
         try {
           const order = await createOrder(currentUser.id, id);

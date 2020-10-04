@@ -3,6 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { getAllUsers } from '../api/users';
 
 import logo from './images/GrandmasMac.png';
+import homeImg from './images/granmachome.png';
+import accountImg from './images/granmacaccount.png';
+import loginImg from './images/grandmalogin.png';
+import registerImg from './images/granmacregister.png';
+import cartImg from './images/grandmamamacart.png';
 
 import './Header.css';
 
@@ -34,57 +39,59 @@ const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
               <h2> Welcome! </h2>
             </div>
             <div className='navBar'>
-              <NavLink className='homeNav' to='/home'>
-                HOME
+              <NavLink id='homeNav' to='/home'>
+                <img src={homeImg} alt='A home with a heart around macaroni in it.' />HOME
               </NavLink>
-              <NavLink className='accountNav' to='/account'>
-                ACCOUNT
+              <NavLink id='accountNav' to='/account'>
+                <img src={accountImg} alt="A grandma's head with macaroni for eyes." />ACCOUNT
               </NavLink>
-              <NavLink className='registerNav' to='/register'>
-                REGISTER
+              <NavLink id='registerNav' to='/register'>
+                <img src={registerImg} alt="A grandma's head with a plus sign eyes." />REGISTER
               </NavLink>
-              <NavLink className='loginNav' to='/login'>
-                LOGIN{' '}
+              <NavLink id='loginNav' to='/login'>
+                <img src={loginImg} alt='A grandma walking into a doorway.' />LOGIN{' '}
               </NavLink>
-              <NavLink className='cartNav' to='/cart'>
-                MY CART{' '}
+              <NavLink id='cartNav' to='/cart'>
+                <img src={cartImg} alt='A pot of macaroni.' /> CART{' '}
+
+
               </NavLink>
             </div>
             <div className='rightOfNavbar'></div>
           </div>
         </>
       ) : (
-        <>
-          <NavLink className='homeNav' to='/'>
-            <img src={logo} alt="Grandma's Mac Logo" />
-          </NavLink>
-          <div className='navContainer'>
-            <div className='leftOfNavbar'>
-              <h2>
-                Current User:
+          <>
+            <NavLink className='homeNav' to='/'>
+              <img src={logo} alt="Grandma's Mac Logo" />
+            </NavLink>
+            <div className='navContainer'>
+              <div className='leftOfNavbar'>
+                <h2>
+                  Current User:
                 <NavLink className='accountNav' to='/account'>
-                  {currentUser.username}
-                </NavLink>
-              </h2>
-            </div>
-            <div className='navBar'>
-              <NavLink className='homeNav' to='/'>
-                HOME
+                    {currentUser.username}
+                  </NavLink>
+                </h2>
+              </div>
+              <div className='navBar'>
+                <NavLink className='homeNav' to='/'>
+                  HOME
               </NavLink>
-              <NavLink className='accountNav' to='/account'>
-                ACCOUNT
+                <NavLink className='accountNav' to='/account'>
+                  ACCOUNT
               </NavLink>
-              <NavLink className='cartNav' to='/cart'>
-                MY CART
+                <NavLink id='cartNav' to='/cart'>
+                  MY CART
               </NavLink>
+              </div>
+              <div className='rightOfNavbar'>
+                <button onClick={logOutUser}>Log Out</button>
+                {/* <button onClick={testStuff}>TEST JWT</button> */}
+              </div>
             </div>
-            <div className='rightOfNavbar'>
-              <button onClick={logOutUser}>Log Out</button>
-              {/* <button onClick={testStuff}>TEST JWT</button> */}
-            </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
     </div>
   );
 };
