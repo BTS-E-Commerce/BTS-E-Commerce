@@ -13,7 +13,7 @@ const config = {
 
 export async function getAllUsers() {
   try {
-    const { data } = await axios.get(`${BASE_URL}/users`, config);
+    const { data } = await axios.get(`${BASE_URL}/users`);
     return data;
   } catch (error) {
     throw error;

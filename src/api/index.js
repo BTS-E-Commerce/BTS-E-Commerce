@@ -1,7 +1,7 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS/EXPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~
-export { getAllCategories } from './categories';
+export { getAllCategories, createCategory, deleteCategory } from './categories';
 export {
   getAllProducts,
   createProduct,
@@ -17,5 +17,3 @@ export {
   updateOrderProduct,
   deleteOrder,
 } from './orders';
-
-//Maybe this should just be where we import/export all the api functions for use in componets?

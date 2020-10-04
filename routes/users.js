@@ -18,7 +18,7 @@ const SALT_COUNT = 10;
 // -- GET Routes --
 //* Get All Users
 
-usersRouter.get('/', requireUser, async (req, res, next) => {
+usersRouter.get('/', async (req, res, next) => {
   try {
     const users = await client.getAllUsers();
 

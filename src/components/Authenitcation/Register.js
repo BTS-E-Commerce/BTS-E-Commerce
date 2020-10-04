@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createUser } from '../../api/index';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import './Auth.css';
 
 const Register = ({ currentUser, setCurrentUser }) => {
@@ -93,6 +93,7 @@ const Register = ({ currentUser, setCurrentUser }) => {
             <button className='auth-button' type='submit'>
               Register
             </button>
+            <NavLink to='/login'>LOGIN</NavLink>
           </form>
         </>
       ) : (

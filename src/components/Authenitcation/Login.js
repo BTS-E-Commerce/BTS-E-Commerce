@@ -1,9 +1,17 @@
+//~~~~~~~~~~~~~~~~~~~
+//~~~~~ IMPORTS ~~~~~
+//~~~~~~~~~~~~~~~~~~~
+
 import React, { useState } from 'react';
 import { loginUser } from '../../api/users';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import './Auth.css';
 
 const Login = ({ currentUser, setCurrentUser }) => {
+  //~~~~~~~~~~~~~~~~~~~
+  //~~~~~~ STATE ~~~~~~
+  //~~~~~~~~~~~~~~~~~~~
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -33,6 +41,10 @@ const Login = ({ currentUser, setCurrentUser }) => {
     setPassword('');
   }
 
+  //~~~~~~~~~~~~~~~~~~~
+  //~~~~ FUNCTIONS ~~~~
+  //~~~~~~~~~~~~~~~~~~~
+
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -40,6 +52,10 @@ const Login = ({ currentUser, setCurrentUser }) => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  //~~~~~~~~~~~~~~~~~~~
+  //~~~~~~ JSX ~~~~~~~~
+  //~~~~~~~~~~~~~~~~~~~
 
   return (
     <div id='login'>
@@ -74,6 +90,7 @@ const Login = ({ currentUser, setCurrentUser }) => {
             <button className='auth-button' type='submit'>
               Login
             </button>
+            <NavLink to='/register'>REGISTER</NavLink>
           </form>
         </>
       ) : (

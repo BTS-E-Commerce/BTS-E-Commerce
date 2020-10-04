@@ -72,26 +72,14 @@ async function createCategories(categoryList) {
     .map((_, index) => `$${index + 1}`)
     .join('), (');
 
-  const valuesStringSelect = categoryList
-    .map((_, index) => `$${index + 1}`)
-    .join(', ');
-
   //# For some reason it does not like this line of code below
   //#  ON CONFLICT (name) DO NOTHING;
   try {
-    await client.query(
-      `
-      INSERT INTO categories(name)
-      VALUES (${valuesStringInsert});
-      `,
-      categoryList
-    );
-
     const { rows } = await client.query(
       `
-      SELECT * FROM categories
-      WHERE name
-      IN (${valuesStringSelect});
+      INSERT INTO categories(name)
+      VALUES (${valuesStringInsert})
+      RETURNING *;
       `,
       categoryList
     );
