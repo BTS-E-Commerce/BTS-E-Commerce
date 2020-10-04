@@ -50,10 +50,7 @@ const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
                 MY CART{' '}
               </NavLink>
             </div>
-            <div className='rightOfNavbar'>
-              <button onClick={logOutUser}>Log Out</button>
-              {/* <button onClick={testStuff}>TEST JWT</button> */}
-            </div>
+            <div className='rightOfNavbar'></div>
           </div>
         </>
       ) : (
