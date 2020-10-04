@@ -2,7 +2,7 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState, useEffect } from 'react';
-import { Header } from './index';
+import { Header, LandingPage } from './index';
 import {
   getAllCategories,
   getAllProducts,
@@ -220,6 +220,9 @@ const App = () => {
           setOngoingOrder={setOngoingOrder}
         />
         <Switch>
+          <Route exact path='/'>
+            <LandingPage />
+          </Route>
           <Route exact path='/account'>
             <h2>Welcome to your account, {currentUser.username}</h2>
             <Account
@@ -258,13 +261,15 @@ const App = () => {
           <Route path='/home'>
             <Redirect to='/' />
           </Route>
-          <Content
-            products={products}
-            setProducts={setProducts}
-            addProductToCart={addProductToCart}
-            categories={categories}
-            currentUser={currentUser}
-          />
+          <Route path='/store'>
+            <Content
+              products={products}
+              setProducts={setProducts}
+              addProductToCart={addProductToCart}
+              categories={categories}
+              currentUser={currentUser}
+            />
+          </Route>
         </Switch>
       </div>
     </Router>

@@ -3,7 +3,7 @@
 //~~~~~~~~~~~~~~~~~~~
 import React, { useEffect, useState } from 'react';
 
-import { Redirect, Route, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { updateUser } from '../../../api/index';
 

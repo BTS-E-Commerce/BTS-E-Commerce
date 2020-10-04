@@ -52,6 +52,16 @@ div#Header {
   padding-right: 10px;
 }
 
+#storeNav{
+  display: flex;
+}
+  
+#storeNav img{
+  height: 25px;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
 #accountNav{
   display: flex;
 }

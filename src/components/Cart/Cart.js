@@ -2,6 +2,7 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 
 import { CartProducts } from './index';
 
@@ -15,6 +16,7 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
     //~~~~~~~~~~~~~~~~~~~
     const [totalPrice, setTotalPrice] = useState(0);
 
+    let history = useHistory();
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~ EFFECTS ~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -49,6 +51,8 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
             localStorage.removeItem('cart');
             console.log("THIS IS WHAT WAS DELETED", deletedOrder);
             console.log("THIS IS ONGOING AFTER DELETED", ongoingOrder);
+
+            history.push('/');
         } else {
             console.log('Cannot delete order.')
         }
@@ -74,6 +78,7 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
             setOngoingOrder({});
             setUsersOrders([...usersOrders, completedOrder]);
             console.log('Here is your completed order:', completedOrder);
+            history.push('/');
         } catch (error) {
             throw error;
         }
