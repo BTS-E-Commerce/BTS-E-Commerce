@@ -25,7 +25,7 @@ div#Header {
 }
 
 .leftOfNavbar {
-  width: 300px;
+  width: 250px;
   height: 36px;
   display: flex;
   justify-content: center;
@@ -68,7 +68,7 @@ h2 a:hover {
 
 .navBar {
   height: 36px;
-  width: 800px;
+  width: 900px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -94,13 +94,18 @@ h2 a:hover {
   margin: 6px 0px 2px 0px;
 }
 
+#storeNav img {
+  height: 26px;
+  margin-bottom: 0px;
+}
+
 .navBar a:hover {
   color: #674403;
   text-shadow: -2px 0px 2px #f3b542;
 }
 
 .rightOfNavbar {
-  width: 300px;
+  width: 250px;
   height: 36px;
   display: flex;
   justify-content: center;
