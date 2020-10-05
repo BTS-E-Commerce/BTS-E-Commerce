@@ -103,6 +103,160 @@ async function initializeProducts() {
         { id: 7, name: 'special' },
       ]
     );
+
+    await createProduct(
+      {
+        name: 'Fire-Grilled Sour Mac N Cheese',
+        description:
+          "Steamed thick acorn noodles with kola nut and oregano on a bed of steamed cabbage, cooked wild leek and mangos. Served with pepperjack, stout, rye bread, tangerine pie and fried eggs.",
+        image:
+          'https://midwestfoodieblog.com/wp-content/uploads/2020/02/FINAL-mexican-mac-and-cheese-1-3.jpg',
+        inventory: '100',
+        basePrice: '1500',
+        currentPrice: '1500',
+        sale: true,
+      },
+      [
+        { id: 2, name: 'baked' },
+      ]
+    );
+
+    await createProduct(
+      {
+        name: 'Grilled Fennel & Lime Mac',
+        description:
+          "Boiled lizard with vanilla, pili nuts and caramel with a salad of diced parsnip, fiddlehead and avocados.",
+        image:
+          'https://joyfoodsunshine.com/wp-content/uploads/2019/04/best-easy-homemade-mac-and-cheese-recipe-1-500x500.jpg',
+        inventory: '100',
+        basePrice: '2000',
+        currentPrice: '2000',
+        sale: true,
+      },
+      [
+        { id: 2, name: 'baked' },
+      ]
+    );
+
+    await createProduct(
+      {
+        name: 'Cooked Light Macaroni Crocodile',
+        description:
+          "The throbbing pain from their wound was enough to disorient them. Hazy, confused and weak in their knees they felt as if they could collapse under their own weight at any moment. It was exhausting and the pain took its toll on them. Tired, but unable to sleep and unable to stop it. The road ahead was a tough one and right now they weren't sure whether they were willing to walk it, let alone whether they were able.",
+        image:
+          'https://www.spendwithpennies.com/wp-content/uploads/2020/02/Cauliflower-Mac-and-Cheese-SpendWithPennies-8.jpg',
+        inventory: '50',
+        basePrice: '1000',
+        currentPrice: '1000',
+        sale: false,
+      },
+      [
+        { id: 5, name: 'cheesy' },
+      ]
+    );
+
+    await createProduct(
+      {
+        name: 'Sautéed Cinnamon Baked Mac',
+        description:
+          "Fried small flat rice noodles with chives, rosemary and cumin on a bed of sliced winter purslane, sliced sea kale and wolfberries. Served with manioc soup, fried eggs, red wine, focaccia and brined cream cheese.",
+        image:
+          'https://www.thechunkychef.com/wp-content/uploads/2018/02/Ultimate-Creamy-Baked-Mac-and-Cheese-feat-1-440x500.jpg',
+        inventory: '10',
+        basePrice: '700',
+        currentPrice: '700',
+        sale: false,
+      },
+      [
+        { id: 2, name: 'baked' },
+      ]
+    );
+
+    await createProduct(
+      {
+        name: 'Pecan and Walnut Molten Macaroni Cake',
+        description:
+          "Werecat tripe with orange peel and sumac on a bed of cooked beetroot, sauteed kumara and plums. Served with gabon nut pie and potato bread with jam.",
+        image:
+          'https://www.seasonsandsuppers.ca/wp-content/uploads/2013/01/mac-cheese-3.jpg',
+        inventory: '40',
+        basePrice: '1700',
+        currentPrice: '1700',
+        sale: false,
+      },
+      [
+        { id: 7, name: 'special' },
+      ]
+    );
+
+    await createProduct(
+      {
+        name: "Grandma's Special Onion and Mac Fritters",
+        description:
+          "If you encounter Grandma Mac at night do not approach her! While normally of temperate disposition, at night the moonlight causes such pain that its violent tendencies become exacerbated.",
+        image:
+          'https://www.wholesomeyum.com/wp-content/uploads/2017/06/www.wholesomeyum.com-cauliflower-mac-and-cheese-recipe-low-carb-keto-gluten-free-img_3715-1.jpg',
+        inventory: '40',
+        basePrice: '2500',
+        currentPrice: '2500',
+        sale: false,
+      },
+      [
+        { id: 6, name: 'cheddar' },
+      ]
+    );
+
+    await createProduct(
+      {
+        name: 'Almond Bombe: Grandma Style',
+        description:
+          "Tasty burgers made from lea bacon and minced lamb, served in a roll.",
+        image:
+          'https://www.wholesomeyum.com/wp-content/uploads/2017/06/www.wholesomeyum.com-cauliflower-mac-and-cheese-recipe-low-carb-keto-gluten-free-img_3715-1.jpg',
+        inventory: '40',
+        basePrice: '2300',
+        currentPrice: '2300',
+        sale: false,
+      },
+      [
+        { id: 5, name: 'cheesy' },
+      ]
+    );
+
+    await createProduct(
+      {
+        name: 'Cured Macaroni & Garlic Flatbread',
+        description:
+          "Steamed brown rice with bay leaves, tinda, marjoram, horse gram and gabon nut with a side of sliced chinese artichoke and mulberries. Served with soft boiled eggs, cloves and vanilla soup and aged gouda.",
+        image:
+          'https://www.thechunkychef.com/wp-content/uploads/2018/02/Ultimate-Creamy-Baked-Mac-and-Cheese-feat-1-440x500.jpg',
+        inventory: '40',
+        basePrice: '1600',
+        currentPrice: '1600',
+        sale: false,
+      },
+      [
+        { id: 3, name: 'oven' },
+      ]
+    );
+
+    await createProduct(
+      {
+        name: 'Mango Mac Mooncake',
+        description:
+          "Soft moans and grunts escaped their mouth. Tired and frustrated they wanted it all to be over and done with. Perhaps against their better judgment they swallowed the pain and continued onward, but taking at least some care to prevent making it worse.",
+        image:
+          'https://joyfoodsunshine.com/wp-content/uploads/2019/04/best-easy-homemade-mac-and-cheese-recipe-1-500x500.jpg',
+        inventory: '40',
+        basePrice: '1200',
+        currentPrice: '1200',
+        sale: false,
+      },
+      [
+        { id: 3, name: 'oven' },
+      ]
+    );
+
     console.log('Finished making products...');
   } catch (error) {
     console.log('Error creating initial products...');

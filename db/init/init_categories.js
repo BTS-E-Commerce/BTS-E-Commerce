@@ -29,8 +29,10 @@ async function initializeCategories() {
       'vegan',
       'special',
       'cheese',
+      'boiled',
+      'grilled',
+
     ]);
-    console.log(categories);
   } catch (error) {
     console.log(error);
   }
@@ -56,9 +58,9 @@ async function testCategoryFunctions() {
     console.log('Sucessfully tested getCategorybyName: ', categoryByName);
 
     //# Verified this works, commenting out for now.
-    console.log('Testing deleteCategory...');
-    await deleteCategory(8);
-    console.log('Remaining Routines: ', await getAllCategories());
+    // console.log('Testing deleteCategory...');
+    // await deleteCategory(8);
+    // console.log('Remaining Routines: ', await getAllCategories());
 
     //# Verified this works, commenting out to de-clutter
     //Commented out because need none to stay active.
