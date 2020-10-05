@@ -11,7 +11,7 @@
 }
 
 #login .auth-form {
-  height: 350px;
+  height: 365px;
 }
 
 .auth-form {
@@ -74,11 +74,40 @@ label.auth-label {
   line-height: 1px;
   letter-spacing: 1px;
   font-family: 'Niconne', cursive;
-  margin-top: 50px;
+  margin-top: 35px;
   height: 40px;
   font-size: 26px;
 }
 
 .auth-button:active {
   margin: 55px 0px 2px 0px;
+}
+
+.accountCheck {
+  align-self: center;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+}
+
+h2.memberCheck {
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-family: 'Lobster Two', cursive;
+  color: #a0520f;
+}
+
+.accountCheck a {
+  text-decoration: none;
+  padding-left: 10px;
+  color: #bf7c00;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.accountCheck a:hover {
+  color: #674403;
+  text-shadow: -2px 0px 2px #f3b542;
 }
