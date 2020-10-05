@@ -49,7 +49,12 @@ const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
                 HOME
               </NavLink>
               <NavLink id='storeNav' to='/store'>
-                <img src={storeImg} alt='A store with macaroni on it.' />STORE
+                <img
+                  className='navImg'
+                  src={storeImg}
+                  alt='A store with macaroni on it.'
+                />
+                STORE
               </NavLink>
               <NavLink id='accountNav' to='/account'>
                 <img

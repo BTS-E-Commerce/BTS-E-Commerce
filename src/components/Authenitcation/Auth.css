@@ -58,6 +58,7 @@ label.auth-label {
   text-shadow: 0px 0px 0px #6c4403;
   letter-spacing: 1px;
   cursor: text;
+  border: none;
 }
 
 .auth-button {
