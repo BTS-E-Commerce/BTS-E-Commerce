@@ -1,17 +1,23 @@
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
-import React, { useState } from 'react';
+import React from 'react';
+import { useLocation, useHistory } from 'react-router-dom'
 
-const CheckoutPage = ({ ongoingOrder }) => {
+const CheckoutPage = () => {
+    const history = useHistory();
+    const location = useLocation();
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~ EFFECTS ~~~~~
     //~~~~~~~~~~~~~~~~~~~
-
+    console.log(location.state.totalPrice);
     //~~~~~~~~~~~~~~~~~~~
     //~~~~ FUNCTIONS ~~~~
     //~~~~~~~~~~~~~~~~~~~
-    // history.push('/');
+    const onReturnStore = () => {
+        history.push('/store');
+    }
+
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -19,8 +25,9 @@ const CheckoutPage = ({ ongoingOrder }) => {
         <div>
             <h1>CHECKOUT PAGE</h1>
             <h3>Congratulations! You just checked out!</h3>
-            <p>You spent : ${ongoingOrder.totalPrice}</p>
-            <p>I hope it was worth it.</p>
+            <p>You spent : ${location.state.totalPrice}</p>
+            <p>You can review your order inside your "Order History" on your "Account".</p>
+            <button onClick={onReturnStore}>Return to Store</button>
         </div>
     );
 };

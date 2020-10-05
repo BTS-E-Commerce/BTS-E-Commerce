@@ -12,10 +12,10 @@ const ProductCard = ({
   onAddToOrder,
   currentUser,
 }) => {
-  const [editFormStatus, setEditFormStatus] = useState(false);
+  const [productEditFromStatus, setProductEditFromStatus] = useState(false);
 
-  const showEditFrom = () => {
-    setEditFormStatus(!editFormStatus);
+  const showProductEditFrom = () => {
+    setProductEditFromStatus(!productEditFromStatus);
   }
 
   return (
@@ -27,32 +27,36 @@ const ProductCard = ({
       />
       {product.inventory <= 0 ? <h1>OUT OF ORDER</h1> : ''}
       <h1>{product.name}</h1>
-      <p>DATE CREATED: {moment(product.date).format('dddd, MMMM Do YYYY')}</p>
-      <p>DESCRIPTION: {product.description}</p>
-      <p>CATEGORY: {product.categories[0].name}</p>
-      <h3>PRICE: ${product.currentPrice / 100}</h3>
-      <button id='addToCartButton' onClick={onAddToOrder}>
-        Add To Cart
+      <div className='productInfo'>
+        <p>DATE CREATED: {moment(product.date).format('dddd, MMMM Do YYYY')}</p>
+        <p>DESCRIPTION: {product.description}</p>
+        <p>CATEGORY: {product.categories[0].name}</p>
+        <h3>PRICE: ${product.currentPrice / 100}</h3>
+      </div>
+      <div className='productButtons'>
+        <button id='addToCartButton' onClick={onAddToOrder}>
+          Add To Cart
       </button>
-      {currentUser.admin === false ? (
-        ''
-      ) : (
-          <button id='productDeleteButton' onClick={onDelete}>
-            DELETE
-          </button>
-        )}
+        {currentUser.admin === false ? (
+          ''
+        ) : (
+            <button id='productDeleteButton' onClick={onDelete}>
+              DELETE
+            </button>
+          )}
 
-      {currentUser.admin === false ? (
-        ''
-      ) : <button onClick={showEditFrom}>
-          {editFormStatus === false
-            ? 'Show'
-            : 'Hide'}
+        {currentUser.admin === false ? (
+          ''
+        ) : <button onClick={showProductEditFrom}>
+            {productEditFromStatus === false
+              ? 'Show'
+              : 'Hide'}
           Edit Form
           </button>}
+      </div>
       {currentUser.admin === false ? (
         ''
-      ) : editFormStatus === false
+      ) : productEditFromStatus === false
           ? ''
           : <EditProductForm
             product={product}

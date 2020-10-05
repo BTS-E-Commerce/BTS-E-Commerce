@@ -10,6 +10,8 @@ import { updateOrder, deleteOrder, deleteProductFromOrder, updateProduct } from 
 
 import { FindTotalPrice } from '../../utils/FindTotalPrice';
 
+import './Cart.css';
+
 const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder, setOngoingOrder, compareProductIds }) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
@@ -49,9 +51,6 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
             setOngoingOrder({});
             //Need to change to localstorage.remove when user token shit is added.
             localStorage.removeItem('cart');
-            console.log("THIS IS WHAT WAS DELETED", deletedOrder);
-            console.log("THIS IS ONGOING AFTER DELETED", ongoingOrder);
-
             history.push('/');
         } else {
             console.log('Cannot delete order.')
@@ -59,7 +58,6 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
     }
 
     async function onCheckout() {
-        alert('THANKS FOR CHECKING OUT!');
         ongoingOrder.products.forEach(product => {
             const [{ inventory }] = products.filter((storeProduct) => product.id === storeProduct.id);
             product.inventory = inventory;
@@ -74,11 +72,11 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
                 product.inventory -= product.quantity;
                 await updateProduct(product.id, { inventory: product.inventory });
             }
+            const checkoutTotalPrice = totalPrice;
             localStorage.removeItem('cart');
             setOngoingOrder({});
             setUsersOrders([...usersOrders, completedOrder]);
-            console.log('Here is your completed order:', completedOrder);
-            history.push('/checkout');
+            history.push('/checkout', { totalPrice: checkoutTotalPrice });
         } catch (error) {
             throw error;
         }
@@ -100,12 +98,13 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
     return (
-        <div>
+        <div id='cartContainer'>
             <h1>Cart</h1>
-            {(ongoingOrder.hasOwnProperty('products'))
-                ? (ongoingOrder.products).length !== 0
-                    ? ongoingOrder.products.map((product) => (
-                        <>
+            <div id='cartProductContainer'>
+                {(ongoingOrder.hasOwnProperty('products'))
+                    ? (ongoingOrder.products).length !== 0
+                        ? ongoingOrder.products.map((product) => (
+
                             <CartProducts
                                 key={product.id}
                                 products={products}
@@ -117,14 +116,21 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
                                 onDeleteProductFromCart={onDeleteProductFromCart(product.id)}
                             />
 
+                        ))
+                        : "There is nothing here."
+                    : "There is nothing here."}
+            </div>
+            <div id='cartInfo'>
+                <p> Total Cart Price: ${(totalPrice / 100).toFixed(2)}</p>
+                {(ongoingOrder.hasOwnProperty('products'))
+                    ? (ongoingOrder.products).length !== 0
+                        ? <div id='orderButtons'>
                             <button onClick={onDeleteOrder}>DELETE ORDER</button>
-                        </>
-                    ))
-                    : "There is nothing here."
-                : "There is nothing here."}
-            {(ongoingOrder.hasOwnProperty('products'))
-                ? (ongoingOrder.products).length !== 0 ? <button onClick={onCheckout}>CHECKOUT</button> : '' : ''}
-            < p > Total Price: ${(totalPrice / 100).toFixed(2)}</p>
+                            <button onClick={onCheckout}>CHECKOUT</button>
+                        </div>
+                        : ''
+                    : ''}
+            </div>
         </div >
     )
 }

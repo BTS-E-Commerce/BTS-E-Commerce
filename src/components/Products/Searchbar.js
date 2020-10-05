@@ -45,6 +45,7 @@ const Searchbar = ({ products, setProducts }) => {
     <div id='searchBarContainer'>
       <fieldset className='searchByValue'>
         <input
+          id='valueSearchField'
           name='searchValue'
           type='text'
           placeholder='Search Our Inventory...'

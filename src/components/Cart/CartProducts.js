@@ -34,20 +34,22 @@ const CartProducts = ({ products, setProducts, product, ongoingOrder, setOngoing
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
     return (
-        <div>
+        <div className='cartProductCard'>
             <h4>CartCardProduct</h4>
-            <img src={product.image} alt='An image of mac.' />
-            <h5>Product: {product.name}</h5>
-            <p>Product Price: ${((product.currentPrice / 100) * product.quantity).toFixed(2)}</p>
-            <label htmlFor='quantity'>Quantity:</label>
-            <input
-                id='quantity'
-                type='number'
-                name='quantity'
-                value={product.quantity}
-                onChange={handleOnQuantityChange}
-            />
-            <button onClick={onDeleteProductFromCart}>DELETE PRODUCT</button>
+            <img className='productImage' src={product.image} alt='An image of mac.' />
+            <h5>{product.name}</h5>
+            <p>Price: ${((product.currentPrice / 100) * product.quantity).toFixed(2)}</p>
+            <div className='quantityFields'>
+                <label htmlFor='quantity'>Quantity:</label>
+                <input
+                    id='quantity'
+                    type='number'
+                    name='quantity'
+                    value={product.quantity}
+                    onChange={handleOnQuantityChange}
+                />
+            </div>
+            <button onClick={onDeleteProductFromCart}>REMOVE PRODUCT FROM CART</button>
         </div>
     )
 }

@@ -16,7 +16,6 @@ const OrderCard = ({ order, number }) => {
             <h2>OrderCard</h2>
             <p>Order Number: {number}</p>
             <p>Date Created: {moment(order.date).format('dddd, MMMM Do YYYY')}</p>
-            <p>Is Order Completed? {order.isComplete === true ? 'Yes.' : 'No.'}</p>
             <h3>Products</h3>
             {order.products.map((product) => (
                 <OrderCardProducts

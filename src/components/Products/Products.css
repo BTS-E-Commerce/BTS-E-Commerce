@@ -1,8 +1,10 @@
 /*CONTENT STUFF */
 div#content {
+  display: flex;
   width: 1437px;
   height: 760px;
   overflow-y: auto;
+
 }
 
 .feature {
@@ -14,15 +16,74 @@ div#content {
   margin-bottom: 3px;
 }
 
+#product-search{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+#product-search button{
+  color: wheat;
+  background-color: #8b5907;
+  width: auto;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  align-self: center;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  line-height: 1px;
+  letter-spacing: 1px;
+  font-family: 'Niconne', cursive;
+  margin-top: 15px;
+  height: 40px;
+  font-size: 26px;
+}
+
+#productFormButton{
+  width: auto;
+}
+
+#searchBarContainer{
+  display: flex;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchByValue{
+  width: 80%;    
+}
+
+#valueSearchField{
+  text-align: left;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  font-family: 'Just Another Hand', cursive;
+  font-size: 25px;
+  color: #6c4403;
+  text-shadow: 0px 0px 0px #6c4403;
+  letter-spacing: 1px;
+  cursor: text;
+  border: none;
+  border-bottom: 3px solid #a0520f;
+}
+
 .productCard{
   display: flex;
   flex: 1 1 400px;
   flex-flow: column;
   align-items: center;
   height: 100%;
-  border: 3px solid black;
-  padding: 0px 10px 10px 10px;
+  padding: 10px 20px 20px 20px;
   margin: 0px 20px 20px 20px;
+  border: 7px double #a77327;
+  border-top: 7px double #a77327;
+  border-bottom: 7px double #a77327;
+  box-shadow: 2px 2px 5px #9e6805;
 }
 
 .productImage{
@@ -30,6 +91,22 @@ div#content {
   max-width: 50%;
   max-height: 50%;
 }
+
+.productCard h1{
+  font-family: 'Lobster Two', cursive;
+  color: #a0520f;
+}
+
+.productInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
 /*NEW PRODUCT FORM STUFF */
 @import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Lobster+Two:ital@1&family=Niconne&display=swap');
 
