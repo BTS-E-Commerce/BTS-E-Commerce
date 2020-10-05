@@ -46,9 +46,11 @@ export async function createUser({ username, password }) {
   }
 }
 
-export async function updateUser(userId, fields) {
+export async function updateUser({ userId, adminUserId = null, currentPassword, fields }) {
   try {
     const { data } = await axios.patch(`${BASE_URL}/users/${userId}`, {
+      adminUserId,
+      currentPassword,
       fields
     });
 

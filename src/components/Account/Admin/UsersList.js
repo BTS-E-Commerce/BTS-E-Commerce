@@ -57,8 +57,8 @@ const UsersList = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
     return (
-        <div>
-            <h2>Users List</h2>
+        <div id='userListContainer'>
+            <h1>Users</h1>
             {users.map((user) => (
                 <UserCard
                     key={user.id}

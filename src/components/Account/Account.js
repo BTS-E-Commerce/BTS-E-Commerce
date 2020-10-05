@@ -2,12 +2,22 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 import React, { useEffect, useState } from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect,
+    useHistory,
+    NavLink
+} from 'react-router-dom';
 
 import { OrderHistory } from './OrderHistory/index'
 
 import { Admin, EditUserForm } from './Admin/index'
 
 import { updateUser } from '../../api/index'
+
+import './Account.css';
 
 const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser, categories, setCategories }) => {
     //~~~~~~~~~~~~~~~~~~~
@@ -21,26 +31,24 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
     //~~~~~~~~~~~~~~~~~~~
     //~~~~ FUNCTIONS ~~~~
     //~~~~~~~~~~~~~~~~~~~
-    const onMakeAdmin = async function () {
-        const { updatedUser } = await updateUser(currentUser.id, { admin: true });
-        setCurrentUser(updatedUser);
-    }
 
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
     return (
-        <div>
+        <div id='accountContainer'>
             <h1>AccountInfo</h1>
-            <h2>Current user is: {currentUser.username}</h2>
-            <button onClick={onMakeAdmin}>Make {currentUser.username} an Admin</button>
+            <h2>Welcome to your account, {currentUser.username}</h2>
             {currentUser.admin === false
                 ? ''
                 : <p>You are an admin.</p>
             }
+            <div id='accountNavBar'>
+            </div>
             {currentUser.admin === false
                 ? ''
-                : <Admin
+                :
+                <Admin
                     categories={categories}
                     setCategories={setCategories}
                     currentUser={currentUser}
@@ -48,10 +56,14 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
                     setOngoingOrder={setOngoingOrder}
                 />
             }
+
             {currentUser.username !== 'guest'
                 ? <div className='account-information'>
                     <OrderHistory usersOrders={usersOrders} />
-                    <EditUserForm setCurrentUser={setCurrentUser} currentUser={currentUser} />
+                    {currentUser.admin === false
+                        ? <EditUserForm setOngoingOrder={setOngoingOrder} setCurrentUser={setCurrentUser} currentUser={currentUser} />
+                        : ''}
+
                 </div>
                 : 'Register or Sign in to see your order history.'}
 

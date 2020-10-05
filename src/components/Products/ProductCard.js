@@ -13,7 +13,7 @@ const ProductCard = ({
   currentUser,
 }) => {
   return (
-    <div id='productCard' key={product.id}>
+    <div className='productCard' key={product.id}>
       <img
         className='productImage'
         src={product.image}
@@ -31,21 +31,21 @@ const ProductCard = ({
       {currentUser.admin === false ? (
         ''
       ) : (
-        <button id='productDeleteButton' onClick={onDelete}>
-          DELETE
-        </button>
-      )}
+          <button id='productDeleteButton' onClick={onDelete}>
+            DELETE
+          </button>
+        )}
 
       {currentUser.admin === false ? (
         ''
       ) : (
-        <EditProductForm
-          product={product}
-          products={products}
-          setProducts={setProducts}
-          categories={categories}
-        />
-      )}
+          <EditProductForm
+            product={product}
+            products={products}
+            setProducts={setProducts}
+            categories={categories}
+          />
+        )}
     </div>
   );
 };

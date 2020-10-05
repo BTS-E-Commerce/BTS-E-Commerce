@@ -4,6 +4,7 @@ import { getAllUsers } from '../api/users';
 
 import logo from './images/GrandmasMac.png';
 import homeImg from './images/granmachome.png';
+import storeImg from './images/granmacstore.png';
 import accountImg from './images/granmacaccount.png';
 import loginImg from './images/grandmalogin.png';
 import registerImg from './images/granmacregister.png';
@@ -46,6 +47,9 @@ const Header = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
                   alt='A home with a heart around macaroni in it.'
                 />
                 HOME
+              </NavLink>
+              <NavLink id='storeNav' to='/store'>
+                <img src={storeImg} alt='A store with macaroni on it.' />STORE
               </NavLink>
               <NavLink id='accountNav' to='/account'>
                 <img

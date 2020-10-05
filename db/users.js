@@ -131,7 +131,6 @@ async function updateUser(userId, fields = {}) {
 
     const updatedUser = await getUserById(userId);
 
-    console.log(updatedUser);
     return updatedUser;
   } catch (error) {
     throw error;

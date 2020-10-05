@@ -1,6 +1,34 @@
 /*CONTENT STUFF */
-.feature {
+div#content {
+  width: 1437px;
+  height: 760px;
   overflow-y: auto;
+}
+
+.feature {
+  display: flex;
+  flex-flow: row wrap;
+  /* overflow: auto; */
+  width: 100%;
+  margin-right: 3px;
+  margin-bottom: 3px;
+}
+
+.productCard{
+  display: flex;
+  flex: 1 1 400px;
+  flex-flow: column;
+  align-items: center;
+  height: 100%;
+  border: 3px solid black;
+  padding: 0px 10px 10px 10px;
+  margin: 0px 20px 20px 20px;
+}
+
+.productImage{
+  border-radius: 50%;
+  max-width: 50%;
+  max-height: 50%;
 }
 /*NEW PRODUCT FORM STUFF */
 @import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Lobster+Two:ital@1&family=Niconne&display=swap');

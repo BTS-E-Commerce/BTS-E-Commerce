@@ -4,6 +4,8 @@ import { ProductCard, NewProductForm, Searchbar } from './index';
 import { CategoryList } from '../Account/Admin/index';
 import { deleteProduct, createProduct } from '../../api/index';
 
+import landingImg from '../images/grandmaclanding.png';
+
 import '../App.css';
 import './Products.css';
 
@@ -27,7 +29,9 @@ const Content = ({ products, setProducts, addProductToCart, categories, currentU
     };
 
   const onProductCreate = async function (newProduct) {
-    console.log(newProduct);
+    if (newProduct.product.imageUrl === '') {
+      newProduct.product.imageUrl = landingImg;
+    }
     let { price } = newProduct.product;
     newProduct.product.price = price * 100;
 
@@ -44,8 +48,10 @@ const Content = ({ products, setProducts, addProductToCart, categories, currentU
         </div>
       }
 
-      <div className='feature'>
+      <div id="product-search">
         <Searchbar products={products} setProducts={setProducts} />
+      </div>
+      <div className='feature'>
         {products.map((product) => (
           <ProductCard
             categories={categories}
