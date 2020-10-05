@@ -29,9 +29,7 @@ async function initializeProducts() {
         sale: true,
         date: '09/15/20',
       },
-      [
-        { id: 2, name: 'oven' },
-      ]
+      [{ id: 2, name: 'oven' }]
     );
 
     await createProduct(
@@ -47,9 +45,7 @@ async function initializeProducts() {
         sale: true,
         date: '09/17/20',
       },
-      [
-        { id: 7, name: 'special' },
-      ]
+      [{ id: 7, name: 'special' }]
     );
 
     await createProduct(
@@ -64,9 +60,7 @@ async function initializeProducts() {
         sale: false,
         date: '09/10/2020',
       },
-      [
-        { id: 7, name: 'special' },
-      ]
+      [{ id: 7, name: 'special' }]
     );
 
     await createProduct(
@@ -82,9 +76,7 @@ async function initializeProducts() {
         sale: false,
         date: '09/27/2020',
       },
-      [
-        { id: 6, name: 'crunchy' },
-      ]
+      [{ id: 6, name: 'crunchy' }]
     );
 
     await createProduct(
@@ -99,16 +91,14 @@ async function initializeProducts() {
         sale: true,
         date: '09/30/2020',
       },
-      [
-        { id: 7, name: 'special' },
-      ]
+      [{ id: 7, name: 'special' }]
     );
 
     await createProduct(
       {
         name: 'Fire-Grilled Sour Mac N Cheese',
         description:
-          "Steamed thick acorn noodles with kola nut and oregano on a bed of steamed cabbage, cooked wild leek and mangos. Served with pepperjack, stout, rye bread, tangerine pie and fried eggs.",
+          'Steamed thick acorn noodles with kola nut and oregano on a bed of steamed cabbage, cooked wild leek and mangos. Served with pepperjack, stout, rye bread, tangerine pie and fried eggs.',
         image:
           'https://midwestfoodieblog.com/wp-content/uploads/2020/02/FINAL-mexican-mac-and-cheese-1-3.jpg',
         inventory: '100',
@@ -116,16 +106,14 @@ async function initializeProducts() {
         currentPrice: '1500',
         sale: true,
       },
-      [
-        { id: 2, name: 'baked' },
-      ]
+      [{ id: 2, name: 'baked' }]
     );
 
     await createProduct(
       {
         name: 'Grilled Fennel & Lime Mac',
         description:
-          "Boiled lizard with vanilla, pili nuts and caramel with a salad of diced parsnip, fiddlehead and avocados.",
+          'Boiled lizard with vanilla, pili nuts and caramel with a salad of diced parsnip, fiddlehead and avocados.',
         image:
           'https://joyfoodsunshine.com/wp-content/uploads/2019/04/best-easy-homemade-mac-and-cheese-recipe-1-500x500.jpg',
         inventory: '100',
@@ -133,9 +121,7 @@ async function initializeProducts() {
         currentPrice: '2000',
         sale: true,
       },
-      [
-        { id: 2, name: 'baked' },
-      ]
+      [{ id: 2, name: 'baked' }]
     );
 
     await createProduct(
@@ -150,16 +136,14 @@ async function initializeProducts() {
         currentPrice: '1000',
         sale: false,
       },
-      [
-        { id: 5, name: 'cheesy' },
-      ]
+      [{ id: 5, name: 'cheesy' }]
     );
 
     await createProduct(
       {
         name: 'Sautéed Cinnamon Baked Mac',
         description:
-          "Fried small flat rice noodles with chives, rosemary and cumin on a bed of sliced winter purslane, sliced sea kale and wolfberries. Served with manioc soup, fried eggs, red wine, focaccia and brined cream cheese.",
+          'Fried small flat rice noodles with chives, rosemary and cumin on a bed of sliced winter purslane, sliced sea kale and wolfberries. Served with manioc soup, fried eggs, red wine, focaccia and brined cream cheese.',
         image:
           'https://www.thechunkychef.com/wp-content/uploads/2018/02/Ultimate-Creamy-Baked-Mac-and-Cheese-feat-1-440x500.jpg',
         inventory: '10',
@@ -167,16 +151,14 @@ async function initializeProducts() {
         currentPrice: '700',
         sale: false,
       },
-      [
-        { id: 2, name: 'baked' },
-      ]
+      [{ id: 2, name: 'baked' }]
     );
 
     await createProduct(
       {
         name: 'Pecan and Walnut Molten Macaroni Cake',
         description:
-          "Werecat tripe with orange peel and sumac on a bed of cooked beetroot, sauteed kumara and plums. Served with gabon nut pie and potato bread with jam.",
+          'Werecat tripe with orange peel and sumac on a bed of cooked beetroot, sauteed kumara and plums. Served with gabon nut pie and potato bread with jam.',
         image:
           'https://www.seasonsandsuppers.ca/wp-content/uploads/2013/01/mac-cheese-3.jpg',
         inventory: '40',
@@ -184,16 +166,14 @@ async function initializeProducts() {
         currentPrice: '1700',
         sale: false,
       },
-      [
-        { id: 7, name: 'special' },
-      ]
+      [{ id: 7, name: 'special' }]
     );
 
     await createProduct(
       {
         name: "Grandma's Special Onion and Mac Fritters",
         description:
-          "If you encounter Grandma Mac at night do not approach her! While normally of temperate disposition, at night the moonlight causes such pain that its violent tendencies become exacerbated.",
+          'If you encounter Grandma Mac at night do not approach her! While normally of temperate disposition, at night the moonlight causes such pain that its violent tendencies become exacerbated.',
         image:
           'https://www.wholesomeyum.com/wp-content/uploads/2017/06/www.wholesomeyum.com-cauliflower-mac-and-cheese-recipe-low-carb-keto-gluten-free-img_3715-1.jpg',
         inventory: '40',
@@ -201,16 +181,14 @@ async function initializeProducts() {
         currentPrice: '2500',
         sale: false,
       },
-      [
-        { id: 6, name: 'cheddar' },
-      ]
+      [{ id: 6, name: 'cheddar' }]
     );
 
     await createProduct(
       {
         name: 'Almond Bombe: Grandma Style',
         description:
-          "Tasty burgers made from lea bacon and minced lamb, served in a roll.",
+          'Tasty burgers made from lea bacon and minced lamb, served in a roll.',
         image:
           'https://www.wholesomeyum.com/wp-content/uploads/2017/06/www.wholesomeyum.com-cauliflower-mac-and-cheese-recipe-low-carb-keto-gluten-free-img_3715-1.jpg',
         inventory: '40',
@@ -218,16 +196,14 @@ async function initializeProducts() {
         currentPrice: '2300',
         sale: false,
       },
-      [
-        { id: 5, name: 'cheesy' },
-      ]
+      [{ id: 5, name: 'cheesy' }]
     );
 
     await createProduct(
       {
         name: 'Cured Macaroni & Garlic Flatbread',
         description:
-          "Steamed brown rice with bay leaves, tinda, marjoram, horse gram and gabon nut with a side of sliced chinese artichoke and mulberries. Served with soft boiled eggs, cloves and vanilla soup and aged gouda.",
+          'Steamed brown rice with bay leaves, tinda, marjoram, horse gram and gabon nut with a side of sliced chinese artichoke and mulberries. Served with soft boiled eggs, cloves and vanilla soup and aged gouda.',
         image:
           'https://www.thechunkychef.com/wp-content/uploads/2018/02/Ultimate-Creamy-Baked-Mac-and-Cheese-feat-1-440x500.jpg',
         inventory: '40',
@@ -235,16 +211,14 @@ async function initializeProducts() {
         currentPrice: '1600',
         sale: false,
       },
-      [
-        { id: 3, name: 'oven' },
-      ]
+      [{ id: 3, name: 'oven' }]
     );
 
     await createProduct(
       {
         name: 'Mango Mac Mooncake',
         description:
-          "Soft moans and grunts escaped their mouth. Tired and frustrated they wanted it all to be over and done with. Perhaps against their better judgment they swallowed the pain and continued onward, but taking at least some care to prevent making it worse.",
+          'Soft moans and grunts escaped their mouth. Tired and frustrated they wanted it all to be over and done with. Perhaps against their better judgment they swallowed the pain and continued onward, but taking at least some care to prevent making it worse.',
         image:
           'https://joyfoodsunshine.com/wp-content/uploads/2019/04/best-easy-homemade-mac-and-cheese-recipe-1-500x500.jpg',
         inventory: '40',
@@ -252,198 +226,217 @@ async function initializeProducts() {
         currentPrice: '1200',
         sale: false,
       },
-      [
-        { id: 3, name: 'oven' },
-      ]
+      [{ id: 3, name: 'oven' }]
     );
 
     await createProduct(
       {
         name: 'Cheese and pancetta fusilli',
         description:
-          "Fresh egg pasta in a sauce made from fresh cheese and smoked pancetta!",
+          'Fresh egg pasta in a sauce made from fresh cheese and smoked pancetta!',
         image:
-       "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSLJkJjksTRPftYeZyOjpurpdvxq0cvnQprng&usqp=CAU",
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSLJkJjksTRPftYeZyOjpurpdvxq0cvnQprng&usqp=CAU',
         inventory: '20',
         basePrice: '5000',
         currentPrice: '3000',
         sale: true,
       },
-      [
-        { id: 10, name: 'boiled' },
-      ]
+      [{ id: 10, name: 'boiled' }]
     );
 
-await createProduct(
+    await createProduct(
       {
         name: 'Broccoli and bacon pasta',
         description:
-          "Fresh egg pasta in a sauce made from fresh broccoli and lea bacon!",
+          'Fresh egg pasta in a sauce made from fresh broccoli and lea bacon!',
         image:
-       "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSPjQ9JkHyiQO-mcqVjkDhFhhoWAspy-h__Bw&usqp=CAU",
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSPjQ9JkHyiQO-mcqVjkDhFhhoWAspy-h__Bw&usqp=CAU',
         inventory: '50',
         basePrice: '10000',
         currentPrice: '7000',
         sale: true,
       },
-      [
-        { id: 5, name: "cheesy"},
-      ]
+      [{ id: 5, name: 'cheesy' }]
     );
 
-await createProduct(
+    await createProduct(
       {
         name: 'Leek and spinach pasta',
         description:
-          "Fresh egg pasta in a sauce made from baby leek and fresh spinach",
+          'Fresh egg pasta in a sauce made from baby leek and fresh spinach',
         image:
-       "https://www.simplyrecipes.com/wp-content/uploads/2016/03/green-goddess-mac-cheese-horiz-a-1200.jpg",
+          'https://www.simplyrecipes.com/wp-content/uploads/2016/03/green-goddess-mac-cheese-horiz-a-1200.jpg',
         inventory: '15',
         basePrice: '15000',
         currentPrice: '15000',
         sale: false,
       },
-      [
-        { id: 7, name: "vegan"},
-      ]
+      [{ id: 7, name: 'vegan' }]
     );
 
-await createProduct(
+    await createProduct(
       {
         name: ' Cheese and chilli toastie',
         description:
-          "Hot slices of bread filled with creamy cheese and red chilli Mac",
+          'Hot slices of bread filled with creamy cheese and red chilli Mac',
         image:
-       "https://www.foodpeoplewant.com/wp-content/uploads/2009/11/Green-Chile-Mac-Cheese-1024x768.jpg",
+          'https://www.foodpeoplewant.com/wp-content/uploads/2009/11/Green-Chile-Mac-Cheese-1024x768.jpg',
         inventory: '20',
         basePrice: '6000',
         currentPrice: '3000',
         sale: true,
       },
-      [
-        { id: 6, name: "cheddar"},
-      ]
+      [{ id: 6, name: 'cheddar' }]
     );
 
-await createProduct(
+    await createProduct(
       {
         name: ' Shepherd’s Mac Fusion!',
         description:
           "Grandma’s exclusive combination of her own Mac and Auntie M’s homestyle Shepherd's Pie!",
         image:
-       "https://parade.com/wp-content/uploads/2018/02/cottage-pie-FEAT.jpg",
+          'https://parade.com/wp-content/uploads/2018/02/cottage-pie-FEAT.jpg',
         inventory: '10',
         basePrice: '240000',
         currentPrice: '19000',
         sale: true,
       },
-      [
-        { id: 8, name: "special"},
-      ]
+      [{ id: 8, name: 'special' }]
     );
 
-await createProduct(
+    await createProduct(
       {
         name: 'Pasta and cheese pizza',
         description:
-          "Deep pan pizza topped with campanelle pasta and vintage cheese",
+          'Deep pan pizza topped with campanelle pasta and vintage cheese',
         image:
-       "https://www.hormel.com/getattachment/d5a2142f-da2a-432d-8a90-627099b3f827",
+          'https://www.hormel.com/getattachment/d5a2142f-da2a-432d-8a90-627099b3f827',
         inventory: '8',
         basePrice: '2000',
         currentPrice: '2000',
         sale: false,
       },
-      [
-        { id: 3, name: "oven"},
-      ]
+      [{ id: 3, name: 'oven' }]
     );
 
-await createProduct(
+    await createProduct(
       {
         name: 'Cheese and stilton buns',
-        description:
-          "Crumbly buns made with creamy cheese and stilton",
+        description: 'Crumbly buns made with creamy cheese and stilton',
         image:
-       "https://www.chewboom.com/wp-content/uploads/2019/03/Huddle-House-Introduces-New-Mac-Cheese-Bites-Welcomes-Back-Prime-Rib-Tips-678x381.jpg",
+          'https://www.chewboom.com/wp-content/uploads/2019/03/Huddle-House-Introduces-New-Mac-Cheese-Bites-Welcomes-Back-Prime-Rib-Tips-678x381.jpg',
         inventory: '30',
         basePrice: '3500',
         currentPrice: '1000',
         sale: true,
       },
-      [
-        { id: 4, name: "crunchy"},
-      ]
+      [{ id: 4, name: 'crunchy' }]
     );
 
-await createProduct(
+    await createProduct(
       {
         name: 'Mac Medley',
         description:
-          "A light blend of elbow noodles and seasonal vegetables for an all natural mac selection",
+          'A light blend of elbow noodles and seasonal vegetables for an all natural mac selection',
         image:
-       "https://www.gimmesomeoven.com/wp-content/uploads/2012/08/Roasted-Vegetable-Mac-and-Cheese-Recipe-1.jpg",
+          'https://www.gimmesomeoven.com/wp-content/uploads/2012/08/Roasted-Vegetable-Mac-and-Cheese-Recipe-1.jpg',
         inventory: '18',
         basePrice: '10000',
         currentPrice: '5000',
         sale: true,
       },
-      [
-        { id: 4, name: "vegan"},
-      ]
+      [{ id: 4, name: 'vegan' }]
     );
 
-await createProduct(
+    await createProduct(
       {
         name: 'Chili Mac Dogs',
         description:
-          "Americas classing chili dog infused with Grandma’s original Mac!",
+          'Americas classing chili dog infused with Grandma’s original Mac!',
         image:
-       "https://hips.hearstapps.com/del.h-cdn.co/assets/17/20/640x959/gallery-1495057199-delish-mac-cheese-dogs-1.jpg?resize=480:*",
+          'https://hips.hearstapps.com/del.h-cdn.co/assets/17/20/640x959/gallery-1495057199-delish-mac-cheese-dogs-1.jpg?resize=480:*',
         inventory: '50',
         basePrice: '5000',
         currentPrice: '3000',
         sale: true,
       },
-      [
-        { id: 9, name: "cheesy"},
-      ]
+      [{ id: 9, name: 'cheesy' }]
     );
 
-await createProduct(
+    await createProduct(
       {
         name: 'Green Almonds',
         description:
-          "Elbow pasta greens casserole with roasted almonds on top.",
+          'Elbow pasta greens casserole with roasted almonds on top.',
         image:
-       "https://www.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2020/01/24/Food/Images/v-wkveg-greensmacncheese_074_leadweb.jpg?t=20170517",
+          'https://www.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2020/01/24/Food/Images/v-wkveg-greensmacncheese_074_leadweb.jpg?t=20170517',
         inventory: '6',
         basePrice: '16000',
         currentPrice: '16000',
         sale: false,
       },
-      [
-        { id: 4, name: "vegan"},
-      ]
+      [{ id: 4, name: 'vegan' }]
     );
 
-await createProduct(
+    await createProduct(
       {
         name: 'Waffle Mac',
         description:
-          "Lunch for breakfast? Grandma says ‘Yes!’ with her take on chicken and waffles!",
+          'Lunch for breakfast? Grandma says ‘Yes!’ with her take on chicken and waffles!',
         image:
-       "https://hips.hearstapps.com/vidthumb/manual_upload/59efca72bbddbd7731689284/thumb_1508887159.png",
+          'https://hips.hearstapps.com/vidthumb/manual_upload/59efca72bbddbd7731689284/thumb_1508887159.png',
         inventory: '30',
         basePrice: '6000',
         currentPrice: '6000',
         sale: false,
       },
-      [
-        { id: 4, name: "crunchy"},
-      ]
+      [{ id: 4, name: 'crunchy' }]
     );
 
+    await createProduct(
+      {
+        name: 'Mac-Attack',
+        description:
+          'Macaroni and Cheese Burger. Charbroiled and Topped with our Creamy Fried Macaroni and Cheese Balls and Cheddar Cheese Sauce. ',
+        image:
+          'https://www.coopercheese.com/wp-content/uploads/2017/10/Cooper-mac-and-cheese-burger-recipe-cheeseburgers-mobile.jpg',
+        inventory: '50',
+        basePrice: '4000',
+        currentPrice: '4000',
+        sale: false,
+      },
+      [{ id: 11, name: 'grilled’' }]
+    );
+
+    await createProduct(
+      {
+        name: 'Killer Mac and Cheese with Bacon',
+        description:
+          'Creamy Mac and cheese with not one, not two, but three different cheeses: cheddar, fontina and Parmesan.',
+        image:
+          'https://food.cld.sndimg.com/image/upload/w_2400/v1/fn_core_images/food/fullset/2014/2/7/1/FNM_030114-Killer-Mac-And-Cheese-With-Bacon-Recipe-h_s4x3.jpg',
+        inventory: '100',
+        basePrice: '2500',
+        currentPrice: '2500',
+        sale: true,
+      },
+      [{ id: 8, name: 'special' }]
+    );
+
+    await createProduct(
+      {
+        name: 'Flamin Hot Mac and Cheese',
+        description:
+          'Hot, spicy flavor packed into crunchy, cheesy snacks. Crunchy FLAMIN Cheese Flavored Snacks are full of flavor and made with real MAC N CHEESE.',
+        image:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTsy3MofgffpqXLZo3zjYF5ya2HWfgE1TzANw&usqp=CAU',
+        inventory: '100',
+        basePrice: '5500',
+        currentPrice: '5000',
+        sale: true,
+      },
+      [{ id: 8, name: 'special' }]
+    );
 
     console.log('Finished making products...');
   } catch (error) {
