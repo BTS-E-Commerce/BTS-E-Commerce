@@ -78,7 +78,7 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
             setOngoingOrder({});
             setUsersOrders([...usersOrders, completedOrder]);
             console.log('Here is your completed order:', completedOrder);
-            history.push('/');
+            history.push('/checkout');
         } catch (error) {
             throw error;
         }

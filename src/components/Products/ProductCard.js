@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 
 import { EditProductForm } from './index';
@@ -12,6 +12,12 @@ const ProductCard = ({
   onAddToOrder,
   currentUser,
 }) => {
+  const [editFormStatus, setEditFormStatus] = useState(false);
+
+  const showEditFrom = () => {
+    setEditFormStatus(!editFormStatus);
+  }
+
   return (
     <div className='productCard' key={product.id}>
       <img
@@ -38,14 +44,23 @@ const ProductCard = ({
 
       {currentUser.admin === false ? (
         ''
-      ) : (
-          <EditProductForm
+      ) : <button onClick={showEditFrom}>
+          {editFormStatus === false
+            ? 'Show'
+            : 'Hide'}
+          Edit Form
+          </button>}
+      {currentUser.admin === false ? (
+        ''
+      ) : editFormStatus === false
+          ? ''
+          : <EditProductForm
             product={product}
             products={products}
             setProducts={setProducts}
             categories={categories}
           />
-        )}
+      }
     </div>
   );
 };
