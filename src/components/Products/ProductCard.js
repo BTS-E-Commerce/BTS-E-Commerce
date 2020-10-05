@@ -3,6 +3,8 @@ import moment from 'moment';
 
 import { EditProductForm } from './index';
 
+import './Products.css'
+
 const ProductCard = ({
   categories,
   products,
@@ -25,13 +27,13 @@ const ProductCard = ({
         src={product.image}
         alt='A pic of macaroni.'
       />
-      {product.inventory <= 0 ? <h1>OUT OF ORDER</h1> : ''}
+      {product.inventory <= 0 ? <h2 className='outOfOrder'>OUT OF ORDER</h2> : ''}
       <h1>{product.name}</h1>
       <div className='productInfo'>
         <p>DATE CREATED: {moment(product.date).format('dddd, MMMM Do YYYY')}</p>
         <p>DESCRIPTION: {product.description}</p>
         <p>CATEGORY: {product.categories[0].name}</p>
-        <h3>PRICE: ${product.currentPrice / 100}</h3>
+        <h3>PRICE: ${(product.currentPrice / 100).toFixed(2)}</h3>
       </div>
       <div className='productButtons'>
         <button id='addToCartButton' onClick={onAddToOrder}>
