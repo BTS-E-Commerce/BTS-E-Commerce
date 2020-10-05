@@ -18,7 +18,7 @@ ordersRouter.get('/', async (req, res, next) => {
 });
 
 ordersRouter.post('/', async (req, res, next) => {
-  const { orderId, products } = req.body;
+  const { userId, products } = req.body;
   // Check for orderId exsistence
   try {
     const order = await client.createOrder(req.body);
@@ -63,7 +63,6 @@ ordersRouter.patch('/:orderId', async (req, res, next) => {
 ordersRouter.patch('/:orderId/:productId', async (req, res, next) => {
   const { orderId, productId } = req.params;
   const { fields } = req.body;
-
   //Check for order exsistence
   //check for fields
   try {
