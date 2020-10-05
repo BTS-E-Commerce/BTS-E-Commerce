@@ -1,0 +1,9 @@
+#adminActionsContainer{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+#adminActions{
+    display: flex;
+    flex-flow: row wrap;
+}

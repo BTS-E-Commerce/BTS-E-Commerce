@@ -22,10 +22,3 @@ body {
   height: 937px;
   box-shadow: 0px 0px 14px #9e6805;
 }
-
-div#content {
-  display: flex;
-  width: 1437px;
-  height: 760px;
-  overflow-y: hidden;
-}
