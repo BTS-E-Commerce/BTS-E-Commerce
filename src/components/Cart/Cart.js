@@ -119,8 +119,8 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
                             />
 
                         ))
-                        : "There is nothing here."
-                    : "There is nothing here."}
+                        : <p>Look's like the pot's empty. No mac makes the macaroni homunculus sad...</p>
+                    : <p>Look's like the pot's empty. No mac makes Granny sad...</p>}
             </div>
             <div id='cartInfo'>
                 <p> Total Cart Price: ${(totalPrice / 100).toFixed(2)}</p>

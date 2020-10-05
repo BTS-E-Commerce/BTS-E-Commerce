@@ -75,6 +75,7 @@ const Login = ({ currentUser, setCurrentUser }) => {
                 name='username'
                 value={username}
                 onChange={handleUsernameChange}
+                required
               />
             </div>
             <div className='auth-box'>
@@ -87,6 +88,7 @@ const Login = ({ currentUser, setCurrentUser }) => {
                 name='password'
                 value={password}
                 onChange={handlePasswordChange}
+                required
               />
             </div>
             <button className='auth-button' type='submit'>
@@ -99,10 +101,10 @@ const Login = ({ currentUser, setCurrentUser }) => {
           </form>
         </>
       ) : (
-        <>
-          <Redirect to='/home' />
-        </>
-      )}
+          <>
+            <Redirect to='/home' />
+          </>
+        )}
     </div>
   );
 };

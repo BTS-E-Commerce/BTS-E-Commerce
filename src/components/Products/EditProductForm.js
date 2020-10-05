@@ -57,6 +57,7 @@ const EditProductFrom = ({ product, products, setProducts, categories, createPro
                     name='name'
                     value={name}
                     onChange={handleNameChange}
+                    required
                 />
                 <label htmlFor='description'>Description:</label>
                 <input
@@ -65,6 +66,7 @@ const EditProductFrom = ({ product, products, setProducts, categories, createPro
                     name='description'
                     value={description}
                     onChange={handleDescriptionChange}
+                    required
                 />
                 <label htmlFor='image-url'>Image URL:</label>
                 <input
@@ -81,6 +83,9 @@ const EditProductFrom = ({ product, products, setProducts, categories, createPro
                     name='inventory'
                     value={inventory}
                     onChange={handleInventoryChange}
+                    min='1'
+                    max='2,147,483,647'
+                    required
                 />
                 <label htmlFor='price'>Price:</label>
                 <input
@@ -89,6 +94,9 @@ const EditProductFrom = ({ product, products, setProducts, categories, createPro
                     name='price'
                     value={price}
                     onChange={handlePriceChange}
+                    min='1'
+                    max='2,147,483,647'
+                    required
                 />
                 <label>On Sale:</label>
                 <input
