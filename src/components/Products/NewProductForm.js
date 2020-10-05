@@ -25,6 +25,8 @@ const NewProductForm = ({
   const [category, setCategory] = useState({ id: 1, name: 'none' });
   // const [categories, setCategories] = useState([]);
 
+
+
   async function handleSubmit(event) {
     event.preventDefault();
 

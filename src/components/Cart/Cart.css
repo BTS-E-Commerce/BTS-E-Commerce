@@ -1,0 +1,32 @@
+#cartContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#cartProductContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cartProductCard{
+    display: flex;
+    flex: 1 1 400px;
+    flex-flow: column;
+    align-items: center;
+    height: 100%;
+    padding: 10px 20px 20px 20px;
+    margin: 0px 20px 20px 20px;
+    border: 7px double #a77327;
+    border-top: 7px double #a77327;
+    border-bottom: 7px double #a77327;
+    box-shadow: 2px 2px 5px #9e6805;
+}
+
+.productImage{
+    border-radius: 50%;
+    max-width: 50%;
+    max-height: 50%;
+  }

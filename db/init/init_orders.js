@@ -22,14 +22,14 @@ const {
 async function initializeOrders() {
   try {
     await createOrder({
-      userId: 2, products: [
+      userId: 5, products: [
         { id: 1, quantity: 2 },
         { id: 3, quantity: 1 },
       ]
     });
 
     await createOrder({
-      userId: 2, products: [
+      userId: 5, products: [
         { id: 1, quantity: 2 },
         { id: 2, quantity: 1 },
         { id: 3, quantity: 1 }
@@ -44,7 +44,7 @@ async function initializeOrders() {
     });
 
     await createOrder({
-      userId: 2, isComplete: true, products: [
+      userId: 4, isComplete: true, products: [
         { id: 1, quantity: 2 },
         { id: 2, quantity: 1 },
       ]

@@ -26,7 +26,7 @@ const LandingPage = () => {
   return (
     <div className='landingPageContainer'>
       <div className='hook'>
-        <h1>Home is where the mac is...</h1>
+        <h1>Home is where the Mac is...</h1>
         <p>
           ...especially when Grandma's home. You know, I know, we all know that
           Grandma makes the best mac. So, come on in! Peruse our selection of
