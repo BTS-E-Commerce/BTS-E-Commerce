@@ -33,7 +33,9 @@ const Cart = ({ products, setProducts, usersOrders, setUsersOrders, ongoingOrder
     useEffect(() => {
         async function updateTotalPrice() {
             try {
-                await updateOrder(ongoingOrder.id, { totalPrice })
+                if (ongoingOrder.hasOwnProperty('products')) {
+                    await updateOrder(ongoingOrder.id, { totalPrice })
+                }
             } catch (error) {
                 throw error;
             }
