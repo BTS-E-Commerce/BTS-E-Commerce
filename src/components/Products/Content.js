@@ -13,6 +13,7 @@ const Content = ({ products, setProducts, addProductToCart, categories, currentU
   const [newProductFormStatus, setNewProductFormStatus] = useState(false);
   // const [products, setProducts] = useState([]);
 
+
   // useEffect(() => {
   //   getAllProducts()
   //     .then((result) => {
@@ -67,7 +68,7 @@ const Content = ({ products, setProducts, addProductToCart, categories, currentU
                 : 'Hide'}
         New Product Form
         </button>}
-          <Searchbar products={products} setProducts={setProducts} />
+          <Searchbar products={products} setProducts={setProducts} categories={categories} />
         </div>
         <div className='feature'>
           {products.map((product) => (
