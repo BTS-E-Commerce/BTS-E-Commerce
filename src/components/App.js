@@ -3,6 +3,7 @@
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState, useEffect } from 'react';
 import { Header, LandingPage } from './index';
+import { CheckoutPage } from './Cart/index';
 import {
   getAllCategories,
   getAllProducts,
@@ -268,6 +269,9 @@ const App = () => {
               categories={categories}
               currentUser={currentUser}
             />
+          </Route>
+          <Route path='/checkout'>
+            <CheckoutPage ongoingOrder={ongoingOrder} />
           </Route>
         </Switch>
       </div>

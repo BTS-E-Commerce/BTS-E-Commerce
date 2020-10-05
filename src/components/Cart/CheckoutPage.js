@@ -3,7 +3,7 @@
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState } from 'react';
 
-const CheckoutPage = () => {
+const CheckoutPage = ({ ongoingOrder }) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~ EFFECTS ~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -11,15 +11,15 @@ const CheckoutPage = () => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~ FUNCTIONS ~~~~
     //~~~~~~~~~~~~~~~~~~~
-
+    // history.push('/');
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
     return (
         <div>
             <h1>CHECKOUT PAGE</h1>
-            <h3>Congratulations! You just checkout out!</h3>
-            <p>You spent : $</p>
+            <h3>Congratulations! You just checked out!</h3>
+            <p>You spent : ${ongoingOrder.totalPrice}</p>
             <p>I hope it was worth it.</p>
         </div>
     );
