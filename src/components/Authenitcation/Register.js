@@ -93,7 +93,10 @@ const Register = ({ currentUser, setCurrentUser }) => {
             <button className='auth-button' type='submit'>
               Register
             </button>
-            <NavLink to='/login'>LOGIN</NavLink>
+            <div className='accountCheck'>
+              <h2 className='memberCheck'>Already A Mac Member?</h2>
+              <NavLink to='/login'>LOGIN</NavLink>
+            </div>
           </form>
         </>
       ) : (

@@ -9,8 +9,8 @@ div#Header {
   box-shadow: 0px 0px 10px #9e68059e;
 }
 
-#Header img {
-  height: 120px;
+#macLogo {
+  height: 110px;
 }
 
 .navContainer {
@@ -19,18 +19,17 @@ div#Header {
   justify-content: space-between;
   align-items: center;
   width: 1437px;
-  height: 40px;
+  height: 50px;
   border-top: 7px double #a77327;
   border-bottom: 7px double #a77327;
 }
 
 .leftOfNavbar {
   width: 300px;
-  height: 26px;
+  height: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 90px;
 }
 
 .leftOfNavbar h2 {
@@ -42,54 +41,12 @@ div#Header {
   color: #a0520f;
 }
 
-#homeNav{
-  display: flex;
-}
-  
-#homeNav img{
-  height: 25px;
+.navImg {
+  height: 30px;
   padding-left: 20px;
   padding-right: 10px;
-}
-
-#accountNav{
-  display: flex;
-}
-  
-#accountNav img{
-  height: 25px;
-  padding-left: 20px;
-  padding-right: 10px;
-}
-
-#loginNav{
-  display: flex;
-}
-  
-#loginNav img{
-  height: 25px;
-  padding-left: 20px;
-  padding-right: 10px;
-}
-
-#registerNav{
-  display: flex;
-}
-  
-#registerNav img{
-  height: 25px;
-  padding-left: 20px;
-  padding-right: 10px;
-}
-
-#cartNav{
-display: flex;
-}
-
-#cartNav img{
-  height: 25px;
-  padding-left: 20px;
-  padding-right: 10px;
+  color: beige;
+  margin-bottom: 2px;
 }
 
 h2 a {
@@ -109,10 +66,9 @@ h2 a:hover {
   text-shadow: -2px 0px 2px #f3b542;
 }
 
-/* If you remove the width here it will auto adjust to center. */
 .navBar {
-  height: 20px;
-  width: 600px;
+  height: 36px;
+  width: 800px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -126,7 +82,12 @@ h2 a:hover {
   cursor: pointer;
   font-family: 'Lobster Two', cursive;
   font-weight: bolder;
+  height: 36px;
   letter-spacing: 5px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  width: 170px;
 }
 
 .navBar a:active {
@@ -140,10 +101,9 @@ h2 a:hover {
 
 .rightOfNavbar {
   width: 300px;
-  height: 26px;
+  height: 36px;
   display: flex;
   justify-content: center;
-  margin-left: 90px;
 }
 
 .rightOfNavbar button {
