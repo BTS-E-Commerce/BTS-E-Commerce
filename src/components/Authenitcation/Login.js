@@ -92,14 +92,17 @@ const Login = ({ currentUser, setCurrentUser }) => {
             <button className='auth-button' type='submit'>
               Login
             </button>
-            <NavLink to='/register'>REGISTER</NavLink>
+            <div className='accountCheck'>
+              <h2 className='memberCheck'>Not A Mac Member Yet?</h2>
+              <NavLink to='/register'>REGISTER</NavLink>
+            </div>
           </form>
         </>
       ) : (
-          <>
-            <Redirect to='/home' />
-          </>
-        )}
+        <>
+          <Redirect to='/home' />
+        </>
+      )}
     </div>
   );
 };
