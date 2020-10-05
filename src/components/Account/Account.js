@@ -17,6 +17,8 @@ import { Admin, EditUserForm } from './Admin/index'
 
 import { updateUser } from '../../api/index'
 
+import accountImg from '../images/granmacaccount.png'
+
 import './Account.css';
 
 const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser, categories, setCategories }) => {
@@ -37,8 +39,19 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
     //~~~~~~~~~~~~~~~~~~~
     return (
         <div id='accountContainer'>
-            <h1>AccountInfo</h1>
-            <h2>Welcome to your account, {currentUser.username}</h2>
+            <img
+                className='accountImg'
+                src={accountImg}
+                alt="A grandma's head with macaroni for eyes."
+            />
+            <h1>ACCOUNT</h1>
+            {currentUser.username !== 'guest'
+                ? <h2>Welcome to your account, {currentUser.username}</h2>
+                : <div id='accountWelcome'>
+                    <h2>Grandma Mac is always happy to sense a new customer!</h2><p>Login or Register to see personalized account information and keep track of your Mac!</p>
+                </div>}
+
+
             {currentUser.admin === false
                 ? ''
                 : <p>You are an admin.</p>
@@ -65,7 +78,7 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
                         : ''}
 
                 </div>
-                : 'Register or Sign in to see your order history.'}
+                : ''}
 
         </div>
 

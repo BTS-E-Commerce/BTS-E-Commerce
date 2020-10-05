@@ -30,8 +30,8 @@ const ProductCard = ({
       {product.inventory <= 0 ? (
         <h2 className='outOfOrder'>OUT OF ORDER</h2>
       ) : (
-        ''
-      )}
+          ''
+        )}
       <h1>{product.name}</h1>
       <div className='productInfo'>
         <span>
@@ -45,7 +45,10 @@ const ProductCard = ({
         <div className='productFooter'>
           <span>
             <h3>Category: </h3>
-            <p>{product.categories[0].name}</p>
+            <p>
+              {product.categories[0].name[0].toUpperCase()}
+              {product.categories[0].name.slice(1)}
+            </p>
           </span>
           <span>
             <h2>Price: </h2>
@@ -60,32 +63,32 @@ const ProductCard = ({
         {currentUser.admin === false ? (
           ''
         ) : (
-          <button id='productDeleteButton' onClick={onDelete}>
-            DELETE
-          </button>
-        )}
+            <button id='productDeleteButton' onClick={onDelete}>
+              DELETE
+            </button>
+          )}
 
         {currentUser.admin === false ? (
           ''
         ) : (
-          <button onClick={showProductEditFrom}>
-            {productEditFromStatus === false ? 'Show' : 'Hide'}
+            <button onClick={showProductEditFrom}>
+              {productEditFromStatus === false ? 'Show' : 'Hide'}
             Edit Form
-          </button>
-        )}
+            </button>
+          )}
       </div>
       {currentUser.admin === false ? (
         ''
       ) : productEditFromStatus === false ? (
         ''
       ) : (
-        <EditProductForm
-          product={product}
-          products={products}
-          setProducts={setProducts}
-          categories={categories}
-        />
-      )}
+            <EditProductForm
+              product={product}
+              products={products}
+              setProducts={setProducts}
+              categories={categories}
+            />
+          )}
     </div>
   );
 };

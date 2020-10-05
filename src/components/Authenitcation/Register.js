@@ -10,7 +10,7 @@ const Register = ({ currentUser, setCurrentUser }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-
+    //Checks for verification
     if (password !== confirm) {
       alert('Passwords do not match!');
     }
@@ -59,11 +59,15 @@ const Register = ({ currentUser, setCurrentUser }) => {
                 Username:
               </label>
               <input
+                title='Username must be between 8 and 16 charcters long.'
                 className='auth-input'
                 type='text'
                 name='username'
                 value={username}
                 onChange={handleUsernameChange}
+                minLength='8'
+                maxLength='16'
+                required
               />
             </div>
             <div className='auth-box'>
@@ -71,11 +75,15 @@ const Register = ({ currentUser, setCurrentUser }) => {
                 Password:
               </label>
               <input
+                title='Password must be between 8 and 16 charcters long.'
                 className='auth-input'
                 type='password'
                 name='password'
                 value={password}
                 onChange={handlePasswordChange}
+                minLength='8'
+                maxLength='16'
+                required
               />
             </div>
             <div className='auth-box'>
@@ -88,6 +96,7 @@ const Register = ({ currentUser, setCurrentUser }) => {
                 name='confirm'
                 value={confirm}
                 onChange={handleConfirmChange}
+                required
               />
             </div>
             <button className='auth-button' type='submit'>
@@ -100,10 +109,10 @@ const Register = ({ currentUser, setCurrentUser }) => {
           </form>
         </>
       ) : (
-        <>
-          <Redirect to='/home' />
-        </>
-      )}
+          <>
+            <Redirect to='/home' />
+          </>
+        )}
     </div>
   );
 };

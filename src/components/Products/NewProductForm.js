@@ -74,6 +74,7 @@ const NewProductForm = ({
           name='name'
           value={name}
           onChange={handleNameChange}
+          required
         />
         <label htmlFor='descriptionForm'>Description:</label>
         <textarea
@@ -82,6 +83,7 @@ const NewProductForm = ({
           name='description'
           value={description}
           onChange={handleDescriptionChange}
+          required
         ></textarea>
         <label htmlFor='image-urlForm'>Image URL:</label>
         <input
@@ -99,6 +101,9 @@ const NewProductForm = ({
             name='price'
             value={price}
             onChange={handlePriceChange}
+            min='1'
+            max='2,147,483,647'
+            required
           />
           <label htmlFor='salesForm'>On Sale:</label>
           <input
@@ -117,6 +122,9 @@ const NewProductForm = ({
             name='inventory'
             value={inventory}
             onChange={handleInventoryChange}
+            min='1'
+            max='2,147,483,647'
+            required
           />
         </div>
         <div className='categoriesContainer'>
