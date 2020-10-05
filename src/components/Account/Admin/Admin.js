@@ -6,6 +6,8 @@ import React from 'react';
 import { UsersList, CategoryList } from './index';
 import { deleteCategory } from '../../../api';
 
+import './Admin.css';
+
 const Admin = ({
   categories,
   setCategories,
@@ -29,14 +31,16 @@ const Admin = ({
   //~~~~~~ JSX ~~~~~~~~
   //~~~~~~~~~~~~~~~~~~~
   return (
-    <div>
+    <div id='adminActionsContainer'>
       <h1>Admin Actions</h1>
-      <UsersList
-        currentUser={currentUser}
-        setCurrentUser={setCurrentUser}
-        setOngoingOrder={setOngoingOrder}
-      />
-      <CategoryList categories={categories} setCategories={setCategories} />
+      <div id='adminActions'>
+        <UsersList
+          currentUser={currentUser}
+          setCurrentUser={setCurrentUser}
+          setOngoingOrder={setOngoingOrder}
+        />
+        <CategoryList categories={categories} setCategories={setCategories} />
+      </div>
     </div>
   );
 };

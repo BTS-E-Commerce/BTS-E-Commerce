@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom'
 
 import landingImg from './images/grandmaclanding.png';
 
+import './LandingPage.css';
+
 const LandingPage = () => {
     let history = useHistory();
     //~~~~~~~~~~~~~~~~~~~
@@ -22,7 +24,7 @@ const LandingPage = () => {
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
     return (
-        <div>
+        <div id="langingPageContainer">
             <h1>Home is where the mac is...</h1>
             <p>...especially when Grandma's home. You know, I know, we all know that Grandma makes the best mac. So, come on in! Peruse our selection of artisan macaroni products!</p>
             <img src={landingImg} alt='A wholesome image of Grandma Mac cooking her favorite food - macaroni.' />
