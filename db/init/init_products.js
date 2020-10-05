@@ -257,6 +257,194 @@ async function initializeProducts() {
       ]
     );
 
+    await createProduct(
+      {
+        name: 'Cheese and pancetta fusilli',
+        description:
+          "Fresh egg pasta in a sauce made from fresh cheese and smoked pancetta!",
+        image:
+       "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSLJkJjksTRPftYeZyOjpurpdvxq0cvnQprng&usqp=CAU",
+        inventory: '20',
+        basePrice: '5000',
+        currentPrice: '3000',
+        sale: true,
+      },
+      [
+        { id: 10, name: 'boiled' },
+      ]
+    );
+
+await createProduct(
+      {
+        name: 'Broccoli and bacon pasta',
+        description:
+          "Fresh egg pasta in a sauce made from fresh broccoli and lea bacon!",
+        image:
+       "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSPjQ9JkHyiQO-mcqVjkDhFhhoWAspy-h__Bw&usqp=CAU",
+        inventory: '50',
+        basePrice: '10000',
+        currentPrice: '7000',
+        sale: true,
+      },
+      [
+        { id: 5, name: "cheesy"},
+      ]
+    );
+
+await createProduct(
+      {
+        name: 'Leek and spinach pasta',
+        description:
+          "Fresh egg pasta in a sauce made from baby leek and fresh spinach",
+        image:
+       "https://www.simplyrecipes.com/wp-content/uploads/2016/03/green-goddess-mac-cheese-horiz-a-1200.jpg",
+        inventory: '15',
+        basePrice: '15000',
+        currentPrice: '15000',
+        sale: false,
+      },
+      [
+        { id: 7, name: "vegan"},
+      ]
+    );
+
+await createProduct(
+      {
+        name: ' Cheese and chilli toastie',
+        description:
+          "Hot slices of bread filled with creamy cheese and red chilli Mac",
+        image:
+       "https://www.foodpeoplewant.com/wp-content/uploads/2009/11/Green-Chile-Mac-Cheese-1024x768.jpg",
+        inventory: '20',
+        basePrice: '6000',
+        currentPrice: '3000',
+        sale: true,
+      },
+      [
+        { id: 6, name: "cheddar"},
+      ]
+    );
+
+await createProduct(
+      {
+        name: ' Shepherd’s Mac Fusion!',
+        description:
+          "Grandma’s exclusive combination of her own Mac and Auntie M’s homestyle Shepherd's Pie!",
+        image:
+       "https://parade.com/wp-content/uploads/2018/02/cottage-pie-FEAT.jpg",
+        inventory: '10',
+        basePrice: '240000',
+        currentPrice: '19000',
+        sale: true,
+      },
+      [
+        { id: 8, name: "special"},
+      ]
+    );
+
+await createProduct(
+      {
+        name: 'Pasta and cheese pizza',
+        description:
+          "Deep pan pizza topped with campanelle pasta and vintage cheese",
+        image:
+       "https://www.hormel.com/getattachment/d5a2142f-da2a-432d-8a90-627099b3f827",
+        inventory: '8',
+        basePrice: '2000',
+        currentPrice: '2000',
+        sale: false,
+      },
+      [
+        { id: 3, name: "oven"},
+      ]
+    );
+
+await createProduct(
+      {
+        name: 'Cheese and stilton buns',
+        description:
+          "Crumbly buns made with creamy cheese and stilton",
+        image:
+       "https://www.chewboom.com/wp-content/uploads/2019/03/Huddle-House-Introduces-New-Mac-Cheese-Bites-Welcomes-Back-Prime-Rib-Tips-678x381.jpg",
+        inventory: '30',
+        basePrice: '3500',
+        currentPrice: '1000',
+        sale: true,
+      },
+      [
+        { id: 4, name: "crunchy"},
+      ]
+    );
+
+await createProduct(
+      {
+        name: 'Mac Medley',
+        description:
+          "A light blend of elbow noodles and seasonal vegetables for an all natural mac selection",
+        image:
+       "https://www.gimmesomeoven.com/wp-content/uploads/2012/08/Roasted-Vegetable-Mac-and-Cheese-Recipe-1.jpg",
+        inventory: '18',
+        basePrice: '10000',
+        currentPrice: '5000',
+        sale: true,
+      },
+      [
+        { id: 4, name: "vegan"},
+      ]
+    );
+
+await createProduct(
+      {
+        name: 'Chili Mac Dogs',
+        description:
+          "Americas classing chili dog infused with Grandma’s original Mac!",
+        image:
+       "https://hips.hearstapps.com/del.h-cdn.co/assets/17/20/640x959/gallery-1495057199-delish-mac-cheese-dogs-1.jpg?resize=480:*",
+        inventory: '50',
+        basePrice: '5000',
+        currentPrice: '3000',
+        sale: true,
+      },
+      [
+        { id: 9, name: "cheesy"},
+      ]
+    );
+
+await createProduct(
+      {
+        name: 'Green Almonds',
+        description:
+          "Elbow pasta greens casserole with roasted almonds on top.",
+        image:
+       "https://www.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2020/01/24/Food/Images/v-wkveg-greensmacncheese_074_leadweb.jpg?t=20170517",
+        inventory: '6',
+        basePrice: '16000',
+        currentPrice: '16000',
+        sale: false,
+      },
+      [
+        { id: 4, name: "vegan"},
+      ]
+    );
+
+await createProduct(
+      {
+        name: 'Waffle Mac',
+        description:
+          "Lunch for breakfast? Grandma says ‘Yes!’ with her take on chicken and waffles!",
+        image:
+       "https://hips.hearstapps.com/vidthumb/manual_upload/59efca72bbddbd7731689284/thumb_1508887159.png",
+        inventory: '30',
+        basePrice: '6000',
+        currentPrice: '6000',
+        sale: false,
+      },
+      [
+        { id: 4, name: "crunchy"},
+      ]
+    );
+
+
     console.log('Finished making products...');
   } catch (error) {
     console.log('Error creating initial products...');

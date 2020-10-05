@@ -9,10 +9,15 @@ import landingImg from '../images/grandmaclanding.png';
 import '../App.css';
 import './Products.css';
 
-const Content = ({ products, setProducts, addProductToCart, categories, currentUser }) => {
+const Content = ({
+  products,
+  setProducts,
+  addProductToCart,
+  categories,
+  currentUser,
+}) => {
   const [newProductFormStatus, setNewProductFormStatus] = useState(false);
   // const [products, setProducts] = useState([]);
-
 
   // useEffect(() => {
   //   getAllProducts()
@@ -25,7 +30,7 @@ const Content = ({ products, setProducts, addProductToCart, categories, currentU
   // }, []);
   const showNewProductFormStatus = () => {
     setNewProductFormStatus(!newProductFormStatus);
-  }
+  };
 
   const onProductDelete = (id) =>
     async function () {
@@ -49,44 +54,52 @@ const Content = ({ products, setProducts, addProductToCart, categories, currentU
       <div id='productFormContainer'>
         {currentUser.admin === false ? (
           ''
-        ) : newProductFormStatus === false
-            ? ''
-            : <NewProductForm
-              products={products}
-              setProducts={setProducts}
-              categories={categories}
-              createProduct={onProductCreate} />
-        }
+        ) : newProductFormStatus === false ? (
+          ''
+        ) : (
+          <NewProductForm
+            products={products}
+            setProducts={setProducts}
+            categories={categories}
+            createProduct={onProductCreate}
+          />
+        )}
       </div>
       <div id='productContainer'>
-        <div id="product-search">
-          {currentUser.admin === false
-            ? ''
-            : <button id='productFormButton' onClick={showNewProductFormStatus}>
-              {newProductFormStatus === false
-                ? 'Show'
-                : 'Hide'}
-        New Product Form
-        </button>}
-          <Searchbar products={products} setProducts={setProducts} categories={categories} />
+        <div id='product-search'>
+          {currentUser.admin === false ? (
+            ''
+          ) : (
+            <button id='productFormButton' onClick={showNewProductFormStatus}>
+              {newProductFormStatus === false ? 'Show' : 'Hide'}
+              New Product Form
+            </button>
+          )}
+          <Searchbar
+            products={products}
+            setProducts={setProducts}
+            categories={categories}
+          />
         </div>
         <div className='feature'>
-          {products.map((product) => (
-            <ProductCard
-              categories={categories}
-              products={products}
-              setProducts={setProducts}
-              onDelete={onProductDelete(product.id)}
-              key={product.id}
-              product={product}
-              onAddToOrder={addProductToCart(
-                product.id,
-                product.currentPrice,
-                product.inventory
-              )}
-              currentUser={currentUser}
-            />
-          ))}
+          <div className='featureScrollBar'>
+            {products.map((product) => (
+              <ProductCard
+                categories={categories}
+                products={products}
+                setProducts={setProducts}
+                onDelete={onProductDelete(product.id)}
+                key={product.id}
+                product={product}
+                onAddToOrder={addProductToCart(
+                  product.id,
+                  product.currentPrice,
+                  product.inventory
+                )}
+                currentUser={currentUser}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import { EditProductForm } from './index';
 
-import './Products.css'
+import './Products.css';
 
 const ProductCard = ({
   categories,
@@ -18,7 +18,7 @@ const ProductCard = ({
 
   const showProductEditFrom = () => {
     setProductEditFromStatus(!productEditFromStatus);
-  }
+  };
 
   return (
     <div className='productCard' key={product.id}>
@@ -27,46 +27,65 @@ const ProductCard = ({
         src={product.image}
         alt='A pic of macaroni.'
       />
-      {product.inventory <= 0 ? <h2 className='outOfOrder'>OUT OF ORDER</h2> : ''}
+      {product.inventory <= 0 ? (
+        <h2 className='outOfOrder'>OUT OF ORDER</h2>
+      ) : (
+        ''
+      )}
       <h1>{product.name}</h1>
       <div className='productInfo'>
-        <p>DATE CREATED: {moment(product.date).format('dddd, MMMM Do YYYY')}</p>
-        <p>DESCRIPTION: {product.description}</p>
-        <p>CATEGORY: {product.categories[0].name}</p>
-        <h3>PRICE: ${(product.currentPrice / 100).toFixed(2)}</h3>
+        <span>
+          <h3>Date Created: </h3>
+          <p>{moment(product.date).format('dddd, MMMM Do YYYY')}</p>
+        </span>
+        <span id='productDescription'>
+          <h3>Description: </h3>
+          <p>{product.description}</p>
+        </span>
+        <div className='productFooter'>
+          <span>
+            <h3>Category: </h3>
+            <p>{product.categories[0].name}</p>
+          </span>
+          <span>
+            <h2>Price: </h2>
+            <p>${(product.currentPrice / 100).toFixed(2)}</p>
+          </span>
+        </div>
       </div>
       <div className='productButtons'>
         <button id='addToCartButton' onClick={onAddToOrder}>
           Add To Cart
-      </button>
+        </button>
         {currentUser.admin === false ? (
           ''
         ) : (
-            <button id='productDeleteButton' onClick={onDelete}>
-              DELETE
-            </button>
-          )}
+          <button id='productDeleteButton' onClick={onDelete}>
+            DELETE
+          </button>
+        )}
 
         {currentUser.admin === false ? (
           ''
-        ) : <button onClick={showProductEditFrom}>
-            {productEditFromStatus === false
-              ? 'Show'
-              : 'Hide'}
-          Edit Form
-          </button>}
+        ) : (
+          <button onClick={showProductEditFrom}>
+            {productEditFromStatus === false ? 'Show' : 'Hide'}
+            Edit Form
+          </button>
+        )}
       </div>
       {currentUser.admin === false ? (
         ''
-      ) : productEditFromStatus === false
-          ? ''
-          : <EditProductForm
-            product={product}
-            products={products}
-            setProducts={setProducts}
-            categories={categories}
-          />
-      }
+      ) : productEditFromStatus === false ? (
+        ''
+      ) : (
+        <EditProductForm
+          product={product}
+          products={products}
+          setProducts={setProducts}
+          categories={categories}
+        />
+      )}
     </div>
   );
 };
