@@ -65,8 +65,10 @@ const UsersList = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
                     user={user}
                     users={users}
                     setUsers={setUsers}
+                    setCurrentUser={setCurrentUser}
                     currentUser={currentUser}
                     changeUser={onChangeUser(user)}
+                    setOngoingOrder={setOngoingOrder}
                     onDeleteUser={onDeleteUser(user.id)} />
             ))}
         </div>
