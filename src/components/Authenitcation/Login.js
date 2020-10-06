@@ -4,10 +4,10 @@
 
 import React, { useState } from 'react';
 import { checkUserByUsername, loginUser } from '../../api/users';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, Redirect } from 'react-router-dom';
 import './Auth.css';
 
-const Login = ({ setCurrentUser }) => {
+const Login = ({ setCurrentUser, currentUser }) => {
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ STATE ~~~~~~
   //~~~~~~~~~~~~~~~~~~~
@@ -33,20 +33,20 @@ const Login = ({ setCurrentUser }) => {
         alert('Username does not exist');
         return;
       }
-    const user = await loginUser({ username, password });
+      const user = await loginUser({ username, password });
 
-    if (!user.hasOwnProperty('user')) {
-      alert(`Name: ${user.name} \n` + `Message: ${user.message}`);
-      return;
-    }
+      if (!user.hasOwnProperty('user')) {
+        alert(`Name: ${user.name} \n` + `Message: ${user.message}`);
+        return;
+      }
 
-    localStorage.clear();
+      localStorage.clear();
 
-    setCurrentUser({
-      id: user.user.id,
-      username: user.user.username,
-      admin: user.user.admin,
-    });
+      setCurrentUser({
+        id: user.user.id,
+        username: user.user.username,
+        admin: user.user.admin,
+      });
 
       localStorage.setItem('id', user.user.id);
       localStorage.setItem('username', user.user.username);
