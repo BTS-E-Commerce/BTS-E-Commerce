@@ -47,9 +47,9 @@ const EditProductFrom = ({ product, products, setProducts, categories, createPro
         setCategory(chosenCategory);
     };
     return (
-        <div>
+        <div className='editProductContainer'>
             <h1>Edit Product</h1>
-            <form onSubmit={handleSubmit}>
+            <form className='editProductForm' onSubmit={handleSubmit}>
                 <label htmlFor='name'>Name:</label>
                 <input
                     className='edit-name'
@@ -76,38 +76,44 @@ const EditProductFrom = ({ product, products, setProducts, categories, createPro
                     value={imageUrl}
                     onChange={handleImageUrlChange}
                 />
-                <label htmlFor='inventory'>Inventory:</label>
-                <input
-                    className='edit-inventory'
-                    type='number'
-                    name='inventory'
-                    value={inventory}
-                    onChange={handleInventoryChange}
-                    min='1'
-                    max='2,147,483,647'
-                    required
-                />
-                <label htmlFor='price'>Price:</label>
-                <input
-                    className='edit-price'
-                    type='number'
-                    name='price'
-                    value={price}
-                    onChange={handlePriceChange}
-                    min='1'
-                    max='2,147,483,647'
-                    required
-                />
-                <label>On Sale:</label>
-                <input
-                    className='edit-sale'
-                    type='checkbox'
-                    name='Sale'
-                    value={sale}
-                    onChange={handleSaleChange}
-                />
+                <div className='priceContainer'>
+                    <label htmlFor='price'>Price:</label>
+                    <input
+                        className='edit-price'
+                        type='number'
+                        name='price'
+                        value={price}
+                        onChange={handlePriceChange}
+                        min='1'
+                        max='2,147,483,647'
+                        required
+                    />
+                    <label>On Sale:</label>
+                    <input
+                        className='edit-sale'
+                        type='checkbox'
+                        name='Sale'
+                        value={sale}
+                        onChange={handleSaleChange}
+                    />
+                </div>
+
+                <div className='inventoryContainer'>
+                    <label htmlFor='inventory'>Inventory:</label>
+                    <input
+                        className='edit-inventory'
+                        type='number'
+                        name='inventory'
+                        value={inventory}
+                        onChange={handleInventoryChange}
+                        min='1'
+                        max='2,147,483,647'
+                        required
+                    />
+                </div>
+
                 {categories === undefined ? '' :
-                    <div className='categoriesContainerForm'>
+                    <div className='categoriesContainer'>
                         <label htmlFor='categories'>Choose a Category:</label>
                         <select className='edit-categories' name='categories' value={category === undefined ? '' : category.name} onChange={handleCategoryChange}>
                             {categories.map(category => (
@@ -123,7 +129,7 @@ const EditProductFrom = ({ product, products, setProducts, categories, createPro
                         </select>
                     </div>
                 }
-                <input type='submit' value='Submit'></input>
+                <input class='editProductSubmit' type='submit' value='Submit'></input>
             </form>
         </div>
 
