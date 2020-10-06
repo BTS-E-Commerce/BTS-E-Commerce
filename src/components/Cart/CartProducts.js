@@ -60,7 +60,7 @@ const CartProducts = ({
       </div>
       <div id='cart-details'>
         <h5>{product.name}</h5>
-        <p>
+        <p id='cart-price'>
           Price: ${((product.currentPrice / 100) * product.quantity).toFixed(2)}
         </p>
         <div className='quantityFields'>
