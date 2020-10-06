@@ -1,32 +1,134 @@
-#cartContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+#cartContainer {
+  align-items: center;
+  display: block;
+  margin: 1rem 1rem 1.75rem 1.75rem;
+  height: 740px;
+  overflow-y: scroll;
 }
 
-#cartProductContainer{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+#cart-header {
+  display: block;
+  margin: 1.25rem;
+  text-align: center;
+  font-size: 34px;
+  font-family: 'Lobster Two', cursive;
+  color: #a0520f;
+  letter-spacing: 2px;
 }
 
-.cartProductCard{
-    display: flex;
-    flex: 1 1 400px;
-    flex-flow: column;
-    align-items: center;
-    height: 100%;
-    padding: 10px 20px 20px 20px;
-    margin: 0px 20px 20px 20px;
-    border: 7px double #a77327;
-    border-top: 7px double #a77327;
-    border-bottom: 7px double #a77327;
-    box-shadow: 2px 2px 5px #9e6805;
+#cartProductContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  margin: 1rem 2rem;
+  border: 7px double #a77327;
+  box-shadow: 2px 2px 5px #9e6805;
 }
 
-.productImage{
-    border-radius: 50%;
-    max-width: 50%;
-    max-height: 50%;
-  }
+.cartProductCard {
+  /* display: flex;
+  flex: 1 1 400px;
+  flex-flow: column; */
+  align-items: center;
+  height: 22rem;
+  padding: 1.25rem;
+  margin: 1.75rem 8rem;
+  border: 1px solid #a77327;
+}
+
+#cartInfo {
+  font-family: 'Lobster Two', cursive;
+  color: #a0520f;
+  display: block;
+  margin: 1.25rem;
+  text-align: center;
+  color: #9e6805;
+  letter-spacing: 2px;
+}
+
+#cartInfo {
+  font-size: 26px;
+  margin: 2rem;
+}
+
+#cartInfo > p {
+  margin: 2rem;
+}
+
+#orderButtons > button {
+  color: wheat;
+  background-color: #8b5907;
+  width: auto;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+
+  height: 2rem;
+  width: 8rem;
+}
+
+#orderButtons {
+  display: flex;
+  justify-content: space-evenly;
+
+  margin-bottom: 2rem;
+}
+
+.cartProductCard {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+}
+
+.productImage {
+  border-radius: 50%;
+  width: 50%;
+  height: 50%;
+  margin-left: 1rem;
+  padding-left: 1rem;
+}
+
+#cart-details {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+#cart-details {
+  font-family: 'Just Another Hand', cursive;
+  font-size: 25px;
+  color: #6c4403;
+  text-shadow: 0px 0px 0px #6c4403;
+  letter-spacing: 1px;
+}
+
+#cart-details > h5,
+p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+#cart-details > h5 {
+  font-size: 34px;
+  letter-spacing: 2px;
+}
+
+.quantityFields > input {
+  font-family: 'Just Another Hand', cursive;
+  font-size: 32px;
+  color: #6c4403;
+  text-shadow: 0px 0px 0px #6c4403;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+  padding-left: 3rem;
+}
+
+#cart-remove {
+  color: wheat;
+  background-color: #8b5907;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+
+  height: 3rem;
+  width: 22rem;
+}

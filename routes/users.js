@@ -30,6 +30,19 @@ usersRouter.get('/', async (req, res, next) => {
   }
 });
 
+usersRouter.get('/:username', async (req, res, next) => {
+  try {
+    const { username } = req.body;
+    const user = await client.getUserByUsername({ username });
+    console.log(user);
+    res.status(201).send({
+      user,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // -- CREATE Routes --
 //* Creates a user from the register form.
 usersRouter.post('/register', async (req, res, next) => {
@@ -86,15 +99,24 @@ usersRouter.post('/login', async (req, res, next) => {
     const { username, password } = req.body;
 
     const user = await client.getUserByUsername({ username });
+    console.log(user);
 
-    const hashedPassword = user.password;
+    if (user === undefined) {
+      res.status(401).send({
+        name: 'Username does not exist',
+        message: 'Please provide a valid username and password',
+      });
+    }
 
     if (!username || !password) {
-      next({
+      res.status(401).send({
         name: 'Missing Credentials Error',
         message: 'Please provide a valid username and password',
       });
     }
+
+    const hashedPassword = user.password;
+
     bcrypt.compare(password, hashedPassword, function (err, passwordsMatch) {
       if (passwordsMatch) {
         const token = jwt.sign(
@@ -145,17 +167,24 @@ usersRouter.patch('/:userId', async (req, res, next) => {
 
     const originalHashedPassword = user.password;
 
-    bcrypt.compare(currentPassword, originalHashedPassword, async function (err, passwordsMatch) {
+    bcrypt.compare(currentPassword, originalHashedPassword, async function (
+      err,
+      passwordsMatch
+    ) {
       if (passwordsMatch) {
         if (fields.password !== undefined) {
           let securePassword;
 
-          bcrypt.hash(fields.password, SALT_COUNT, async (err, hashedPassword) => {
-            securePassword = hashedPassword;
-            fields.password = securePassword;
+          bcrypt.hash(
+            fields.password,
+            SALT_COUNT,
+            async (err, hashedPassword) => {
+              securePassword = hashedPassword;
+              fields.password = securePassword;
 
-            updatedUser = await client.updateUser(userId, fields);
-          });
+              updatedUser = await client.updateUser(userId, fields);
+            }
+          );
         } else {
           updatedUser = await client.updateUser(userId, fields);
         }
@@ -186,7 +215,7 @@ usersRouter.delete('/:userId', async (req, res, next) => {
   } catch (error) {
     throw error;
   }
-})
+});
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~

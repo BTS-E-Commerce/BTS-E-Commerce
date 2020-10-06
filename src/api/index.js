@@ -8,7 +8,14 @@ export {
   updateProduct,
   deleteProduct,
 } from './products';
-export { getAllUsers, createUser, loginUser, updateUser, deleteUser } from './users';
+export {
+  getAllUsers,
+  createUser,
+  loginUser,
+  updateUser,
+  deleteUser,
+  checkUserByUsername,
+} from './users';
 export {
   getAllOrders,
   createOrder,
@@ -16,5 +23,5 @@ export {
   updateOrder,
   updateOrderProduct,
   deleteOrder,
-  deleteProductFromOrder
+  deleteProductFromOrder,
 } from './orders';

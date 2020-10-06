@@ -224,6 +224,15 @@ const App = () => {
           <Route exact path='/'>
             <LandingPage />
           </Route>
+          <Route exact path='/register'>
+            <Register
+              setCurrentUser={setCurrentUser}
+              currentUser={currentUser}
+            />
+          </Route>
+          <Route exact path='/login'>
+            <Login setCurrentUser={setCurrentUser} currentUser={currentUser} />
+          </Route>
           <Route exact path='/account'>
             <Account
               categories={categories}
@@ -238,15 +247,7 @@ const App = () => {
               setCurrentUser={setCurrentUser}
             />
           </Route>
-          <Route exact path='/register'>
-            <Register
-              setCurrentUser={setCurrentUser}
-              currentUser={currentUser}
-            />
-          </Route>
-          <Route exact path='/login'>
-            <Login setCurrentUser={setCurrentUser} currentUser={currentUser} />
-          </Route>
+
           <Route exact path='/cart'>
             <Cart
               products={products}
