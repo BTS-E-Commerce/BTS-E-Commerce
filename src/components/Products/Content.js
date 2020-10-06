@@ -57,24 +57,24 @@ const Content = ({
         ) : newProductFormStatus === false ? (
           ''
         ) : (
-          <NewProductForm
-            products={products}
-            setProducts={setProducts}
-            categories={categories}
-            createProduct={onProductCreate}
-          />
-        )}
+              <NewProductForm
+                products={products}
+                setProducts={setProducts}
+                categories={categories}
+                createProduct={onProductCreate}
+              />
+            )}
       </div>
       <div id='productContainer'>
         <div id='product-search'>
           {currentUser.admin === false ? (
             ''
           ) : (
-            <button id='productFormButton' onClick={showNewProductFormStatus}>
-              {newProductFormStatus === false ? 'Show' : 'Hide'}
-              New Product Form
-            </button>
-          )}
+              <button id='productFormButton' onClick={showNewProductFormStatus}>
+                {newProductFormStatus === false ? 'Show New Product Form' : 'Hide New Product Form'}
+
+              </button>
+            )}
           <Searchbar
             products={products}
             setProducts={setProducts}

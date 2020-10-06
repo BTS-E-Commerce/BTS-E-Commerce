@@ -27,7 +27,7 @@ div#content {
   margin-bottom: 5px;
 }
 
-#product-search button {
+#searchBarContainer button {
   color: wheat;
   background-color: #8b5907;
   width: auto;
@@ -48,7 +48,23 @@ div#content {
 }
 
 #productFormButton {
-  width: auto;
+  text-align: center;
+  width: 25%;
+  color: wheat;
+  background-color: #8b5907;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  align-self: center;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  line-height: 1px;
+  letter-spacing: 1px;
+  font-family: 'Niconne', cursive;
+  margin-top: 15px;
+  height: 40px;
+  font-size: 26px;
 }
 
 #searchBarContainer {
@@ -177,8 +193,13 @@ span#productDescription {
   text-shadow: 1px 1px 1px #ff7600;
 }
 
-button#addToCartButton,
-#productDeleteButton {
+.productButtons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button#addToCartButton{
   color: wheat;
   background-color: #8b5907;
   border: 2px solid #814109;
@@ -196,6 +217,32 @@ button#addToCartButton,
   font-size: 26px;
   width: 200px;
 }
+
+.adminProductButtons{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#productDeleteButton, .showEditFrom {
+  color: wheat;
+  background-color: #8b5907;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  align-self: center;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  line-height: 1px;
+  letter-spacing: 1px;
+  font-family: 'Niconne', cursive;
+  margin-top: 15px;
+  height: 25px;
+  font-size: 20px;
+  width: 150px;
+}
+
 .featureScrollBar::-webkit-scrollbar {
   width: 10px;
   background-color: #f5f5f500;
@@ -228,8 +275,148 @@ button#addToCartButton,
 .productInfo p {
   text-align: center;
 }
-/*NEW PRODUCT FORM STUFF */
+
+
+/* EDIT PRODUCT FORM  */
+
+#newProductForm h1 {
+  font-family: 'Lobster Two', cursive;
+  color: #6c4403;
+  text-shadow: 1px 1px 1px #ff7600;
+  text-align: center;
+  border-bottom: 7px double #a77327;
+  padding: 10px;
+}
+
+div.editProductContainer form {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.editProductForm label {
+  font-family: 'Lobster Two', cursive;
+  font-weight: bolder;
+  font-size: 20px;
+  color: #c77e00;
+  text-shadow: 0px 0px 0px #6c4403;
+  letter-spacing: 1px;
+}
+
+.editProductForm input {
+  border: 2px solid #a0520f;
+  height: 30px;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 24px;
+  font-family: 'Just Another Hand', cursive;
+  cursor: text;
+  color: #6c4403;
+  line-height: 1px;
+  letter-spacing: 1px;
+}
+
+textarea.edit-description {
+  border: 2px solid #a0520f;
+  height: 80px;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 24px;
+  box-shadow: 0px 0px 7px #a77327;
+  font-family: 'Just Another Hand', cursive;
+  min-height: 80px;
+  max-height: 328px;
+  max-width: 250px;
+  min-width: 250px;
+  cursor: text;
+  color: #6c4403;
+  letter-spacing: 1px;
+}
+
+input,
+textarea,
+button {
+  outline: none;
+}
+
+#edit-sale {
+  height: 13px;
+}
+
+select.edit-categories {
+  border: 2px solid #a0520f;
+  height: 40px;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 24px;
+  box-shadow: 0px 0px 7px #a77327;
+  font-family: 'Just Another Hand', cursive;
+  cursor: pointer;
+  color: #6c4403;
+  width: 93px;
+}
+
+select.edit-categories:focus {
+  outline: none;
+}
+
+input.edit-price{
+  width: 100px;
+}
+
+input.inventoryForm {
+  width: 164px;
+}
+
+.edit-description::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f500;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.edit-description::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background-color: #fff;
+  background-image: -webkit-gradient(
+    linear,
+    40% 0%,
+    75% 84%,
+    from(#ed8f00),
+    to(#ed8f00),
+    color-stop(0.6, #ffebcd)
+  );
+  cursor: pointer;
+}
+
+.edit-description::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #816a4152;
+  border-radius: 10px;
+}
+
+.editProductSubmit {
+  color: wheat;
+  background-color: #8b5907;
+  width: 100px;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  align-self: center;
+  font-family: 'Niconne', cursive;
+}
+
+.editProductSubmit:active {
+  margin: 8px 10px 2px 10px;
+}
+
+/*NEW PRODUCT FORM*/
 @import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Lobster+Two:ital@1&family=Niconne&display=swap');
+
 
 div#newProductForm {
   display: flex;

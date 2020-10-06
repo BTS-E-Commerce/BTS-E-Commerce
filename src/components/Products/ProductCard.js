@@ -60,22 +60,18 @@ const ProductCard = ({
         <button id='addToCartButton' onClick={onAddToOrder}>
           Add To Cart
         </button>
-        {currentUser.admin === false ? (
-          ''
-        ) : (
-            <button id='productDeleteButton' onClick={onDelete}>
-              DELETE
-            </button>
-          )}
 
         {currentUser.admin === false ? (
           ''
-        ) : (
-            <button onClick={showProductEditFrom}>
-              {productEditFromStatus === false ? 'Show' : 'Hide'}
-            Edit Form
+        ) : <div className='adminProductButtons'>
+            <button id='productDeleteButton' onClick={onDelete}>
+              DELETE
             </button>
-          )}
+            <button className='showEditFrom' onClick={showProductEditFrom}>
+              {productEditFromStatus === false ? 'Show ' : 'Hide '}
+             Edit Form
+            </button>
+          </div>}
       </div>
       {currentUser.admin === false ? (
         ''
