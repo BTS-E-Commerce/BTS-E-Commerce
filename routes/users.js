@@ -30,6 +30,19 @@ usersRouter.get('/', async (req, res, next) => {
   }
 });
 
+usersRouter.get('/:username', async (req, res, next) => {
+  try {
+    const { username } = req.body;
+    const user = await client.getUserByUsername({ username });
+    console.log(user);
+    res.status(201).send({
+      user,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // -- CREATE Routes --
 //* Creates a user from the register form.
 usersRouter.post('/register', async (req, res, next) => {
@@ -63,8 +76,6 @@ usersRouter.post('/register', async (req, res, next) => {
         }
       );
 
-      // delete newUser.password;
-
       res.status(201).send({
         newUser: {
           username: newUser.username,
@@ -85,8 +96,11 @@ usersRouter.post('/login', async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
+    const user = await client.getUserByUsername({ username });
+    console.log(user);
+
     if (!username || !password) {
-      res.status(200).send({
+      res.status(401).send({
         name: 'Missing Credentials Error',
         message: 'Please provide a valid username and password',
       });
@@ -100,7 +114,7 @@ usersRouter.post('/login', async (req, res, next) => {
         message: 'No user was found with that username.'
       })
     }
-
+    
     const hashedPassword = user.password;
 
     bcrypt.compare(password, hashedPassword, function (err, passwordsMatch) {
@@ -110,8 +124,6 @@ usersRouter.post('/login', async (req, res, next) => {
           JWT_SECRET,
           { expiresIn: '2hr' }
         );
-
-        // delete user.password;
 
         res.status(201).send({
           user: { username: user.username, id: user.id, admin: user.admin },
@@ -153,17 +165,24 @@ usersRouter.patch('/:userId', async (req, res, next) => {
 
     const originalHashedPassword = user.password;
 
-    bcrypt.compare(currentPassword, originalHashedPassword, async function (err, passwordsMatch) {
+    bcrypt.compare(currentPassword, originalHashedPassword, async function (
+      err,
+      passwordsMatch
+    ) {
       if (passwordsMatch) {
         if (fields.password !== undefined) {
           let securePassword;
 
-          bcrypt.hash(fields.password, SALT_COUNT, async (err, hashedPassword) => {
-            securePassword = hashedPassword;
-            fields.password = securePassword;
+          bcrypt.hash(
+            fields.password,
+            SALT_COUNT,
+            async (err, hashedPassword) => {
+              securePassword = hashedPassword;
+              fields.password = securePassword;
 
-            updatedUser = await client.updateUser(userId, fields);
-          });
+              updatedUser = await client.updateUser(userId, fields);
+            }
+          );
         } else {
           updatedUser = await client.updateUser(userId, fields);
         }
@@ -194,7 +213,7 @@ usersRouter.delete('/:userId', async (req, res, next) => {
   } catch (error) {
     throw error;
   }
-})
+});
 
 //~~~~~~~~~~~~~~~~~~~
 //~~~~~ EXPORTS ~~~~~

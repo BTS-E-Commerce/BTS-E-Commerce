@@ -39,19 +39,23 @@ export async function createUser({ username, password }) {
       username,
       password,
     });
-
     return data;
   } catch (error) {
     throw error;
   }
 }
 
-export async function updateUser({ userId, adminUserId = null, currentPassword, fields }) {
+export async function updateUser({
+  userId,
+  adminUserId = null,
+  currentPassword,
+  fields,
+}) {
   try {
     const { data } = await axios.patch(`${BASE_URL}/users/${userId}`, {
       adminUserId,
       currentPassword,
-      fields
+      fields,
     });
 
     return data;
@@ -70,3 +74,12 @@ export async function deleteUser(userId) {
   }
 }
 
+export async function checkUserByUsername({ username }) {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/users/${username}`);
+    console.log(data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}

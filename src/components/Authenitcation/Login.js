@@ -3,17 +3,19 @@
 //~~~~~~~~~~~~~~~~~~~
 
 import React, { useState } from 'react';
-import { loginUser } from '../../api/users';
-import { NavLink, Redirect } from 'react-router-dom';
+import { checkUserByUsername, loginUser } from '../../api/users';
+import { NavLink, useHistory } from 'react-router-dom';
 import './Auth.css';
 
-const Login = ({ currentUser, setCurrentUser }) => {
+const Login = ({ setCurrentUser }) => {
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ STATE ~~~~~~
   //~~~~~~~~~~~~~~~~~~~
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  let history = useHistory();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -22,7 +24,15 @@ const Login = ({ currentUser, setCurrentUser }) => {
       alert('Please enter a valid username or password');
       return;
     }
+    try {
+      const userUsername = await checkUserByUsername({ username });
+      console.log(userUsername);
 
+      // whis is this if statement not working
+      if (userUsername === undefined) {
+        alert('Username does not exist');
+        return;
+      }
     const user = await loginUser({ username, password });
 
     if (!user.hasOwnProperty('user')) {
@@ -38,12 +48,16 @@ const Login = ({ currentUser, setCurrentUser }) => {
       admin: user.user.admin,
     });
 
-    localStorage.setItem('id', user.user.id);
-    localStorage.setItem('username', user.user.username);
-    localStorage.setItem('token', user.token);
+      localStorage.setItem('id', user.user.id);
+      localStorage.setItem('username', user.user.username);
+      localStorage.setItem('token', user.token);
 
-    setUsername('');
-    setPassword('');
+      setUsername('');
+      setPassword('');
+      history.push('/store');
+    } catch (error) {
+      throw error;
+    }
   }
 
   //~~~~~~~~~~~~~~~~~~~
