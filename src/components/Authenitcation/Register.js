@@ -12,24 +12,14 @@ const Register = ({ setCurrentUser }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log('register clicked');
-
-    if (!username || !password || !confirm) {
-      alert('Please make sure all fields are filled out');
-    }
-
+    
     if (password !== confirm) {
       alert('Passwords do not match!');
       return;
     }
 
-    // window.location.reload();
-
     try {
       const user = await createUser({ username, password });
-      console.log(user);
-      console.log(user.newUser.id, user.newUser.username);
-      console.log(user.token);
 
       localStorage.clear();
 
@@ -78,6 +68,9 @@ const Register = ({ setCurrentUser }) => {
             name='username'
             value={username}
             onChange={handleUsernameChange}
+            minLength='6'
+            maxLength='16'
+            required
           />
         </div>
         <div className='auth-box'>
@@ -90,6 +83,9 @@ const Register = ({ setCurrentUser }) => {
             name='password'
             value={password}
             onChange={handlePasswordChange}
+            minLength='6'
+            maxLength='16'
+            required
           />
         </div>
         <div className='auth-box'>
@@ -102,6 +98,7 @@ const Register = ({ setCurrentUser }) => {
             name='confirm'
             value={confirm}
             onChange={handleConfirmChange}
+            required
           />
         </div>
         <button className='auth-button' type='submit'>

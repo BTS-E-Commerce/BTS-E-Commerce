@@ -25,9 +25,8 @@ async function initializeProducts() {
           'https://www.recipetineats.com/wp-content/uploads/2018/05/Baked-Mac-and-Cheese_2.jpg',
         inventory: '10',
         basePrice: '7',
-        currentPrice: '5',
+        currentPrice: '500',
         sale: true,
-        date: '09/15/20',
       },
       [{ id: 2, name: 'oven' }]
     );
@@ -41,9 +40,8 @@ async function initializeProducts() {
           'https://img.buzzfeed.com/video-api-prod/assets/5643fc670b714aefadf31991ed2f0f2f/BFV11184_MacnCheeseBreadsticks-Thumb1080SQ.jpg?resize=300:*&output-format=webp&output-quality=auto',
         inventory: '20',
         basePrice: '5',
-        currentPrice: '3',
+        currentPrice: '300',
         sale: true,
-        date: '09/17/20',
       },
       [{ id: 7, name: 'special' }]
     );
@@ -56,9 +54,8 @@ async function initializeProducts() {
           'https://img.buzzfeed.com/video-api-prod/assets/d9fd07cb667d47288c03a873c76a3445/FB_1.jpg?resize=300:*&output-format=webp&output-quality=auto',
         inventory: '5',
         basePrice: '10',
-        currentPrice: '10',
+        currentPrice: '1000',
         sale: false,
-        date: '09/10/2020',
       },
       [{ id: 7, name: 'special' }]
     );
@@ -72,9 +69,8 @@ async function initializeProducts() {
           'https://img.huffingtonpost.com/asset/5a83285321000039006011a2.png?ops=scalefit_960_noupscale&format=webp',
         inventory: '20',
         basePrice: '15',
-        currentPrice: '15',
+        currentPrice: '1500',
         sale: false,
-        date: '09/27/2020',
       },
       [{ id: 6, name: 'crunchy' }]
     );
@@ -87,9 +83,8 @@ async function initializeProducts() {
           'https://img.huffingtonpost.com/asset/55a7fc101200002b00135271.jpeg?ops=scalefit_960_noupscale&format=webp',
         inventory: '3',
         basePrice: '25',
-        currentPrice: '15',
+        currentPrice: '1500',
         sale: true,
-        date: '09/30/2020',
       },
       [{ id: 7, name: 'special' }]
     );

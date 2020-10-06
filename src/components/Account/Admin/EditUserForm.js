@@ -7,7 +7,9 @@ import { useHistory } from 'react-router-dom'
 
 import { updateUser } from '../../../api/index';
 
-const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser, setOngoingOrder }) => {
+const EditUserForm = (props) => {
+    console.log(props);
+    const { user, users, setUsers, currentUser, setCurrentUser, setOngoingOrder } = props;
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -101,14 +103,17 @@ const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser, setO
             <form onSubmit={handleSubmit}>
                 <label htmlFor='edit-current-password'>Current Password:</label>
                 <input
+                    placeholder="Input your current password..."
                     className='edit-current-password'
                     type='text'
                     name='current-password'
                     value={currentPassword}
                     onChange={handleCurrentPasswordChange}
+                    required
                 />
                 <label htmlFor='edit-username'>New Username:</label>
                 <input
+                    placeholder="Input your new username..."
                     className='edit-username'
                     type='text'
                     name='username'
@@ -117,6 +122,7 @@ const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser, setO
                 />
                 <label htmlFor='edit-password'>New Password:</label>
                 <input
+                    placeholder="Input your new password..."
                     className='edit-password'
                     type='text'
                     name='password'

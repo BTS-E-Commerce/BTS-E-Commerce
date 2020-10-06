@@ -2,7 +2,7 @@
 //~~~~~ IMPORTS ~~~~~
 //~~~~~~~~~~~~~~~~~~~
 import React, { useState, useEffect } from 'react';
-import { Header, LandingPage } from './index';
+import { Header, LandingPage, ErrorPage } from './index';
 import { CheckoutPage } from './Cart/index';
 import {
   getAllCategories,
@@ -16,7 +16,7 @@ import {
   Route,
   Switch,
   Redirect,
-  useHistory,
+  NavLink
 } from 'react-router-dom';
 import { Content } from './Products/index';
 import { Account } from './Account/index';
@@ -24,6 +24,7 @@ import { Register, Login } from './Authenitcation/index';
 import { Cart } from './Cart/index';
 
 import './App.css';
+import Footer from './Footer';
 
 const App = () => {
   //~~~~~~~~~~~~~~~~~~~
@@ -39,14 +40,6 @@ const App = () => {
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~ EFFECTS ~~~~~
   //~~~~~~~~~~~~~~~~~~~
-
-  function getUser() {
-    // Tyler todo:
-    // write a function to check if the user stored in local
-    // storage actually exists in the database
-    // call inside of the login useEffect below
-  }
-
   useEffect(() => {
     const userId = localStorage.getItem('id');
     const userUsername = localStorage.getItem('username');
@@ -160,6 +153,9 @@ const App = () => {
     );
   };
 
+  const test404 = () => {
+  }
+
   const addProductToCart = (id, price, inventory, quantity = 1) =>
     async function () {
       if (inventory < quantity) {
@@ -177,6 +173,7 @@ const App = () => {
           setOrders([...orders, order]);
           localStorage.setItem('cart', JSON.stringify(order));
           setOngoingOrder(order);
+          alert('You created a new order!\nYou can see this order or proceed to checkout by clicking on "Cart"!')
         } catch (error) {
           throw error;
         }
@@ -204,6 +201,7 @@ const App = () => {
 
           localStorage.setItem('cart', JSON.stringify(order));
           setOngoingOrder(order);
+          alert('You have just added a new product to your order!\nYou can see this order or proceed to checkout by clicking on "Cart"!')
         } catch (error) {
           throw error;
         }
@@ -274,6 +272,10 @@ const App = () => {
           <Route path='/checkout'>
             <CheckoutPage ongoingOrder={ongoingOrder} />
           </Route>
+          <Route path='/404'>
+            <ErrorPage />
+          </Route>
+          <Redirect to='/404' />
         </Switch>
       </div>
     </Router>

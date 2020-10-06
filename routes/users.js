@@ -106,6 +106,15 @@ usersRouter.post('/login', async (req, res, next) => {
       });
     }
 
+    const user = await client.getUserByUsername({ username });
+
+    if (!user) {
+      res.status(200).send({
+        name: 'No User Found',
+        message: 'No user was found with that username.'
+      })
+    }
+    
     const hashedPassword = user.password;
 
     bcrypt.compare(password, hashedPassword, function (err, passwordsMatch) {

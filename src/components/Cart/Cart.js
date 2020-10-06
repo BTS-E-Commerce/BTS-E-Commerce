@@ -63,7 +63,6 @@ const Cart = ({
     const deletedOrder = await deleteOrder(ongoingOrder.id);
     if (deletedOrder) {
       setOngoingOrder({});
-      //Need to change to localstorage.remove when user token shit is added.
       localStorage.removeItem('cart');
       history.push('/');
     } else {
@@ -103,7 +102,6 @@ const Cart = ({
     }
   }
 
-  //Implement removing product from cart after addition.
   const onDeleteProductFromCart = (id) =>
     async function () {
       try {

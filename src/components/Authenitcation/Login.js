@@ -33,18 +33,20 @@ const Login = ({ setCurrentUser }) => {
         alert('Username does not exist');
         return;
       }
-      const user = await loginUser({ username, password });
+    const user = await loginUser({ username, password });
 
-      console.log(user);
+    if (!user.hasOwnProperty('user')) {
+      alert(`Name: ${user.name} \n` + `Message: ${user.message}`);
+      return;
+    }
 
-      localStorage.clear();
-      //When logging in after changing username and password user comes back as undefined.
-      //I suspect a bcrypt problem.
-      setCurrentUser({
-        id: user.user.id,
-        username: user.user.username,
-        admin: user.user.admin,
-      });
+    localStorage.clear();
+
+    setCurrentUser({
+      id: user.user.id,
+      username: user.user.username,
+      admin: user.user.admin,
+    });
 
       localStorage.setItem('id', user.user.id);
       localStorage.setItem('username', user.user.username);
@@ -76,40 +78,50 @@ const Login = ({ setCurrentUser }) => {
 
   return (
     <div id='login'>
-      <form onSubmit={handleSubmit} className='auth-form'>
-        <h1 className='auth-header'>Welcome</h1>
-        <div className='auth-box'>
-          <label htmlFor='username' className='auth-label'>
-            Username:
-          </label>
-          <input
-            className='auth-input'
-            type='text'
-            name='username'
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div className='auth-box'>
-          <label htmlFor='password' className='auth-label'>
-            Password:
-          </label>
-          <input
-            className='auth-input'
-            type='password'
-            name='password'
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button className='auth-button' type='submit'>
-          Login
-        </button>
-        <div className='accountCheck'>
-          <h2 className='memberCheck'>Not A Mac Member Yet?</h2>
-          <NavLink to='/register'>REGISTER</NavLink>
-        </div>
-      </form>
+      {currentUser.id === 1 ? (
+        <>
+          <form onSubmit={handleSubmit} className='auth-form'>
+            <h1 className='auth-header'>Welcome Back!</h1>
+            <div className='auth-box'>
+              <label htmlFor='username' className='auth-label'>
+                Username:
+              </label>
+              <input
+                className='auth-input'
+                type='text'
+                name='username'
+                value={username}
+                onChange={handleUsernameChange}
+                required
+              />
+            </div>
+            <div className='auth-box auth-box-last'>
+              <label htmlFor='password' className='auth-label'>
+                Password:
+              </label>
+              <input
+                className='auth-input'
+                type='password'
+                name='password'
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+            </div>
+            <div className='accountCheck'>
+              <h2 className='memberCheck'>Not A Mac Member Yet?</h2>
+              <NavLink to='/register'>REGISTER</NavLink>
+            </div>
+            <button className='auth-button' type='submit'>
+              Login
+            </button>
+          </form>
+        </>
+      ) : (
+          <>
+            <Redirect to='/home' />
+          </>
+        )}
     </div>
   );
 };
