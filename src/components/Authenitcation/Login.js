@@ -24,11 +24,14 @@ const Login = ({ currentUser, setCurrentUser }) => {
     }
 
     const user = await loginUser({ username, password });
-    console.log(user);
+
+    if (!user.hasOwnProperty('user')) {
+      alert(`Name: ${user.name} \n` + `Message: ${user.message}`);
+      return;
+    }
 
     localStorage.clear();
-    //When logging in after changing username and password user comes back as undefined.
-    //I suspect a bcrypt problem.
+
     setCurrentUser({
       id: user.user.id,
       username: user.user.username,
@@ -64,7 +67,7 @@ const Login = ({ currentUser, setCurrentUser }) => {
       {currentUser.id === 1 ? (
         <>
           <form onSubmit={handleSubmit} className='auth-form'>
-            <h1 className='auth-header'>Welcome</h1>
+            <h1 className='auth-header'>Welcome Back!</h1>
             <div className='auth-box'>
               <label htmlFor='username' className='auth-label'>
                 Username:
@@ -78,7 +81,7 @@ const Login = ({ currentUser, setCurrentUser }) => {
                 required
               />
             </div>
-            <div className='auth-box'>
+            <div className='auth-box auth-box-last'>
               <label htmlFor='password' className='auth-label'>
                 Password:
               </label>
@@ -91,13 +94,13 @@ const Login = ({ currentUser, setCurrentUser }) => {
                 required
               />
             </div>
-            <button className='auth-button' type='submit'>
-              Login
-            </button>
             <div className='accountCheck'>
               <h2 className='memberCheck'>Not A Mac Member Yet?</h2>
               <NavLink to='/register'>REGISTER</NavLink>
             </div>
+            <button className='auth-button' type='submit'>
+              Login
+            </button>
           </form>
         </>
       ) : (

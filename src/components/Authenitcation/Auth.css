@@ -10,9 +10,9 @@
   justify-content: center;
 }
 
-#login .auth-form {
+/* #login .auth-form {
   height: 365px;
-}
+} */
 
 .auth-form {
   font-family: 'Lobster Two', cursive;
@@ -20,7 +20,7 @@
   border: 2px solid #a0520f;
   border-radius: 2%;
   width: 640px;
-  height: 430px;
+  height: 25%;
 }
 
 .auth-header {
@@ -28,7 +28,13 @@
   color: #6c4403;
   text-shadow: 1px 1px 1px #ff7600;
   text-align: center;
-  margin: 30px 15px 15px 15px;
+  margin: 30px 15px 0px 15px;
+}
+
+.auth-form h3{
+  color: #6c4403;
+  text-align: center;
+  margin: 0px 15px 15px 15px;
 }
 
 .auth-box {
@@ -36,6 +42,10 @@
   margin: 5px;
   color: #6c4403;
   border-bottom: 3px solid #a0520f;
+}
+
+.auth-box-last{
+  margin: 5px 5px 10px 5px;
 }
 
 label.auth-label {
@@ -66,7 +76,7 @@ label.auth-label {
   background-color: #8b5907;
   width: 500px;
   border: 2px solid #814109;
-  box-shadow: 0px 0px 7px #3b2506;
+  box-shadow: 0px 0px 5px #3b2506;
   cursor: pointer;
   align-self: center;
   margin: 5px;
@@ -75,13 +85,18 @@ label.auth-label {
   line-height: 1px;
   letter-spacing: 1px;
   font-family: 'Niconne', cursive;
-  margin-top: 35px;
   height: 40px;
   font-size: 26px;
 }
 
+.auth-button:hover {
+  color: #bf7c00;
+  /* margin: 30px 0px 2px 0px; */
+}
+
 .auth-button:active {
-  margin: 55px 0px 2px 0px;
+  /* padding-top: 10px; */
+  /* margin: 30px 0px 2px 0px; */
 }
 
 .accountCheck {

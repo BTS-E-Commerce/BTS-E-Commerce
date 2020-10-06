@@ -21,7 +21,9 @@ import accountImg from '../images/granmacaccount.png'
 
 import './Account.css';
 
-const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser, categories, setCategories }) => {
+const Account = (props) => {
+    const { usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser, categories, setCategories } = props;
+    console.log(props);
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -70,13 +72,10 @@ const Account = ({ usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder
                 />
             }
 
-            {currentUser.username !== 'guest'
-                ? <div className='account-information'>
+            {currentUser.username !== 'guest' && currentUser.admin === false
+                ? <div className='accountInformation'>
                     <OrderHistory usersOrders={usersOrders} />
-                    {currentUser.admin === false
-                        ? <EditUserForm setOngoingOrder={setOngoingOrder} setCurrentUser={setCurrentUser} currentUser={currentUser} />
-                        : ''}
-
+                    <EditUserForm setOngoingOrder={setOngoingOrder} setCurrentUser={setCurrentUser} currentUser={currentUser} />
                 </div>
                 : ''}
 

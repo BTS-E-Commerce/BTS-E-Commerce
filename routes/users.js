@@ -85,16 +85,24 @@ usersRouter.post('/login', async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
-    const user = await client.getUserByUsername({ username });
-
-    const hashedPassword = user.password;
-
     if (!username || !password) {
-      next({
+      res.status(200).send({
         name: 'Missing Credentials Error',
         message: 'Please provide a valid username and password',
       });
     }
+
+    const user = await client.getUserByUsername({ username });
+
+    if (!user) {
+      res.status(200).send({
+        name: 'No User Found',
+        message: 'No user was found with that username.'
+      })
+    }
+
+    const hashedPassword = user.password;
+
     bcrypt.compare(password, hashedPassword, function (err, passwordsMatch) {
       if (passwordsMatch) {
         const token = jwt.sign(

@@ -53,7 +53,8 @@ const Register = ({ currentUser, setCurrentUser }) => {
       {currentUser.id === 1 ? (
         <>
           <form onSubmit={handleSubmit} className='auth-form'>
-            <h1 className='auth-header'>Welcome</h1>
+            <h1 className='auth-header'>Welcome!</h1>
+            <h3>Grandma loves new faces!</h3>
             <div className='auth-box'>
               <label htmlFor='username' className='auth-label'>
                 Username:
@@ -86,7 +87,7 @@ const Register = ({ currentUser, setCurrentUser }) => {
                 required
               />
             </div>
-            <div className='auth-box'>
+            <div className='auth-box auth-box-last'>
               <label htmlFor='confirm' className='auth-label'>
                 Confirm Password:
               </label>
@@ -99,13 +100,13 @@ const Register = ({ currentUser, setCurrentUser }) => {
                 required
               />
             </div>
-            <button className='auth-button' type='submit'>
-              Register
-            </button>
             <div className='accountCheck'>
               <h2 className='memberCheck'>Already A Mac Member?</h2>
               <NavLink to='/login'>LOGIN</NavLink>
             </div>
+            <button className='auth-button' type='submit'>
+              Register
+            </button>
           </form>
         </>
       ) : (
