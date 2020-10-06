@@ -137,14 +137,16 @@ const Cart = ({
               />
             ))
           ) : (
-              <p>
-                Look's like the pot's empty. No mac makes the macaroni homunculus
-                sad...
-              </p>
-            )
+            <p className='empty-pot'>
+              Look's like the pot's empty. No mac makes the macaroni homunculus
+              sad...
+            </p>
+          )
         ) : (
-            <p>Look's like the pot's empty. No mac makes Granny sad...</p>
-          )}
+          <p className='empty-pot'>
+            Look's like the pot's empty. No mac makes Granny sad...
+          </p>
+        )}
       </div>
       <div id='cartInfo'>
         <p> Total Cart Price: ${(totalPrice / 100).toFixed(2)}</p>
@@ -159,11 +161,11 @@ const Cart = ({
               </button>
             </div>
           ) : (
-              ''
-            )
-        ) : (
             ''
-          )}
+          )
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );
