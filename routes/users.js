@@ -76,8 +76,6 @@ usersRouter.post('/register', async (req, res, next) => {
         }
       );
 
-      // delete newUser.password;
-
       res.status(201).send({
         newUser: {
           username: newUser.username,
@@ -101,13 +99,6 @@ usersRouter.post('/login', async (req, res, next) => {
     const user = await client.getUserByUsername({ username });
     console.log(user);
 
-    if (user === undefined) {
-      res.status(401).send({
-        name: 'Username does not exist',
-        message: 'Please provide a valid username and password',
-      });
-    }
-
     if (!username || !password) {
       res.status(401).send({
         name: 'Missing Credentials Error',
@@ -124,8 +115,6 @@ usersRouter.post('/login', async (req, res, next) => {
           JWT_SECRET,
           { expiresIn: '2hr' }
         );
-
-        // delete user.password;
 
         res.status(201).send({
           user: { username: user.username, id: user.id, admin: user.admin },
