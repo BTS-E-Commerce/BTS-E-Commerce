@@ -7,7 +7,9 @@ import { useHistory } from 'react-router-dom'
 
 import { updateUser } from '../../../api/index';
 
-const EditUserForm = ({ user, users, setUsers, currentUser, setCurrentUser, setOngoingOrder }) => {
+const EditUserForm = (props) => {
+    console.log(props);
+    const { user, users, setUsers, currentUser, setCurrentUser, setOngoingOrder } = props;
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~

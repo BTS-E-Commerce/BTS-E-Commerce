@@ -39,36 +39,27 @@ const Searchbar = ({ products, setProducts, categories }) => {
   }
 
   const searchProducts = (product) => {
-    let { name, description } = product;;
+    let { name, description } = product;
     const [category] = product.categories;
     name = name.toLowerCase();
     description = description.toLowerCase();
     category.name = category.name.toLowerCase();
-    console.log("Category exists?", category !== undefined);
-    console.log("Checking name...")
     let searchSuccess = false;
     if (name) {
       searchSuccess = name.includes(searchValue);
       if (searchSuccess === true) {
-        console.log("Found name!")
         return true;
-      } else if (description) {
-        console.log("Checking description...")
+      } if (description) {
         searchSuccess = description.includes(searchValue);
         if (searchSuccess === true) {
-          console.log("Found description!")
           return true;
         }
-        //# For some reason it never makes this check. I have no idea why.
-      } else if (category.name) {
-        console.log("Checking categories...")
+      } if (category.name) {
         searchSuccess = category.name.includes(searchValue);
         if (searchSuccess) {
-          console.log("Found category!")
           return true;
         }
       }
-    } else {
       return false;
     }
   };

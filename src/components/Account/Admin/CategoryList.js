@@ -45,7 +45,7 @@ const CategoryList = ({ categories, setCategories }) => {
   //~~~~~~ JSX ~~~~~~~~
   //~~~~~~~~~~~~~~~~~~~
   return (
-    <div>
+    <div id='categoriesListContainer'>
       <h1>Categories</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor='add-category'>New Category:</label>
