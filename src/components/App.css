@@ -11,7 +11,7 @@ body {
   background-image: url('https://previews.123rf.com/images/sudowoodo/sudowoodo1805/sudowoodo180500035/102441690-italian-pasta-seamless-pattern-on-white-background-cute-hand-drawn-macaroni-doodles-vector-illustrat.jpg');
   background-size: 20em;
   cursor: default;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .App {

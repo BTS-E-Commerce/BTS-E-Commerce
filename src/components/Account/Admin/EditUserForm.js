@@ -17,14 +17,13 @@ const EditUserForm = (props) => {
     const [password, setPassword] = useState('');
     const [currentPassword, setCurrentPassword] = useState('');
     const [admin, setAdmin] = useState(user === undefined ? '' : (user.admin));
-    //For some reason setCurrentUser is listed as not a fucntion.
 
     let history = useHistory();
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~ EFFECTS ~~~~~
     //~~~~~~~~~~~~~~~~~~~
     useEffect(() => {
-        if (currentUser.admin === false) {
+        if (!(currentUser.admin === true)) {
             setAdmin(false);
         }
     }, []);

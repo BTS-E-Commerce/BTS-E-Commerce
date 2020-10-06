@@ -91,6 +91,20 @@ async function initializeProducts() {
 
     await createProduct(
       {
+        name: "Arman's Mac and Chesse",
+        description: 'As requested.',
+        image:
+          'https://img.huffingtonpost.com/asset/55a7fc101200002b00135271.jpeg?ops=scalefit_960_noupscale&format=webp',
+        inventory: '1',
+        basePrice: '25',
+        currentPrice: '100',
+        sale: true,
+      },
+      [{ id: 7, name: 'special' }]
+    );
+
+    await createProduct(
+      {
         name: 'Fire-Grilled Sour Mac N Cheese',
         description:
           'Steamed thick acorn noodles with kola nut and oregano on a bed of steamed cabbage, cooked wild leek and mangos. Served with pepperjack, stout, rye bread, tangerine pie and fried eggs.',

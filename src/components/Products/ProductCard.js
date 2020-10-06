@@ -61,9 +61,8 @@ const ProductCard = ({
           Add To Cart
         </button>
 
-        {currentUser.admin === false ? (
-          ''
-        ) : <div className='adminProductButtons'>
+        {currentUser.admin === true
+          ? <div className='adminProductButtons'>
             <button id='productDeleteButton' onClick={onDelete}>
               DELETE
             </button>
@@ -71,20 +70,23 @@ const ProductCard = ({
               {productEditFromStatus === false ? 'Show ' : 'Hide '}
              Edit Form
             </button>
-          </div>}
+          </div>
+          : ''}
       </div>
-      {currentUser.admin === false ? (
-        ''
-      ) : productEditFromStatus === false ? (
-        ''
-      ) : (
+      {currentUser.admin === true
+        ? productEditFromStatus === false
+          ? (
+            ''
+          )
+          : (
             <EditProductForm
               product={product}
               products={products}
               setProducts={setProducts}
               categories={categories}
             />
-          )}
+          )
+        : ''}
     </div>
   );
 };

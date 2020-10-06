@@ -54,25 +54,24 @@ const Account = (props) => {
                 </div>}
 
 
-            {currentUser.admin === false
-                ? ''
-                : <p>You are an admin.</p>
+            {currentUser.admin === true
+                ? <p>You are an admin.</p>
+                : ''
             }
             <div id='accountNavBar'>
             </div>
-            {currentUser.admin === false
-                ? ''
-                :
-                <Admin
+            {currentUser.admin === true
+                ? <Admin
                     categories={categories}
                     setCategories={setCategories}
                     currentUser={currentUser}
                     setCurrentUser={setCurrentUser}
                     setOngoingOrder={setOngoingOrder}
                 />
+                : ''
             }
 
-            {currentUser.username !== 'guest' && currentUser.admin === false
+            {currentUser.username !== 'guest' && currentUser.admin !== true
                 ? <div className='accountInformation'>
                     <OrderHistory usersOrders={usersOrders} />
                     <EditUserForm setOngoingOrder={setOngoingOrder} setCurrentUser={setCurrentUser} currentUser={currentUser} />
