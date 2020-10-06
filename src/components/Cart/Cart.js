@@ -124,22 +124,29 @@ const Cart = ({
     <div id='cartContainer'>
       <h1 id='cart-header'>Cart Summary</h1>
       <div id='cartProductContainer'>
-        {ongoingOrder.hasOwnProperty('products')
-          ? ongoingOrder.products.length !== 0
-            ? ongoingOrder.products.map((product) => (
-                <CartProducts
-                  key={product.id}
-                  products={products}
-                  setProducts={setProducts}
-                  product={product}
-                  ongoingOrder={ongoingOrder}
-                  setOngoingOrder={setOngoingOrder}
-                  compareProductIds={compareProductIds}
-                  onDeleteProductFromCart={onDeleteProductFromCart(product.id)}
-                />
-              ))
-            : 'There is nothing here.'
-          : 'There is nothing here.'}
+        {ongoingOrder.hasOwnProperty('products') ? (
+          ongoingOrder.products.length !== 0 ? (
+            ongoingOrder.products.map((product) => (
+              <CartProducts
+                key={product.id}
+                products={products}
+                setProducts={setProducts}
+                product={product}
+                ongoingOrder={ongoingOrder}
+                setOngoingOrder={setOngoingOrder}
+                compareProductIds={compareProductIds}
+                onDeleteProductFromCart={onDeleteProductFromCart(product.id)}
+              />
+            ))
+          ) : (
+            <p>
+              Look's like the pot's empty. No mac makes the macaroni homunculus
+              sad...
+            </p>
+          )
+        ) : (
+          <p>Look's like the pot's empty. No mac makes Granny sad...</p>
+        )}
       </div>
       <div id='cartInfo'>
         <p> Total Cart Price: ${(totalPrice / 100).toFixed(2)}</p>
