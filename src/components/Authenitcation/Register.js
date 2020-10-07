@@ -12,7 +12,7 @@ const Register = ({ setCurrentUser }) => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    
+
     if (password !== confirm) {
       alert('Passwords do not match!');
       return;
@@ -38,6 +38,7 @@ const Register = ({ setCurrentUser }) => {
       setConfirm('');
       history.push('/store');
     } catch (error) {
+      alert("That username already exists.");
       console.error(error);
     }
   }

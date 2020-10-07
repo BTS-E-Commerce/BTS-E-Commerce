@@ -51,7 +51,7 @@ usersRouter.post('/register', async (req, res, next) => {
 
     const userCheck = await client.getUserByUsername({ username });
 
-    if (userCheck) {
+    if (userCheck !== undefined) {
       res.status(401).send({
         name: 'User Already Exists Error',
         message: 'Username already exists',
