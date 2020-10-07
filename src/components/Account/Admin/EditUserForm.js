@@ -21,11 +21,11 @@ const EditUserForm = (props) => {
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~ EFFECTS ~~~~~
   //~~~~~~~~~~~~~~~~~~~
-  useEffect(() => {
-    if (currentUser.admin === false || currentUser.admin === undefined) {
-      setAdmin(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (currentUser.admin === false || currentUser.admin === undefined) {
+  //     setAdmin(false);
+  //   }
+  // }, []);
   //~~~~~~~~~~~~~~~~~~~
   //~~~~ FUNCTIONS ~~~~
   //~~~~~~~~~~~~~~~~~~~
@@ -35,8 +35,9 @@ const EditUserForm = (props) => {
       userId: currentUser.id,
       adminUserId: currentUser.id,
       currentPassword: currentPassword,
-      fields: { admin: true },
+      fields: { admin: true, adminCode: 666 },
     });
+    localStorage.setItem('admin', updatedUser.admin);
     setCurrentUser(updatedUser);
   };
 

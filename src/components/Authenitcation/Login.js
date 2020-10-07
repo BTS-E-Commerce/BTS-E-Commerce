@@ -46,11 +46,17 @@ const Login = ({ setCurrentUser, currentUser }) => {
         id: user.user.id,
         username: user.user.username,
         admin: user.user.admin,
+        adminCode: user.user.adminCode
       });
+
+      console.log("THIS IS THE CURRENT USER", currentUser);
 
       localStorage.setItem('id', user.user.id);
       localStorage.setItem('username', user.user.username);
       localStorage.setItem('token', user.token);
+      //FOR DEMO
+      localStorage.setItem('admin', user.user.admin);
+
 
       setUsername('');
       setPassword('');

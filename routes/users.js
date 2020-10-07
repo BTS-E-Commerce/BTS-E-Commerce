@@ -76,15 +76,18 @@ usersRouter.post('/register', async (req, res, next) => {
         }
       );
 
-      res.status(201).send({
-        newUser: {
-          username: newUser.username,
-          id: newUser.id,
-          admin: newUser.admin,
-        },
-        token,
-        message: 'Thank you for signing up!',
-      });
+      if (newUser.adminCode)
+
+        res.status(201).send({
+          newUser: {
+            username: newUser.username,
+            id: newUser.id,
+            admin: newUser.admin,
+            adminCode: newUser.adminCode
+          },
+          token,
+          message: 'Thank you for signing up!',
+        });
     });
   } catch (error) {
     console.error(error.message);
@@ -123,7 +126,7 @@ usersRouter.post('/login', async (req, res, next) => {
         );
 
         res.status(201).send({
-          user: { username: user.username, id: user.id, admin: user.admin },
+          user: { username: user.username, id: user.id, admin: user.admin, adminCode: user.adminCode },
           token,
           message: 'succesful login',
         });

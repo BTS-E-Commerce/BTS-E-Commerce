@@ -31,7 +31,7 @@ const OrderCard = ({ order, number }) => {
       </div>
       <span className='totalPriceSpan'>
         <h3>Total Price: </h3>
-        <p>${totalPrice / 100}</p>
+        <p>${(totalPrice / 100).toFixed(2)}</p>
       </span>
     </div>
   );
