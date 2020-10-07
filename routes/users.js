@@ -76,18 +76,16 @@ usersRouter.post('/register', async (req, res, next) => {
         }
       );
 
-      if (newUser.adminCode)
-
-        res.status(201).send({
-          newUser: {
-            username: newUser.username,
-            id: newUser.id,
-            admin: newUser.admin,
-            adminCode: newUser.adminCode
-          },
-          token,
-          message: 'Thank you for signing up!',
-        });
+      res.status(201).send({
+        newUser: {
+          username: newUser.username,
+          id: newUser.id,
+          admin: newUser.admin,
+          adminCode: newUser.adminCode
+        },
+        token,
+        message: 'Thank you for signing up!',
+      });
     });
   } catch (error) {
     console.error(error.message);

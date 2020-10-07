@@ -35,6 +35,7 @@ export async function loginUser({ username, password }) {
 
 export async function createUser({ username, password }) {
   try {
+    console.log("BEOFRE API:", username)
     const { data } = await axios.post(`${BASE_URL}/users/register`, {
       username,
       password,
