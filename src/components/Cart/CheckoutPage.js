@@ -18,12 +18,12 @@ const CheckoutPage = () => {
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
     return (
-        <div>
-            <h1>CHECKOUT PAGE</h1>
-            <h3>Congratulations! You just checked out!</h3>
-            <p>You spent : ${(location.state.totalPrice / 100).toFixed(2)}</p>
-            <p>You can review your order inside your "Order History" on your "Account".</p>
-            <button onClick={onReturnStore}>Return to Store</button>
+        <div id='checkoutPageContainer'>
+            {/* <h1 id='checkoutTitle'>CHECKOUT PAGE</h1> */}
+            <h3 id='checkoutHeading'>Congratulations! You just checked out!</h3>
+            <p id='checkoutTotal'>You spent : ${(location.state.totalPrice / 100).toFixed(2)}</p>
+            <p id='checkoutAccount'>You can review your order inside your "Order History" on your "Account".</p>
+            <button id='checkoutReturnButton' onClick={onReturnStore}>Return to Store</button>
         </div>
     );
 };

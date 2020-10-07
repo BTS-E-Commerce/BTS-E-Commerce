@@ -16,7 +16,7 @@ const CategoryCard = ({ category, onDelete }) => {
   //~~~~~~ JSX ~~~~~~~~
   //~~~~~~~~~~~~~~~~~~~
   return (
-    <div>
+    <div className='categoryCard'>
       <p key={category.id}>
         {category.name[0].toUpperCase()}
         {category.name.slice(1)}
@@ -24,7 +24,7 @@ const CategoryCard = ({ category, onDelete }) => {
 
       {/* <button>Edit Category</button> */}
       <button value={category.id} onClick={onDelete}>
-        Delete Category
+        Delete
       </button>
     </div>
   );

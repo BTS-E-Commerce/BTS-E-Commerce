@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import { createCategory, deleteCategory, getAllProducts } from '../../../api';
 import { CategoryCard } from './index';
 
+import './Admin.css';
+
 const CategoryList = ({ categories, setCategories }) => {
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~ EFFECTS ~~~~~
@@ -46,8 +48,7 @@ const CategoryList = ({ categories, setCategories }) => {
   //~~~~~~~~~~~~~~~~~~~
   return (
     <div id='categoriesListContainer'>
-      <h1>Categories</h1>
-      <form onSubmit={handleSubmit}>
+      <form id='adminNewCategory' onSubmit={handleSubmit}>
         <label htmlFor='add-category'>New Category:</label>
         <input
           type='text'
@@ -57,8 +58,7 @@ const CategoryList = ({ categories, setCategories }) => {
         />
         <button>Add New Category</button>
       </form>
-
-      <ul>
+      <ul id='categoriesContainer'>
         {categories.map((category) => (
           <CategoryCard
             key={category.id}
