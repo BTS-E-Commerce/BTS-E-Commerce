@@ -15,7 +15,7 @@ const EditUserForm = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
-  const [admin, setAdmin] = useState(user === undefined ? '' : (user.admin));
+  const [admin, setAdmin] = useState(false);
 
   let history = useHistory();
   //~~~~~~~~~~~~~~~~~~~
@@ -35,7 +35,7 @@ const EditUserForm = (props) => {
       userId: currentUser.id,
       adminUserId: currentUser.id,
       currentPassword: currentPassword,
-      fields: { admin: true, adminCode: 666 },
+      fields: { admin: true },
     });
     localStorage.setItem('admin', updatedUser.admin);
     setCurrentUser(updatedUser);
@@ -175,9 +175,13 @@ const EditUserForm = (props) => {
           )}
         <input type='submit' value='Submit'></input>
       </form>
-      <button onClick={onMakeAdmin}>
-        Make {currentUser.username} an Admin
-      </button>
+      {user.admin === true
+        ? ''
+        : <button onClick={onMakeAdmin}>
+          Make {currentUser.username} an Admin
+    </button>
+      }
+
     </div>
   );
 };

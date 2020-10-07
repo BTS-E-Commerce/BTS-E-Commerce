@@ -33,8 +33,14 @@ const UsersList = ({ currentUser, setCurrentUser, setOngoingOrder }) => {
   //~~~~~~~~~~~~~~~~~~~
   const onChangeUser = (user) => () => {
     localStorage.setItem('cart', null);
+    console.log(user);
     setOngoingOrder({});
     setCurrentUser(user);
+
+    localStorage.setItem('id', user.id);
+    localStorage.setItem('username', user.username);
+    //FOR DEMO
+    localStorage.setItem('admin', user.admin);
   };
 
   const onDeleteUser = (id) =>
