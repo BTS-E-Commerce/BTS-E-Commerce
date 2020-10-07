@@ -36,7 +36,7 @@ const CategoryList = ({ categories, setCategories }) => {
     async function () {
       await deleteCategory(id);
       setCategories(categories.filter((category) => id !== category.id));
-      window.location.reload();
+      // window.location.reload();
       // await getAllProducts();
       // const newProducts = products.filter((product) => )
     };

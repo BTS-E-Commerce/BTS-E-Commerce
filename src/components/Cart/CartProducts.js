@@ -71,6 +71,7 @@ const CartProducts = ({
             name='quantity'
             value={product.quantity}
             onChange={handleOnQuantityChange}
+            min='1'
           />
         </div>
         <button id='cart-remove' onClick={onDeleteProductFromCart}>

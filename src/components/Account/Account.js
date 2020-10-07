@@ -24,6 +24,8 @@ import './Account.css';
 const Account = (props) => {
     const { usersOrders, orders, setOrders, ongoingOrder, setOngoingOrder, currentUser, setCurrentUser, categories, setCategories } = props;
     console.log(props);
+    const [orderHistoryStatus, setOrderHistoryStatus] = useState(false);
+    const [editUserForm, setEditUserForm] = useState(false);
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ STATE ~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -35,7 +37,14 @@ const Account = (props) => {
     //~~~~~~~~~~~~~~~~~~~
     //~~~~ FUNCTIONS ~~~~
     //~~~~~~~~~~~~~~~~~~~
-
+    const showOrderHistory = () => {
+        setEditUserForm(false);
+        setOrderHistoryStatus(!orderHistoryStatus);
+    }
+    const showEditUserForm = () => {
+        setOrderHistoryStatus(false);
+        setEditUserForm(!editUserForm);
+    }
     //~~~~~~~~~~~~~~~~~~~
     //~~~~~~ JSX ~~~~~~~~
     //~~~~~~~~~~~~~~~~~~~
@@ -73,8 +82,18 @@ const Account = (props) => {
 
             {currentUser.username !== 'guest' && currentUser.admin !== true
                 ? <div className='accountInformation'>
-                    <OrderHistory usersOrders={usersOrders} />
-                    <EditUserForm setOngoingOrder={setOngoingOrder} setCurrentUser={setCurrentUser} currentUser={currentUser} />
+                    <div className='accountInformationNav'>
+                        <button onClick={showOrderHistory}>Order History</button>
+                        <button onClick={showEditUserForm}>Edit Account Information</button>
+                    </div>
+                    {orderHistoryStatus === true
+                        ? <OrderHistory usersOrders={usersOrders} />
+                        : ''}
+                    {editUserForm === true
+                        ? <EditUserForm setOngoingOrder={setOngoingOrder} setCurrentUser={setCurrentUser} currentUser={currentUser} />
+                        : ''}
+
+
                 </div>
                 : ''}
 

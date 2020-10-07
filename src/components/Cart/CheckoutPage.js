@@ -8,10 +8,6 @@ const CheckoutPage = () => {
     const history = useHistory();
     const location = useLocation();
     //~~~~~~~~~~~~~~~~~~~
-    //~~~~~ EFFECTS ~~~~~
-    //~~~~~~~~~~~~~~~~~~~
-    console.log(location.state.totalPrice);
-    //~~~~~~~~~~~~~~~~~~~
     //~~~~ FUNCTIONS ~~~~
     //~~~~~~~~~~~~~~~~~~~
     const onReturnStore = () => {
