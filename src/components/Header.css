@@ -4,13 +4,14 @@ div#Header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 164px;
+  width: 168.5vh;
+  height: 20.5vh;
   box-shadow: 0px 0px 10px #9e68059e;
 }
 
 #macLogo {
-  height: 110px;
+  height: 14.8vh;
+  width: 80vh;
 }
 
 .navContainer {
@@ -18,43 +19,44 @@ div#Header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 50px;
+  width: 168.6vh;
+  height: 50vh;
   border-top: 7px double #a77327;
   border-bottom: 7px double #a77327;
 }
 
 .leftOfNavbar {
-  width: 20%;
-  height: 36px;
+  width: 30vh;
+  height: 3.9vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 3vh;
 }
 
 .leftOfNavbar h2 {
-  height: 26px;
+  height: 3vh;
   text-align: center;
-  font-size: 18px;
-  letter-spacing: 2px;
+  font-size: 2.2vh;
+  letter-spacing: 0.2vh;
   font-family: 'Lobster Two', cursive;
   color: #a0520f;
 }
 
 .navImg {
-  height: 30px;
-  padding-left: 20px;
-  padding-right: 10px;
-  color: beige;
+  height: 3.5vh;
+  padding-left: 1.5vh;
+  padding-right: 1.4vh;
   margin-bottom: 2px;
 }
 
 h2 a {
   text-decoration: none;
-  padding-left: 10px;
+  padding-left: 1vh;
   color: #bf7c00;
-  letter-spacing: 2px;
+  letter-spacing: 0.1vh;
   cursor: pointer;
+  font-size: 2vh;
 }
 
 h2 a:active {
@@ -67,8 +69,8 @@ h2 a:hover {
 }
 
 .navBar {
-  height: 36px;
-  width: 80%;
+  height: 3.9vh;
+  width: 110vh;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -77,17 +79,17 @@ h2 a:hover {
 
 .navBar a {
   text-decoration: none;
-  font-size: 18px;
+  font-size: 2.3vh;
   color: #674403;
   cursor: pointer;
   font-family: 'Lobster Two', cursive;
   font-weight: bolder;
-  height: 36px;
-  letter-spacing: 5px;
+  height: 3.9vh;
+  letter-spacing: 0.2vh;
   display: flex;
   align-items: center;
   justify-items: center;
-  width: 170px;
+  width: 19vh;
 }
 
 .navBar a:active {
@@ -95,8 +97,8 @@ h2 a:hover {
 }
 
 #storeNav img {
-  height: 26px;
-  margin-bottom: 0px;
+  height: 2.9vh;
+  margin-bottom: 0vh;
 }
 
 .navBar a:hover {
@@ -105,26 +107,27 @@ h2 a:hover {
 }
 
 .rightOfNavbar {
-  width: 20%;
-  height: 36px;
+  width: 30vh;
+  height: 3.9vh;
   display: flex;
   justify-content: center;
+  margin-right: 3vh;
 }
 
 .rightOfNavbar button {
   color: wheat;
   background-color: #8b5907;
-  width: 100px;
+  width: 10vh;
   border: 2px solid #814109;
   box-shadow: 0px 0px 7px #3b2506;
   cursor: pointer;
   align-self: center;
-  height: 24px;
-  margin: 5px;
+  height: 3vh;
+  margin: 0.4vh;
   border-radius: 10px;
-  padding: 5px;
-  font-size: 18px;
-  line-height: 1px;
+  padding: 0.3vh;
+  font-size: 2vh;
+  line-height: 1vh;
   letter-spacing: 1px;
   font-family: 'Niconne', cursive;
 }

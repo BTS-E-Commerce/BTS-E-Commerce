@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Lobster+Two:ital@1&family=Niconne&display=swap');
 
-#register {
-  display: flex;
-  justify-content: center;
-}
-
+#register,
 #login {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 78vh;
 }
 
 /* #login .auth-form {
@@ -16,57 +14,53 @@
 
 .auth-form {
   font-family: 'Lobster Two', cursive;
-  margin: 4rem;
-  border: 2px solid #a0520f;
-  border-radius: 2%;
-  width: 640px;
-  height: 25%;
+  margin: 4vh;
+  border: 0.2vh solid #a0520f;
+  border-radius: 2vh;
+  width: 67vh;
+  height: fit-content;
 }
 
 .auth-header {
-  font-size: 36px;
+  font-size: 3.6vh;
   color: #6c4403;
-  text-shadow: 1px 1px 1px #ff7600;
+  text-shadow: 0.1vh 0.1vh 0.1vh #ff7600;
   text-align: center;
-  margin: 30px 15px 0px 15px;
+  margin: 3vh 1.5vh 0vh 1.5vh;
 }
 
-.auth-form h3{
+.auth-form h3 {
   color: #6c4403;
   text-align: center;
   margin: 0px 15px 15px 15px;
 }
 
 .auth-box {
-  font-family: sans-serif;
-  margin: 5px;
+  margin: 0.5vh;
   color: #6c4403;
-  border-bottom: 3px solid #a0520f;
-}
-
-.auth-box-last{
-  margin: 5px 5px 10px 5px;
+  border-bottom: 0.3vh solid #a0520f;
 }
 
 label.auth-label {
   font-family: 'Lobster Two', cursive;
   font-weight: bolder;
-  font-size: 24px;
+  font-size: 2.4vh;
   color: #c77e00;
-  text-shadow: 0px 0px 0px #6c4403;
-  letter-spacing: 1px;
+  text-shadow: 0vh 0vh 0vh #6c4403;
+  letter-spacing: 0.1vh;
 }
 
 .auth-input {
   text-align: left;
-  padding: 10px;
+  padding: 0.5vh;
+  padding-left: 1vh;
   background-color: rgb(255, 255, 255);
-  width: 370px;
+  width: 43vh;
   font-family: 'Just Another Hand', cursive;
-  font-size: 25px;
+  font-size: 3vh;
   color: #6c4403;
-  text-shadow: 0px 0px 0px #6c4403;
-  letter-spacing: 1px;
+  text-shadow: 0vh 0vh 0vh #6c4403;
+  letter-spacing: 0.1vh;
   cursor: text;
   border: none;
 }
@@ -74,30 +68,27 @@ label.auth-label {
 .auth-button {
   color: wheat;
   background-color: #8b5907;
-  width: 500px;
-  border: 2px solid #814109;
-  box-shadow: 0px 0px 5px #3b2506;
+  width: 50vh;
+  border: 0.3vh solid #814109;
+  box-shadow: 0vh 0vh 0.5vh #3b2506;
   cursor: pointer;
   align-self: center;
-  margin: 5px;
-  border-radius: 10px;
-  padding: 5px;
-  line-height: 1px;
-  letter-spacing: 1px;
+  margin: 0.5vh;
+  border-radius: 10vh;
+  padding: 0.5vh;
+  line-height: 0.1vh;
+  letter-spacing: 0.1vh;
   font-family: 'Niconne', cursive;
-  height: 40px;
-  font-size: 26px;
+  height: 4vh;
+  font-size: 3vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
-.auth-button:hover {
-  color: #bf7c00;
-  /* margin: 30px 0px 2px 0px; */
-}
-
-.auth-button:active {
-  /* padding-top: 10px; */
-  /* margin: 30px 0px 2px 0px; */
-}
+/* .auth-button:active {
+  padding-top: 10px;
+  margin: 30px 0px 2px 0px;
+} */
 
 .accountCheck {
   align-self: center;

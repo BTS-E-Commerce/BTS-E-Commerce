@@ -1,22 +1,28 @@
-/*CONTENT STUFF */
 div#content {
   display: flex;
   width: 100%;
   height: 760px;
   overflow-y: hidden;
+  height: 79.3%;
+}
+
+div#productContainer {
+  height: 100%;
 }
 
 .feature {
   display: flex;
   width: 100%;
   border-top: 5px double #a77327;
+  height: 91%;
 }
+
 .featureScrollBar {
   display: flex;
   flex-flow: row wrap;
   width: auto;
   overflow-y: scroll;
-  height: 665px;
+  height: 97.5%;
   margin: 15px;
 }
 
@@ -82,6 +88,7 @@ div#content {
 #valueSearchField {
   text-align: left;
   padding: 10px;
+  padding-bottom: 0px;
   background-color: rgb(125 97 97 / 0%);
   width: 100%;
   font-family: 'Just Another Hand', cursive;
@@ -112,6 +119,8 @@ div#content {
   border-radius: 50%;
   max-width: 50%;
   max-height: 50%;
+  padding: 5px;
+  border: 3px solid #8b5907;
 }
 
 .productCard h1 {
@@ -193,13 +202,13 @@ span#productDescription {
   text-shadow: 1px 1px 1px #ff7600;
 }
 
-.productButtons{
+.productButtons {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-button#addToCartButton{
+button#addToCartButton {
   color: wheat;
   background-color: #8b5907;
   border: 2px solid #814109;
@@ -218,13 +227,14 @@ button#addToCartButton{
   width: 200px;
 }
 
-.adminProductButtons{
+.adminProductButtons {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-#productDeleteButton, .showEditFrom {
+#productDeleteButton,
+.showEditFrom {
   color: wheat;
   background-color: #8b5907;
   border: 2px solid #814109;
@@ -276,7 +286,6 @@ button#addToCartButton{
   text-align: center;
 }
 
-
 /* EDIT PRODUCT FORM  */
 
 #newProductForm h1 {
@@ -294,6 +303,9 @@ div.editProductContainer form {
   flex-direction: column;
   padding: 15px;
 }
+.editProductContainer {
+  width: 90%;
+}
 
 .editProductForm label {
   font-family: 'Lobster Two', cursive;
@@ -306,7 +318,7 @@ div.editProductContainer form {
 
 .editProductForm input {
   border: 2px solid #a0520f;
-  height: 30px;
+  height: 35px;
   margin: 5px;
   border-radius: 10px;
   padding: 5px;
@@ -316,6 +328,11 @@ div.editProductContainer form {
   color: #6c4403;
   line-height: 1px;
   letter-spacing: 1px;
+  box-shadow: 0px 0px 7px #a77327;
+}
+
+input.edit-sale {
+  height: auto;
 }
 
 textarea.edit-description {
@@ -328,9 +345,9 @@ textarea.edit-description {
   box-shadow: 0px 0px 7px #a77327;
   font-family: 'Just Another Hand', cursive;
   min-height: 80px;
-  max-height: 328px;
-  max-width: 250px;
-  min-width: 250px;
+  max-height: 308px;
+  max-width: 338px;
+  min-width: 338px;
   cursor: text;
   color: #6c4403;
   letter-spacing: 1px;
@@ -364,7 +381,7 @@ select.edit-categories:focus {
   outline: none;
 }
 
-input.edit-price{
+input.edit-price {
   width: 100px;
 }
 
@@ -399,7 +416,7 @@ input.inventoryForm {
   border-radius: 10px;
 }
 
-.editProductSubmit {
+#editProductSubmit {
   color: wheat;
   background-color: #8b5907;
   width: 100px;
@@ -416,7 +433,6 @@ input.inventoryForm {
 
 /*NEW PRODUCT FORM*/
 @import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Lobster+Two:ital@1&family=Niconne&display=swap');
-
 
 div#newProductForm {
   display: flex;
@@ -477,7 +493,7 @@ textarea.descriptionForm {
   box-shadow: 0px 0px 7px #a77327;
   font-family: 'Just Another Hand', cursive;
   min-height: 80px;
-  max-height: 328px;
+  max-height: 308px;
   max-width: 250px;
   min-width: 250px;
   cursor: text;
