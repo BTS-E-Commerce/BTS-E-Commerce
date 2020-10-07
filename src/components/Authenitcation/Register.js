@@ -17,9 +17,11 @@ const Register = ({ setCurrentUser }) => {
       alert('Passwords do not match!');
       return;
     }
-
+    console.log("THIS IS BEFORE THE DB CALL ON REGISTER");
     try {
       const user = await createUser({ username, password });
+
+      console.log("THIS IS THE REGISTER USERR OBJECT", user);
 
       localStorage.clear();
 
