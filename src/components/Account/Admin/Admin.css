@@ -1,9 +1,264 @@
-#adminActionsContainer{
-    display: flex;
-    flex-flow: column;
-    align-items: center;
+.adminContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
-#adminActions{
-    display: flex;
-    flex-flow: row wrap;
+
+#adminActionsContainer {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  height: 94.9%;
+}
+
+#adminActionsContainer h1 {
+  height: 3vh;
+  text-align: center;
+  font-size: 3vh;
+  letter-spacing: 0.2vh;
+  font-family: 'Lobster Two', cursive;
+  color: #a0520f;
+  margin-bottom: 10px;
+}
+
+div#adminActionsNav {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  height: 8%;
+}
+
+#adminActionsNav button {
+  color: wheat;
+  background-color: #8b5907;
+  width: 25%;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  align-self: center;
+  height: 3.7vh;
+  margin: 0.4vh;
+  border-radius: 10px;
+  padding: 0.3vh;
+  font-size: 2.5vh;
+  line-height: 1vh;
+  letter-spacing: 1px;
+  font-family: 'Niconne', cursive;
+}
+
+#adminActionsNav button {
+  color: wheat;
+  background-color: #8b5907;
+  width: 25%;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  align-self: center;
+  height: 3.7vh;
+  margin: 0.4vh;
+  border-radius: 10px;
+  padding: 0.3vh;
+  font-size: 2.7vh;
+  line-height: 1vh;
+  letter-spacing: 1px;
+  font-family: 'Niconne', cursive;
+}
+
+#adminActionsContainer a {
+  color: wheat;
+  text-decoration: none;
+}
+
+#userListContainer::-webkit-scrollbar {
+  width: 1vh;
+  background-color: #f5f5f500;
+  border-radius: 2vh;
+  cursor: pointer;
+}
+
+#userListContainer::-webkit-scrollbar-thumb {
+  border-radius: 5vh;
+  background-color: #fff;
+  background-image: -webkit-gradient(
+    linear,
+    40% 0%,
+    75% 84%,
+    from(#ed8f00),
+    to(#ed8f00),
+    color-stop(0.6, #ffebcd)
+  );
+  cursor: pointer;
+}
+
+#userListContainer::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #816a4152;
+  border-radius: 1vh;
+}
+
+div#adminActions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 84%;
+  width: 98%;
+  border: 6px double #a67225;
+  margin-top: 5px;
+  overflow: hidden;
+  box-shadow: 0px 0px 6px #9e6805;
+}
+
+div#userListContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 5px;
+  width: 98%;
+  height: 97%;
+  overflow-y: scroll;
+}
+
+.cardDemensions {
+  height: fit-content;
+  width: -webkit-fill-available;
+  border: 3px double #8b5907;
+  margin: 0px 10px 15px 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 6px #9e6805;
+}
+
+.userCardHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userCardHeader span {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#userListContainer h3 {
+  font-family: 'Lobster Two', cursive;
+  font-weight: bolder;
+  font-size: 20px;
+  color: #c77e00;
+  text-shadow: 0px 0px 0px #6c4403;
+  letter-spacing: 1px;
+  margin-right: 10px;
+}
+
+.cardDemensions span {
+  margin-top: 3px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.editUserForm input {
+  border: 2px solid #a0520f;
+  height: 35px;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 24px;
+  font-family: 'Just Another Hand', cursive;
+  cursor: text;
+  color: #6c4403;
+  line-height: 1px;
+  letter-spacing: 1px;
+  box-shadow: 0px 0px 7px #a77327;
+}
+
+.cardButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.cardButtons button {
+  color: wheat;
+  background-color: #8b5907;
+  width: 17vh;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  height: 4vh;
+  margin: 0.4vh;
+  border-radius: 10px;
+  padding: 0.3vh;
+  font-size: 2.5vh;
+  line-height: 1vh;
+  letter-spacing: 1px;
+  font-family: 'Niconne', cursive;
+}
+
+.editUserForm label {
+  font-family: 'Lobster Two', cursive;
+  font-weight: bolder;
+  font-size: 20px;
+  color: #c77e00;
+  text-shadow: 0px 0px 0px #6c4403;
+  letter-spacing: 1px;
+  margin-right: 10px;
+}
+
+.makeUserAdmin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.makeUserAdmin p {
+  font-family: 'Lobster Two', cursive;
+  font-weight: bolder;
+  font-size: 20px;
+  color: #c77e00;
+  text-shadow: 0px 0px 0px #6c4403;
+  letter-spacing: 3px;
+  margin-right: 20px;
+}
+
+.makeUserAdmin input {
+  box-shadow: none;
+  height: 35px;
+  cursor: pointer;
+  height: 35px;
+  margin: 5px;
+}
+
+.makeUserAdmin label {
+  margin: 5px;
+  padding: 5px;
+  font-size: 28px;
+  font-family: 'Just Another Hand', cursive;
+  color: #6c4403;
+  line-height: 1px;
+  letter-spacing: 2px;
+  margin-right: -4px;
+  margin-left: 20px;
+}
+
+.editUserForm input[type='submit'] {
+  color: wheat;
+  background-color: #8b5907;
+  width: 17vh;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  height: 4vh;
+  margin: 0.4vh;
+  border-radius: 10px;
+  padding: 0.3vh;
+  font-size: 2.5vh;
+  line-height: 1vh;
+  letter-spacing: 1px;
+  align-self: center;
+  font-family: 'Niconne', cursive;
 }

@@ -3,68 +3,69 @@ div.landingPageContainer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 78vh;
 }
 
 .hook {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 1vh;
 }
 
 .hook h1 {
-  letter-spacing: 2px;
+  letter-spacing: 0.2vh;
   font-family: 'Lobster Two', cursive;
   color: #674403;
-  text-shadow: -1px -1px 9px #ed9003;
-  font-size: 35px;
+  text-shadow: -0.1vh -0.1vh 0.9vh #ed9003;
+  font-size: 3.5vh;
 }
 
 .hook p {
-  letter-spacing: 1px;
+  letter-spacing: 0.1vh;
   font-family: 'Just Another Hand', cursive;
-  font-size: 28px;
+  font-size: 2.8vh;
   color: #6c4403;
 }
 
 .landingPageContainer img {
-  height: 300px;
-  margin-top: 10px;
+  height: 30vh;
+  margin-top: 1vh;
 }
 
 .landingPageContainer button {
   color: #f5deb3;
   background-color: #8b5907;
-  width: 500px;
-  border: 2px solid #814109;
-  box-shadow: 0px 0px 7px #3b2506;
+  width: 50vh;
+  border: 0.3vh solid #814109;
+  box-shadow: 0vh 0vh 0.7vh #3b2506;
   cursor: pointer;
   align-self: center;
-  border-radius: 10px;
-  padding: 5px;
-  line-height: 1px;
-  letter-spacing: 2px;
+  border-radius: 2vh;
+  padding: 0.5vh;
+  line-height: 0.1vh;
+  letter-spacing: 0.2vh;
   font-family: 'Lobster Two', cursive;
-  margin-top: 20px;
-  height: 40px;
-  font-size: 26px;
-  word-spacing: 14px;
+  margin-top: 2vh;
+  height: 4vh;
+  font-size: 2.6vh;
+  word-spacing: 1.4vh;
 }
 
 .landingPageContainer button:active {
-  margin: 26px 0px 2px 0px;
+  margin: 2.6vh 0vh 2vh 0vh;
 }
 
 .macHistory {
   display: flex;
   flex-direction: column;
-  height: 225px;
-  width: 1400px;
-  border: 2px solid #a0520f;
-  border-radius: 20px;
-  margin-top: 10px;
-  box-shadow: 0px 3px 6px #9e6805;
-  padding: 20px;
+  height: 23.5vh;
+  width: 150vh;
+  border: 0.2vh solid #a0520f;
+  border-radius: 2vh;
+  margin-top: 1vh;
+  box-shadow: 0vh 0.3vh 0.6vh #9e6805;
+  padding: 2vh;
   overflow: hidden;
 }
 
@@ -78,20 +79,20 @@ div.landingPageContainer {
 }
 
 .macScrollbar {
-  height: 210px;
-  width: 1350px;
+  height: 20vh;
+  width: 145vh;
   overflow-y: scroll;
 }
 
 .macScrollbar::-webkit-scrollbar {
-  width: 10px;
+  width: 1vh;
   background-color: #f5f5f500;
-  border-radius: 15px;
+  border-radius: 2vh;
   cursor: pointer;
 }
 
 .macScrollbar::-webkit-scrollbar-thumb {
-  border-radius: 50px;
+  border-radius: 5vh;
   background-color: #fff;
   background-image: -webkit-gradient(
     linear,
@@ -107,7 +108,7 @@ div.landingPageContainer {
 .macScrollbar::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
   background-color: #816a4152;
-  border-radius: 10px;
+  border-radius: 1vh;
 }
 
 .macFollow {
@@ -115,15 +116,15 @@ div.landingPageContainer {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 12px;
-  width: 900px;
+  margin-top: 1.2vh;
+  width: 90vh;
 }
 
 .macFollow h2 {
   text-align: center;
   align-self: center;
-  font-size: 27px;
-  letter-spacing: 2px;
+  font-size: 2.7vh;
+  letter-spacing: 0.2vh;
   font-family: 'Lobster Two', cursive;
   color: #a0520f;
 }
@@ -132,14 +133,13 @@ a#macFacebook {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 43px;
+  height: 4.3vh;
 }
-
 #facebookImg {
-  height: 45px;
-  width: 45px;
-  margin-left: 15px;
-  margin-top: 0px;
-  box-shadow: 0px 0px 6px #cc8608;
-  border-radius: 50px;
+  height: 4.5vh;
+  width: 4.5vh;
+  margin-left: 1.5vh;
+  margin-top: 0vh;
+  box-shadow: 0vh 0vh 0.6vh #cc8608;
+  border-radius: 5vh;
 }

@@ -34,11 +34,11 @@ const Admin = (props) => {
   const showUsers = () => {
     setCategoriesStatus(false);
     setUsersStatus(!usersStatus);
-  }
+  };
   const showCategories = () => {
     setUsersStatus(false);
     setCategoriesStatus(!categoriesStatus);
-  }
+  };
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~~ JSX ~~~~~~~~
   //~~~~~~~~~~~~~~~~~~~
@@ -48,24 +48,26 @@ const Admin = (props) => {
       <div id='adminActionsNav'>
         <button onClick={showUsers}>Users</button>
         <button onClick={showCategories}>Categories</button>
+        <button>
+          <NavLink to='/404'>Test 404</NavLink>
+        </button>
       </div>
       <div id='adminActions'>
-        {usersStatus === true && categoriesStatus === false
-          ? <UsersList
+        {usersStatus === true && categoriesStatus === false ? (
+          <UsersList
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
             setOngoingOrder={setOngoingOrder}
           />
-          : ''}
-        {categoriesStatus === true && usersStatus === false
-          ? <CategoryList
-            categories={categories}
-            setCategories={setCategories}
-          />
-          : ''}
-
+        ) : (
+          ''
+        )}
+        {categoriesStatus === true && usersStatus === false ? (
+          <CategoryList categories={categories} setCategories={setCategories} />
+        ) : (
+          ''
+        )}
       </div>
-      <NavLink to='/404'>TEST 404</NavLink>
     </div>
   );
 };

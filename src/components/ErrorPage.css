@@ -1,63 +1,64 @@
-#errorPage{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5%;
+#errorPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  height: 79%;
 }
 
-.errorImg{
-    width: 40%;
-    margin-bottom: 5%;
+.errorImg {
+  width: 40%;
+  margin-bottom: 5%;
 }
 
-#errorHeading{
-    text-align: center;
-    font-size: 40px;
-    letter-spacing: 2px;
-    font-family: 'Lobster Two', cursive;
-    color: #a0520f;
-    width: 50%;
-    margin-bottom: 2%;
+#errorHeading {
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: 2px;
+  font-family: 'Lobster Two', cursive;
+  color: #a0520f;
+  width: 50%;
+  margin-bottom: 2%;
 }
 
-#errorSubHeading{
-    text-align: center;
-    font-size: 40px;
-    letter-spacing: 2px;
-    font-family: 'Lobster Two', cursive;
-    width: 50%;
-    margin-bottom: 5%;
-    font-size: 26px;
-    color: #bf7c008f;
+#errorSubHeading {
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: 2px;
+  font-family: 'Lobster Two', cursive;
+  width: 50%;
+  margin-bottom: 5%;
+  font-size: 26px;
+  color: #bf7c008f;
 }
 
-#errorParagraph{
-    font-family: 'Just Another Hand', cursive;
-    text-align: center;
-    font-size: 40px;
-    letter-spacing: 2px;
-    width: 50%;
-    margin-bottom: 2%;
-    font-size: 26px;
-    color: #6c4403;
+#errorParagraph {
+  font-family: 'Just Another Hand', cursive;
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: 2px;
+  width: 50%;
+  margin-bottom: 2%;
+  font-size: 26px;
+  color: #6c4403;
 }
 
-#errorReturn{
-    text-decoration: none;
-    color: wheat;
-    background-color: #8b5907;
-    width: 500px;
-    border: 2px solid #814109;
-    box-shadow: 0px 0px 5px #3b2506;
-    cursor: pointer;
-    align-self: center;
-    margin: 5px;
-    border-radius: 10px;
-    padding: 5px;
-    line-height: 1px;
-    letter-spacing: 1px;
-    font-family: 'Niconne', cursive;
-    height: 40px;
-    font-size: 26px;
+#errorReturn {
+  text-decoration: none;
+  color: wheat;
+  background-color: #8b5907;
+  width: 500px;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 5px #3b2506;
+  cursor: pointer;
+  align-self: center;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  line-height: 1px;
+  letter-spacing: 1px;
+  font-family: 'Niconne', cursive;
+  height: 40px;
+  font-size: 26px;
 }
