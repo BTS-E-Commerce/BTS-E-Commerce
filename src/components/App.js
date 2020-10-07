@@ -36,17 +36,21 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [ongoingOrder, setOngoingOrder] = useState({});
   const [usersOrders, setUsersOrders] = useState([]);
+  console.log("THIS IS THE CURRENT USER", currentUser);
 
   //~~~~~~~~~~~~~~~~~~~
   //~~~~~ EFFECTS ~~~~~
   //~~~~~~~~~~~~~~~~~~~
   useEffect(() => {
-    const userId = localStorage.getItem('id');
-    const userUsername = localStorage.getItem('username');
+    const userId = JSON.parse(localStorage.getItem('id'));
+    const userUsername = JSON.parse(localStorage.getItem('username'));
+    //FOR DEMO
+    const userAdmin = JSON.parse(localStorage.getItem('admin'));
+    console.log("CHEKCING FOR LOGGED IN USER")
     if (!userId || !userUsername) {
       setCurrentUser({ id: 1, username: 'guest', admin: false });
     } else {
-      setCurrentUser({ id: userId, username: userUsername });
+      setCurrentUser({ id: userId, username: userUsername, admin: userAdmin });
     }
   }, []);
 
@@ -118,12 +122,10 @@ const App = () => {
   }, [orders, currentUser]);
 
   useEffect(() => {
-    // getUsersOrders()
     setUsersOrders(getUsersOrderHistory());
   }, []);
 
   useEffect(() => {
-    // getUsersOrders()
     setUsersOrders(getUsersOrderHistory());
   }, [orders, currentUser]);
 
@@ -153,9 +155,6 @@ const App = () => {
     );
   };
 
-  const test404 = () => {
-  }
-
   const addProductToCart = (id, price, inventory, quantity = 1) =>
     async function () {
       if (inventory < quantity) {
@@ -178,8 +177,6 @@ const App = () => {
           throw error;
         }
       } else {
-        //Check if product alreayd exists in cart.
-        //If yes, dont add and send user message.
         const existingProduct = ongoingOrder.products.filter(
           (product) => product.id === id
         );

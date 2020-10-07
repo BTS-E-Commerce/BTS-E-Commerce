@@ -27,6 +27,7 @@ const Register = ({ setCurrentUser }) => {
         id: user.newUser.id,
         username: user.newUser.username,
         admin: user.newUser.admin,
+        adminCode: user.adminCode
       });
 
       localStorage.setItem('id', user.newUser.id);

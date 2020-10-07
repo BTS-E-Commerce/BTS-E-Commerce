@@ -12,7 +12,8 @@ const OrderCardProducts = ({ product }) => {
         </span>
         <span>
           <h4>Product Price: </h4>
-          <p>${product.currentPrice / 100}</p>
+
+          <p>${(product.currentPrice / 100).toFixed(2)}</p>
         </span>
       </div>
     </div>
