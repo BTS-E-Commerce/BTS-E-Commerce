@@ -23,7 +23,7 @@ const EditUserForm = (props) => {
     //~~~~~ EFFECTS ~~~~~
     //~~~~~~~~~~~~~~~~~~~
     useEffect(() => {
-        if (!(currentUser.admin === true)) {
+        if (currentUser.admin === false || currentUser.admin === undefined) {
             setAdmin(false);
         }
     }, []);
@@ -104,7 +104,7 @@ const EditUserForm = (props) => {
                 <input
                     placeholder="Input your current password..."
                     className='edit-current-password'
-                    type='text'
+                    type='password'
                     name='current-password'
                     value={currentPassword}
                     onChange={handleCurrentPasswordChange}
@@ -123,7 +123,7 @@ const EditUserForm = (props) => {
                 <input
                     placeholder="Input your new password..."
                     className='edit-password'
-                    type='text'
+                    type='password'
                     name='password'
                     value={password}
                     onChange={handlePasswordChange}
