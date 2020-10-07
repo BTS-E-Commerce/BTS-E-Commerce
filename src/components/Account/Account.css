@@ -1,12 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Lobster+Two:ital@1&family=Niconne&display=swap');
 
-.accountContainer {
+#accountContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 78vh;
-  overflow: hidden;
+  /* overflow: hidden; */
+  height: 100vh;
+}
+
+#accountTitle{
+  height: 3vh;
+  margin: 1.25rem;
+  text-align: center;
+  font-size: 3vh;
+  letter-spacing: 0.2vh;
+  font-family: 'Lobster Two', cursive;
+  color: #a0520f;
+  margin-bottom: 10px;
 }
 
 .adminContainer {
@@ -18,12 +28,47 @@ img.accountImg {
   height: 30vh;
 }
 
+#adminVerification{
+  font-family: 'Just Another Hand', cursive;
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: 2px;
+  margin-bottom: 2%;
+  font-size: 26px;
+  color: #6c4403;
+}
+
 div#accountWelcome {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vh;
+  width: 100%;
+}
+
+#welcomeHeading, #personalWelcome{
+  font-family: 'Lobster Two', cursive;
+  color: #6c4403;
+  text-shadow: 1px 1px 1px #ff7600;
+  text-align: center;
+  font-size: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  border-top: 5px double #a77327;
+}
+
+#welcomeSubHeading{
+  font-family: 'Just Another Hand', cursive;
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: 2px;
+  width: 50%;
+  margin-bottom: 2%;
+  font-size: 26px;
+  color: #6c4403;
 }
 
 .accountContainer h2 {
@@ -65,6 +110,29 @@ div#accountWelcome {
   justify-content: flex-start;
 }
 
+.accountInformationNav{
+  display: flex;
+  width: 50%;
+}
+
+.accountInformationNav button{
+  color: wheat;
+  background-color: #8b5907;
+  width: 50%;
+  border: 2px solid #814109;
+  box-shadow: 0px 0px 7px #3b2506;
+  cursor: pointer;
+  align-self: center;
+  height: 3.7vh;
+  margin: 0.4vh;
+  border-radius: 10px;
+  padding: 0.3vh;
+  font-size: 2.7vh;
+  line-height: 1vh;
+  letter-spacing: 1px;
+  font-family: 'Niconne', cursive;
+}
+
 .userContent {
   display: flex;
   flex-direction: row;
@@ -83,7 +151,7 @@ div#accountWelcome {
 }
 
 form {
-  height: 90%;
+  height: auto;
   display: flex;
   flex-direction: column;
   padding: 15px;
@@ -116,6 +184,7 @@ form {
   justify-content: flex-start;
   align-items: center;
   height: 96%;
+  min-height: 200px;
   border: 3px double #a77327;
   margin: 20px;
   width: 75%;
