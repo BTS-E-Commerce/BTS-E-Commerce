@@ -175,12 +175,9 @@ const EditUserForm = (props) => {
           )}
         <input type='submit' value='Submit'></input>
       </form>
-      {user.admin === true
-        ? ''
-        : <button onClick={onMakeAdmin}>
-          Make {currentUser.username} an Admin
+      <button onClick={onMakeAdmin}>
+        Make {currentUser.username} an Admin
     </button>
-      }
 
     </div>
   );
