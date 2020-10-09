@@ -264,7 +264,7 @@ div#userListContainer {
   font-family: 'Niconne', cursive;
 }
 
-#categoriesListContainer{
+#categoriesListContainer {
   display: flex;
   flex-flow: column;
   padding: 5px;
@@ -273,7 +273,7 @@ div#userListContainer {
   overflow-y: scroll;
 }
 
-#categoriesListContainer button{
+#categoriesListContainer button {
   color: wheat;
   background-color: #8b5907;
   width: 100%;
@@ -342,13 +342,12 @@ div#userListContainer {
   margin-right: 10px;
 }
 
-
-#categoriesContainer{
+#categoriesContainer {
   display: flex;
   flex-flow: row wrap;
 }
 
-.categoryCard{
+.categoryCard {
   display: flex;
   width: 20%;
   flex: 1 1 100px 100px;
@@ -361,4 +360,19 @@ div#userListContainer {
   border-top: 7px double #a77327;
   border-bottom: 7px double #a77327;
   box-shadow: 2px 2px 5px #9e6805;
+}
+
+#adminVerification {
+  font-family: 'Just Another Hand', cursive;
+  text-align: center;
+  font-size: 40px;
+  letter-spacing: 2px;
+  margin-bottom: 1%;
+  font-size: 26px;
+  color: #6c4403;
+}
+
+.adminContainer {
+  display: flex;
+  justify-content: flex-start;
 }

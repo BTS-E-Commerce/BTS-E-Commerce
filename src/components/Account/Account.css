@@ -3,39 +3,14 @@
 #accountContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  /* overflow: hidden; */
-  height: 100vh;
-}
-
-#accountTitle{
-  height: 3vh;
-  margin: 1.25rem;
-  text-align: center;
-  font-size: 3vh;
-  letter-spacing: 0.2vh;
-  font-family: 'Lobster Two', cursive;
-  color: #a0520f;
-  margin-bottom: 10px;
-}
-
-.adminContainer {
-  display: flex;
-  justify-content: flex-start;
+  overflow: hidden;
+  height: 78vh;
 }
 
 img.accountImg {
   height: 30vh;
-}
-
-#adminVerification{
-  font-family: 'Just Another Hand', cursive;
-  text-align: center;
-  font-size: 40px;
-  letter-spacing: 2px;
-  margin-bottom: 2%;
-  font-size: 26px;
-  color: #6c4403;
 }
 
 div#accountWelcome {
@@ -46,21 +21,31 @@ div#accountWelcome {
   width: 100%;
 }
 
-#welcomeHeading, #personalWelcome{
+#welcomeHeading,
+#personalWelcome {
   font-family: 'Lobster Two', cursive;
   color: #6c4403;
   text-shadow: 1px 1px 1px #ff7600;
   text-align: center;
-  font-size: 30px;
+  font-size: 4vh;
   margin-top: 15px;
   margin-bottom: 15px;
   align-self: center;
   justify-self: center;
   width: 100%;
-  border-top: 5px double #a77327;
 }
 
-#welcomeSubHeading{
+#personalWelcome span {
+  text-decoration: none;
+  padding-left: 1vh;
+  color: #bf7c00;
+  letter-spacing: 0.1vh;
+  cursor: pointer;
+  font-size: 4vh;
+  text-shadow: -2px 0px 2px #674403;
+}
+
+#welcomeSubHeading {
   font-family: 'Just Another Hand', cursive;
   text-align: center;
   font-size: 40px;
@@ -103,19 +88,19 @@ div#accountWelcome {
 .accountInformation {
   align-self: center;
   width: 100%;
-  height: 100%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 
-.accountInformationNav{
+.accountInformationNav {
   display: flex;
   width: 50%;
 }
 
-.accountInformationNav button{
+.accountInformationNav button {
   color: wheat;
   background-color: #8b5907;
   width: 50%;
@@ -183,7 +168,7 @@ form {
   flex-flow: column;
   justify-content: flex-start;
   align-items: center;
-  height: 96%;
+  height: 90%;
   min-height: 200px;
   border: 3px double #a77327;
   margin: 20px;
@@ -212,6 +197,7 @@ form {
   display: flex;
   flex-direction: row;
   align-self: center;
+  justify-content: space-around;
   width: 100%;
   height: 15%;
   margin-bottom: 10px;
@@ -221,18 +207,35 @@ form {
   box-shadow: 0px 0px 10px #9e68059e;
 }
 
-.orderCardHeader p {
-  height: 100%;
-  width: 100%;
+.orderCardHeader span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
 }
 
-.orderCardHeader h3 {
-  height: 100%;
-  width: 100%;
-  font-size: 3vh;
-  font-family: 'Niconne', cursive;
-  letter-spacing: 1px;
-  color: #bf7c00;
+.orderCardHeader h4 {
+  width: 40%;
+  font-family: 'Lobster Two', cursive;
+  font-weight: bolder;
+  font-size: 2vh;
+  color: #c77e00;
+  text-shadow: 0vh 0vh 0vh #6c4403;
+  letter-spacing: 0.2vh;
+}
+
+.orderCardHeader p {
+  width: 40%;
+  font-family: 'Just Another Hand', cursive;
+  font-size: 2vh;
+  color: #6c4403;
+  text-shadow: 0vh 0vh 0vh #6c4403;
+  letter-spacing: 0.1vh;
+  margin-top: 1px;
+}
+
+.orderNumber p {
+  width: 10%;
 }
 
 .orderedProductList {
@@ -317,22 +320,77 @@ form {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 65%;
-  margin-top: 10px;
+  width: 100%;
+  margin-top: 5%;
+  height: 10%;
+  margin-bottom: 5%;
+}
+
+.productFooter span {
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+}
+
+.productFooter h4 {
+  width: 100%;
+  font-family: 'Lobster Two', cursive;
+  font-weight: bolder;
+  color: #c77e00;
+  text-shadow: 0vh 0vh 0vh #6c4403;
+  letter-spacing: 0.2vh;
+  text-align: center;
+  font-size: 18px;
 }
 
 .orderHistoryContainer h1 {
   margin-top: 5px;
-  height: 3vh;
+  font-size: 3.5vh;
   text-align: center;
-  font-size: 4vh;
+  font-size: 3.5vh;
   letter-spacing: 0.2vh;
   font-family: 'Lobster Two', cursive;
   color: #a0520f;
 }
 
 .productFooter p {
-  width: fit-content;
+  width: 100%;
+  text-align: center;
+  font-family: 'Just Another Hand', cursive;
+  font-size: 2.4vh;
+  color: #6c4403;
+  text-shadow: 0vh 0vh 0vh #6c4403;
+  letter-spacing: 0.1vh;
+}
+
+span.totalPriceSpan {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 1%;
+}
+
+.totalPriceSpan h3 {
+  font-family: 'Lobster Two', cursive;
+  font-weight: bolder;
+  color: #c77e00;
+  text-shadow: 0vh 0vh 0vh #6c4403;
+  letter-spacing: 0.2vh;
+  text-align: center;
+  font-size: 3vh;
+  margin-right: 5px;
+}
+
+span.totalPriceSpan {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 1%;
 }
 
 .orderHistoryContainer::-webkit-scrollbar {

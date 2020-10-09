@@ -117,7 +117,10 @@
   color: #6c4403;
   text-shadow: 0px 0px 0px #6c4403;
   letter-spacing: 1px;
-
+  border: 2px solid #a0520f;
+  border-radius: 10px;
+  margin-left: 10px;
+  width: 6%;
   cursor: pointer;
   padding-left: 2rem;
 }
@@ -171,7 +174,7 @@
   border-radius: 1vh;
 }
 
-#checkoutPageContainer{
+#checkoutPageContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -184,7 +187,7 @@
 
 } */
 
-#checkoutHeading{
+#checkoutHeading {
   text-align: center;
   font-size: 40px;
   letter-spacing: 2px;
@@ -194,7 +197,7 @@
   margin-bottom: 2%;
 }
 
-#checkoutTotal{
+#checkoutTotal {
   text-align: center;
   font-size: 40px;
   letter-spacing: 2px;
@@ -205,7 +208,7 @@
   color: #bf7c008f;
 }
 
-#checkoutAccount{
+#checkoutAccount {
   font-family: 'Just Another Hand', cursive;
   text-align: center;
   font-size: 40px;
@@ -216,7 +219,7 @@
   color: #6c4403;
 }
 
-#checkoutReturnButton{
+#checkoutReturnButton {
   text-decoration: none;
   color: wheat;
   background-color: #8b5907;
