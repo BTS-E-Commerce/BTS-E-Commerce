@@ -322,7 +322,7 @@ form {
   align-items: center;
   width: 100%;
   margin-top: 5%;
-  height: 10%;
+  height: fit-content;
   margin-bottom: 5%;
 }
 
@@ -384,13 +384,13 @@ span.totalPriceSpan {
   margin-right: 5px;
 }
 
-span.totalPriceSpan {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  align-items: center;
-  margin-bottom: 1%;
+.totalPriceSpan p {
+  font-family: 'Just Another Hand', cursive;
+  font-size: 3vh;
+  color: #6c4403;
+  text-shadow: 0vh 0vh 0vh #6c4403;
+  letter-spacing: 0.1vh;
+  margin-top: 5px;
 }
 
 .orderHistoryContainer::-webkit-scrollbar {
