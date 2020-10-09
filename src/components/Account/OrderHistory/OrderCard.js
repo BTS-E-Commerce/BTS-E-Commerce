@@ -14,11 +14,10 @@ const OrderCard = ({ order, number }) => {
   return (
     <div className='orderCard'>
       <div className='orderCardHeader'>
-        <span>
+        <span className='orderNumber'>
           <h4>Order Number: </h4>
           <p>{number}</p>
         </span>
-        <h3>Products</h3>
         <span>
           <h4>Date Created: </h4>
           <p>{moment(order.date).format('dddd, MMMM Do YYYY')}</p>

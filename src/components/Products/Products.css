@@ -346,8 +346,8 @@ textarea.edit-description {
   font-family: 'Just Another Hand', cursive;
   min-height: 80px;
   max-height: 308px;
-  max-width: 338px;
-  min-width: 338px;
+  max-width: 434px;
+  min-width: 434px;
   cursor: text;
   color: #6c4403;
   letter-spacing: 1px;
@@ -535,6 +535,7 @@ select.categoriesForm:focus {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 input.priceForm {
