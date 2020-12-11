@@ -1,19 +1,9 @@
 ## Grandma's Mac
 A little info about your project and/ or overview that explains **what** the project is about.
+Grandma's Mac is a full-stack, e-commerce website. It runs on a stack that includes: HTML/CSS, Javascript, Node.js, Express, and PostgreSQL. On this site, users can browse and purchase artisan macaroni and cheese products! Users can checkout as a guest or authenticated user.
 
 ## Motivation
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
-
-## Build status
-Build status of continus integration i.e. travis, appveyor etc. Ex. - 
-
-[![Build Status](https://travis-ci.org/akashnimare/foco.svg?branch=master)](https://travis-ci.org/akashnimare/foco)
-[![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/akashnimare/foco?branch=master&svg=true)](https://ci.appveyor.com/project/akashnimare/foco/branch/master)
-
-## Code style
-If you're using any code style like xo, standard etc. That will help others while contributing to your project. Ex. -
-
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+We created Grandma's Mac as a way to practice building a full-stack, e-commerce website while expressing an outlet for creative design.
  
 ## Videos & Screenshots
 **Overview**:
@@ -21,10 +11,14 @@ If you're using any code style like xo, standard etc. That will help others whil
 [![Grandma's Mac Presentation](http://i3.ytimg.com/vi/247hNkqLX1k/hqdefault.jpg)](https://www.youtube.com/watch?v=247hNkqLX1k&amp%3Bindex=4)
 
 ## Tech/framework used
-Ex. -
-
 <b>Built with</b>
 - [Electron](https://electron.atom.io)
+- HTML
+- CSS
+- Javascript
+- Node.js
+- Express
+- PostgreSQL
 
 ## Features
 What makes your project stand out?
