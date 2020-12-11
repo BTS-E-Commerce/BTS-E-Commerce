@@ -12,13 +12,12 @@ We created Grandma's Mac as a way to practice building a full-stack, e-commerce 
 
 ## Tech/framework used
 <b>Built with</b>
-- [Electron](https://electron.atom.io)
 - HTML
 - CSS
-- Javascript
-- Node.js
-- Express
-- PostgreSQL
+- [Javascript](https://www.javascript.com/)
+- [Node.js](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 ## Features
 What makes your project stand out?
