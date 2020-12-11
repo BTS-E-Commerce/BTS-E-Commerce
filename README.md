@@ -15,8 +15,9 @@ If you're using any code style like xo, standard etc. That will help others whil
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
  
-## Screenshots
+## Videos & Screenshots
 **Overview**:
+
 [![Grandma's Mac Presentation](http://i3.ytimg.com/vi/247hNkqLX1k/hqdefault.jpg)](https://www.youtube.com/watch?v=247hNkqLX1k&amp%3Bindex=4)
 
 ## Tech/framework used
