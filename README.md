@@ -1,4 +1,5 @@
-## Grandma's Mac
+## Grandma's Mac 
+**Oct. 2020**
 [View Site](https://grandmas-mac.herokuapp.com/)
 
 Grandma's Mac is a full-stack, e-commerce website. It runs on a stack that includes: HTML/CSS, Javascript, Node.js, Express, and PostgreSQL. On this site, users can browse and purchase artisan macaroni and cheese products! Users can checkout as a guest or authenticated user.
